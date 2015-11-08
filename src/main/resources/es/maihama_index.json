@@ -1,0 +1,58 @@
+{
+  ".maihama_index" : {
+    "aliases" : { },
+    "mappings" : {
+      "park_sea" : {
+        "_all" : {
+          "enabled" : false
+        },
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "createdTime" : {
+            "type" : "long"
+          },
+          "updatedTime" : {
+            "type" : "long"
+          },
+          "defaultDate" : {
+            "type" : "date"
+          },
+          "formatDate" : {
+            "type" : "date",
+            "format" : "date"
+          },
+          "formatDateTime" : {
+            "type" : "date",
+            "format" : "date_time"
+          },
+          "formatTime" : {
+            "type" : "date",
+            "format" : "time"
+          },
+          "formatDateOptionalTime" : {
+            "type" : "date",
+            "format" : "date_optional_time"
+          }
+        }
+      },
+      "park_land" : {
+        "_all" : {
+          "enabled" : false
+        },
+        "properties" : {
+          "labelTypeId" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "webConfigId" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          }
+        }
+      }
+    }
+  }
+}
