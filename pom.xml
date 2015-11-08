@@ -294,7 +294,6 @@
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>${jsp.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency> <!-- tomcat does not provides, jetty's two jar files so here -->
 			<groupId>javax.servlet</groupId>
