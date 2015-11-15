@@ -45,14 +45,14 @@ public class EsproductListAction extends WaterfrontBaseAction {
     //                                                                             =======
     @Execute
     public HtmlResponse index(OptionalThing<Integer> pageNumber, EsproductSearchForm form) {
-        validate(form, messages -> {} , () -> {
-            return asHtml(path_Esproduct_ProductDetailJsp);
+        validate(form, messages -> {}, () -> {
+            return asHtml(path_Esproduct_EsproductListJsp);
         });
         PagingResultBean<Product> page = selectProductPage(pageNumber.orElse(1), form);
         List<EsproductSearchRowBean> beans = page.mappingList(product -> {
             return mappingToBean(product);
         });
-        return asHtml(path_Esproduct_ProductListJsp).renderWith(data -> {
+        return asHtml(path_Esproduct_EsproductListJsp).renderWith(data -> {
             data.register("beans", beans);
             registerPagingNavi(data, page, form);
         });
