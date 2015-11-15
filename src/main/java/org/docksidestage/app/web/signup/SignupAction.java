@@ -59,7 +59,7 @@ public class SignupAction extends WaterfrontBaseAction {
     public HtmlResponse signup(SignupForm form) {
         validate(form, messages -> {
             int count = memberBhv.selectCount(cb -> {
-                cb.query().setMemberAccount_Equal(form.account);
+                cb.query().setMemberAccount_Equal(form.memberAccount);
             });
             if (count > 0) {
                 messages.addErrorsSignupAccountAlreadyExists("account");
@@ -74,14 +74,14 @@ public class SignupAction extends WaterfrontBaseAction {
             postcard.setFrom(waterfrontConfig.getMailAddressSupport(), "Waterfront Support");
             postcard.addTo(deriveMemberMailAddress(form));
             postcard.setDomain(waterfrontConfig.getServerDomain());
-            postcard.setMemberName(form.name);
+            postcard.setMemberName(form.memberName);
             postcard.setToken(generateToken());
         });
         return redirect(MypageAction.class);
     }
 
     private String deriveMemberMailAddress(SignupForm form) {
-        return form.account + "@docksidestage.org"; // #simple_for_example
+        return form.memberAccount + "@docksidestage.org"; // #simple_for_example
     }
 
     private String generateToken() {
@@ -98,8 +98,8 @@ public class SignupAction extends WaterfrontBaseAction {
     //                                                                        ============
     private Integer newMember(SignupForm form) {
         Member member = new Member();
-        member.setMemberAccount(form.account);
-        member.setMemberName(form.name);
+        member.setMemberName(form.memberName);
+        member.setMemberAccount(form.memberAccount);
         member.setMemberStatusCode_Provisional();
         memberBhv.insert(member);
 

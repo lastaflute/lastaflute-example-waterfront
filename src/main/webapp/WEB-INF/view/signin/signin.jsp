@@ -1,5 +1,5 @@
 <c:import url="${viewPrefix}/common/default_layout.jsp">
-<c:param name="title">LastaFlute Example | SignIn</c:param>
+<c:param name="title">LastaFlute Example | Sign In</c:param>
 <c:param name="contents">
 <!-- <main> start main content -->
 <div class="">
