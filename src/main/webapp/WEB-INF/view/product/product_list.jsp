@@ -2,9 +2,9 @@
 <c:param name="contents">
 <!-- <main> start main content -->
 <div class="contents">
-	<h2 class="sg-content-title"><la:caption key="labels.product.list.title"/></h2>
+	<h2 class="content-title"><la:caption key="labels.product.list.title"/></h2>
 	<section class="product-search-box">
-		<h3 class="sg-content-title-second">Search Condition</h3>
+		<h3 class="content-title-second">Search Condition</h3>
 		<la:form method="GET" styleClass="product-search-form">
 			<la:errors/>
 			<ul class="product-search-condition-list">
@@ -22,15 +22,16 @@
 		</la:form>
 	</section>
 	<section class="product-result-box">
-		<h3 class="sg-content-title-second">Search Results</h3>
+		<h3 class="content-title-second">Search Results</h3>
 		<table class="product-list-tbl">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Name</th>
-					<th>Price</th>
+					<th>Product Name</th>
+					<th>Status</th>
 					<th>Category</th>
-					<th>Registration</th>
+					<th>Price</th>
+					<th>Latest Purchase Date</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,9 +39,10 @@
 				<tr>
 					<td>${f:h(bean.productId)}</td>
 					<td><la:link href="/product/detail/${f:h(bean.productId)}">${f:h(bean.productName)}</la:link></td>
+					<td>${f:h(bean.productStatus)}</td>
+					<td>${f:h(bean.productCategory)}</td>
 					<td>${f:h(bean.regularPrice)}</td>
-					<td>${f:h(bean.productCategoryName)}</td>
-					<td>${f:h(bean.registerDatetime)}</td>
+					<td>${f:h(bean.latestPurchaseDate)}</td>
 				</tr>
 				</c:forEach>
 			</tbody>

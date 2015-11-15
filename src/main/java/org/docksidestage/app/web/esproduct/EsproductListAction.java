@@ -45,7 +45,7 @@ public class EsproductListAction extends WaterfrontBaseAction {
     //                                                                             =======
     @Execute
     public HtmlResponse index(OptionalThing<Integer> pageNumber, EsproductSearchForm form) {
-        validate(form, messages -> {}, () -> {
+        validate(form, messages -> {} , () -> {
             return asHtml(path_Esproduct_ProductDetailJsp);
         });
         PagingResultBean<Product> page = selectProductPage(pageNumber.orElse(1), form);
@@ -94,7 +94,6 @@ public class EsproductListAction extends WaterfrontBaseAction {
         bean.productId = product.asDocMeta().id();
         bean.productName = product.getName();
         bean.regularPrice = product.getRegularPrice();
-        bean.registerDatetime = product.getRegisterDatetime();
         //        product.getProductStatus().alwaysPresent(status -> {
         //            bean.productStatusName = status.getProductStatusName();
         //        });

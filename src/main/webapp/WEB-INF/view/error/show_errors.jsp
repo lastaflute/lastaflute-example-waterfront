@@ -1,5 +1,5 @@
 <c:import url="${viewPrefix}/common/header.jsp">
-	<c:param name="title" value="エラー通知"/>
+	<c:param name="title" value="Notice"/>
 </c:import>
 <div class="contents">
 	<h2><la:message key="labels.error.message.title"/></h2>

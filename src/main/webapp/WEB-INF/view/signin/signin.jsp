@@ -3,14 +3,14 @@
 <c:param name="contents">
 <!-- <main> start main content -->
 <div class="">
-	<h2 class="sg-content-title"><la:caption key="labels.signin.title"/></h2>
+	<h2 class="content-title"><la:caption key="labels.signin.title"/></h2>
 	<la:errors/>
 	<section class="sign-in-box">
 		<la:form styleClass="signin-form">
 			<ul>
 				<li>
 					<p><la:message key="labels.account"/></p>
-					<la:text property="email" placeholder="labels.signin.input.account"/>
+					<la:text property="account" placeholder="labels.signin.input.account"/>
 				</li>
 				<li>
 					<p><la:message key="labels.password"/></p>
