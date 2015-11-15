@@ -35,7 +35,7 @@ import org.docksidestage.dbflute.exentity.*;
  *     PRODUCT_ID
  * 
  * [column]
- *     PRODUCT_ID, PRODUCT_NAME, PRODUCT_HANDLE_CODE, PRODUCT_CATEGORY_CODE, PRODUCT_STATUS_CODE, REGULAR_PRICE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     PRODUCT_ID, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_HANDLE_CODE, PRODUCT_CATEGORY_CODE, PRODUCT_STATUS_CODE, REGULAR_PRICE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  * 
  * [sequence]
  *     
@@ -62,6 +62,7 @@ import org.docksidestage.dbflute.exentity.*;
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer productId = entity.getProductId();
  * String productName = entity.getProductName();
+ * String productDescription = entity.getProductDescription();
  * String productHandleCode = entity.getProductHandleCode();
  * String productCategoryCode = entity.getProductCategoryCode();
  * String productStatusCode = entity.getProductStatusCode();
@@ -73,6 +74,7 @@ import org.docksidestage.dbflute.exentity.*;
  * Long versionNo = entity.getVersionNo();
  * entity.setProductId(productId);
  * entity.setProductName(productName);
+ * entity.setProductDescription(productDescription);
  * entity.setProductHandleCode(productHandleCode);
  * entity.setProductCategoryCode(productCategoryCode);
  * entity.setProductStatusCode(productStatusCode);
@@ -102,6 +104,9 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity, 
 
     /** (商品名称)PRODUCT_NAME: {IX, NotNull, VARCHAR(50)} */
     protected String _productName;
+
+    /** PRODUCT_DESCRIPTION: {VARCHAR(200)} */
+    protected String _productDescription;
 
     /** (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)} */
     protected String _productHandleCode;
@@ -364,6 +369,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity, 
         StringBuilder sb = new StringBuilder();
         sb.append(dm).append(xfND(_productId));
         sb.append(dm).append(xfND(_productName));
+        sb.append(dm).append(xfND(_productDescription));
         sb.append(dm).append(xfND(_productHandleCode));
         sb.append(dm).append(xfND(_productCategoryCode));
         sb.append(dm).append(xfND(_productStatusCode));
@@ -441,6 +447,24 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity, 
     public void setProductName(String productName) {
         registerModifiedProperty("productName");
         _productName = productName;
+    }
+
+    /**
+     * [get] PRODUCT_DESCRIPTION: {VARCHAR(200)} <br>
+     * @return The value of the column 'PRODUCT_DESCRIPTION'. (NullAllowed even if selected: for no constraint)
+     */
+    public String getProductDescription() {
+        checkSpecifiedProperty("productDescription");
+        return convertEmptyToNull(_productDescription);
+    }
+
+    /**
+     * [set] PRODUCT_DESCRIPTION: {VARCHAR(200)} <br>
+     * @param productDescription The value of the column 'PRODUCT_DESCRIPTION'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setProductDescription(String productDescription) {
+        registerModifiedProperty("productDescription");
+        _productDescription = productDescription;
     }
 
     /**

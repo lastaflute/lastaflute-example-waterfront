@@ -60,6 +60,7 @@ public class ProductDbm extends AbstractDBMeta {
     protected void xsetupEpg() {
         setupEpg(_epgMap, et -> ((Product)et).getProductId(), (et, vl) -> ((Product)et).setProductId(cti(vl)), "productId");
         setupEpg(_epgMap, et -> ((Product)et).getProductName(), (et, vl) -> ((Product)et).setProductName((String)vl), "productName");
+        setupEpg(_epgMap, et -> ((Product)et).getProductDescription(), (et, vl) -> ((Product)et).setProductDescription((String)vl), "productDescription");
         setupEpg(_epgMap, et -> ((Product)et).getProductHandleCode(), (et, vl) -> ((Product)et).setProductHandleCode((String)vl), "productHandleCode");
         setupEpg(_epgMap, et -> ((Product)et).getProductCategoryCode(), (et, vl) -> ((Product)et).setProductCategoryCode((String)vl), "productCategoryCode");
         setupEpg(_epgMap, et -> ((Product)et).getProductStatusCode(), (et, vl) -> {
@@ -112,8 +113,9 @@ public class ProductDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnProductId = cci("PRODUCT_ID", "PRODUCT_ID", null, null, Integer.class, "productId", null, true, true, true, "INTEGER", 10, 0, "NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_7B615D48_C908_4FD2_946C_5E585BBFB7FC", false, null, null, null, "purchaseList", null, false);
+    protected final ColumnInfo _columnProductId = cci("PRODUCT_ID", "PRODUCT_ID", null, null, Integer.class, "productId", null, true, true, true, "INTEGER", 10, 0, "NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_C0424841_0AF0_4C93_A648_18C58E32227D", false, null, null, null, "purchaseList", null, false);
     protected final ColumnInfo _columnProductName = cci("PRODUCT_NAME", "PRODUCT_NAME", null, "商品名称", String.class, "productName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnProductDescription = cci("PRODUCT_DESCRIPTION", "PRODUCT_DESCRIPTION", null, null, String.class, "productDescription", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnProductHandleCode = cci("PRODUCT_HANDLE_CODE", "PRODUCT_HANDLE_CODE", null, "商品ハンドルコード", String.class, "productHandleCode", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnProductCategoryCode = cci("PRODUCT_CATEGORY_CODE", "PRODUCT_CATEGORY_CODE", null, null, String.class, "productCategoryCode", null, false, false, true, "CHAR", 3, 0, null, false, null, null, "productCategory", null, null, false);
     protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, null, String.class, "productStatusCode", null, false, false, true, "CHAR", 3, 0, null, false, null, null, "productStatus", null, CDef.DefMeta.ProductStatus, false);
@@ -134,6 +136,11 @@ public class ProductDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnProductName() { return _columnProductName; }
+    /**
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnProductDescription() { return _columnProductDescription; }
     /**
      * (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
@@ -184,6 +191,7 @@ public class ProductDbm extends AbstractDBMeta {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnProductId());
         ls.add(columnProductName());
+        ls.add(columnProductDescription());
         ls.add(columnProductHandleCode());
         ls.add(columnProductCategoryCode());
         ls.add(columnProductStatusCode());

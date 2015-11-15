@@ -369,6 +369,11 @@ public class BsProductCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnProductName() { return doColumn("PRODUCT_NAME"); }
         /**
+         * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnProductDescription() { return doColumn("PRODUCT_DESCRIPTION"); }
+        /**
          * (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */

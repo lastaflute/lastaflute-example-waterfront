@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionBean;
-import org.docksidestage.esflute.maihama.bsentity.dbmeta.ParkSeaDbm;
-import org.docksidestage.esflute.maihama.cbean.ParkSeaCB;
-import org.docksidestage.esflute.maihama.cbean.cq.ParkSeaCQ;
-import org.docksidestage.esflute.maihama.cbean.cq.bs.BsParkSeaCQ;
+import org.docksidestage.esflute.maihama.bsentity.dbmeta.ProductDbm;
+import org.docksidestage.esflute.maihama.cbean.ProductCB;
+import org.docksidestage.esflute.maihama.cbean.cq.ProductCQ;
+import org.docksidestage.esflute.maihama.cbean.cq.bs.BsProductCQ;
 import org.dbflute.cbean.ConditionQuery;
 import org.elasticsearch.action.count.CountRequestBuilder;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -32,25 +32,25 @@ import org.elasticsearch.index.query.QueryBuilder;
 /**
  * @author ESFlute (using FreeGen)
  */
-public class BsParkSeaCB extends EsAbstractConditionBean {
+public class BsProductCB extends EsAbstractConditionBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected BsParkSeaCQ _conditionQuery;
+    protected BsProductCQ _conditionQuery;
     protected HpSpecification _specification;
 
     // ===================================================================================
     //                                                                             Control
     //                                                                             =======
     @Override
-    public ParkSeaDbm asDBMeta() {
-        return ParkSeaDbm.getInstance();
+    public ProductDbm asDBMeta() {
+        return ProductDbm.getInstance();
     }
 
     @Override
     public String asTableDbName() {
-        return "park_sea";
+        return "product";
     }
 
     @Override
@@ -66,11 +66,11 @@ public class BsParkSeaCB extends EsAbstractConditionBean {
     // ===================================================================================
     //                                                                         Primary Key
     //                                                                         ===========
-    public ParkSeaCB acceptPK(String id) {
+    public ProductCB acceptPK(String id) {
         assertObjectNotNull("id", id);
-        BsParkSeaCB cb = this;
+        BsProductCB cb = this;
         cb.query().docMeta().setId_Equal(id);
-        return (ParkSeaCB) this;
+        return (ProductCB) this;
     }
 
     @Override
@@ -114,20 +114,20 @@ public class BsParkSeaCB extends EsAbstractConditionBean {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    public BsParkSeaCQ query() {
+    public BsProductCQ query() {
         assertQueryPurpose();
         return doGetConditionQuery();
     }
 
-    protected BsParkSeaCQ doGetConditionQuery() {
+    protected BsProductCQ doGetConditionQuery() {
         if (_conditionQuery == null) {
             _conditionQuery = createLocalCQ();
         }
         return _conditionQuery;
     }
 
-    protected BsParkSeaCQ createLocalCQ() {
-        return new ParkSeaCQ();
+    protected BsProductCQ createLocalCQ() {
+        return new ProductCQ();
     }
 
     // ===================================================================================
@@ -158,29 +158,35 @@ public class BsParkSeaCB extends EsAbstractConditionBean {
             doColumn("_id");
         }
 
-        public void columnCode() {
-            doColumn("code");
+        public void columnCategoryCode() {
+            doColumn("category_code");
         }
-        public void columnCreatedTime() {
-            doColumn("createdTime");
+        public void columnDescription() {
+            doColumn("description");
         }
-        public void columnUpdatedTime() {
-            doColumn("updatedTime");
+        public void columnHandleCode() {
+            doColumn("handle_code");
         }
-        public void columnDefaultDate() {
-            doColumn("defaultDate");
+        public void columnName() {
+            doColumn("name");
         }
-        public void columnFormatDate() {
-            doColumn("formatDate");
+        public void columnRegisterDatetime() {
+            doColumn("register_datetime");
         }
-        public void columnFormatDateTime() {
-            doColumn("formatDateTime");
+        public void columnRegisterUser() {
+            doColumn("register_user");
         }
-        public void columnFormatTime() {
-            doColumn("formatTime");
+        public void columnRegularPrice() {
+            doColumn("regular_price");
         }
-        public void columnFormatDateOptionalTime() {
-            doColumn("formatDateOptionalTime");
+        public void columnStatus() {
+            doColumn("status");
+        }
+        public void columnUpdateDatetime() {
+            doColumn("update_datetime");
+        }
+        public void columnUpdateUser() {
+            doColumn("update_user");
         }
     }
 }

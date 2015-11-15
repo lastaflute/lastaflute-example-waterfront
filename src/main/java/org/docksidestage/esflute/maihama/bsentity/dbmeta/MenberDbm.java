@@ -19,7 +19,7 @@ import java.time.*;
 import java.util.List;
 import java.util.Map;
 
-import org.docksidestage.esflute.maihama.exentity.ParkLand;
+import org.docksidestage.esflute.maihama.exentity.Menber;
 
 import org.dbflute.Entity;
 import org.dbflute.dbmeta.AbstractDBMeta;
@@ -33,19 +33,19 @@ import org.dbflute.util.DfTypeUtil;
 /**
  * @author ESFlute (using FreeGen)
  */
-public class ParkLandDbm extends AbstractDBMeta {
+public class MenberDbm extends AbstractDBMeta {
 
     protected static final Class<?> suppressUnusedImportLocalDateTime = LocalDateTime.class;
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final ParkLandDbm _instance = new ParkLandDbm();
+    private static final MenberDbm _instance = new MenberDbm();
 
-    private ParkLandDbm() {
+    private MenberDbm() {
     }
 
-    public static ParkLandDbm getInstance() {
+    public static MenberDbm getInstance() {
         return _instance;
     }
 
@@ -80,8 +80,8 @@ public class ParkLandDbm extends AbstractDBMeta {
     //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
-        setupEpg(_epgMap, et-> ((ParkLand)et).getLabelTypeId(),(et,vl)->((ParkLand) et).setLabelTypeId(DfTypeUtil.toString(vl)), "labelTypeId");
-        setupEpg(_epgMap, et-> ((ParkLand)et).getWebConfigId(),(et,vl)->((ParkLand) et).setWebConfigId(DfTypeUtil.toString(vl)), "webConfigId");
+        setupEpg(_epgMap, et-> ((Menber)et).getAccount(),(et,vl)->((Menber) et).setAccount(DfTypeUtil.toString(vl)), "account");
+        setupEpg(_epgMap, et-> ((Menber)et).getName(),(et,vl)->((Menber) et).setName(DfTypeUtil.toString(vl)), "name");
     }
 
     @Override
@@ -92,9 +92,9 @@ public class ParkLandDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "park_land";
-    protected final String _tableDispName = "park_land";
-    protected final String _tablePropertyName = "ParkLand";
+    protected final String _tableDbName = "menber";
+    protected final String _tableDispName = "menber";
+    protected final String _tablePropertyName = "Menber";
     public String getTableDbName() { return _tableDbName; }
     @Override
     public String getTableDispName() { return _tableDispName; }
@@ -106,16 +106,16 @@ public class ParkLandDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnLabelTypeId = cci("labelTypeId", "labelTypeId", null, null, String.class, "labelTypeId", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnWebConfigId = cci("webConfigId", "webConfigId", null, null, String.class, "webConfigId", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnAccount = cci("account", "account", null, null, String.class, "account", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnName = cci("name", "name", null, null, String.class, "name", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
 
-    public ColumnInfo columnLabelTypeId() { return _columnLabelTypeId; }
-    public ColumnInfo columnWebConfigId() { return _columnWebConfigId; }
+    public ColumnInfo columnAccount() { return _columnAccount; }
+    public ColumnInfo columnName() { return _columnName; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnLabelTypeId());
-        ls.add(columnWebConfigId());
+        ls.add(columnAccount());
+        ls.add(columnName());
         return ls;
     }
 
@@ -142,17 +142,17 @@ public class ParkLandDbm extends AbstractDBMeta {
     //                                                                           =========
     @Override
     public String getEntityTypeName() {
-        return "org.docksidestage.esflute.maihama.exentity.ParkLand";
+        return "org.docksidestage.esflute.maihama.exentity.Menber";
     }
 
     @Override
     public String getConditionBeanTypeName() {
-        return "org.docksidestage.esflute.maihama.cbean.ParkLandCB";
+        return "org.docksidestage.esflute.maihama.cbean.MenberCB";
     }
 
     @Override
     public String getBehaviorTypeName() {
-        return "org.docksidestage.esflute.maihama.exbhv.ParkLandBhv";
+        return "org.docksidestage.esflute.maihama.exbhv.MenberBhv";
     }
 
     // ===================================================================================
@@ -160,7 +160,7 @@ public class ParkLandDbm extends AbstractDBMeta {
     //                                                                         ===========
     @Override
     public Class<? extends Entity> getEntityType() {
-        return ParkLand.class;
+        return Menber.class;
     }
 
     // ===================================================================================
@@ -168,7 +168,7 @@ public class ParkLandDbm extends AbstractDBMeta {
     //                                                                     ===============
     @Override
     public Entity newEntity() {
-        return new ParkLand();
+        return new Menber();
     }
 
     // ===================================================================================

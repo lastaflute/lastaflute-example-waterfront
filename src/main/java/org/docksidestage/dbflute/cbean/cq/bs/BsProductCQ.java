@@ -142,6 +142,26 @@ public class BsProductCQ extends AbstractBsProductCQ {
      */
     public BsProductCQ addOrderBy_ProductName_Desc() { regOBD("PRODUCT_NAME"); return this; }
 
+    protected ConditionValue _productDescription;
+    public ConditionValue xdfgetProductDescription()
+    { if (_productDescription == null) { _productDescription = nCV(); }
+      return _productDescription; }
+    protected ConditionValue xgetCValueProductDescription() { return xdfgetProductDescription(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_ProductDescription_Asc() { regOBA("PRODUCT_DESCRIPTION"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_ProductDescription_Desc() { regOBD("PRODUCT_DESCRIPTION"); return this; }
+
     protected ConditionValue _productHandleCode;
     public ConditionValue xdfgetProductHandleCode()
     { if (_productHandleCode == null) { _productHandleCode = nCV(); }

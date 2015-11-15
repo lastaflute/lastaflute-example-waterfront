@@ -20,13 +20,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity;
-import org.docksidestage.esflute.maihama.bsentity.dbmeta.ParkLandDbm;
+import org.docksidestage.esflute.maihama.bsentity.dbmeta.MenberDbm;
 
 /**
  * ${table.comment}
  * @author ESFlute (using FreeGen)
  */
-public class BsParkLand extends EsAbstractEntity {
+public class BsMenber extends EsAbstractEntity {
 
     // ===================================================================================
     //                                                                          Definition
@@ -37,11 +37,11 @@ public class BsParkLand extends EsAbstractEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** labelTypeId */
-    protected String labelTypeId;
+    /** account */
+    protected String account;
 
-    /** webConfigId */
-    protected String webConfigId;
+    /** name */
+    protected String name;
 
     // [Referrers] *comment only
 
@@ -49,13 +49,13 @@ public class BsParkLand extends EsAbstractEntity {
     //                                                                             DB Meta
     //                                                                             =======
     @Override
-    public ParkLandDbm asDBMeta() {
-        return ParkLandDbm.getInstance();
+    public MenberDbm asDBMeta() {
+        return MenberDbm.getInstance();
     }
 
     @Override
     public String asTableDbName() {
-        return "park_land";
+        return "menber";
     }
 
     // ===================================================================================
@@ -64,11 +64,11 @@ public class BsParkLand extends EsAbstractEntity {
     @Override
     public Map<String, Object> toSource() {
         Map<String, Object> sourceMap = new HashMap<>();
-        if (labelTypeId != null) {
-            sourceMap.put("labelTypeId", labelTypeId);
+        if (account != null) {
+            sourceMap.put("account", account);
         }
-        if (webConfigId != null) {
-            sourceMap.put("webConfigId", webConfigId);
+        if (name != null) {
+            sourceMap.put("name", name);
         }
         return sourceMap;
     }
@@ -79,8 +79,8 @@ public class BsParkLand extends EsAbstractEntity {
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(labelTypeId);
-        sb.append(dm).append(webConfigId);
+        sb.append(dm).append(account);
+        sb.append(dm).append(name);
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -91,23 +91,23 @@ public class BsParkLand extends EsAbstractEntity {
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public String getLabelTypeId() {
-        checkSpecifiedProperty("labelTypeId");
-        return convertEmptyToNull(labelTypeId);
+    public String getAccount() {
+        checkSpecifiedProperty("account");
+        return convertEmptyToNull(account);
     }
 
-    public void setLabelTypeId(String value) {
-        registerModifiedProperty("labelTypeId");
-        this.labelTypeId = value;
+    public void setAccount(String value) {
+        registerModifiedProperty("account");
+        this.account = value;
     }
 
-    public String getWebConfigId() {
-        checkSpecifiedProperty("webConfigId");
-        return convertEmptyToNull(webConfigId);
+    public String getName() {
+        checkSpecifiedProperty("name");
+        return convertEmptyToNull(name);
     }
 
-    public void setWebConfigId(String value) {
-        registerModifiedProperty("webConfigId");
-        this.webConfigId = value;
+    public void setName(String value) {
+        registerModifiedProperty("name");
+        this.name = value;
     }
 }

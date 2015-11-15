@@ -1,0 +1,83 @@
+{
+    "mappings" : {
+      "product" : {
+        "_all" : {
+          "enabled" : false
+        },
+        "properties" : {
+          "category_code" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "description" : {
+            "type" : "string",
+            "analyzer" : "standard"
+          },
+          "handle_code" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "name" : {
+            "type" : "string",
+            "analyzer" : "standard",
+            "fields" : {
+              "raw" : {
+                "type" : "string",
+                "index" : "not_analyzed"
+              }
+            }
+          },
+          "register_datetime" : {
+            "type" : "date",
+            "format" : "date_optional_time"
+          },
+          "register_user" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "regular_price" : {
+            "type" : "integer"
+          },
+          "status" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "update_datetime" : {
+            "type" : "date",
+            "format" : "date_optional_time"
+          },
+          "update_user" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          }
+        }
+      },
+      "menber" : {
+        "_all" : {
+          "enabled" : false
+        },
+        "properties" : {
+          "account" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "name" : {
+            "type" : "string",
+            "analyzer" : "standard",
+            "fields" : {
+              "raw" : {
+                "type" : "string",
+                "index" : "not_analyzed"
+              }
+            }
+          }
+        }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "number_of_shards" : "5",
+        "number_of_replicas" : "0"
+      }
+    }
+}

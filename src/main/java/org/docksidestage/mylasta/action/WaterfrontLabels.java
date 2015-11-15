@@ -32,6 +32,9 @@ public class WaterfrontLabels extends ActionMessages {
     /** The key of the message: Product */
     public static final String LABELS_PRODUCT = "{labels.product}";
 
+    /** The key of the message: ES Product */
+    public static final String LABELS_ESPRODUCT = "{labels.esproduct}";
+
     /** The key of the message: Purchase */
     public static final String LABELS_PURCHASE = "{labels.purchase}";
 
@@ -49,6 +52,9 @@ public class WaterfrontLabels extends ActionMessages {
 
     /** The key of the message: @[labels.product] @[labels.status] */
     public static final String LABELS_PRODUCT_STATUS = "{labels.product.status}";
+
+    /** The key of the message: @[labels.esproduct] @[labels.status] */
+    public static final String LABELS_ESPRODUCT_STATUS = "{labels.esproduct.status}";
 
     /** The key of the message: @[labels.member] ID */
     public static final String LABELS_MEMBER_ID = "{labels.memberId}";
@@ -95,6 +101,9 @@ public class WaterfrontLabels extends ActionMessages {
     /** The key of the message: Finish */
     public static final String LABELS_FINISH = "{labels.finish}";
 
+    /** The key of the message: Import */
+    public static final String LABELS_IMPORT = "{labels.import}";
+
     /** The key of the message: @[labels.list] of @[labels.member] */
     public static final String LABELS_MEMBER_LIST_TITLE = "{labels.member.list.title}";
 
@@ -133,6 +142,12 @@ public class WaterfrontLabels extends ActionMessages {
 
     /** The key of the message: @[labels.list] of @[labels.purchase] */
     public static final String LABELS_PURCHASE_DETAIL_TITLE = "{labels.purchase.detail.title}";
+
+    /** The key of the message: @[labels.list] of @[labels.esproduct] */
+    public static final String LABELS_ESPRODUCT_LIST_TITLE = "{labels.esproduct.list.title}";
+
+    /** The key of the message: @[labels.detail] of @[labels.esproduct] */
+    public static final String LABELS_ESPRODUCT_DETAIL_TITLE = "{labels.esproduct.detail.title}";
 
     /** The key of the message: Sign In */
     public static final String LABELS_SIGNIN_TITLE = "{labels.signin.title}";

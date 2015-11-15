@@ -19,7 +19,7 @@ import java.time.*;
 import java.util.List;
 import java.util.Map;
 
-import org.docksidestage.esflute.maihama.exentity.ParkSea;
+import org.docksidestage.esflute.maihama.exentity.Product;
 
 import org.dbflute.Entity;
 import org.dbflute.dbmeta.AbstractDBMeta;
@@ -33,19 +33,19 @@ import org.dbflute.util.DfTypeUtil;
 /**
  * @author ESFlute (using FreeGen)
  */
-public class ParkSeaDbm extends AbstractDBMeta {
+public class ProductDbm extends AbstractDBMeta {
 
     protected static final Class<?> suppressUnusedImportLocalDateTime = LocalDateTime.class;
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final ParkSeaDbm _instance = new ParkSeaDbm();
+    private static final ProductDbm _instance = new ProductDbm();
 
-    private ParkSeaDbm() {
+    private ProductDbm() {
     }
 
-    public static ParkSeaDbm getInstance() {
+    public static ProductDbm getInstance() {
         return _instance;
     }
 
@@ -80,14 +80,16 @@ public class ParkSeaDbm extends AbstractDBMeta {
     //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
-        setupEpg(_epgMap, et-> ((ParkSea)et).getCode(),(et,vl)->((ParkSea) et).setCode(DfTypeUtil.toString(vl)), "code");
-        setupEpg(_epgMap, et-> ((ParkSea)et).getCreatedTime(),(et,vl)->((ParkSea) et).setCreatedTime(DfTypeUtil.toLong(vl)), "createdTime");
-        setupEpg(_epgMap, et-> ((ParkSea)et).getUpdatedTime(),(et,vl)->((ParkSea) et).setUpdatedTime(DfTypeUtil.toLong(vl)), "updatedTime");
-        setupEpg(_epgMap, et-> ((ParkSea)et).getDefaultDate(),(et,vl)->((ParkSea) et).setDefaultDate(DfTypeUtil.toLocalDateTime(vl)), "defaultDate");
-        setupEpg(_epgMap, et-> ((ParkSea)et).getFormatDate(),(et,vl)->((ParkSea) et).setFormatDate(DfTypeUtil.toLocalDate(vl)), "formatDate");
-        setupEpg(_epgMap, et-> ((ParkSea)et).getFormatDateTime(),(et,vl)->((ParkSea) et).setFormatDateTime(DfTypeUtil.toLocalDateTime(vl)), "formatDateTime");
-        setupEpg(_epgMap, et-> ((ParkSea)et).getFormatTime(),(et,vl)->((ParkSea) et).setFormatTime(DfTypeUtil.toLocalTime(vl)), "formatTime");
-        setupEpg(_epgMap, et-> ((ParkSea)et).getFormatDateOptionalTime(),(et,vl)->((ParkSea) et).setFormatDateOptionalTime(DfTypeUtil.toLocalDateTime(vl)), "formatDateOptionalTime");
+        setupEpg(_epgMap, et-> ((Product)et).getCategoryCode(),(et,vl)->((Product) et).setCategoryCode(DfTypeUtil.toString(vl)), "categoryCode");
+        setupEpg(_epgMap, et-> ((Product)et).getDescription(),(et,vl)->((Product) et).setDescription(DfTypeUtil.toString(vl)), "description");
+        setupEpg(_epgMap, et-> ((Product)et).getHandleCode(),(et,vl)->((Product) et).setHandleCode(DfTypeUtil.toString(vl)), "handleCode");
+        setupEpg(_epgMap, et-> ((Product)et).getName(),(et,vl)->((Product) et).setName(DfTypeUtil.toString(vl)), "name");
+        setupEpg(_epgMap, et-> ((Product)et).getRegisterDatetime(),(et,vl)->((Product) et).setRegisterDatetime(DfTypeUtil.toLocalDateTime(vl)), "registerDatetime");
+        setupEpg(_epgMap, et-> ((Product)et).getRegisterUser(),(et,vl)->((Product) et).setRegisterUser(DfTypeUtil.toString(vl)), "registerUser");
+        setupEpg(_epgMap, et-> ((Product)et).getRegularPrice(),(et,vl)->((Product) et).setRegularPrice(DfTypeUtil.toInteger(vl)), "regularPrice");
+        setupEpg(_epgMap, et-> ((Product)et).getStatus(),(et,vl)->((Product) et).setStatus(DfTypeUtil.toString(vl)), "status");
+        setupEpg(_epgMap, et-> ((Product)et).getUpdateDatetime(),(et,vl)->((Product) et).setUpdateDatetime(DfTypeUtil.toLocalDateTime(vl)), "updateDatetime");
+        setupEpg(_epgMap, et-> ((Product)et).getUpdateUser(),(et,vl)->((Product) et).setUpdateUser(DfTypeUtil.toString(vl)), "updateUser");
     }
 
     @Override
@@ -98,9 +100,9 @@ public class ParkSeaDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "park_sea";
-    protected final String _tableDispName = "park_sea";
-    protected final String _tablePropertyName = "ParkSea";
+    protected final String _tableDbName = "product";
+    protected final String _tableDispName = "product";
+    protected final String _tablePropertyName = "Product";
     public String getTableDbName() { return _tableDbName; }
     @Override
     public String getTableDispName() { return _tableDispName; }
@@ -112,34 +114,40 @@ public class ParkSeaDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnCode = cci("code", "code", null, null, String.class, "code", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnCreatedTime = cci("createdTime", "createdTime", null, null, Long.class, "createdTime", null, false, false, false, "Long", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUpdatedTime = cci("updatedTime", "updatedTime", null, null, Long.class, "updatedTime", null, false, false, false, "Long", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnDefaultDate = cci("defaultDate", "defaultDate", null, null, LocalDateTime.class, "defaultDate", null, false, false, false, "LocalDateTime", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnFormatDate = cci("formatDate", "formatDate", null, null, LocalDate.class, "formatDate", null, false, false, false, "LocalDate", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnFormatDateTime = cci("formatDateTime", "formatDateTime", null, null, LocalDateTime.class, "formatDateTime", null, false, false, false, "LocalDateTime", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnFormatTime = cci("formatTime", "formatTime", null, null, LocalTime.class, "formatTime", null, false, false, false, "LocalTime", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnFormatDateOptionalTime = cci("formatDateOptionalTime", "formatDateOptionalTime", null, null, LocalDateTime.class, "formatDateOptionalTime", null, false, false, false, "LocalDateTime", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnCategoryCode = cci("category_code", "category_code", null, null, String.class, "categoryCode", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnDescription = cci("description", "description", null, null, String.class, "description", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnHandleCode = cci("handle_code", "handle_code", null, null, String.class, "handleCode", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnName = cci("name", "name", null, null, String.class, "name", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterDatetime = cci("register_datetime", "register_datetime", null, null, LocalDateTime.class, "registerDatetime", null, false, false, false, "LocalDateTime", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterUser = cci("register_user", "register_user", null, null, String.class, "registerUser", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegularPrice = cci("regular_price", "regular_price", null, null, Integer.class, "regularPrice", null, false, false, false, "Integer", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnStatus = cci("status", "status", null, null, String.class, "status", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateDatetime = cci("update_datetime", "update_datetime", null, null, LocalDateTime.class, "updateDatetime", null, false, false, false, "LocalDateTime", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateUser = cci("update_user", "update_user", null, null, String.class, "updateUser", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
 
-    public ColumnInfo columnCode() { return _columnCode; }
-    public ColumnInfo columnCreatedTime() { return _columnCreatedTime; }
-    public ColumnInfo columnUpdatedTime() { return _columnUpdatedTime; }
-    public ColumnInfo columnDefaultDate() { return _columnDefaultDate; }
-    public ColumnInfo columnFormatDate() { return _columnFormatDate; }
-    public ColumnInfo columnFormatDateTime() { return _columnFormatDateTime; }
-    public ColumnInfo columnFormatTime() { return _columnFormatTime; }
-    public ColumnInfo columnFormatDateOptionalTime() { return _columnFormatDateOptionalTime; }
+    public ColumnInfo columnCategoryCode() { return _columnCategoryCode; }
+    public ColumnInfo columnDescription() { return _columnDescription; }
+    public ColumnInfo columnHandleCode() { return _columnHandleCode; }
+    public ColumnInfo columnName() { return _columnName; }
+    public ColumnInfo columnRegisterDatetime() { return _columnRegisterDatetime; }
+    public ColumnInfo columnRegisterUser() { return _columnRegisterUser; }
+    public ColumnInfo columnRegularPrice() { return _columnRegularPrice; }
+    public ColumnInfo columnStatus() { return _columnStatus; }
+    public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }
+    public ColumnInfo columnUpdateUser() { return _columnUpdateUser; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnCode());
-        ls.add(columnCreatedTime());
-        ls.add(columnUpdatedTime());
-        ls.add(columnDefaultDate());
-        ls.add(columnFormatDate());
-        ls.add(columnFormatDateTime());
-        ls.add(columnFormatTime());
-        ls.add(columnFormatDateOptionalTime());
+        ls.add(columnCategoryCode());
+        ls.add(columnDescription());
+        ls.add(columnHandleCode());
+        ls.add(columnName());
+        ls.add(columnRegisterDatetime());
+        ls.add(columnRegisterUser());
+        ls.add(columnRegularPrice());
+        ls.add(columnStatus());
+        ls.add(columnUpdateDatetime());
+        ls.add(columnUpdateUser());
         return ls;
     }
 
@@ -166,17 +174,17 @@ public class ParkSeaDbm extends AbstractDBMeta {
     //                                                                           =========
     @Override
     public String getEntityTypeName() {
-        return "org.docksidestage.esflute.maihama.exentity.ParkSea";
+        return "org.docksidestage.esflute.maihama.exentity.Product";
     }
 
     @Override
     public String getConditionBeanTypeName() {
-        return "org.docksidestage.esflute.maihama.cbean.ParkSeaCB";
+        return "org.docksidestage.esflute.maihama.cbean.ProductCB";
     }
 
     @Override
     public String getBehaviorTypeName() {
-        return "org.docksidestage.esflute.maihama.exbhv.ParkSeaBhv";
+        return "org.docksidestage.esflute.maihama.exbhv.ProductBhv";
     }
 
     // ===================================================================================
@@ -184,7 +192,7 @@ public class ParkSeaDbm extends AbstractDBMeta {
     //                                                                         ===========
     @Override
     public Class<? extends Entity> getEntityType() {
-        return ParkSea.class;
+        return Product.class;
     }
 
     // ===================================================================================
@@ -192,7 +200,7 @@ public class ParkSeaDbm extends AbstractDBMeta {
     //                                                                     ===============
     @Override
     public Entity newEntity() {
-        return new ParkSea();
+        return new Product();
     }
 
     // ===================================================================================

@@ -21,9 +21,9 @@ import java.util.Map;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractBehavior;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.RequestOptionCall;
-import org.docksidestage.esflute.maihama.bsentity.dbmeta.ParkSeaDbm;
-import org.docksidestage.esflute.maihama.cbean.ParkSeaCB;
-import org.docksidestage.esflute.maihama.exentity.ParkSea;
+import org.docksidestage.esflute.maihama.bsentity.dbmeta.ProductDbm;
+import org.docksidestage.esflute.maihama.cbean.ProductCB;
+import org.docksidestage.esflute.maihama.exentity.Product;
 import org.dbflute.Entity;
 import org.dbflute.bhv.readable.CBCall;
 import org.dbflute.bhv.readable.EntityRowHandler;
@@ -40,7 +40,7 @@ import org.elasticsearch.action.index.IndexRequestBuilder;
 /**
  * @author ESFlute (using FreeGen)
  */
-public abstract class BsParkSeaBhv extends EsAbstractBehavior<ParkSea, ParkSeaCB> {
+public abstract class BsProductBhv extends EsAbstractBehavior<Product, ProductCB> {
 
     // ===================================================================================
     //                                                                    Control Override
@@ -52,36 +52,38 @@ public abstract class BsParkSeaBhv extends EsAbstractBehavior<ParkSea, ParkSeaCB
 
     @Override
     protected String asEsIndex() {
-        return ".maihama_index";
+        return "maihama";
     }
 
     @Override
     public String asEsIndexType() {
-        return "park_sea";
+        return "product";
     }
 
     @Override
     public String asEsSearchType() {
-        return "park_sea";
+        return "product";
     }
 
     @Override
-    public ParkSeaDbm asDBMeta() {
-        return ParkSeaDbm.getInstance();
+    public ProductDbm asDBMeta() {
+        return ProductDbm.getInstance();
     }
 
     @Override
-    protected <RESULT extends ParkSea> RESULT createEntity(Map<String, Object> source, Class<? extends RESULT> entityType) {
+    protected <RESULT extends Product> RESULT createEntity(Map<String, Object> source, Class<? extends RESULT> entityType) {
         try {
             final RESULT result = entityType.newInstance();
-            result.setCode(DfTypeUtil.toString(source.get("code")));
-            result.setCreatedTime(DfTypeUtil.toLong(source.get("createdTime")));
-            result.setUpdatedTime(DfTypeUtil.toLong(source.get("updatedTime")));
-            result.setDefaultDate(DfTypeUtil.toLocalDateTime(source.get("defaultDate")));
-            result.setFormatDate(DfTypeUtil.toLocalDate(source.get("formatDate")));
-            result.setFormatDateTime(DfTypeUtil.toLocalDateTime(source.get("formatDateTime")));
-            result.setFormatTime(DfTypeUtil.toLocalTime(source.get("formatTime")));
-            result.setFormatDateOptionalTime(DfTypeUtil.toLocalDateTime(source.get("formatDateOptionalTime")));
+            result.setCategoryCode(DfTypeUtil.toString(source.get("category_code")));
+            result.setDescription(DfTypeUtil.toString(source.get("description")));
+            result.setHandleCode(DfTypeUtil.toString(source.get("handle_code")));
+            result.setName(DfTypeUtil.toString(source.get("name")));
+            result.setRegisterDatetime(DfTypeUtil.toLocalDateTime(source.get("register_datetime")));
+            result.setRegisterUser(DfTypeUtil.toString(source.get("register_user")));
+            result.setRegularPrice(DfTypeUtil.toInteger(source.get("regular_price")));
+            result.setStatus(DfTypeUtil.toString(source.get("status")));
+            result.setUpdateDatetime(DfTypeUtil.toLocalDateTime(source.get("update_datetime")));
+            result.setUpdateUser(DfTypeUtil.toString(source.get("update_user")));
             return result;
         } catch (InstantiationException | IllegalAccessException e) {
             final String msg = "Cannot create a new instance: " + entityType.getName();
@@ -92,26 +94,26 @@ public abstract class BsParkSeaBhv extends EsAbstractBehavior<ParkSea, ParkSeaCB
     // ===================================================================================
     //                                                                              Select
     //                                                                              ======
-    public int selectCount(CBCall<ParkSeaCB> cbLambda) {
+    public int selectCount(CBCall<ProductCB> cbLambda) {
         return facadeSelectCount(createCB(cbLambda));
     }
 
-    public OptionalEntity<ParkSea> selectEntity(CBCall<ParkSeaCB> cbLambda) {
+    public OptionalEntity<Product> selectEntity(CBCall<ProductCB> cbLambda) {
         return facadeSelectEntity(createCB(cbLambda));
     }
 
-    protected OptionalEntity<ParkSea> facadeSelectEntity(ParkSeaCB cb) {
+    protected OptionalEntity<Product> facadeSelectEntity(ProductCB cb) {
         return doSelectOptionalEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends ParkSea> OptionalEntity<ENTITY> doSelectOptionalEntity(ParkSeaCB cb,
+    protected <ENTITY extends Product> OptionalEntity<ENTITY> doSelectOptionalEntity(ProductCB cb,
             Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
     @Override
-    public ParkSeaCB newConditionBean() {
-        return new ParkSeaCB();
+    public ProductCB newConditionBean() {
+        return new ProductCB();
     }
 
     @Override
@@ -119,135 +121,135 @@ public abstract class BsParkSeaBhv extends EsAbstractBehavior<ParkSea, ParkSeaCB
         return facadeSelectEntity(downcast(cb)).orElse(null);
     }
 
-    public ParkSea selectEntityWithDeletedCheck(CBCall<ParkSeaCB> cbLambda) {
+    public Product selectEntityWithDeletedCheck(CBCall<ProductCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
     }
 
-    public OptionalEntity<ParkSea> selectByPK(String id) {
+    public OptionalEntity<Product> selectByPK(String id) {
         return facadeSelectByPK(id);
     }
 
-    protected OptionalEntity<ParkSea> facadeSelectByPK(String id) {
+    protected OptionalEntity<Product> facadeSelectByPK(String id) {
         return doSelectOptionalByPK(id, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends ParkSea> ENTITY doSelectByPK(String id, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Product> ENTITY doSelectByPK(String id, Class<? extends ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(id), tp);
     }
 
-    protected ParkSeaCB xprepareCBAsPK(String id) {
+    protected ProductCB xprepareCBAsPK(String id) {
         assertObjectNotNull("id", id);
         return newConditionBean().acceptPK(id);
     }
 
-    protected <ENTITY extends ParkSea> OptionalEntity<ENTITY> doSelectOptionalByPK(String id, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Product> OptionalEntity<ENTITY> doSelectOptionalByPK(String id, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(id, tp), id);
     }
 
     @Override
-    protected Class<? extends ParkSea> typeOfSelectedEntity() {
-        return ParkSea.class;
+    protected Class<? extends Product> typeOfSelectedEntity() {
+        return Product.class;
     }
 
     @Override
-    protected Class<ParkSea> typeOfHandlingEntity() {
-        return ParkSea.class;
+    protected Class<Product> typeOfHandlingEntity() {
+        return Product.class;
     }
 
     @Override
-    protected Class<ParkSeaCB> typeOfHandlingConditionBean() {
-        return ParkSeaCB.class;
+    protected Class<ProductCB> typeOfHandlingConditionBean() {
+        return ProductCB.class;
     }
 
-    public ListResultBean<ParkSea> selectList(CBCall<ParkSeaCB> cbLambda) {
+    public ListResultBean<Product> selectList(CBCall<ProductCB> cbLambda) {
         return facadeSelectList(createCB(cbLambda));
     }
 
-    public PagingResultBean<ParkSea> selectPage(CBCall<ParkSeaCB> cbLambda) {
+    public PagingResultBean<Product> selectPage(CBCall<ProductCB> cbLambda) {
         // #pending same?
-        return (PagingResultBean<ParkSea>) facadeSelectList(createCB(cbLambda));
+        return (PagingResultBean<Product>) facadeSelectList(createCB(cbLambda));
     }
 
-    public void selectCursor(CBCall<ParkSeaCB> cbLambda, EntityRowHandler<ParkSea> entityLambda) {
+    public void selectCursor(CBCall<ProductCB> cbLambda, EntityRowHandler<Product> entityLambda) {
         facadeSelectCursor(createCB(cbLambda), entityLambda);
     }
 
-    public void selectBulk(CBCall<ParkSeaCB> cbLambda, EntityRowHandler<List<ParkSea>> entityLambda) {
+    public void selectBulk(CBCall<ProductCB> cbLambda, EntityRowHandler<List<Product>> entityLambda) {
         delegateSelectBulk(createCB(cbLambda), entityLambda,typeOfSelectedEntity());
     }
 
     // ===================================================================================
     //                                                                              Update
     //                                                                              ======
-    public void insert(ParkSea entity) {
+    public void insert(Product entity) {
         doInsert(entity, null);
     }
 
-    public void insert(ParkSea entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void insert(Product entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         if (entity instanceof EsAbstractEntity) {
             entity.asDocMeta().indexOption(opLambda);
         }
         doInsert(entity, null);
     }
 
-    public void update(ParkSea entity) {
+    public void update(Product entity) {
         doUpdate(entity, null);
     }
 
-    public void update(ParkSea entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void update(Product entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         if (entity instanceof EsAbstractEntity) {
             entity.asDocMeta().indexOption(opLambda);
         }
         doUpdate(entity, null);
     }
 
-    public void insertOrUpdate(ParkSea entity) {
+    public void insertOrUpdate(Product entity) {
         doInsertOrUpdate(entity, null, null);
     }
 
-    public void insertOrUpdate(ParkSea entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void insertOrUpdate(Product entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         if (entity instanceof EsAbstractEntity) {
             entity.asDocMeta().indexOption(opLambda);
         }
         doInsertOrUpdate(entity, null, null);
     }
 
-    public void delete(ParkSea entity) {
+    public void delete(Product entity) {
         doDelete(entity, null);
     }
 
-    public void delete(ParkSea entity, RequestOptionCall<DeleteRequestBuilder> opLambda) {
+    public void delete(Product entity, RequestOptionCall<DeleteRequestBuilder> opLambda) {
         if (entity instanceof EsAbstractEntity) {
             entity.asDocMeta().deleteOption(opLambda);
         }
         doDelete(entity, null);
     }
 
-    public int queryDelete(CBCall<ParkSeaCB> cbLambda) {
+    public int queryDelete(CBCall<ProductCB> cbLambda) {
         return doQueryDelete(createCB(cbLambda), null);
     }
 
-    public int[] batchInsert(List<ParkSea> list) {
+    public int[] batchInsert(List<Product> list) {
         return batchInsert(list, null);
     }
 
-    public int[] batchInsert(List<ParkSea> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchInsert(List<Product> list, RequestOptionCall<BulkRequestBuilder> call) {
         return doBatchInsert(new BulkList<>(list, call), null);
     }
 
-    public int[] batchUpdate(List<ParkSea> list) {
+    public int[] batchUpdate(List<Product> list) {
         return batchUpdate(list, null);
     }
 
-    public int[] batchUpdate(List<ParkSea> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchUpdate(List<Product> list, RequestOptionCall<BulkRequestBuilder> call) {
         return doBatchUpdate(new BulkList<>(list, call), null);
     }
 
-    public int[] batchDelete(List<ParkSea> list) {
+    public int[] batchDelete(List<Product> list) {
         return batchDelete(list, null);
     }
 
-    public int[] batchDelete(List<ParkSea> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchDelete(List<Product> list, RequestOptionCall<BulkRequestBuilder> call) {
         return doBatchDelete(new BulkList<>(list, call), null);
     }
 

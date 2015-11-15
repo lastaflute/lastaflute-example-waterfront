@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionBean;
-import org.docksidestage.esflute.maihama.bsentity.dbmeta.ParkLandDbm;
-import org.docksidestage.esflute.maihama.cbean.ParkLandCB;
-import org.docksidestage.esflute.maihama.cbean.cq.ParkLandCQ;
-import org.docksidestage.esflute.maihama.cbean.cq.bs.BsParkLandCQ;
+import org.docksidestage.esflute.maihama.bsentity.dbmeta.MenberDbm;
+import org.docksidestage.esflute.maihama.cbean.MenberCB;
+import org.docksidestage.esflute.maihama.cbean.cq.MenberCQ;
+import org.docksidestage.esflute.maihama.cbean.cq.bs.BsMenberCQ;
 import org.dbflute.cbean.ConditionQuery;
 import org.elasticsearch.action.count.CountRequestBuilder;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -32,25 +32,25 @@ import org.elasticsearch.index.query.QueryBuilder;
 /**
  * @author ESFlute (using FreeGen)
  */
-public class BsParkLandCB extends EsAbstractConditionBean {
+public class BsMenberCB extends EsAbstractConditionBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected BsParkLandCQ _conditionQuery;
+    protected BsMenberCQ _conditionQuery;
     protected HpSpecification _specification;
 
     // ===================================================================================
     //                                                                             Control
     //                                                                             =======
     @Override
-    public ParkLandDbm asDBMeta() {
-        return ParkLandDbm.getInstance();
+    public MenberDbm asDBMeta() {
+        return MenberDbm.getInstance();
     }
 
     @Override
     public String asTableDbName() {
-        return "park_land";
+        return "menber";
     }
 
     @Override
@@ -66,11 +66,11 @@ public class BsParkLandCB extends EsAbstractConditionBean {
     // ===================================================================================
     //                                                                         Primary Key
     //                                                                         ===========
-    public ParkLandCB acceptPK(String id) {
+    public MenberCB acceptPK(String id) {
         assertObjectNotNull("id", id);
-        BsParkLandCB cb = this;
+        BsMenberCB cb = this;
         cb.query().docMeta().setId_Equal(id);
-        return (ParkLandCB) this;
+        return (MenberCB) this;
     }
 
     @Override
@@ -114,20 +114,20 @@ public class BsParkLandCB extends EsAbstractConditionBean {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    public BsParkLandCQ query() {
+    public BsMenberCQ query() {
         assertQueryPurpose();
         return doGetConditionQuery();
     }
 
-    protected BsParkLandCQ doGetConditionQuery() {
+    protected BsMenberCQ doGetConditionQuery() {
         if (_conditionQuery == null) {
             _conditionQuery = createLocalCQ();
         }
         return _conditionQuery;
     }
 
-    protected BsParkLandCQ createLocalCQ() {
-        return new ParkLandCQ();
+    protected BsMenberCQ createLocalCQ() {
+        return new MenberCQ();
     }
 
     // ===================================================================================
@@ -158,11 +158,11 @@ public class BsParkLandCB extends EsAbstractConditionBean {
             doColumn("_id");
         }
 
-        public void columnLabelTypeId() {
-            doColumn("labelTypeId");
+        public void columnAccount() {
+            doColumn("account");
         }
-        public void columnWebConfigId() {
-            doColumn("webConfigId");
+        public void columnName() {
+            doColumn("name");
         }
     }
 }

@@ -322,6 +322,123 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @param productDescription The value of productDescription as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setProductDescription_Equal(String productDescription) {
+        doSetProductDescription_Equal(fRES(productDescription));
+    }
+
+    protected void doSetProductDescription_Equal(String productDescription) {
+        regProductDescription(CK_EQ, productDescription);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @param productDescription The value of productDescription as notEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setProductDescription_NotEqual(String productDescription) {
+        doSetProductDescription_NotEqual(fRES(productDescription));
+    }
+
+    protected void doSetProductDescription_NotEqual(String productDescription) {
+        regProductDescription(CK_NES, productDescription);
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @param productDescriptionList The collection of productDescription as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setProductDescription_InScope(Collection<String> productDescriptionList) {
+        doSetProductDescription_InScope(productDescriptionList);
+    }
+
+    protected void doSetProductDescription_InScope(Collection<String> productDescriptionList) {
+        regINS(CK_INS, cTL(productDescriptionList), xgetCValueProductDescription(), "PRODUCT_DESCRIPTION");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @param productDescriptionList The collection of productDescription as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setProductDescription_NotInScope(Collection<String> productDescriptionList) {
+        doSetProductDescription_NotInScope(productDescriptionList);
+    }
+
+    protected void doSetProductDescription_NotInScope(Collection<String> productDescriptionList) {
+        regINS(CK_NINS, cTL(productDescriptionList), xgetCValueProductDescription(), "PRODUCT_DESCRIPTION");
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)} <br>
+     * <pre>e.g. setProductDescription_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param productDescription The value of productDescription as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setProductDescription_LikeSearch(String productDescription, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setProductDescription_LikeSearch(productDescription, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)} <br>
+     * <pre>e.g. setProductDescription_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param productDescription The value of productDescription as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setProductDescription_LikeSearch(String productDescription, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(productDescription), xgetCValueProductDescription(), "PRODUCT_DESCRIPTION", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @param productDescription The value of productDescription as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setProductDescription_NotLikeSearch(String productDescription, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setProductDescription_NotLikeSearch(productDescription, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     * @param productDescription The value of productDescription as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setProductDescription_NotLikeSearch(String productDescription, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(productDescription), xgetCValueProductDescription(), "PRODUCT_DESCRIPTION", likeSearchOption);
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     */
+    public void setProductDescription_IsNull() { regProductDescription(CK_ISN, DOBJ); }
+
+    /**
+     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     */
+    public void setProductDescription_IsNullOrEmpty() { regProductDescription(CK_ISNOE, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
+     * PRODUCT_DESCRIPTION: {VARCHAR(200)}
+     */
+    public void setProductDescription_IsNotNull() { regProductDescription(CK_ISNN, DOBJ); }
+
+    protected void regProductDescription(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueProductDescription(), "PRODUCT_DESCRIPTION"); }
+    protected abstract ConditionValue xgetCValueProductDescription();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
      * (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)}
      * @param productHandleCode The value of productHandleCode as equal. (NullAllowed: if null (or empty), no condition)
      */

@@ -10,6 +10,7 @@
 			<h1 class="sg-main-title"><a href="${ctx}/">Maihama<span> (LastaFlute Example)</span></a></h1>
 			<ul class="nav-home">
 				<li><a href="${ctx}/product/list/"><span class="link-block">Product</span></a></li>
+				<li><a href="${ctx}/esproduct/list/"><span class="link-block">Product(ES)</span></a></li>
 				<li><a href="${ctx}/member/list/"><span class="link-block">Member</span></a></li>
 				<li><a href="${ctx}/purchase/list/"><span class="link-block">Purchase</span></a></li>
 			</ul>

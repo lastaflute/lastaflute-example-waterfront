@@ -21,9 +21,9 @@ import java.util.Map;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractBehavior;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.RequestOptionCall;
-import org.docksidestage.esflute.maihama.bsentity.dbmeta.ParkLandDbm;
-import org.docksidestage.esflute.maihama.cbean.ParkLandCB;
-import org.docksidestage.esflute.maihama.exentity.ParkLand;
+import org.docksidestage.esflute.maihama.bsentity.dbmeta.MenberDbm;
+import org.docksidestage.esflute.maihama.cbean.MenberCB;
+import org.docksidestage.esflute.maihama.exentity.Menber;
 import org.dbflute.Entity;
 import org.dbflute.bhv.readable.CBCall;
 import org.dbflute.bhv.readable.EntityRowHandler;
@@ -40,7 +40,7 @@ import org.elasticsearch.action.index.IndexRequestBuilder;
 /**
  * @author ESFlute (using FreeGen)
  */
-public abstract class BsParkLandBhv extends EsAbstractBehavior<ParkLand, ParkLandCB> {
+public abstract class BsMenberBhv extends EsAbstractBehavior<Menber, MenberCB> {
 
     // ===================================================================================
     //                                                                    Control Override
@@ -52,30 +52,30 @@ public abstract class BsParkLandBhv extends EsAbstractBehavior<ParkLand, ParkLan
 
     @Override
     protected String asEsIndex() {
-        return ".maihama_index";
+        return "maihama";
     }
 
     @Override
     public String asEsIndexType() {
-        return "park_land";
+        return "menber";
     }
 
     @Override
     public String asEsSearchType() {
-        return "park_land";
+        return "menber";
     }
 
     @Override
-    public ParkLandDbm asDBMeta() {
-        return ParkLandDbm.getInstance();
+    public MenberDbm asDBMeta() {
+        return MenberDbm.getInstance();
     }
 
     @Override
-    protected <RESULT extends ParkLand> RESULT createEntity(Map<String, Object> source, Class<? extends RESULT> entityType) {
+    protected <RESULT extends Menber> RESULT createEntity(Map<String, Object> source, Class<? extends RESULT> entityType) {
         try {
             final RESULT result = entityType.newInstance();
-            result.setLabelTypeId(DfTypeUtil.toString(source.get("labelTypeId")));
-            result.setWebConfigId(DfTypeUtil.toString(source.get("webConfigId")));
+            result.setAccount(DfTypeUtil.toString(source.get("account")));
+            result.setName(DfTypeUtil.toString(source.get("name")));
             return result;
         } catch (InstantiationException | IllegalAccessException e) {
             final String msg = "Cannot create a new instance: " + entityType.getName();
@@ -86,26 +86,26 @@ public abstract class BsParkLandBhv extends EsAbstractBehavior<ParkLand, ParkLan
     // ===================================================================================
     //                                                                              Select
     //                                                                              ======
-    public int selectCount(CBCall<ParkLandCB> cbLambda) {
+    public int selectCount(CBCall<MenberCB> cbLambda) {
         return facadeSelectCount(createCB(cbLambda));
     }
 
-    public OptionalEntity<ParkLand> selectEntity(CBCall<ParkLandCB> cbLambda) {
+    public OptionalEntity<Menber> selectEntity(CBCall<MenberCB> cbLambda) {
         return facadeSelectEntity(createCB(cbLambda));
     }
 
-    protected OptionalEntity<ParkLand> facadeSelectEntity(ParkLandCB cb) {
+    protected OptionalEntity<Menber> facadeSelectEntity(MenberCB cb) {
         return doSelectOptionalEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends ParkLand> OptionalEntity<ENTITY> doSelectOptionalEntity(ParkLandCB cb,
+    protected <ENTITY extends Menber> OptionalEntity<ENTITY> doSelectOptionalEntity(MenberCB cb,
             Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
     @Override
-    public ParkLandCB newConditionBean() {
-        return new ParkLandCB();
+    public MenberCB newConditionBean() {
+        return new MenberCB();
     }
 
     @Override
@@ -113,135 +113,135 @@ public abstract class BsParkLandBhv extends EsAbstractBehavior<ParkLand, ParkLan
         return facadeSelectEntity(downcast(cb)).orElse(null);
     }
 
-    public ParkLand selectEntityWithDeletedCheck(CBCall<ParkLandCB> cbLambda) {
+    public Menber selectEntityWithDeletedCheck(CBCall<MenberCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
     }
 
-    public OptionalEntity<ParkLand> selectByPK(String id) {
+    public OptionalEntity<Menber> selectByPK(String id) {
         return facadeSelectByPK(id);
     }
 
-    protected OptionalEntity<ParkLand> facadeSelectByPK(String id) {
+    protected OptionalEntity<Menber> facadeSelectByPK(String id) {
         return doSelectOptionalByPK(id, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends ParkLand> ENTITY doSelectByPK(String id, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Menber> ENTITY doSelectByPK(String id, Class<? extends ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(id), tp);
     }
 
-    protected ParkLandCB xprepareCBAsPK(String id) {
+    protected MenberCB xprepareCBAsPK(String id) {
         assertObjectNotNull("id", id);
         return newConditionBean().acceptPK(id);
     }
 
-    protected <ENTITY extends ParkLand> OptionalEntity<ENTITY> doSelectOptionalByPK(String id, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Menber> OptionalEntity<ENTITY> doSelectOptionalByPK(String id, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(id, tp), id);
     }
 
     @Override
-    protected Class<? extends ParkLand> typeOfSelectedEntity() {
-        return ParkLand.class;
+    protected Class<? extends Menber> typeOfSelectedEntity() {
+        return Menber.class;
     }
 
     @Override
-    protected Class<ParkLand> typeOfHandlingEntity() {
-        return ParkLand.class;
+    protected Class<Menber> typeOfHandlingEntity() {
+        return Menber.class;
     }
 
     @Override
-    protected Class<ParkLandCB> typeOfHandlingConditionBean() {
-        return ParkLandCB.class;
+    protected Class<MenberCB> typeOfHandlingConditionBean() {
+        return MenberCB.class;
     }
 
-    public ListResultBean<ParkLand> selectList(CBCall<ParkLandCB> cbLambda) {
+    public ListResultBean<Menber> selectList(CBCall<MenberCB> cbLambda) {
         return facadeSelectList(createCB(cbLambda));
     }
 
-    public PagingResultBean<ParkLand> selectPage(CBCall<ParkLandCB> cbLambda) {
+    public PagingResultBean<Menber> selectPage(CBCall<MenberCB> cbLambda) {
         // #pending same?
-        return (PagingResultBean<ParkLand>) facadeSelectList(createCB(cbLambda));
+        return (PagingResultBean<Menber>) facadeSelectList(createCB(cbLambda));
     }
 
-    public void selectCursor(CBCall<ParkLandCB> cbLambda, EntityRowHandler<ParkLand> entityLambda) {
+    public void selectCursor(CBCall<MenberCB> cbLambda, EntityRowHandler<Menber> entityLambda) {
         facadeSelectCursor(createCB(cbLambda), entityLambda);
     }
 
-    public void selectBulk(CBCall<ParkLandCB> cbLambda, EntityRowHandler<List<ParkLand>> entityLambda) {
+    public void selectBulk(CBCall<MenberCB> cbLambda, EntityRowHandler<List<Menber>> entityLambda) {
         delegateSelectBulk(createCB(cbLambda), entityLambda,typeOfSelectedEntity());
     }
 
     // ===================================================================================
     //                                                                              Update
     //                                                                              ======
-    public void insert(ParkLand entity) {
+    public void insert(Menber entity) {
         doInsert(entity, null);
     }
 
-    public void insert(ParkLand entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void insert(Menber entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         if (entity instanceof EsAbstractEntity) {
             entity.asDocMeta().indexOption(opLambda);
         }
         doInsert(entity, null);
     }
 
-    public void update(ParkLand entity) {
+    public void update(Menber entity) {
         doUpdate(entity, null);
     }
 
-    public void update(ParkLand entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void update(Menber entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         if (entity instanceof EsAbstractEntity) {
             entity.asDocMeta().indexOption(opLambda);
         }
         doUpdate(entity, null);
     }
 
-    public void insertOrUpdate(ParkLand entity) {
+    public void insertOrUpdate(Menber entity) {
         doInsertOrUpdate(entity, null, null);
     }
 
-    public void insertOrUpdate(ParkLand entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void insertOrUpdate(Menber entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         if (entity instanceof EsAbstractEntity) {
             entity.asDocMeta().indexOption(opLambda);
         }
         doInsertOrUpdate(entity, null, null);
     }
 
-    public void delete(ParkLand entity) {
+    public void delete(Menber entity) {
         doDelete(entity, null);
     }
 
-    public void delete(ParkLand entity, RequestOptionCall<DeleteRequestBuilder> opLambda) {
+    public void delete(Menber entity, RequestOptionCall<DeleteRequestBuilder> opLambda) {
         if (entity instanceof EsAbstractEntity) {
             entity.asDocMeta().deleteOption(opLambda);
         }
         doDelete(entity, null);
     }
 
-    public int queryDelete(CBCall<ParkLandCB> cbLambda) {
+    public int queryDelete(CBCall<MenberCB> cbLambda) {
         return doQueryDelete(createCB(cbLambda), null);
     }
 
-    public int[] batchInsert(List<ParkLand> list) {
+    public int[] batchInsert(List<Menber> list) {
         return batchInsert(list, null);
     }
 
-    public int[] batchInsert(List<ParkLand> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchInsert(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call) {
         return doBatchInsert(new BulkList<>(list, call), null);
     }
 
-    public int[] batchUpdate(List<ParkLand> list) {
+    public int[] batchUpdate(List<Menber> list) {
         return batchUpdate(list, null);
     }
 
-    public int[] batchUpdate(List<ParkLand> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchUpdate(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call) {
         return doBatchUpdate(new BulkList<>(list, call), null);
     }
 
-    public int[] batchDelete(List<ParkLand> list) {
+    public int[] batchDelete(List<Menber> list) {
         return batchDelete(list, null);
     }
 
-    public int[] batchDelete(List<ParkLand> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchDelete(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call) {
         return doBatchDelete(new BulkList<>(list, call), null);
     }
 

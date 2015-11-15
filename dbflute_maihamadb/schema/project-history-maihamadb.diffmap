@@ -1,4 +1,19 @@
 map:{
+    ; 2015/11/14 12:14:50 = map:{
+        ; diffDate = 2015/11/14 12:14:50
+        ; tableDiff = map:{
+            ; PRODUCT = map:{
+                ; tableName = PRODUCT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; PRODUCT_DESCRIPTION = map:{
+                        ; columnName = PRODUCT_DESCRIPTION
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
     ; 2015/09/25 16:35:28 = map:{
         ; diffDate = 2015/09/25 16:35:28
         ; tableDiff = map:{

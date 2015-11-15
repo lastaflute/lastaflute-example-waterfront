@@ -88,6 +88,7 @@ public class ProductCIQ extends AbstractBsProductCQ {
     public String keepProductId_QueryDerivedReferrer_PurchaseListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueProductName() { return _myCQ.xdfgetProductName(); }
+    protected ConditionValue xgetCValueProductDescription() { return _myCQ.xdfgetProductDescription(); }
     protected ConditionValue xgetCValueProductHandleCode() { return _myCQ.xdfgetProductHandleCode(); }
     protected ConditionValue xgetCValueProductCategoryCode() { return _myCQ.xdfgetProductCategoryCode(); }
     protected ConditionValue xgetCValueProductStatusCode() { return _myCQ.xdfgetProductStatusCode(); }
