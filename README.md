@@ -8,11 +8,13 @@ https://github.com/lastaflute/lastaflute
 # Quick Trial
 Can boot it by example of LastaFlute:
 
-1. git clone https://github.com/lastaflute/lastaflute-example-waterfront.git
-2. prepare database by *ReplaceSchema at DBFlute client directory 'dbflute_maihamadb'  
-3. compile it by Java8, on e.g. Eclipse or IntelliJ or ... as Maven project
-4. execute the *main() method of (org.docksidestage.boot) WaterfrontBoot
-5. access to http://localhost:8099/waterfront  
+1. start Elasticsearch 2.0
+2. git clone https://github.com/lastaflute/lastaflute-example-waterfront.git
+3. create index: curl -XPUT localhost:9200/maihama -d @dbflute_maihamadb/playes/create-maihama.json
+4. prepare database by *ReplaceSchema at DBFlute client directory 'dbflute_maihamadb'  
+5. compile it by Java8, on e.g. Eclipse or IntelliJ or ... as Maven project
+6. execute the *main() method of (org.docksidestage.boot) WaterfrontBoot
+7. access to http://localhost:8099/waterfront  
 and login by user 'Pixy' and password 'sea', and can see debug log at console.
 
 *ReplaceSchema
