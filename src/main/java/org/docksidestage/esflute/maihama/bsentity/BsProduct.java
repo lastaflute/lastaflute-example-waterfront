@@ -37,17 +37,29 @@ public class BsProduct extends EsAbstractEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** category_code */
-    protected String categoryCode;
+    /** latest_purchase_date */
+    protected LocalDateTime latestPurchaseDate;
 
-    /** description */
-    protected String description;
+    /** product_category */
+    protected String productCategory;
 
-    /** handle_code */
-    protected String handleCode;
+    /** product_category_code */
+    protected String productCategoryCode;
 
-    /** name */
-    protected String name;
+    /** product_description */
+    protected String productDescription;
+
+    /** product_handle_code */
+    protected String productHandleCode;
+
+    /** product_name */
+    protected String productName;
+
+    /** product_status */
+    protected String productStatus;
+
+    /** product_status_code */
+    protected String productStatusCode;
 
     /** register_datetime */
     protected LocalDateTime registerDatetime;
@@ -57,9 +69,6 @@ public class BsProduct extends EsAbstractEntity {
 
     /** regular_price */
     protected Integer regularPrice;
-
-    /** status */
-    protected String status;
 
     /** update_datetime */
     protected LocalDateTime updateDatetime;
@@ -88,17 +97,29 @@ public class BsProduct extends EsAbstractEntity {
     @Override
     public Map<String, Object> toSource() {
         Map<String, Object> sourceMap = new HashMap<>();
-        if (categoryCode != null) {
-            sourceMap.put("category_code", categoryCode);
+        if (latestPurchaseDate != null) {
+            sourceMap.put("latest_purchase_date", latestPurchaseDate);
         }
-        if (description != null) {
-            sourceMap.put("description", description);
+        if (productCategory != null) {
+            sourceMap.put("product_category", productCategory);
         }
-        if (handleCode != null) {
-            sourceMap.put("handle_code", handleCode);
+        if (productCategoryCode != null) {
+            sourceMap.put("product_category_code", productCategoryCode);
         }
-        if (name != null) {
-            sourceMap.put("name", name);
+        if (productDescription != null) {
+            sourceMap.put("product_description", productDescription);
+        }
+        if (productHandleCode != null) {
+            sourceMap.put("product_handle_code", productHandleCode);
+        }
+        if (productName != null) {
+            sourceMap.put("product_name", productName);
+        }
+        if (productStatus != null) {
+            sourceMap.put("product_status", productStatus);
+        }
+        if (productStatusCode != null) {
+            sourceMap.put("product_status_code", productStatusCode);
         }
         if (registerDatetime != null) {
             sourceMap.put("register_datetime", registerDatetime);
@@ -108,9 +129,6 @@ public class BsProduct extends EsAbstractEntity {
         }
         if (regularPrice != null) {
             sourceMap.put("regular_price", regularPrice);
-        }
-        if (status != null) {
-            sourceMap.put("status", status);
         }
         if (updateDatetime != null) {
             sourceMap.put("update_datetime", updateDatetime);
@@ -127,14 +145,17 @@ public class BsProduct extends EsAbstractEntity {
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(categoryCode);
-        sb.append(dm).append(description);
-        sb.append(dm).append(handleCode);
-        sb.append(dm).append(name);
+        sb.append(dm).append(latestPurchaseDate);
+        sb.append(dm).append(productCategory);
+        sb.append(dm).append(productCategoryCode);
+        sb.append(dm).append(productDescription);
+        sb.append(dm).append(productHandleCode);
+        sb.append(dm).append(productName);
+        sb.append(dm).append(productStatus);
+        sb.append(dm).append(productStatusCode);
         sb.append(dm).append(registerDatetime);
         sb.append(dm).append(registerUser);
         sb.append(dm).append(regularPrice);
-        sb.append(dm).append(status);
         sb.append(dm).append(updateDatetime);
         sb.append(dm).append(updateUser);
         if (sb.length() > dm.length()) {
@@ -147,44 +168,84 @@ public class BsProduct extends EsAbstractEntity {
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public String getCategoryCode() {
-        checkSpecifiedProperty("categoryCode");
-        return convertEmptyToNull(categoryCode);
+    public LocalDateTime getLatestPurchaseDate() {
+        checkSpecifiedProperty("latestPurchaseDate");
+        return latestPurchaseDate;
     }
 
-    public void setCategoryCode(String value) {
-        registerModifiedProperty("categoryCode");
-        this.categoryCode = value;
+    public void setLatestPurchaseDate(LocalDateTime value) {
+        registerModifiedProperty("latestPurchaseDate");
+        this.latestPurchaseDate = value;
     }
 
-    public String getDescription() {
-        checkSpecifiedProperty("description");
-        return convertEmptyToNull(description);
+    public String getProductCategory() {
+        checkSpecifiedProperty("productCategory");
+        return convertEmptyToNull(productCategory);
     }
 
-    public void setDescription(String value) {
-        registerModifiedProperty("description");
-        this.description = value;
+    public void setProductCategory(String value) {
+        registerModifiedProperty("productCategory");
+        this.productCategory = value;
     }
 
-    public String getHandleCode() {
-        checkSpecifiedProperty("handleCode");
-        return convertEmptyToNull(handleCode);
+    public String getProductCategoryCode() {
+        checkSpecifiedProperty("productCategoryCode");
+        return convertEmptyToNull(productCategoryCode);
     }
 
-    public void setHandleCode(String value) {
-        registerModifiedProperty("handleCode");
-        this.handleCode = value;
+    public void setProductCategoryCode(String value) {
+        registerModifiedProperty("productCategoryCode");
+        this.productCategoryCode = value;
     }
 
-    public String getName() {
-        checkSpecifiedProperty("name");
-        return convertEmptyToNull(name);
+    public String getProductDescription() {
+        checkSpecifiedProperty("productDescription");
+        return convertEmptyToNull(productDescription);
     }
 
-    public void setName(String value) {
-        registerModifiedProperty("name");
-        this.name = value;
+    public void setProductDescription(String value) {
+        registerModifiedProperty("productDescription");
+        this.productDescription = value;
+    }
+
+    public String getProductHandleCode() {
+        checkSpecifiedProperty("productHandleCode");
+        return convertEmptyToNull(productHandleCode);
+    }
+
+    public void setProductHandleCode(String value) {
+        registerModifiedProperty("productHandleCode");
+        this.productHandleCode = value;
+    }
+
+    public String getProductName() {
+        checkSpecifiedProperty("productName");
+        return convertEmptyToNull(productName);
+    }
+
+    public void setProductName(String value) {
+        registerModifiedProperty("productName");
+        this.productName = value;
+    }
+
+    public String getProductStatus() {
+        checkSpecifiedProperty("productStatus");
+        return convertEmptyToNull(productStatus);
+    }
+
+    public void setProductStatus(String value) {
+        registerModifiedProperty("productStatus");
+        this.productStatus = value;
+    }
+
+    public String getProductStatusCode() {
+        checkSpecifiedProperty("productStatusCode");
+        return convertEmptyToNull(productStatusCode);
+    }
+
+    public void setProductStatusCode(String value) {
+        registerModifiedProperty("productStatusCode");
+        this.productStatusCode = value;
     }
 
     public LocalDateTime getRegisterDatetime() {
@@ -215,16 +276,6 @@ public class BsProduct extends EsAbstractEntity {
     public void setRegularPrice(Integer value) {
         registerModifiedProperty("regularPrice");
         this.regularPrice = value;
-    }
-
-    public String getStatus() {
-        checkSpecifiedProperty("status");
-        return convertEmptyToNull(status);
-    }
-
-    public void setStatus(String value) {
-        registerModifiedProperty("status");
-        this.status = value;
     }
 
     public LocalDateTime getUpdateDatetime() {

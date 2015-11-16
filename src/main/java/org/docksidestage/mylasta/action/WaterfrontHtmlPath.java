@@ -23,26 +23,14 @@ import org.lastaflute.web.response.next.HtmlNext;
  */
 public interface WaterfrontHtmlPath {
 
-    /** The path of the HTML: /error/error_message.jsp */
-    HtmlNext path_Error_ErrorMessageJsp = new HtmlNext("/error/error_message.jsp");
+    /** The path of the HTML: /error/show_errors.jsp */
+    HtmlNext path_Error_ShowErrorsJsp = new HtmlNext("/error/show_errors.jsp");
 
-    /** The path of the HTML: /esproduct/product_detail.jsp */
-    HtmlNext path_Esproduct_ProductDetailJsp = new HtmlNext("/esproduct/product_detail.jsp");
+    /** The path of the HTML: /esproduct/esproduct_detail.jsp */
+    HtmlNext path_Esproduct_EsproductDetailJsp = new HtmlNext("/esproduct/esproduct_detail.jsp");
 
-    /** The path of the HTML: /esproduct/product_list.jsp */
-    HtmlNext path_Esproduct_ProductListJsp = new HtmlNext("/esproduct/product_list.jsp");
-
-    /** The path of the HTML: /member/member_add.jsp */
-    HtmlNext path_Member_MemberAddJsp = new HtmlNext("/member/member_add.jsp");
-
-    /** The path of the HTML: /member/member_edit.jsp */
-    HtmlNext path_Member_MemberEditJsp = new HtmlNext("/member/member_edit.jsp");
-
-    /** The path of the HTML: /member/member_list.jsp */
-    HtmlNext path_Member_MemberListJsp = new HtmlNext("/member/member_list.jsp");
-
-    /** The path of the HTML: /member/purchase/member_purchase_list.jsp */
-    HtmlNext path_MemberPurchase_MemberPurchaseListJsp = new HtmlNext("/member/purchase/member_purchase_list.jsp");
+    /** The path of the HTML: /esproduct/esproduct_list.jsp */
+    HtmlNext path_Esproduct_EsproductListJsp = new HtmlNext("/esproduct/esproduct_list.jsp");
 
     /** The path of the HTML: /mypage/mypage.jsp */
     HtmlNext path_Mypage_MypageJsp = new HtmlNext("/mypage/mypage.jsp");
@@ -53,23 +41,11 @@ public interface WaterfrontHtmlPath {
     /** The path of the HTML: /product/product_list.jsp */
     HtmlNext path_Product_ProductListJsp = new HtmlNext("/product/product_list.jsp");
 
-    /** The path of the HTML: /profile/profile.jsp */
-    HtmlNext path_Profile_ProfileJsp = new HtmlNext("/profile/profile.jsp");
-
-    /** The path of the HTML: /purchase/purchase_list.jsp */
-    HtmlNext path_Purchase_PurchaseListJsp = new HtmlNext("/purchase/purchase_list.jsp");
-
     /** The path of the HTML: /signin/signin.jsp */
     HtmlNext path_Signin_SigninJsp = new HtmlNext("/signin/signin.jsp");
 
     /** The path of the HTML: /signup/signup.jsp */
     HtmlNext path_Signup_SignupJsp = new HtmlNext("/signup/signup.jsp");
-
-    /** The path of the HTML: /startup/startup.jsp */
-    HtmlNext path_Startup_StartupJsp = new HtmlNext("/startup/startup.jsp");
-
-    /** The path of the HTML: /various/various_upload.jsp */
-    HtmlNext path_Various_VariousUploadJsp = new HtmlNext("/various/various_upload.jsp");
 
     /** The path of the HTML: /withdrawal/withdrawal.jsp */
     HtmlNext path_Withdrawal_WithdrawalJsp = new HtmlNext("/withdrawal/withdrawal.jsp");

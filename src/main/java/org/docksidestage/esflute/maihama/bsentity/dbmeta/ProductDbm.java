@@ -80,14 +80,17 @@ public class ProductDbm extends AbstractDBMeta {
     //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
-        setupEpg(_epgMap, et-> ((Product)et).getCategoryCode(),(et,vl)->((Product) et).setCategoryCode(DfTypeUtil.toString(vl)), "categoryCode");
-        setupEpg(_epgMap, et-> ((Product)et).getDescription(),(et,vl)->((Product) et).setDescription(DfTypeUtil.toString(vl)), "description");
-        setupEpg(_epgMap, et-> ((Product)et).getHandleCode(),(et,vl)->((Product) et).setHandleCode(DfTypeUtil.toString(vl)), "handleCode");
-        setupEpg(_epgMap, et-> ((Product)et).getName(),(et,vl)->((Product) et).setName(DfTypeUtil.toString(vl)), "name");
+        setupEpg(_epgMap, et-> ((Product)et).getLatestPurchaseDate(),(et,vl)->((Product) et).setLatestPurchaseDate(DfTypeUtil.toLocalDateTime(vl)), "latestPurchaseDate");
+        setupEpg(_epgMap, et-> ((Product)et).getProductCategory(),(et,vl)->((Product) et).setProductCategory(DfTypeUtil.toString(vl)), "productCategory");
+        setupEpg(_epgMap, et-> ((Product)et).getProductCategoryCode(),(et,vl)->((Product) et).setProductCategoryCode(DfTypeUtil.toString(vl)), "productCategoryCode");
+        setupEpg(_epgMap, et-> ((Product)et).getProductDescription(),(et,vl)->((Product) et).setProductDescription(DfTypeUtil.toString(vl)), "productDescription");
+        setupEpg(_epgMap, et-> ((Product)et).getProductHandleCode(),(et,vl)->((Product) et).setProductHandleCode(DfTypeUtil.toString(vl)), "productHandleCode");
+        setupEpg(_epgMap, et-> ((Product)et).getProductName(),(et,vl)->((Product) et).setProductName(DfTypeUtil.toString(vl)), "productName");
+        setupEpg(_epgMap, et-> ((Product)et).getProductStatus(),(et,vl)->((Product) et).setProductStatus(DfTypeUtil.toString(vl)), "productStatus");
+        setupEpg(_epgMap, et-> ((Product)et).getProductStatusCode(),(et,vl)->((Product) et).setProductStatusCode(DfTypeUtil.toString(vl)), "productStatusCode");
         setupEpg(_epgMap, et-> ((Product)et).getRegisterDatetime(),(et,vl)->((Product) et).setRegisterDatetime(DfTypeUtil.toLocalDateTime(vl)), "registerDatetime");
         setupEpg(_epgMap, et-> ((Product)et).getRegisterUser(),(et,vl)->((Product) et).setRegisterUser(DfTypeUtil.toString(vl)), "registerUser");
         setupEpg(_epgMap, et-> ((Product)et).getRegularPrice(),(et,vl)->((Product) et).setRegularPrice(DfTypeUtil.toInteger(vl)), "regularPrice");
-        setupEpg(_epgMap, et-> ((Product)et).getStatus(),(et,vl)->((Product) et).setStatus(DfTypeUtil.toString(vl)), "status");
         setupEpg(_epgMap, et-> ((Product)et).getUpdateDatetime(),(et,vl)->((Product) et).setUpdateDatetime(DfTypeUtil.toLocalDateTime(vl)), "updateDatetime");
         setupEpg(_epgMap, et-> ((Product)et).getUpdateUser(),(et,vl)->((Product) et).setUpdateUser(DfTypeUtil.toString(vl)), "updateUser");
     }
@@ -114,38 +117,47 @@ public class ProductDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnCategoryCode = cci("category_code", "category_code", null, null, String.class, "categoryCode", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnDescription = cci("description", "description", null, null, String.class, "description", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnHandleCode = cci("handle_code", "handle_code", null, null, String.class, "handleCode", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnName = cci("name", "name", null, null, String.class, "name", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnLatestPurchaseDate = cci("latest_purchase_date", "latest_purchase_date", null, null, LocalDateTime.class, "latestPurchaseDate", null, false, false, false, "LocalDateTime", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnProductCategory = cci("product_category", "product_category", null, null, String.class, "productCategory", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnProductCategoryCode = cci("product_category_code", "product_category_code", null, null, String.class, "productCategoryCode", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnProductDescription = cci("product_description", "product_description", null, null, String.class, "productDescription", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnProductHandleCode = cci("product_handle_code", "product_handle_code", null, null, String.class, "productHandleCode", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnProductName = cci("product_name", "product_name", null, null, String.class, "productName", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnProductStatus = cci("product_status", "product_status", null, null, String.class, "productStatus", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnProductStatusCode = cci("product_status_code", "product_status_code", null, null, String.class, "productStatusCode", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("register_datetime", "register_datetime", null, null, LocalDateTime.class, "registerDatetime", null, false, false, false, "LocalDateTime", 0, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("register_user", "register_user", null, null, String.class, "registerUser", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegularPrice = cci("regular_price", "regular_price", null, null, Integer.class, "regularPrice", null, false, false, false, "Integer", 0, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnStatus = cci("status", "status", null, null, String.class, "status", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("update_datetime", "update_datetime", null, null, LocalDateTime.class, "updateDatetime", null, false, false, false, "LocalDateTime", 0, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateUser = cci("update_user", "update_user", null, null, String.class, "updateUser", null, false, false, false, "String", 0, 0, null, false, null, null, null, null, null, false);
 
-    public ColumnInfo columnCategoryCode() { return _columnCategoryCode; }
-    public ColumnInfo columnDescription() { return _columnDescription; }
-    public ColumnInfo columnHandleCode() { return _columnHandleCode; }
-    public ColumnInfo columnName() { return _columnName; }
+    public ColumnInfo columnLatestPurchaseDate() { return _columnLatestPurchaseDate; }
+    public ColumnInfo columnProductCategory() { return _columnProductCategory; }
+    public ColumnInfo columnProductCategoryCode() { return _columnProductCategoryCode; }
+    public ColumnInfo columnProductDescription() { return _columnProductDescription; }
+    public ColumnInfo columnProductHandleCode() { return _columnProductHandleCode; }
+    public ColumnInfo columnProductName() { return _columnProductName; }
+    public ColumnInfo columnProductStatus() { return _columnProductStatus; }
+    public ColumnInfo columnProductStatusCode() { return _columnProductStatusCode; }
     public ColumnInfo columnRegisterDatetime() { return _columnRegisterDatetime; }
     public ColumnInfo columnRegisterUser() { return _columnRegisterUser; }
     public ColumnInfo columnRegularPrice() { return _columnRegularPrice; }
-    public ColumnInfo columnStatus() { return _columnStatus; }
     public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }
     public ColumnInfo columnUpdateUser() { return _columnUpdateUser; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnCategoryCode());
-        ls.add(columnDescription());
-        ls.add(columnHandleCode());
-        ls.add(columnName());
+        ls.add(columnLatestPurchaseDate());
+        ls.add(columnProductCategory());
+        ls.add(columnProductCategoryCode());
+        ls.add(columnProductDescription());
+        ls.add(columnProductHandleCode());
+        ls.add(columnProductName());
+        ls.add(columnProductStatus());
+        ls.add(columnProductStatusCode());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());
         ls.add(columnRegularPrice());
-        ls.add(columnStatus());
         ls.add(columnUpdateDatetime());
         ls.add(columnUpdateUser());
         return ls;

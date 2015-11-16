@@ -47,21 +47,31 @@ public class EsproductImportAction extends WaterfrontBaseAction {
         SingletonLaContainer.getComponent(org.docksidestage.dbflute.exbhv.ProductBhv.class).selectCursor(cb -> {
             cb.configure(config -> {
                 config.fetchSize(10);
+                cb.setupSelect_ProductStatus();
+                cb.setupSelect_ProductCategory();
+                cb.specify().derivedPurchase().max(purchaseCB -> {
+                    purchaseCB.specify().columnPurchaseDatetime();
+                }, org.docksidestage.dbflute.exentity.Product.ALIAS_latestPurchaseDate);
             });
         }, entity -> {
             Product product = new Product();
             product.asDocMeta().id(entity.getProductId().toString());
-            product.setDescription(entity.getProductDescription());
-            product.setCategoryCode(entity.getProductCategoryCode());
-            product.setHandleCode(entity.getProductHandleCode());
-            product.setName(entity.getProductName());
+            product.setLatestPurchaseDate(entity.getLatestPurchaseDate());
+            product.setProductDescription(entity.getProductDescription());
+            product.setProductCategoryCode(entity.getProductCategoryCode());
+            product.setProductCategory(entity.getProductCategory().get().getProductCategoryName());
+            product.setProductHandleCode(entity.getProductHandleCode());
+            product.setProductName(entity.getProductName());
             product.setRegisterDatetime(entity.getRegisterDatetime());
             product.setRegisterUser(entity.getRegisterUser());
             product.setRegularPrice(entity.getRegularPrice());
-            product.setStatus(entity.getProductStatusCode());
+            product.setProductStatusCode(entity.getProductStatusCode());
+            product.setProductStatus(entity.getProductStatus().get().getProductStatusName());
             product.setUpdateDatetime(entity.getUpdateDatetime());
             product.setUpdateUser(entity.getUpdateUser());
-            productBhv.insert(product);
+            productBhv.insert(product, op -> {
+                op.setRefresh(true);
+            });
         });
         return redirect(EsproductListAction.class);
     }

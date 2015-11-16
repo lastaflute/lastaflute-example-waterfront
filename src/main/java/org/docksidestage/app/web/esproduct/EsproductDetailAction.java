@@ -45,10 +45,10 @@ public class EsproductDetailAction extends WaterfrontBaseAction {
     @Execute
     public HtmlResponse index(Integer productId) {
         validate(productId, messages -> {}, () -> {
-            return asHtml(path_Esproduct_ProductListJsp);
+            return asHtml(path_Esproduct_EsproductListJsp);
         });
         Product product = selectProduct(productId);
-        return asHtml(path_Esproduct_ProductDetailJsp).renderWith(data -> {
+        return asHtml(path_Esproduct_EsproductDetailJsp).renderWith(data -> {
             data.register("product", mappingToBean(product));
         });
     }

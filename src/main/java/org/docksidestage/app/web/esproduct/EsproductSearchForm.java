@@ -15,14 +15,12 @@
  */
 package org.docksidestage.app.web.esproduct;
 
-import org.docksidestage.dbflute.allcommon.CDef;
-
 /**
  * @author jflute
  */
 public class EsproductSearchForm {
 
     public String productName;
-    public CDef.ProductStatus productStatus;
+    public String productStatus;
     public String purchaseMemberName;
 }

@@ -158,17 +158,29 @@ public class BsProductCB extends EsAbstractConditionBean {
             doColumn("_id");
         }
 
-        public void columnCategoryCode() {
-            doColumn("category_code");
+        public void columnLatestPurchaseDate() {
+            doColumn("latest_purchase_date");
         }
-        public void columnDescription() {
-            doColumn("description");
+        public void columnProductCategory() {
+            doColumn("product_category");
         }
-        public void columnHandleCode() {
-            doColumn("handle_code");
+        public void columnProductCategoryCode() {
+            doColumn("product_category_code");
         }
-        public void columnName() {
-            doColumn("name");
+        public void columnProductDescription() {
+            doColumn("product_description");
+        }
+        public void columnProductHandleCode() {
+            doColumn("product_handle_code");
+        }
+        public void columnProductName() {
+            doColumn("product_name");
+        }
+        public void columnProductStatus() {
+            doColumn("product_status");
+        }
+        public void columnProductStatusCode() {
+            doColumn("product_status_code");
         }
         public void columnRegisterDatetime() {
             doColumn("register_datetime");
@@ -178,9 +190,6 @@ public class BsProductCB extends EsAbstractConditionBean {
         }
         public void columnRegularPrice() {
             doColumn("regular_price");
-        }
-        public void columnStatus() {
-            doColumn("status");
         }
         public void columnUpdateDatetime() {
             doColumn("update_datetime");

@@ -45,14 +45,14 @@ public class EsproductListAction extends WaterfrontBaseAction {
     //                                                                             =======
     @Execute
     public HtmlResponse index(OptionalThing<Integer> pageNumber, EsproductSearchForm form) {
-        validate(form, messages -> {} , () -> {
-            return asHtml(path_Esproduct_ProductDetailJsp);
+        validate(form, messages -> {}, () -> {
+            return asHtml(path_Esproduct_EsproductListJsp);
         });
         PagingResultBean<Product> page = selectProductPage(pageNumber.orElse(1), form);
         List<EsproductSearchRowBean> beans = page.mappingList(product -> {
             return mappingToBean(product);
         });
-        return asHtml(path_Esproduct_ProductListJsp).renderWith(data -> {
+        return asHtml(path_Esproduct_EsproductListJsp).renderWith(data -> {
             data.register("beans", beans);
             registerPagingNavi(data, page, form);
         });
@@ -64,14 +64,14 @@ public class EsproductListAction extends WaterfrontBaseAction {
     private PagingResultBean<Product> selectProductPage(int pageNumber, EsproductSearchForm form) {
         verifyParameterTrue("The pageNumber should be positive number: " + pageNumber, pageNumber > 0);
         return productBhv.selectPage(cb -> {
-            cb.ignoreNullOrEmptyQuery();
+            cb.ignoreNullOrEmptyQuery(); // TODO support
             //            cb.setupSelect_ProductStatus();
             //            cb.setupSelect_ProductCategory();
             //            cb.specify().derivedPurchase().count(purchaseCB -> {
             //                purchaseCB.specify().columnPurchaseId();
             //            } , Product.ALIAS_purchaseCount);
             if (form.productName != null) {
-                cb.query().setName_MatchPhrase(form.productName);
+                cb.query().setProductName_MatchPhrase(form.productName);
             }
             //            final String purchaseMemberName = form.purchaseMemberName;
             //            if (isNotEmpty(purchaseMemberName)) {
@@ -79,8 +79,10 @@ public class EsproductListAction extends WaterfrontBaseAction {
             //                    purchaseCB.query().queryMember().setMemberName_LikeSearch(purchaseMemberName, op -> op.likeContain());
             //                });
             //            }
-            //            cb.query().setProductStatusCode_Equal_AsProductStatus(form.productStatus);
-            cb.query().addOrderBy_Name_Asc();
+            if (form.productStatus != null) {
+                cb.query().setProductStatusCode_Equal(form.productStatus);
+            }
+            cb.query().addOrderBy_ProductName_Asc(); // TODO multifield support
             cb.query().addOrderBy_Id_Asc();
             cb.paging(getPagingPageSize(), pageNumber);
         });
@@ -92,14 +94,11 @@ public class EsproductListAction extends WaterfrontBaseAction {
     private EsproductSearchRowBean mappingToBean(Product product) {
         EsproductSearchRowBean bean = new EsproductSearchRowBean();
         bean.productId = product.asDocMeta().id();
-        bean.productName = product.getName();
+        bean.productName = product.getProductName();
         bean.regularPrice = product.getRegularPrice();
-        //        product.getProductStatus().alwaysPresent(status -> {
-        //            bean.productStatusName = status.getProductStatusName();
-        //        });
-        //        product.getProductCategory().alwaysPresent(category -> {
-        //            bean.productCategoryName = category.getProductCategoryName();
-        //        });
+        bean.productStatus = product.getProductStatus();
+        bean.productCategory = product.getProductCategory();
+        bean.latestPurchaseDate = product.getLatestPurchaseDate().toLocalDate();
         return bean;
     }
 }
