@@ -7,19 +7,27 @@
           "enabled" : false
         },
         "properties" : {
-          "category_code" : {
+          "latest_purchase_date" : {
+            "type" : "date",
+            "format" : "date_optional_time"
+          },
+          "product_category" : {
             "type" : "string",
             "index" : "not_analyzed"
           },
-          "description" : {
+          "product_category_code" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "product_description" : {
             "type" : "string",
             "analyzer" : "standard"
           },
-          "handle_code" : {
+          "product_handle_code" : {
             "type" : "string",
             "index" : "not_analyzed"
           },
-          "name" : {
+          "product_name" : {
             "type" : "string",
             "analyzer" : "standard",
             "fields" : {
@@ -28,6 +36,14 @@
                 "index" : "not_analyzed"
               }
             }
+          },
+          "product_status" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "product_status_code" : {
+            "type" : "string",
+            "index" : "not_analyzed"
           },
           "register_datetime" : {
             "type" : "date",
@@ -39,10 +55,6 @@
           },
           "regular_price" : {
             "type" : "integer"
-          },
-          "status" : {
-            "type" : "string",
-            "index" : "not_analyzed"
           },
           "update_datetime" : {
             "type" : "date",
@@ -78,10 +90,10 @@
     },
     "settings" : {
       "index" : {
-        "creation_date" : "1447493347856",
+        "creation_date" : "1447681806264",
         "number_of_shards" : "5",
         "number_of_replicas" : "0",
-        "uuid" : "o5oXiNRhRt2fMZVYaUMgvg",
+        "uuid" : "BWWYOOkbQqqJRoXxrfAcAw",
         "version" : {
           "created" : "2000099"
         }

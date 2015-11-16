@@ -74,14 +74,17 @@ public abstract class BsProductBhv extends EsAbstractBehavior<Product, ProductCB
     protected <RESULT extends Product> RESULT createEntity(Map<String, Object> source, Class<? extends RESULT> entityType) {
         try {
             final RESULT result = entityType.newInstance();
-            result.setCategoryCode(DfTypeUtil.toString(source.get("category_code")));
-            result.setDescription(DfTypeUtil.toString(source.get("description")));
-            result.setHandleCode(DfTypeUtil.toString(source.get("handle_code")));
-            result.setName(DfTypeUtil.toString(source.get("name")));
+            result.setLatestPurchaseDate(DfTypeUtil.toLocalDateTime(source.get("latest_purchase_date")));
+            result.setProductCategory(DfTypeUtil.toString(source.get("product_category")));
+            result.setProductCategoryCode(DfTypeUtil.toString(source.get("product_category_code")));
+            result.setProductDescription(DfTypeUtil.toString(source.get("product_description")));
+            result.setProductHandleCode(DfTypeUtil.toString(source.get("product_handle_code")));
+            result.setProductName(DfTypeUtil.toString(source.get("product_name")));
+            result.setProductStatus(DfTypeUtil.toString(source.get("product_status")));
+            result.setProductStatusCode(DfTypeUtil.toString(source.get("product_status_code")));
             result.setRegisterDatetime(DfTypeUtil.toLocalDateTime(source.get("register_datetime")));
             result.setRegisterUser(DfTypeUtil.toString(source.get("register_user")));
             result.setRegularPrice(DfTypeUtil.toInteger(source.get("regular_price")));
-            result.setStatus(DfTypeUtil.toString(source.get("status")));
             result.setUpdateDatetime(DfTypeUtil.toLocalDateTime(source.get("update_datetime")));
             result.setUpdateUser(DfTypeUtil.toString(source.get("update_user")));
             return result;

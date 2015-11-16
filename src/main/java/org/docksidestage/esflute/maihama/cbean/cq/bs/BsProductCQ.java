@@ -175,667 +175,1320 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         return this;
     }
 
-    public void setCategoryCode_Equal(String categoryCode) {
-        setCategoryCode_Term(categoryCode, null);
+    public void setLatestPurchaseDate_Equal(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_Term(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_Equal(String categoryCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        setCategoryCode_Term(categoryCode, opLambda);
+    public void setLatestPurchaseDate_Equal(LocalDateTime latestPurchaseDate, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        setLatestPurchaseDate_Term(latestPurchaseDate, opLambda);
     }
 
-    public void setCategoryCode_Term(String categoryCode) {
-        setCategoryCode_Term(categoryCode, null);
+    public void setLatestPurchaseDate_Term(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_Term(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_Term(String categoryCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        TermQueryBuilder builder = regTermQ("category_code", categoryCode);
+    public void setLatestPurchaseDate_Term(LocalDateTime latestPurchaseDate, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        TermQueryBuilder builder = regTermQ("latest_purchase_date", latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_NotEqual(String categoryCode) {
-        setCategoryCode_NotTerm(categoryCode, null);
+    public void setLatestPurchaseDate_NotEqual(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_NotTerm(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_NotEqual(String categoryCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        setCategoryCode_NotTerm(categoryCode, opLambda);
+    public void setLatestPurchaseDate_NotEqual(LocalDateTime latestPurchaseDate, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setLatestPurchaseDate_NotTerm(latestPurchaseDate, opLambda);
     }
 
-    public void setCategoryCode_NotTerm(String categoryCode) {
-        setCategoryCode_NotTerm(categoryCode, null);
+    public void setLatestPurchaseDate_NotTerm(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_NotTerm(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_NotTerm(String categoryCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("category_code", categoryCode));
+    public void setLatestPurchaseDate_NotTerm(LocalDateTime latestPurchaseDate, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("latest_purchase_date", latestPurchaseDate));
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_Terms(Collection<String> categoryCodeList) {
-        setCategoryCode_Terms(categoryCodeList, null);
+    public void setLatestPurchaseDate_Terms(Collection<LocalDateTime> latestPurchaseDateList) {
+        setLatestPurchaseDate_Terms(latestPurchaseDateList, null);
     }
 
-    public void setCategoryCode_Terms(Collection<String> categoryCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        TermsQueryBuilder builder = regTermsQ("category_code", categoryCodeList);
+    public void setLatestPurchaseDate_Terms(Collection<LocalDateTime> latestPurchaseDateList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        TermsQueryBuilder builder = regTermsQ("latest_purchase_date", latestPurchaseDateList);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_InScope(Collection<String> categoryCodeList) {
-        setCategoryCode_Terms(categoryCodeList, null);
+    public void setLatestPurchaseDate_InScope(Collection<LocalDateTime> latestPurchaseDateList) {
+        setLatestPurchaseDate_Terms(latestPurchaseDateList, null);
     }
 
-    public void setCategoryCode_InScope(Collection<String> categoryCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        setCategoryCode_Terms(categoryCodeList, opLambda);
+    public void setLatestPurchaseDate_InScope(Collection<LocalDateTime> latestPurchaseDateList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        setLatestPurchaseDate_Terms(latestPurchaseDateList, opLambda);
     }
 
-    public void setCategoryCode_Match(String categoryCode) {
-        setCategoryCode_Match(categoryCode, null);
+    public void setLatestPurchaseDate_Match(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_Match(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_Match(String categoryCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchQ("category_code", categoryCode);
+    public void setLatestPurchaseDate_Match(LocalDateTime latestPurchaseDate, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchQ("latest_purchase_date", latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_MatchPhrase(String categoryCode) {
-        setCategoryCode_MatchPhrase(categoryCode, null);
+    public void setLatestPurchaseDate_MatchPhrase(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_MatchPhrase(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_MatchPhrase(String categoryCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhraseQ("category_code", categoryCode);
+    public void setLatestPurchaseDate_MatchPhrase(LocalDateTime latestPurchaseDate, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhraseQ("latest_purchase_date", latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_MatchPhrasePrefix(String categoryCode) {
-        setCategoryCode_MatchPhrasePrefix(categoryCode, null);
+    public void setLatestPurchaseDate_MatchPhrasePrefix(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_MatchPhrasePrefix(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_MatchPhrasePrefix(String categoryCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhrasePrefixQ("category_code", categoryCode);
+    public void setLatestPurchaseDate_MatchPhrasePrefix(LocalDateTime latestPurchaseDate, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhrasePrefixQ("latest_purchase_date", latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_Fuzzy(String categoryCode) {
-        setCategoryCode_Fuzzy(categoryCode, null);
+    public void setLatestPurchaseDate_Fuzzy(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_Fuzzy(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_Fuzzy(String categoryCode, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
-        FuzzyQueryBuilder builder = regFuzzyQ("category_code", categoryCode);
+    public void setLatestPurchaseDate_Fuzzy(LocalDateTime latestPurchaseDate, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
+        FuzzyQueryBuilder builder = regFuzzyQ("latest_purchase_date", latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_Prefix(String categoryCode) {
-        setCategoryCode_Prefix(categoryCode, null);
+    public void setLatestPurchaseDate_GreaterThan(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_GreaterThan(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_Prefix(String categoryCode, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
-        PrefixQueryBuilder builder = regPrefixQ("category_code", categoryCode);
+    public void setLatestPurchaseDate_GreaterThan(LocalDateTime latestPurchaseDate, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("latest_purchase_date", ConditionKey.CK_GREATER_THAN, latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_GreaterThan(String categoryCode) {
-        setCategoryCode_GreaterThan(categoryCode, null);
+    public void setLatestPurchaseDate_LessThan(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_LessThan(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_GreaterThan(String categoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("category_code", ConditionKey.CK_GREATER_THAN, categoryCode);
+    public void setLatestPurchaseDate_LessThan(LocalDateTime latestPurchaseDate, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("latest_purchase_date", ConditionKey.CK_LESS_THAN, latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_LessThan(String categoryCode) {
-        setCategoryCode_LessThan(categoryCode, null);
+    public void setLatestPurchaseDate_GreaterEqual(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_GreaterEqual(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_LessThan(String categoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("category_code", ConditionKey.CK_LESS_THAN, categoryCode);
+    public void setLatestPurchaseDate_GreaterEqual(LocalDateTime latestPurchaseDate, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("latest_purchase_date", ConditionKey.CK_GREATER_EQUAL, latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_GreaterEqual(String categoryCode) {
-        setCategoryCode_GreaterEqual(categoryCode, null);
+    public void setLatestPurchaseDate_LessEqual(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_LessEqual(latestPurchaseDate, null);
     }
 
-    public void setCategoryCode_GreaterEqual(String categoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("category_code", ConditionKey.CK_GREATER_EQUAL, categoryCode);
+    public void setLatestPurchaseDate_LessEqual(LocalDateTime latestPurchaseDate, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("latest_purchase_date", ConditionKey.CK_LESS_EQUAL, latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setCategoryCode_LessEqual(String categoryCode) {
-        setCategoryCode_LessEqual(categoryCode, null);
-    }
-
-    public void setCategoryCode_LessEqual(String categoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("category_code", ConditionKey.CK_LESS_EQUAL, categoryCode);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public BsProductCQ addOrderBy_CategoryCode_Asc() {
-        regOBA("category_code");
+    public BsProductCQ addOrderBy_LatestPurchaseDate_Asc() {
+        regOBA("latest_purchase_date");
         return this;
     }
 
-    public BsProductCQ addOrderBy_CategoryCode_Desc() {
-        regOBD("category_code");
+    public BsProductCQ addOrderBy_LatestPurchaseDate_Desc() {
+        regOBD("latest_purchase_date");
         return this;
     }
 
-    public void setDescription_Equal(String description) {
-        setDescription_Term(description, null);
+    public void setProductCategory_Equal(String productCategory) {
+        setProductCategory_Term(productCategory, null);
     }
 
-    public void setDescription_Equal(String description, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        setDescription_Term(description, opLambda);
+    public void setProductCategory_Equal(String productCategory, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        setProductCategory_Term(productCategory, opLambda);
     }
 
-    public void setDescription_Term(String description) {
-        setDescription_Term(description, null);
+    public void setProductCategory_Term(String productCategory) {
+        setProductCategory_Term(productCategory, null);
     }
 
-    public void setDescription_Term(String description, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        TermQueryBuilder builder = regTermQ("description", description);
+    public void setProductCategory_Term(String productCategory, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        TermQueryBuilder builder = regTermQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_NotEqual(String description) {
-        setDescription_NotTerm(description, null);
+    public void setProductCategory_NotEqual(String productCategory) {
+        setProductCategory_NotTerm(productCategory, null);
     }
 
-    public void setDescription_NotEqual(String description, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        setDescription_NotTerm(description, opLambda);
+    public void setProductCategory_NotEqual(String productCategory, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductCategory_NotTerm(productCategory, opLambda);
     }
 
-    public void setDescription_NotTerm(String description) {
-        setDescription_NotTerm(description, null);
+    public void setProductCategory_NotTerm(String productCategory) {
+        setProductCategory_NotTerm(productCategory, null);
     }
 
-    public void setDescription_NotTerm(String description, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("description", description));
+    public void setProductCategory_NotTerm(String productCategory, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_category", productCategory));
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_Terms(Collection<String> descriptionList) {
-        setDescription_Terms(descriptionList, null);
+    public void setProductCategory_Terms(Collection<String> productCategoryList) {
+        setProductCategory_Terms(productCategoryList, null);
     }
 
-    public void setDescription_Terms(Collection<String> descriptionList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        TermsQueryBuilder builder = regTermsQ("description", descriptionList);
+    public void setProductCategory_Terms(Collection<String> productCategoryList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        TermsQueryBuilder builder = regTermsQ("product_category", productCategoryList);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_InScope(Collection<String> descriptionList) {
-        setDescription_Terms(descriptionList, null);
+    public void setProductCategory_InScope(Collection<String> productCategoryList) {
+        setProductCategory_Terms(productCategoryList, null);
     }
 
-    public void setDescription_InScope(Collection<String> descriptionList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        setDescription_Terms(descriptionList, opLambda);
+    public void setProductCategory_InScope(Collection<String> productCategoryList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        setProductCategory_Terms(productCategoryList, opLambda);
     }
 
-    public void setDescription_Match(String description) {
-        setDescription_Match(description, null);
+    public void setProductCategory_Match(String productCategory) {
+        setProductCategory_Match(productCategory, null);
     }
 
-    public void setDescription_Match(String description, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchQ("description", description);
+    public void setProductCategory_Match(String productCategory, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_MatchPhrase(String description) {
-        setDescription_MatchPhrase(description, null);
+    public void setProductCategory_MatchPhrase(String productCategory) {
+        setProductCategory_MatchPhrase(productCategory, null);
     }
 
-    public void setDescription_MatchPhrase(String description, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhraseQ("description", description);
+    public void setProductCategory_MatchPhrase(String productCategory, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhraseQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_MatchPhrasePrefix(String description) {
-        setDescription_MatchPhrasePrefix(description, null);
+    public void setProductCategory_MatchPhrasePrefix(String productCategory) {
+        setProductCategory_MatchPhrasePrefix(productCategory, null);
     }
 
-    public void setDescription_MatchPhrasePrefix(String description, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhrasePrefixQ("description", description);
+    public void setProductCategory_MatchPhrasePrefix(String productCategory, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhrasePrefixQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_Fuzzy(String description) {
-        setDescription_Fuzzy(description, null);
+    public void setProductCategory_Fuzzy(String productCategory) {
+        setProductCategory_Fuzzy(productCategory, null);
     }
 
-    public void setDescription_Fuzzy(String description, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
-        FuzzyQueryBuilder builder = regFuzzyQ("description", description);
+    public void setProductCategory_Fuzzy(String productCategory, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
+        FuzzyQueryBuilder builder = regFuzzyQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_Prefix(String description) {
-        setDescription_Prefix(description, null);
+    public void setProductCategory_Prefix(String productCategory) {
+        setProductCategory_Prefix(productCategory, null);
     }
 
-    public void setDescription_Prefix(String description, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
-        PrefixQueryBuilder builder = regPrefixQ("description", description);
+    public void setProductCategory_Prefix(String productCategory, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
+        PrefixQueryBuilder builder = regPrefixQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_GreaterThan(String description) {
-        setDescription_GreaterThan(description, null);
+    public void setProductCategory_GreaterThan(String productCategory) {
+        setProductCategory_GreaterThan(productCategory, null);
     }
 
-    public void setDescription_GreaterThan(String description, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("description", ConditionKey.CK_GREATER_THAN, description);
+    public void setProductCategory_GreaterThan(String productCategory, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_category", ConditionKey.CK_GREATER_THAN, productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_LessThan(String description) {
-        setDescription_LessThan(description, null);
+    public void setProductCategory_LessThan(String productCategory) {
+        setProductCategory_LessThan(productCategory, null);
     }
 
-    public void setDescription_LessThan(String description, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("description", ConditionKey.CK_LESS_THAN, description);
+    public void setProductCategory_LessThan(String productCategory, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_category", ConditionKey.CK_LESS_THAN, productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_GreaterEqual(String description) {
-        setDescription_GreaterEqual(description, null);
+    public void setProductCategory_GreaterEqual(String productCategory) {
+        setProductCategory_GreaterEqual(productCategory, null);
     }
 
-    public void setDescription_GreaterEqual(String description, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("description", ConditionKey.CK_GREATER_EQUAL, description);
+    public void setProductCategory_GreaterEqual(String productCategory, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_category", ConditionKey.CK_GREATER_EQUAL, productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setDescription_LessEqual(String description) {
-        setDescription_LessEqual(description, null);
+    public void setProductCategory_LessEqual(String productCategory) {
+        setProductCategory_LessEqual(productCategory, null);
     }
 
-    public void setDescription_LessEqual(String description, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("description", ConditionKey.CK_LESS_EQUAL, description);
+    public void setProductCategory_LessEqual(String productCategory, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_category", ConditionKey.CK_LESS_EQUAL, productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public BsProductCQ addOrderBy_Description_Asc() {
-        regOBA("description");
+    public BsProductCQ addOrderBy_ProductCategory_Asc() {
+        regOBA("product_category");
         return this;
     }
 
-    public BsProductCQ addOrderBy_Description_Desc() {
-        regOBD("description");
+    public BsProductCQ addOrderBy_ProductCategory_Desc() {
+        regOBD("product_category");
         return this;
     }
 
-    public void setHandleCode_Equal(String handleCode) {
-        setHandleCode_Term(handleCode, null);
+    public void setProductCategoryCode_Equal(String productCategoryCode) {
+        setProductCategoryCode_Term(productCategoryCode, null);
     }
 
-    public void setHandleCode_Equal(String handleCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        setHandleCode_Term(handleCode, opLambda);
+    public void setProductCategoryCode_Equal(String productCategoryCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        setProductCategoryCode_Term(productCategoryCode, opLambda);
     }
 
-    public void setHandleCode_Term(String handleCode) {
-        setHandleCode_Term(handleCode, null);
+    public void setProductCategoryCode_Term(String productCategoryCode) {
+        setProductCategoryCode_Term(productCategoryCode, null);
     }
 
-    public void setHandleCode_Term(String handleCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        TermQueryBuilder builder = regTermQ("handle_code", handleCode);
+    public void setProductCategoryCode_Term(String productCategoryCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        TermQueryBuilder builder = regTermQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_NotEqual(String handleCode) {
-        setHandleCode_NotTerm(handleCode, null);
+    public void setProductCategoryCode_NotEqual(String productCategoryCode) {
+        setProductCategoryCode_NotTerm(productCategoryCode, null);
     }
 
-    public void setHandleCode_NotEqual(String handleCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        setHandleCode_NotTerm(handleCode, opLambda);
+    public void setProductCategoryCode_NotEqual(String productCategoryCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductCategoryCode_NotTerm(productCategoryCode, opLambda);
     }
 
-    public void setHandleCode_NotTerm(String handleCode) {
-        setHandleCode_NotTerm(handleCode, null);
+    public void setProductCategoryCode_NotTerm(String productCategoryCode) {
+        setProductCategoryCode_NotTerm(productCategoryCode, null);
     }
 
-    public void setHandleCode_NotTerm(String handleCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("handle_code", handleCode));
+    public void setProductCategoryCode_NotTerm(String productCategoryCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_category_code", productCategoryCode));
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_Terms(Collection<String> handleCodeList) {
-        setHandleCode_Terms(handleCodeList, null);
+    public void setProductCategoryCode_Terms(Collection<String> productCategoryCodeList) {
+        setProductCategoryCode_Terms(productCategoryCodeList, null);
     }
 
-    public void setHandleCode_Terms(Collection<String> handleCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        TermsQueryBuilder builder = regTermsQ("handle_code", handleCodeList);
+    public void setProductCategoryCode_Terms(Collection<String> productCategoryCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        TermsQueryBuilder builder = regTermsQ("product_category_code", productCategoryCodeList);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_InScope(Collection<String> handleCodeList) {
-        setHandleCode_Terms(handleCodeList, null);
+    public void setProductCategoryCode_InScope(Collection<String> productCategoryCodeList) {
+        setProductCategoryCode_Terms(productCategoryCodeList, null);
     }
 
-    public void setHandleCode_InScope(Collection<String> handleCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        setHandleCode_Terms(handleCodeList, opLambda);
+    public void setProductCategoryCode_InScope(Collection<String> productCategoryCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        setProductCategoryCode_Terms(productCategoryCodeList, opLambda);
     }
 
-    public void setHandleCode_Match(String handleCode) {
-        setHandleCode_Match(handleCode, null);
+    public void setProductCategoryCode_Match(String productCategoryCode) {
+        setProductCategoryCode_Match(productCategoryCode, null);
     }
 
-    public void setHandleCode_Match(String handleCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchQ("handle_code", handleCode);
+    public void setProductCategoryCode_Match(String productCategoryCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_MatchPhrase(String handleCode) {
-        setHandleCode_MatchPhrase(handleCode, null);
+    public void setProductCategoryCode_MatchPhrase(String productCategoryCode) {
+        setProductCategoryCode_MatchPhrase(productCategoryCode, null);
     }
 
-    public void setHandleCode_MatchPhrase(String handleCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhraseQ("handle_code", handleCode);
+    public void setProductCategoryCode_MatchPhrase(String productCategoryCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhraseQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_MatchPhrasePrefix(String handleCode) {
-        setHandleCode_MatchPhrasePrefix(handleCode, null);
+    public void setProductCategoryCode_MatchPhrasePrefix(String productCategoryCode) {
+        setProductCategoryCode_MatchPhrasePrefix(productCategoryCode, null);
     }
 
-    public void setHandleCode_MatchPhrasePrefix(String handleCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhrasePrefixQ("handle_code", handleCode);
+    public void setProductCategoryCode_MatchPhrasePrefix(String productCategoryCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhrasePrefixQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_Fuzzy(String handleCode) {
-        setHandleCode_Fuzzy(handleCode, null);
+    public void setProductCategoryCode_Fuzzy(String productCategoryCode) {
+        setProductCategoryCode_Fuzzy(productCategoryCode, null);
     }
 
-    public void setHandleCode_Fuzzy(String handleCode, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
-        FuzzyQueryBuilder builder = regFuzzyQ("handle_code", handleCode);
+    public void setProductCategoryCode_Fuzzy(String productCategoryCode, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
+        FuzzyQueryBuilder builder = regFuzzyQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_Prefix(String handleCode) {
-        setHandleCode_Prefix(handleCode, null);
+    public void setProductCategoryCode_Prefix(String productCategoryCode) {
+        setProductCategoryCode_Prefix(productCategoryCode, null);
     }
 
-    public void setHandleCode_Prefix(String handleCode, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
-        PrefixQueryBuilder builder = regPrefixQ("handle_code", handleCode);
+    public void setProductCategoryCode_Prefix(String productCategoryCode, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
+        PrefixQueryBuilder builder = regPrefixQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_GreaterThan(String handleCode) {
-        setHandleCode_GreaterThan(handleCode, null);
+    public void setProductCategoryCode_GreaterThan(String productCategoryCode) {
+        setProductCategoryCode_GreaterThan(productCategoryCode, null);
     }
 
-    public void setHandleCode_GreaterThan(String handleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("handle_code", ConditionKey.CK_GREATER_THAN, handleCode);
+    public void setProductCategoryCode_GreaterThan(String productCategoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_category_code", ConditionKey.CK_GREATER_THAN, productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_LessThan(String handleCode) {
-        setHandleCode_LessThan(handleCode, null);
+    public void setProductCategoryCode_LessThan(String productCategoryCode) {
+        setProductCategoryCode_LessThan(productCategoryCode, null);
     }
 
-    public void setHandleCode_LessThan(String handleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("handle_code", ConditionKey.CK_LESS_THAN, handleCode);
+    public void setProductCategoryCode_LessThan(String productCategoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_category_code", ConditionKey.CK_LESS_THAN, productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_GreaterEqual(String handleCode) {
-        setHandleCode_GreaterEqual(handleCode, null);
+    public void setProductCategoryCode_GreaterEqual(String productCategoryCode) {
+        setProductCategoryCode_GreaterEqual(productCategoryCode, null);
     }
 
-    public void setHandleCode_GreaterEqual(String handleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("handle_code", ConditionKey.CK_GREATER_EQUAL, handleCode);
+    public void setProductCategoryCode_GreaterEqual(String productCategoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_category_code", ConditionKey.CK_GREATER_EQUAL, productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setHandleCode_LessEqual(String handleCode) {
-        setHandleCode_LessEqual(handleCode, null);
+    public void setProductCategoryCode_LessEqual(String productCategoryCode) {
+        setProductCategoryCode_LessEqual(productCategoryCode, null);
     }
 
-    public void setHandleCode_LessEqual(String handleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("handle_code", ConditionKey.CK_LESS_EQUAL, handleCode);
+    public void setProductCategoryCode_LessEqual(String productCategoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_category_code", ConditionKey.CK_LESS_EQUAL, productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public BsProductCQ addOrderBy_HandleCode_Asc() {
-        regOBA("handle_code");
+    public BsProductCQ addOrderBy_ProductCategoryCode_Asc() {
+        regOBA("product_category_code");
         return this;
     }
 
-    public BsProductCQ addOrderBy_HandleCode_Desc() {
-        regOBD("handle_code");
+    public BsProductCQ addOrderBy_ProductCategoryCode_Desc() {
+        regOBD("product_category_code");
         return this;
     }
 
-    public void setName_Equal(String name) {
-        setName_Term(name, null);
+    public void setProductDescription_Equal(String productDescription) {
+        setProductDescription_Term(productDescription, null);
     }
 
-    public void setName_Equal(String name, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        setName_Term(name, opLambda);
+    public void setProductDescription_Equal(String productDescription, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        setProductDescription_Term(productDescription, opLambda);
     }
 
-    public void setName_Term(String name) {
-        setName_Term(name, null);
+    public void setProductDescription_Term(String productDescription) {
+        setProductDescription_Term(productDescription, null);
     }
 
-    public void setName_Term(String name, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        TermQueryBuilder builder = regTermQ("name", name);
+    public void setProductDescription_Term(String productDescription, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        TermQueryBuilder builder = regTermQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_NotEqual(String name) {
-        setName_NotTerm(name, null);
+    public void setProductDescription_NotEqual(String productDescription) {
+        setProductDescription_NotTerm(productDescription, null);
     }
 
-    public void setName_NotEqual(String name, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        setName_NotTerm(name, opLambda);
+    public void setProductDescription_NotEqual(String productDescription, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductDescription_NotTerm(productDescription, opLambda);
     }
 
-    public void setName_NotTerm(String name) {
-        setName_NotTerm(name, null);
+    public void setProductDescription_NotTerm(String productDescription) {
+        setProductDescription_NotTerm(productDescription, null);
     }
 
-    public void setName_NotTerm(String name, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("name", name));
+    public void setProductDescription_NotTerm(String productDescription, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_description", productDescription));
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_Terms(Collection<String> nameList) {
-        setName_Terms(nameList, null);
+    public void setProductDescription_Terms(Collection<String> productDescriptionList) {
+        setProductDescription_Terms(productDescriptionList, null);
     }
 
-    public void setName_Terms(Collection<String> nameList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        TermsQueryBuilder builder = regTermsQ("name", nameList);
+    public void setProductDescription_Terms(Collection<String> productDescriptionList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        TermsQueryBuilder builder = regTermsQ("product_description", productDescriptionList);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_InScope(Collection<String> nameList) {
-        setName_Terms(nameList, null);
+    public void setProductDescription_InScope(Collection<String> productDescriptionList) {
+        setProductDescription_Terms(productDescriptionList, null);
     }
 
-    public void setName_InScope(Collection<String> nameList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        setName_Terms(nameList, opLambda);
+    public void setProductDescription_InScope(Collection<String> productDescriptionList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        setProductDescription_Terms(productDescriptionList, opLambda);
     }
 
-    public void setName_Match(String name) {
-        setName_Match(name, null);
+    public void setProductDescription_Match(String productDescription) {
+        setProductDescription_Match(productDescription, null);
     }
 
-    public void setName_Match(String name, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchQ("name", name);
+    public void setProductDescription_Match(String productDescription, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_MatchPhrase(String name) {
-        setName_MatchPhrase(name, null);
+    public void setProductDescription_MatchPhrase(String productDescription) {
+        setProductDescription_MatchPhrase(productDescription, null);
     }
 
-    public void setName_MatchPhrase(String name, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhraseQ("name", name);
+    public void setProductDescription_MatchPhrase(String productDescription, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhraseQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_MatchPhrasePrefix(String name) {
-        setName_MatchPhrasePrefix(name, null);
+    public void setProductDescription_MatchPhrasePrefix(String productDescription) {
+        setProductDescription_MatchPhrasePrefix(productDescription, null);
     }
 
-    public void setName_MatchPhrasePrefix(String name, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhrasePrefixQ("name", name);
+    public void setProductDescription_MatchPhrasePrefix(String productDescription, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhrasePrefixQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_Fuzzy(String name) {
-        setName_Fuzzy(name, null);
+    public void setProductDescription_Fuzzy(String productDescription) {
+        setProductDescription_Fuzzy(productDescription, null);
     }
 
-    public void setName_Fuzzy(String name, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
-        FuzzyQueryBuilder builder = regFuzzyQ("name", name);
+    public void setProductDescription_Fuzzy(String productDescription, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
+        FuzzyQueryBuilder builder = regFuzzyQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_Prefix(String name) {
-        setName_Prefix(name, null);
+    public void setProductDescription_Prefix(String productDescription) {
+        setProductDescription_Prefix(productDescription, null);
     }
 
-    public void setName_Prefix(String name, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
-        PrefixQueryBuilder builder = regPrefixQ("name", name);
+    public void setProductDescription_Prefix(String productDescription, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
+        PrefixQueryBuilder builder = regPrefixQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_GreaterThan(String name) {
-        setName_GreaterThan(name, null);
+    public void setProductDescription_GreaterThan(String productDescription) {
+        setProductDescription_GreaterThan(productDescription, null);
     }
 
-    public void setName_GreaterThan(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_GREATER_THAN, name);
+    public void setProductDescription_GreaterThan(String productDescription, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_description", ConditionKey.CK_GREATER_THAN, productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_LessThan(String name) {
-        setName_LessThan(name, null);
+    public void setProductDescription_LessThan(String productDescription) {
+        setProductDescription_LessThan(productDescription, null);
     }
 
-    public void setName_LessThan(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_LESS_THAN, name);
+    public void setProductDescription_LessThan(String productDescription, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_description", ConditionKey.CK_LESS_THAN, productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_GreaterEqual(String name) {
-        setName_GreaterEqual(name, null);
+    public void setProductDescription_GreaterEqual(String productDescription) {
+        setProductDescription_GreaterEqual(productDescription, null);
     }
 
-    public void setName_GreaterEqual(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_GREATER_EQUAL, name);
+    public void setProductDescription_GreaterEqual(String productDescription, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_description", ConditionKey.CK_GREATER_EQUAL, productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public void setName_LessEqual(String name) {
-        setName_LessEqual(name, null);
+    public void setProductDescription_LessEqual(String productDescription) {
+        setProductDescription_LessEqual(productDescription, null);
     }
 
-    public void setName_LessEqual(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_LESS_EQUAL, name);
+    public void setProductDescription_LessEqual(String productDescription, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_description", ConditionKey.CK_LESS_EQUAL, productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
     }
 
-    public BsProductCQ addOrderBy_Name_Asc() {
-        regOBA("name");
+    public BsProductCQ addOrderBy_ProductDescription_Asc() {
+        regOBA("product_description");
         return this;
     }
 
-    public BsProductCQ addOrderBy_Name_Desc() {
-        regOBD("name");
+    public BsProductCQ addOrderBy_ProductDescription_Desc() {
+        regOBD("product_description");
+        return this;
+    }
+
+    public void setProductHandleCode_Equal(String productHandleCode) {
+        setProductHandleCode_Term(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_Equal(String productHandleCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        setProductHandleCode_Term(productHandleCode, opLambda);
+    }
+
+    public void setProductHandleCode_Term(String productHandleCode) {
+        setProductHandleCode_Term(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_Term(String productHandleCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        TermQueryBuilder builder = regTermQ("product_handle_code", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_NotEqual(String productHandleCode) {
+        setProductHandleCode_NotTerm(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_NotEqual(String productHandleCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductHandleCode_NotTerm(productHandleCode, opLambda);
+    }
+
+    public void setProductHandleCode_NotTerm(String productHandleCode) {
+        setProductHandleCode_NotTerm(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_NotTerm(String productHandleCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_handle_code", productHandleCode));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_Terms(Collection<String> productHandleCodeList) {
+        setProductHandleCode_Terms(productHandleCodeList, null);
+    }
+
+    public void setProductHandleCode_Terms(Collection<String> productHandleCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        TermsQueryBuilder builder = regTermsQ("product_handle_code", productHandleCodeList);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_InScope(Collection<String> productHandleCodeList) {
+        setProductHandleCode_Terms(productHandleCodeList, null);
+    }
+
+    public void setProductHandleCode_InScope(Collection<String> productHandleCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        setProductHandleCode_Terms(productHandleCodeList, opLambda);
+    }
+
+    public void setProductHandleCode_Match(String productHandleCode) {
+        setProductHandleCode_Match(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_Match(String productHandleCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchQ("product_handle_code", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_MatchPhrase(String productHandleCode) {
+        setProductHandleCode_MatchPhrase(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_MatchPhrase(String productHandleCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhraseQ("product_handle_code", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_MatchPhrasePrefix(String productHandleCode) {
+        setProductHandleCode_MatchPhrasePrefix(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_MatchPhrasePrefix(String productHandleCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhrasePrefixQ("product_handle_code", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_Fuzzy(String productHandleCode) {
+        setProductHandleCode_Fuzzy(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_Fuzzy(String productHandleCode, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
+        FuzzyQueryBuilder builder = regFuzzyQ("product_handle_code", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_Prefix(String productHandleCode) {
+        setProductHandleCode_Prefix(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_Prefix(String productHandleCode, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
+        PrefixQueryBuilder builder = regPrefixQ("product_handle_code", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_GreaterThan(String productHandleCode) {
+        setProductHandleCode_GreaterThan(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_GreaterThan(String productHandleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_handle_code", ConditionKey.CK_GREATER_THAN, productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_LessThan(String productHandleCode) {
+        setProductHandleCode_LessThan(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_LessThan(String productHandleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_handle_code", ConditionKey.CK_LESS_THAN, productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_GreaterEqual(String productHandleCode) {
+        setProductHandleCode_GreaterEqual(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_GreaterEqual(String productHandleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_handle_code", ConditionKey.CK_GREATER_EQUAL, productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_LessEqual(String productHandleCode) {
+        setProductHandleCode_LessEqual(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_LessEqual(String productHandleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_handle_code", ConditionKey.CK_LESS_EQUAL, productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public BsProductCQ addOrderBy_ProductHandleCode_Asc() {
+        regOBA("product_handle_code");
+        return this;
+    }
+
+    public BsProductCQ addOrderBy_ProductHandleCode_Desc() {
+        regOBD("product_handle_code");
+        return this;
+    }
+
+    public void setProductName_Equal(String productName) {
+        setProductName_Term(productName, null);
+    }
+
+    public void setProductName_Equal(String productName, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        setProductName_Term(productName, opLambda);
+    }
+
+    public void setProductName_Term(String productName) {
+        setProductName_Term(productName, null);
+    }
+
+    public void setProductName_Term(String productName, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        TermQueryBuilder builder = regTermQ("product_name", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_NotEqual(String productName) {
+        setProductName_NotTerm(productName, null);
+    }
+
+    public void setProductName_NotEqual(String productName, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductName_NotTerm(productName, opLambda);
+    }
+
+    public void setProductName_NotTerm(String productName) {
+        setProductName_NotTerm(productName, null);
+    }
+
+    public void setProductName_NotTerm(String productName, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_name", productName));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_Terms(Collection<String> productNameList) {
+        setProductName_Terms(productNameList, null);
+    }
+
+    public void setProductName_Terms(Collection<String> productNameList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        TermsQueryBuilder builder = regTermsQ("product_name", productNameList);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_InScope(Collection<String> productNameList) {
+        setProductName_Terms(productNameList, null);
+    }
+
+    public void setProductName_InScope(Collection<String> productNameList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        setProductName_Terms(productNameList, opLambda);
+    }
+
+    public void setProductName_Match(String productName) {
+        setProductName_Match(productName, null);
+    }
+
+    public void setProductName_Match(String productName, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchQ("product_name", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_MatchPhrase(String productName) {
+        setProductName_MatchPhrase(productName, null);
+    }
+
+    public void setProductName_MatchPhrase(String productName, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhraseQ("product_name", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_MatchPhrasePrefix(String productName) {
+        setProductName_MatchPhrasePrefix(productName, null);
+    }
+
+    public void setProductName_MatchPhrasePrefix(String productName, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhrasePrefixQ("product_name", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_Fuzzy(String productName) {
+        setProductName_Fuzzy(productName, null);
+    }
+
+    public void setProductName_Fuzzy(String productName, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
+        FuzzyQueryBuilder builder = regFuzzyQ("product_name", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_Prefix(String productName) {
+        setProductName_Prefix(productName, null);
+    }
+
+    public void setProductName_Prefix(String productName, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
+        PrefixQueryBuilder builder = regPrefixQ("product_name", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_GreaterThan(String productName) {
+        setProductName_GreaterThan(productName, null);
+    }
+
+    public void setProductName_GreaterThan(String productName, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_name", ConditionKey.CK_GREATER_THAN, productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_LessThan(String productName) {
+        setProductName_LessThan(productName, null);
+    }
+
+    public void setProductName_LessThan(String productName, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_name", ConditionKey.CK_LESS_THAN, productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_GreaterEqual(String productName) {
+        setProductName_GreaterEqual(productName, null);
+    }
+
+    public void setProductName_GreaterEqual(String productName, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_name", ConditionKey.CK_GREATER_EQUAL, productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_LessEqual(String productName) {
+        setProductName_LessEqual(productName, null);
+    }
+
+    public void setProductName_LessEqual(String productName, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_name", ConditionKey.CK_LESS_EQUAL, productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public BsProductCQ addOrderBy_ProductName_Asc() {
+        regOBA("product_name");
+        return this;
+    }
+
+    public BsProductCQ addOrderBy_ProductName_Desc() {
+        regOBD("product_name");
+        return this;
+    }
+
+    public void setProductStatus_Equal(String productStatus) {
+        setProductStatus_Term(productStatus, null);
+    }
+
+    public void setProductStatus_Equal(String productStatus, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        setProductStatus_Term(productStatus, opLambda);
+    }
+
+    public void setProductStatus_Term(String productStatus) {
+        setProductStatus_Term(productStatus, null);
+    }
+
+    public void setProductStatus_Term(String productStatus, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        TermQueryBuilder builder = regTermQ("product_status", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_NotEqual(String productStatus) {
+        setProductStatus_NotTerm(productStatus, null);
+    }
+
+    public void setProductStatus_NotEqual(String productStatus, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductStatus_NotTerm(productStatus, opLambda);
+    }
+
+    public void setProductStatus_NotTerm(String productStatus) {
+        setProductStatus_NotTerm(productStatus, null);
+    }
+
+    public void setProductStatus_NotTerm(String productStatus, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_status", productStatus));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_Terms(Collection<String> productStatusList) {
+        setProductStatus_Terms(productStatusList, null);
+    }
+
+    public void setProductStatus_Terms(Collection<String> productStatusList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        TermsQueryBuilder builder = regTermsQ("product_status", productStatusList);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_InScope(Collection<String> productStatusList) {
+        setProductStatus_Terms(productStatusList, null);
+    }
+
+    public void setProductStatus_InScope(Collection<String> productStatusList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        setProductStatus_Terms(productStatusList, opLambda);
+    }
+
+    public void setProductStatus_Match(String productStatus) {
+        setProductStatus_Match(productStatus, null);
+    }
+
+    public void setProductStatus_Match(String productStatus, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchQ("product_status", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_MatchPhrase(String productStatus) {
+        setProductStatus_MatchPhrase(productStatus, null);
+    }
+
+    public void setProductStatus_MatchPhrase(String productStatus, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhraseQ("product_status", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_MatchPhrasePrefix(String productStatus) {
+        setProductStatus_MatchPhrasePrefix(productStatus, null);
+    }
+
+    public void setProductStatus_MatchPhrasePrefix(String productStatus, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhrasePrefixQ("product_status", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_Fuzzy(String productStatus) {
+        setProductStatus_Fuzzy(productStatus, null);
+    }
+
+    public void setProductStatus_Fuzzy(String productStatus, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
+        FuzzyQueryBuilder builder = regFuzzyQ("product_status", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_Prefix(String productStatus) {
+        setProductStatus_Prefix(productStatus, null);
+    }
+
+    public void setProductStatus_Prefix(String productStatus, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
+        PrefixQueryBuilder builder = regPrefixQ("product_status", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_GreaterThan(String productStatus) {
+        setProductStatus_GreaterThan(productStatus, null);
+    }
+
+    public void setProductStatus_GreaterThan(String productStatus, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_status", ConditionKey.CK_GREATER_THAN, productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_LessThan(String productStatus) {
+        setProductStatus_LessThan(productStatus, null);
+    }
+
+    public void setProductStatus_LessThan(String productStatus, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_status", ConditionKey.CK_LESS_THAN, productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_GreaterEqual(String productStatus) {
+        setProductStatus_GreaterEqual(productStatus, null);
+    }
+
+    public void setProductStatus_GreaterEqual(String productStatus, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_status", ConditionKey.CK_GREATER_EQUAL, productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_LessEqual(String productStatus) {
+        setProductStatus_LessEqual(productStatus, null);
+    }
+
+    public void setProductStatus_LessEqual(String productStatus, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_status", ConditionKey.CK_LESS_EQUAL, productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public BsProductCQ addOrderBy_ProductStatus_Asc() {
+        regOBA("product_status");
+        return this;
+    }
+
+    public BsProductCQ addOrderBy_ProductStatus_Desc() {
+        regOBD("product_status");
+        return this;
+    }
+
+    public void setProductStatusCode_Equal(String productStatusCode) {
+        setProductStatusCode_Term(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_Equal(String productStatusCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        setProductStatusCode_Term(productStatusCode, opLambda);
+    }
+
+    public void setProductStatusCode_Term(String productStatusCode) {
+        setProductStatusCode_Term(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_Term(String productStatusCode, ConditionOptionCall<TermQueryBuilder> opLambda) {
+        TermQueryBuilder builder = regTermQ("product_status_code", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_NotEqual(String productStatusCode) {
+        setProductStatusCode_NotTerm(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_NotEqual(String productStatusCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductStatusCode_NotTerm(productStatusCode, opLambda);
+    }
+
+    public void setProductStatusCode_NotTerm(String productStatusCode) {
+        setProductStatusCode_NotTerm(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_NotTerm(String productStatusCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_status_code", productStatusCode));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_Terms(Collection<String> productStatusCodeList) {
+        setProductStatusCode_Terms(productStatusCodeList, null);
+    }
+
+    public void setProductStatusCode_Terms(Collection<String> productStatusCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        TermsQueryBuilder builder = regTermsQ("product_status_code", productStatusCodeList);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_InScope(Collection<String> productStatusCodeList) {
+        setProductStatusCode_Terms(productStatusCodeList, null);
+    }
+
+    public void setProductStatusCode_InScope(Collection<String> productStatusCodeList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
+        setProductStatusCode_Terms(productStatusCodeList, opLambda);
+    }
+
+    public void setProductStatusCode_Match(String productStatusCode) {
+        setProductStatusCode_Match(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_Match(String productStatusCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchQ("product_status_code", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_MatchPhrase(String productStatusCode) {
+        setProductStatusCode_MatchPhrase(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_MatchPhrase(String productStatusCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhraseQ("product_status_code", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_MatchPhrasePrefix(String productStatusCode) {
+        setProductStatusCode_MatchPhrasePrefix(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_MatchPhrasePrefix(String productStatusCode, ConditionOptionCall<MatchQueryBuilder> opLambda) {
+        MatchQueryBuilder builder = regMatchPhrasePrefixQ("product_status_code", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_Fuzzy(String productStatusCode) {
+        setProductStatusCode_Fuzzy(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_Fuzzy(String productStatusCode, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
+        FuzzyQueryBuilder builder = regFuzzyQ("product_status_code", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_Prefix(String productStatusCode) {
+        setProductStatusCode_Prefix(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_Prefix(String productStatusCode, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
+        PrefixQueryBuilder builder = regPrefixQ("product_status_code", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_GreaterThan(String productStatusCode) {
+        setProductStatusCode_GreaterThan(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_GreaterThan(String productStatusCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_status_code", ConditionKey.CK_GREATER_THAN, productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_LessThan(String productStatusCode) {
+        setProductStatusCode_LessThan(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_LessThan(String productStatusCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_status_code", ConditionKey.CK_LESS_THAN, productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_GreaterEqual(String productStatusCode) {
+        setProductStatusCode_GreaterEqual(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_GreaterEqual(String productStatusCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_status_code", ConditionKey.CK_GREATER_EQUAL, productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_LessEqual(String productStatusCode) {
+        setProductStatusCode_LessEqual(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_LessEqual(String productStatusCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
+        RangeQueryBuilder builder = regRangeQ("product_status_code", ConditionKey.CK_LESS_EQUAL, productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public BsProductCQ addOrderBy_ProductStatusCode_Asc() {
+        regOBA("product_status_code");
+        return this;
+    }
+
+    public BsProductCQ addOrderBy_ProductStatusCode_Desc() {
+        regOBD("product_status_code");
         return this;
     }
 
@@ -1312,172 +1965,6 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public BsProductCQ addOrderBy_RegularPrice_Desc() {
         regOBD("regular_price");
-        return this;
-    }
-
-    public void setStatus_Equal(String status) {
-        setStatus_Term(status, null);
-    }
-
-    public void setStatus_Equal(String status, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        setStatus_Term(status, opLambda);
-    }
-
-    public void setStatus_Term(String status) {
-        setStatus_Term(status, null);
-    }
-
-    public void setStatus_Term(String status, ConditionOptionCall<TermQueryBuilder> opLambda) {
-        TermQueryBuilder builder = regTermQ("status", status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_NotEqual(String status) {
-        setStatus_NotTerm(status, null);
-    }
-
-    public void setStatus_NotEqual(String status, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        setStatus_NotTerm(status, opLambda);
-    }
-
-    public void setStatus_NotTerm(String status) {
-        setStatus_NotTerm(status, null);
-    }
-
-    public void setStatus_NotTerm(String status, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("status", status));
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_Terms(Collection<String> statusList) {
-        setStatus_Terms(statusList, null);
-    }
-
-    public void setStatus_Terms(Collection<String> statusList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        TermsQueryBuilder builder = regTermsQ("status", statusList);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_InScope(Collection<String> statusList) {
-        setStatus_Terms(statusList, null);
-    }
-
-    public void setStatus_InScope(Collection<String> statusList, ConditionOptionCall<TermsQueryBuilder> opLambda) {
-        setStatus_Terms(statusList, opLambda);
-    }
-
-    public void setStatus_Match(String status) {
-        setStatus_Match(status, null);
-    }
-
-    public void setStatus_Match(String status, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchQ("status", status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_MatchPhrase(String status) {
-        setStatus_MatchPhrase(status, null);
-    }
-
-    public void setStatus_MatchPhrase(String status, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhraseQ("status", status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_MatchPhrasePrefix(String status) {
-        setStatus_MatchPhrasePrefix(status, null);
-    }
-
-    public void setStatus_MatchPhrasePrefix(String status, ConditionOptionCall<MatchQueryBuilder> opLambda) {
-        MatchQueryBuilder builder = regMatchPhrasePrefixQ("status", status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_Fuzzy(String status) {
-        setStatus_Fuzzy(status, null);
-    }
-
-    public void setStatus_Fuzzy(String status, ConditionOptionCall<FuzzyQueryBuilder> opLambda) {
-        FuzzyQueryBuilder builder = regFuzzyQ("status", status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_Prefix(String status) {
-        setStatus_Prefix(status, null);
-    }
-
-    public void setStatus_Prefix(String status, ConditionOptionCall<PrefixQueryBuilder> opLambda) {
-        PrefixQueryBuilder builder = regPrefixQ("status", status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_GreaterThan(String status) {
-        setStatus_GreaterThan(status, null);
-    }
-
-    public void setStatus_GreaterThan(String status, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("status", ConditionKey.CK_GREATER_THAN, status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_LessThan(String status) {
-        setStatus_LessThan(status, null);
-    }
-
-    public void setStatus_LessThan(String status, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("status", ConditionKey.CK_LESS_THAN, status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_GreaterEqual(String status) {
-        setStatus_GreaterEqual(status, null);
-    }
-
-    public void setStatus_GreaterEqual(String status, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("status", ConditionKey.CK_GREATER_EQUAL, status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public void setStatus_LessEqual(String status) {
-        setStatus_LessEqual(status, null);
-    }
-
-    public void setStatus_LessEqual(String status, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        RangeQueryBuilder builder = regRangeQ("status", ConditionKey.CK_LESS_EQUAL, status);
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-
-    public BsProductCQ addOrderBy_Status_Asc() {
-        regOBA("status");
-        return this;
-    }
-
-    public BsProductCQ addOrderBy_Status_Desc() {
-        regOBD("status");
         return this;
     }
 
