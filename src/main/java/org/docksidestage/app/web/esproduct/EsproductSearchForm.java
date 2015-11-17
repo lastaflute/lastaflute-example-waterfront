@@ -17,6 +17,7 @@ package org.docksidestage.app.web.esproduct;
 
 /**
  * @author jflute
+ * @author shinsuke
  */
 public class EsproductSearchForm {
 

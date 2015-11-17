@@ -18,14 +18,15 @@ package org.docksidestage.app.web.esproduct;
 import javax.annotation.Resource;
 
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
-import org.docksidestage.dbflute.exbhv.ProductBhv;
-import org.docksidestage.dbflute.exentity.Product;
+import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
+import org.docksidestage.esflute.maihama.exentity.Product;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.login.AllowAnyoneAccess;
 import org.lastaflute.web.response.HtmlResponse;
 
 /**
  * @author jflute
+ * @author shinsuke
  */
 @AllowAnyoneAccess
 public class EsproductDetailAction extends WaterfrontBaseAction {
@@ -43,23 +44,26 @@ public class EsproductDetailAction extends WaterfrontBaseAction {
     //                                                                             Execute
     //                                                                             =======
     @Execute
-    public HtmlResponse index(Integer productId) {
+    public HtmlResponse index(String productId) {
         validate(productId, messages -> {}, () -> {
             return asHtml(path_Esproduct_EsproductListJsp);
         });
         Product product = selectProduct(productId);
         return asHtml(path_Esproduct_EsproductDetailJsp).renderWith(data -> {
             data.register("product", mappingToBean(product));
+        }).useForm(EsproductDeleteForm.class, op -> {
+            op.setup(form -> {
+                form.productId = productId;
+            });
         });
     }
 
     // ===================================================================================
     //                                                                              Select
     //                                                                              ======
-    private Product selectProduct(int productId) {
+    private Product selectProduct(String productId) {
         return productBhv.selectEntity(cb -> {
-            cb.setupSelect_ProductCategory();
-            cb.query().setProductId_Equal(productId);
+            cb.query().setId_Equal(productId);
         }).orElseThrow(() -> {
             return of404("Not found the product: " + productId); // mistake or user joke
         });
@@ -70,13 +74,11 @@ public class EsproductDetailAction extends WaterfrontBaseAction {
     //                                                                             =======
     private EsproductDetailBean mappingToBean(Product product) {
         EsproductDetailBean bean = new EsproductDetailBean();
-        bean.productId = product.getProductId();
+        bean.productId = product.asDocMeta().id();
         bean.productName = product.getProductName();
         bean.regularPrice = product.getRegularPrice();
         bean.productHandleCode = product.getProductHandleCode();
-        product.getProductCategory().alwaysPresent(category -> {
-            bean.categoryName = category.getProductCategoryName();
-        });
+        bean.categoryName = product.getProductCategory();
         return bean;
     }
 }

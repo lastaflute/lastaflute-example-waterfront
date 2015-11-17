@@ -30,6 +30,7 @@ import org.lastaflute.web.response.HtmlResponse;
 
 /**
  * @author jflute
+ * @author shinsuke
  */
 @AllowAnyoneAccess
 public class EsproductListAction extends WaterfrontBaseAction {
@@ -53,6 +54,7 @@ public class EsproductListAction extends WaterfrontBaseAction {
             return mappingToBean(product);
         });
         return asHtml(path_Esproduct_EsproductListJsp).renderWith(data -> {
+            data.register("totalCount", productBhv.selectCount(cb -> {}));
             data.register("beans", beans);
             registerPagingNavi(data, page, form);
         });
@@ -98,7 +100,7 @@ public class EsproductListAction extends WaterfrontBaseAction {
         bean.regularPrice = product.getRegularPrice();
         bean.productStatus = product.getProductStatus();
         bean.productCategory = product.getProductCategory();
-        bean.latestPurchaseDate = product.getLatestPurchaseDate().toLocalDate();
+        bean.latestPurchaseDate = product.getLatestPurchaseDate() != null ? product.getLatestPurchaseDate().toLocalDate() : null;
         return bean;
     }
 }
