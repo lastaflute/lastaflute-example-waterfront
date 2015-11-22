@@ -17,7 +17,6 @@ package org.docksidestage.app.web.esproduct;
 
 import javax.annotation.Resource;
 
-import org.dbflute.optional.OptionalThing;
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
@@ -42,7 +41,7 @@ public class EsproductImportAction extends WaterfrontBaseAction {
     //                                                                             Execute
     //                                                                             =======
     @Execute
-    public HtmlResponse index(OptionalThing<Integer> pageNumber, EsproductSearchForm form) {
+    public HtmlResponse index() {
         // copy data from db to elasticsearch
         SingletonLaContainer.getComponent(org.docksidestage.dbflute.exbhv.ProductBhv.class).selectCursor(cb -> {
             cb.configure(config -> {

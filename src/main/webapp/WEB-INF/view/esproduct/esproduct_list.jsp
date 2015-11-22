@@ -3,7 +3,7 @@
 <!-- <main> start main content -->
 <div class="contents">
 	<h2 class="content-title"><la:caption key="labels.esproduct.list.title"/></h2>
-	<c:if test="${beans.size() == 0}">
+	<c:if test="${totalCount == 0}">
 	<section class="product-search-box">
 		<h3 class="content-title-second">Import Data From DB</h3>
 		<la:form method="post" styleClass="product-search-form" action="/esproduct/import/">
@@ -55,6 +55,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<la:link href="/esproduct/add/">Create New</la:link>
 		<section class="product-list-paging-box">
 			<c:import url="${viewPrefix}/common/paging_navi.jsp"/>
 		</section>

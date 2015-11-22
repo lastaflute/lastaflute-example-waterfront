@@ -19,6 +19,7 @@ import java.time.LocalDate;
 
 /**
  * @author jflute
+ * @author shinsuke
  */
 public class EsproductSearchRowBean {
 

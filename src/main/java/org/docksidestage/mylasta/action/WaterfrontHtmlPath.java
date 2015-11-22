@@ -26,6 +26,9 @@ public interface WaterfrontHtmlPath {
     /** The path of the HTML: /error/show_errors.jsp */
     HtmlNext path_Error_ShowErrorsJsp = new HtmlNext("/error/show_errors.jsp");
 
+    /** The path of the HTML: /esproduct/esproduct_add.jsp */
+    HtmlNext path_Esproduct_EsproductAddJsp = new HtmlNext("/esproduct/esproduct_add.jsp");
+
     /** The path of the HTML: /esproduct/esproduct_detail.jsp */
     HtmlNext path_Esproduct_EsproductDetailJsp = new HtmlNext("/esproduct/esproduct_detail.jsp");
 
