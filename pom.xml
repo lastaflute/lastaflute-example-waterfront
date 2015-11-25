@@ -14,10 +14,10 @@
 
 	<properties>
 		<!-- Main Framework -->
-		<dbflute.version>1.1.0-sp8</dbflute.version>
+		<dbflute.version>1.1.0-sp9</dbflute.version>
 		<h2.jdbc.version>1.4.188</h2.jdbc.version>
 		<elasticsearch.version>2.0.0</elasticsearch.version>
-		<lastaflute.version>0.6.6</lastaflute.version>
+		<lastaflute.version>0.6.7-RC1</lastaflute.version>
 		<lasta.taglib.version>0.6.1</lasta.taglib.version>
 
 		<!-- Partner Library -->
@@ -33,7 +33,7 @@
 
 		<!-- Testing -->
 		<junit.version>4.8.2</junit.version> <!-- is latest version without hamcrest -->
-		<utflute.version>0.5.4</utflute.version>
+		<utflute.version>0.5.5</utflute.version>
 		<javaparser.version>2.2.2</javaparser.version>
 	</properties>
 
