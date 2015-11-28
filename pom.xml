@@ -18,7 +18,7 @@
 		<h2.jdbc.version>1.4.188</h2.jdbc.version>
 		<elasticsearch.version>2.0.0</elasticsearch.version>
 		<lastaflute.version>0.6.8</lastaflute.version>
-		<lasta.taglib.version>0.6.2-RC2</lasta.taglib.version>
+		<lasta.taglib.version>0.6.2</lasta.taglib.version>
 
 		<!-- Partner Library -->
 		<slf4j.version>1.7.12</slf4j.version>
