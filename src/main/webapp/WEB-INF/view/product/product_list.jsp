@@ -14,7 +14,7 @@
 					<span><la:caption key="labels.product.status"/></span> 
 					<la:select property="productStatus">
 						<la:option value="" key="labels.listbox.caption.tell"/>
-						<la:optionsCls name="ProductStatus"/>
+						<la:optionCls name="ProductStatus"/>
 					</la:select>
 				</li>
 			</ul>
