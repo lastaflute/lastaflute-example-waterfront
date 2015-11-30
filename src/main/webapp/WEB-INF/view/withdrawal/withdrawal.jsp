@@ -10,7 +10,7 @@
 				<li>
 					<la:select property="reasonCode">
 						<la:option value="" key="labels.listbox.caption.tell"/>
-						<la:optionsCls name="WithdrawalReason"/>
+						<la:optionCls name="WithdrawalReason"/>
 					</la:select>
 				</li>
 				<li><span>Withdrawal Reason</span><la:text property="reasonInput"/> <la:errors property="reasonInput"/></li>
