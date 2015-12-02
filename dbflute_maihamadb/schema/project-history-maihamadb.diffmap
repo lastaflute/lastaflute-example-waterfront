@@ -1,4 +1,23 @@
 map:{
+    ; 2015/12/02 23:49:18 = map:{
+        ; diffDate = 2015/12/02 23:49:18
+        ; tableDiff = map:{
+            ; MEMBER = map:{
+                ; tableName = MEMBER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMBER_NAME = map:{
+                        ; columnName = MEMBER_NAME
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 100
+                            ; previous = 200
+                        }
+                    }
+                }
+            }
+        }
+    }
     ; 2015/11/14 12:14:50 = map:{
         ; diffDate = 2015/11/14 12:14:50
         ; tableDiff = map:{
