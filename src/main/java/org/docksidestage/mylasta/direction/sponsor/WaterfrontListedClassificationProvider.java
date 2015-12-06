@@ -15,50 +15,39 @@
  */
 package org.docksidestage.mylasta.direction.sponsor;
 
-import java.util.Locale;
+import java.util.function.Function;
 
 import org.dbflute.jdbc.ClassificationMeta;
-import org.dbflute.optional.OptionalObject;
-import org.dbflute.optional.OptionalThing;
-import org.dbflute.util.Srl;
 import org.docksidestage.dbflute.allcommon.CDef;
 import org.docksidestage.dbflute.allcommon.DBCurrent;
-import org.lastaflute.db.dbflute.classification.ListedClassificationProvider;
+import org.lastaflute.db.dbflute.classification.TypicalListedClassificationProvider;
 import org.lastaflute.db.dbflute.exception.ProvidedClassificationNotFoundException;
 
 /**
  * @author jflute
  */
-public class WaterfrontListedClassificationProvider implements ListedClassificationProvider {
+public class WaterfrontListedClassificationProvider extends TypicalListedClassificationProvider {
 
-    public ClassificationMeta provide(String classificationName) throws ProvidedClassificationNotFoundException {
-        final ClassificationMeta onMainSchema = findOnMainSchema(classificationName);
-        if (onMainSchema == null) {
-            String msg = "Not found the classification: " + classificationName;
-            throw new ProvidedClassificationNotFoundException(msg);
+    @Override
+    protected Function<String, ClassificationMeta> chooseClassificationFinder(String projectName)
+            throws ProvidedClassificationNotFoundException {
+        if (DBCurrent.getInstance().projectName().equals(projectName)) {
+            return searchName -> valueOfOnMainSchema(searchName);
+        } else {
+            throw new ProvidedClassificationNotFoundException("Unknown DBFlute project name: " + projectName);
         }
-        return onMainSchema;
     }
 
-    protected ClassificationMeta findOnMainSchema(String classificationName) throws ProvidedClassificationNotFoundException {
-        String searchName = classificationName;
-        if (classificationName.contains(".")) {
-            final String dbName = Srl.substringFirstFront(classificationName, ".");
-            if (dbName.equals(DBCurrent.getInstance().projectName())) {
-                searchName = Srl.substringFirstRear(classificationName, ".");
-            } else {
-                return null;
-            }
-        }
+    @Override
+    protected Function<String, ClassificationMeta> getDefaultClassificationFinder() {
+        return searchName -> valueOfOnMainSchema(searchName);
+    }
+
+    protected ClassificationMeta valueOfOnMainSchema(String searchName) {
         try {
             return CDef.DefMeta.valueOf(searchName);
         } catch (IllegalArgumentException ignored) { // not found
             return null; // handled later
         }
-    }
-
-    @Override
-    public OptionalThing<String> determineAlias(Locale locale) {
-        return OptionalObject.empty();
     }
 }
