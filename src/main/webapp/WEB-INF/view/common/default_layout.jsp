@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:m="http://mayaa.seasar.org">
 <head>
 	<c:import url="${viewPrefix}/common/header.jsp"></c:import>	
 </head>

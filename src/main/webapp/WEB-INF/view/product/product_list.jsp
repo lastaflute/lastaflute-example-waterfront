@@ -11,7 +11,7 @@
 				<li><span>Name</span><la:text property="productName"/></li>
 				<li><span>Purchased Member</span><la:text property="purchaseMemberName"/></li>
 				<li>
-					<span><la:caption key="labels.product.status"/></span> 
+					<span><la:caption key="labels.productStatus"/></span> 
 					<la:select property="productStatus">
 						<la:option value="" key="labels.listbox.caption.tell"/>
 						<la:optionCls name="ProductStatus"/>
