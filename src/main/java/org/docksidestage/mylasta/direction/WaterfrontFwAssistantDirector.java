@@ -21,6 +21,7 @@ import org.docksidestage.mylasta.direction.sponsor.WaterfrontActionAdjustmentPro
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontApiFailureHook;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontCookieResourceProvider;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontCurtainBeforeHook;
+import org.docksidestage.mylasta.direction.sponsor.WaterfrontJsonResourceProvider;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontListedClassificationProvider;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontMailDeliveryDepartmentCreator;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontSecurityResourceProvider;
@@ -75,6 +76,7 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
 
         direction.directSecurity(createSecurityResourceProvider());
         direction.directTime(createTimeResourceProvider());
+        direction.directJson(createJsonResourceProvider());
         direction.directMail(createMailDeliveryDepartmentCreator().create());
     }
 
@@ -90,6 +92,10 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
 
     protected WaterfrontTimeResourceProvider createTimeResourceProvider() {
         return new WaterfrontTimeResourceProvider(waterfrontConfig);
+    }
+
+    protected WaterfrontJsonResourceProvider createJsonResourceProvider() {
+        return new WaterfrontJsonResourceProvider();
     }
 
     protected WaterfrontMailDeliveryDepartmentCreator createMailDeliveryDepartmentCreator() {
