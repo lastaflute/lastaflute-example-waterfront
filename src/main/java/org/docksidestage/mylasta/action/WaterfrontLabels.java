@@ -48,13 +48,13 @@ public class WaterfrontLabels extends ActionMessages {
     public static final String LABELS_WITHDRAWAL = "{labels.withdrawal}";
 
     /** The key of the message: @[labels.member] @[labels.status] */
-    public static final String LABELS_MEMBER_STATUS = "{labels.member.status}";
+    public static final String LABELS_MEMBER_STATUS = "{labels.memberStatus}";
 
     /** The key of the message: @[labels.product] @[labels.status] */
-    public static final String LABELS_PRODUCT_STATUS = "{labels.product.status}";
+    public static final String LABELS_PRODUCT_STATUS = "{labels.productStatus}";
 
     /** The key of the message: @[labels.esproduct] @[labels.status] */
-    public static final String LABELS_ESPRODUCT_STATUS = "{labels.esproduct.status}";
+    public static final String LABELS_ESPRODUCT_STATUS = "{labels.esproductStatus}";
 
     /** The key of the message: @[labels.member] ID */
     public static final String LABELS_MEMBER_ID = "{labels.memberId}";
