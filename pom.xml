@@ -17,7 +17,7 @@
 		<dbflute.version>1.1.1</dbflute.version>
 		<h2.jdbc.version>1.4.190</h2.jdbc.version>
 		<elasticsearch.version>2.0.0</elasticsearch.version>
-		<lastaflute.version>0.7.5</lastaflute.version>
+		<lastaflute.version>0.7.6</lastaflute.version>
 		<lasta.taglib.version>0.6.7</lasta.taglib.version>
 
 		<!-- Partner Library -->
@@ -33,7 +33,7 @@
 
 		<!-- Testing -->
 		<junit.version>4.8.2</junit.version> <!-- is latest version without hamcrest -->
-		<utflute.version>0.6.0C</utflute.version>
+		<utflute.version>0.6.0D</utflute.version>
 		<javaparser.version>2.2.2</javaparser.version>
 	</properties>
 
