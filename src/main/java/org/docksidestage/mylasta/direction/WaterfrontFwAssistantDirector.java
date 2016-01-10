@@ -25,6 +25,7 @@ import org.docksidestage.mylasta.direction.sponsor.WaterfrontJsonResourceProvide
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontListedClassificationProvider;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontMailDeliveryDepartmentCreator;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontSecurityResourceProvider;
+import org.docksidestage.mylasta.direction.sponsor.WaterfrontSessionResourceProvider;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontTimeResourceProvider;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontUserLocaleProcessProvider;
 import org.docksidestage.mylasta.direction.sponsor.WaterfrontUserTimeZoneProcessProvider;
@@ -120,6 +121,7 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
     @Override
     protected void prepareWebDirection(FwWebDirection direction) {
         direction.directRequest(createUserLocaleProcessProvider(), createUserTimeZoneProcessProvider());
+        direction.directSession(createSessionResourceProvider());
         direction.directCookie(createCookieResourceProvider());
         direction.directAdjustment(createActionAdjustmentProvider());
         direction.directMessage(nameList -> nameList.add("waterfront_message"), "waterfront_label");
@@ -132,6 +134,10 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
 
     protected WaterfrontUserTimeZoneProcessProvider createUserTimeZoneProcessProvider() {
         return new WaterfrontUserTimeZoneProcessProvider();
+    }
+
+    protected WaterfrontSessionResourceProvider createSessionResourceProvider() {
+        return new WaterfrontSessionResourceProvider();
     }
 
     protected WaterfrontCookieResourceProvider createCookieResourceProvider() { // #change_it_first
