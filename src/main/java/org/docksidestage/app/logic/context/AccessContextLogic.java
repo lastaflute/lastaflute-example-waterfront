@@ -46,7 +46,7 @@ public class AccessContextLogic {
         String supply();
     }
 
-    public <ID> AccessContext create(AccessContextResource resource, UserTypeSupplier userTypeSupplier, UserBeanSupplier userBeanSupplier,
+    public AccessContext create(AccessContextResource resource, UserTypeSupplier userTypeSupplier, UserBeanSupplier userBeanSupplier,
             AppTypeSupplier appTypeSupplier) {
         final AccessContext context = new AccessContext();
         context.setAccessLocalDateTimeProvider(() -> timeManager.currentDateTime());
