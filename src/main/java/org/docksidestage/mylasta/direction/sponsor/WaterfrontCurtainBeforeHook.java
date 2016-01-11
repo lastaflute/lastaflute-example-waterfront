@@ -22,7 +22,6 @@ import org.dbflute.system.provider.DfFinalTimeZoneProvider;
 import org.dbflute.util.DfTypeUtil;
 import org.lastaflute.core.direction.CurtainBeforeHook;
 import org.lastaflute.core.direction.FwAssistantDirector;
-import org.lastaflute.job.LastaJobStarter;
 
 /**
  * @author jflute
@@ -31,7 +30,6 @@ public class WaterfrontCurtainBeforeHook implements CurtainBeforeHook {
 
     public void hook(FwAssistantDirector assistantDirector) {
         processDBFluteSystem();
-        new LastaJobStarter().start();
     }
 
     protected void processDBFluteSystem() {
