@@ -25,7 +25,7 @@ import org.lastaflute.web.servlet.session.SessionSharedStorage;
 public class WaterfrontSessionResourceProvider implements SessionResourceProvider {
 
     @Override
-    public SessionSharedStorage provideSessionSharedStorage() {
+    public SessionSharedStorage provideSharedStorage() {
         return new SessionSharedStorage() { // #making: example by Cookie
 
             @Override
