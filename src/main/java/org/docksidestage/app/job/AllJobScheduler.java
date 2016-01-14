@@ -18,7 +18,6 @@ package org.docksidestage.app.job;
 import javax.annotation.Resource;
 
 import org.dbflute.optional.OptionalThing;
-import org.dbflute.util.DfCollectionUtil;
 import org.docksidestage.app.logic.context.AccessContextLogic;
 import org.lastaflute.core.time.TimeManager;
 import org.lastaflute.job.LaCron;
@@ -44,9 +43,9 @@ public class AllJobScheduler implements LaJobScheduler {
     @Override
     public void schedule(LaCron cron) {
         cron.register("* * * * *", SeaJob.class, waitIfConcurrent());
-        cron.register("*/1 * * * *", LandJob.class, quitIfConcurrent(), op -> op.params(() -> {
-            return DfCollectionUtil.newHashMap("showbase", "oneman");
-        }));
+        //        cron.register("*/1 * * * *", LandJob.class, quitIfConcurrent(), op -> op.params(() -> {
+        //            return DfCollectionUtil.newHashMap("showbase", "oneman");
+        //        }));
     }
 
     @Override
