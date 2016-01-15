@@ -40,12 +40,6 @@ public class SeaJob implements LaJob {
             updateMember(before.getMemberId());
             restoreMember(before.getMemberId(), before.getMemberName()); // for test
         });
-        try {
-            Thread.sleep(30000L);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     private void updateMember(Integer memberId) {

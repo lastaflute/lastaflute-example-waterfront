@@ -15,7 +15,6 @@
  */
 package org.docksidestage.app.web.product;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,8 +24,6 @@ import org.dbflute.optional.OptionalThing;
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.dbflute.exbhv.ProductBhv;
 import org.docksidestage.dbflute.exentity.Product;
-import org.lastaflute.core.smartdeploy.ManagedHotdeploy;
-import org.lastaflute.di.core.smart.hot.HotdeployUtil;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.login.AllowAnyoneAccess;
 import org.lastaflute.web.response.HtmlResponse;
@@ -46,23 +43,11 @@ public class ProductListAction extends WaterfrontBaseAction {
     @Resource
     private SessionManager sessionManager;
 
-    class LandBean implements Serializable {
-
-        private static final long serialVersionUID = 1L;
-    }
-
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
     @Execute
     public HtmlResponse index(OptionalThing<Integer> pageNumber, ProductSearchForm form) {
-        System.out.println("@@@@@@@@@++++222224++++++@@cccaaa: " + ManagedHotdeploy.getHotdeployCount());
-        System.out.println("@@@@@@@@@: " + HotdeployUtil.getLaContainerClassLoader());
-        System.out.println("@@@@@@@@@: " + HotdeployUtil.getThreadContextClassLoader());
-        System.out.println("@@@@@@@@@");
-        System.out.println("@@@@@@@@@: " + sessionManager.getAttribute("aaa", LandBean.class));
-        sessionManager.setAttribute("aaa", new LandBean());
-        System.out.println("@@@@@@@@@: " + sessionManager.getAttribute("aaa", LandBean.class));
         validate(form, messages -> {} , () -> {
             return asHtml(path_Product_ProductListJsp);
         });
