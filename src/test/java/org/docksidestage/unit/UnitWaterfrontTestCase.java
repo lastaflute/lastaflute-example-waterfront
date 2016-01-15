@@ -15,7 +15,11 @@
  */
 package org.docksidestage.unit;
 
+import javax.annotation.Resource;
+
 import org.dbflute.utflute.lastaflute.WebContainerTestCase;
+import org.lastaflute.job.JobManager;
+import org.lastaflute.job.mock.MockJobRuntime;
 
 /**
  * Use like this:
@@ -38,4 +42,17 @@ import org.dbflute.utflute.lastaflute.WebContainerTestCase;
  * @author jflute
  */
 public abstract class UnitWaterfrontTestCase extends WebContainerTestCase {
+
+    @Resource
+    private JobManager jobManager;
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        jobManager.getJobList().forEach(job -> job.becomeNonCron()); // suppress scheduling for unit test
+    }
+
+    protected MockJobRuntime getMockJobRuntime() {
+        return MockJobRuntime.asDefault();
+    }
 }
