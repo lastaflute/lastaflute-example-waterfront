@@ -86,7 +86,7 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
     }
 
     protected WaterfrontSecurityResourceProvider createSecurityResourceProvider() { // #change_it_first
-        final InvertibleCryptographer inver = InvertibleCryptographer.createAesCipher("waterfront:dockside");
+        final InvertibleCryptographer inver = InvertibleCryptographer.createBlowfishCipher("waterfront:docks");
         final OneWayCryptographer oneWay = OneWayCryptographer.createSha256Cryptographer();
         return new WaterfrontSecurityResourceProvider(inver, oneWay);
     }
@@ -141,7 +141,7 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
     }
 
     protected WaterfrontCookieResourceProvider createCookieResourceProvider() { // #change_it_first
-        final InvertibleCryptographer cr = InvertibleCryptographer.createAesCipher("dockside:waterfront");
+        final InvertibleCryptographer cr = InvertibleCryptographer.createBlowfishCipher("docks:waterfront");
         return new WaterfrontCookieResourceProvider(waterfrontConfig, cr);
     }
 
