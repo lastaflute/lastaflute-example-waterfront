@@ -24,6 +24,7 @@ import org.dbflute.optional.OptionalThing;
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
+import org.elasticsearch.index.IndexNotFoundException;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.login.AllowAnyoneAccess;
 import org.lastaflute.web.response.HtmlResponse;
@@ -49,15 +50,21 @@ public class EsproductListAction extends WaterfrontBaseAction {
         validate(form, messages -> {}, () -> {
             return asHtml(path_Esproduct_EsproductListJsp);
         });
-        PagingResultBean<Product> page = selectProductPage(pageNumber.orElse(1), form);
-        List<EsproductSearchRowBean> beans = page.mappingList(product -> {
-            return mappingToBean(product);
-        });
-        return asHtml(path_Esproduct_EsproductListJsp).renderWith(data -> {
-            data.register("totalCount", productBhv.selectCount(cb -> {}));
-            data.register("beans", beans);
-            registerPagingNavi(data, page, form);
-        });
+        try {
+            PagingResultBean<Product> page = selectProductPage(pageNumber.orElse(1), form);
+            List<EsproductSearchRowBean> beans = page.mappingList(product -> {
+                return mappingToBean(product);
+            });
+            return asHtml(path_Esproduct_EsproductListJsp).renderWith(data -> {
+                data.register("totalCount", productBhv.selectCount(cb -> {}));
+                data.register("beans", beans);
+                registerPagingNavi(data, page, form);
+            });
+        } catch (IndexNotFoundException e) {
+            return asHtml(path_Esproduct_EsproductListJsp).renderWith(data -> {
+                data.register("totalCount", 0);
+            });
+        }
     }
 
     // ===================================================================================
