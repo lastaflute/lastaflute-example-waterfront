@@ -64,9 +64,7 @@ public class EsproductDetailAction extends WaterfrontBaseAction {
     private Product selectProduct(String productId) {
         return productBhv.selectEntity(cb -> {
             cb.query().setId_Equal(productId);
-        }).orElseThrow(() -> {
-            return of404("Not found the product: " + productId); // mistake or user joke
-        });
+        }).get();
     }
 
     // ===================================================================================

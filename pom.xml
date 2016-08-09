@@ -17,8 +17,8 @@
 		<dbflute.version>1.1.1</dbflute.version>
 		<h2.jdbc.version>1.4.192</h2.jdbc.version>
 		<elasticsearch.version>2.3.3</elasticsearch.version>
-		<lastaflute.version>0.8.2</lastaflute.version>
-		<lasta.taglib.version>0.7.0</lasta.taglib.version>
+		<lastaflute.version>0.8.3-RC8</lastaflute.version>
+		<lasta.taglib.version>0.7.1-RC1</lasta.taglib.version>
 		<lasta.job.version>0.2.2</lasta.job.version>
 
 		<!-- Partner Library -->

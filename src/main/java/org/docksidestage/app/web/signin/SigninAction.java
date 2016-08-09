@@ -21,9 +21,10 @@ import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.app.web.base.login.WaterfrontLoginAssist;
 import org.docksidestage.app.web.mypage.MypageAction;
 import org.docksidestage.mylasta.action.WaterfrontMessages;
+import org.lastaflute.core.util.LaStringUtil;
 import org.lastaflute.web.Execute;
+import org.lastaflute.web.login.credential.UserPasswordCredential;
 import org.lastaflute.web.response.HtmlResponse;
-import org.lastaflute.web.response.JsonResponse;
 
 /**
  * @author jflute
@@ -34,7 +35,7 @@ public class SigninAction extends WaterfrontBaseAction {
     //                                                                           Attribute
     //                                                                           =========
     @Resource
-    private WaterfrontLoginAssist waterfrontLoginAssist;
+    private WaterfrontLoginAssist loginAssist;
 
     // ===================================================================================
     //                                                                             Execute
@@ -53,27 +54,20 @@ public class SigninAction extends WaterfrontBaseAction {
             form.clearSecurityInfo();
             return asHtml(path_Signin_SigninJsp);
         });
-        return waterfrontLoginAssist.loginRedirect(form.account, form.password, op -> op.rememberMe(form.rememberMe), () -> {
+        return loginAssist.loginRedirect(createCredential(form), op -> op.rememberMe(form.rememberMe), () -> {
             return redirect(MypageAction.class);
         });
     }
 
-    @Execute
-    public JsonResponse<Object> indexJson(SigninForm form) {
-        validate(form, messages -> moreValidate(form, messages), () -> {
-            form.clearSecurityInfo();
-            return JsonResponse.asEmptyBody().httpStatus(400);
-        });
-        waterfrontLoginAssist.login(form.account, form.password, op -> op.rememberMe(form.rememberMe));
-        return JsonResponse.asEmptyBody();
-    }
-
     private void moreValidate(SigninForm form, WaterfrontMessages messages) {
-        if (isNotEmpty(form.account) && isNotEmpty(form.password)) {
-            if (!waterfrontLoginAssist.checkUserLoginable(form.account, form.password)) {
-                messages.addErrorsLoginFailure("email");
+        if (LaStringUtil.isNotEmpty(form.account) && LaStringUtil.isNotEmpty(form.password)) {
+            if (!loginAssist.checkUserLoginable(createCredential(form))) {
+                messages.addErrorsLoginFailure("account");
             }
         }
     }
 
+    private UserPasswordCredential createCredential(SigninForm form) {
+        return new UserPasswordCredential(form.account, form.password);
+    }
 }

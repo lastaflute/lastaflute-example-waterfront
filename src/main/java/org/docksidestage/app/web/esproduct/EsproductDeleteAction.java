@@ -22,9 +22,11 @@ import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.login.AllowAnyoneAccess;
 import org.lastaflute.web.response.HtmlResponse;
+import org.lastaflute.web.servlet.request.ResponseManager;
 
 /**
  * @author shinsuke
+ * @author jflute
  */
 @AllowAnyoneAccess
 public class EsproductDeleteAction extends WaterfrontBaseAction {
@@ -32,9 +34,8 @@ public class EsproductDeleteAction extends WaterfrontBaseAction {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    // -----------------------------------------------------
-    //                                          DI Component
-    //                                          ------------
+    @Resource
+    private ResponseManager responseManager;
     @Resource
     private ProductBhv productBhv;
 
@@ -52,9 +53,8 @@ public class EsproductDeleteAction extends WaterfrontBaseAction {
                 op.setRefresh(true);
             });
         }).orElse(() -> {
-            throw404("Not found the product: " + form.productId);
+            throw responseManager.new404("Not found the product: " + form.productId);
         });
         return redirect(EsproductListAction.class);
     }
-
 }

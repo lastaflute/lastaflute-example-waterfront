@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import org.dbflute.cbean.result.PagingResultBean;
 import org.dbflute.optional.OptionalThing;
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
+import org.docksidestage.app.web.base.paging.PagingAssist;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.elasticsearch.index.IndexNotFoundException;
@@ -41,6 +42,8 @@ public class EsproductListAction extends WaterfrontBaseAction {
     //                                                                           =========
     @Resource
     private ProductBhv productBhv;
+    @Resource
+    private PagingAssist pagingAssist;
 
     // ===================================================================================
     //                                                                             Execute
@@ -58,7 +61,7 @@ public class EsproductListAction extends WaterfrontBaseAction {
             return asHtml(path_Esproduct_EsproductListJsp).renderWith(data -> {
                 data.register("totalCount", productBhv.selectCount(cb -> {}));
                 data.register("beans", beans);
-                registerPagingNavi(data, page, form);
+                pagingAssist.registerPagingNavi(data, page, form);
             });
         } catch (IndexNotFoundException e) {
             return asHtml(path_Esproduct_EsproductListJsp).renderWith(data -> {
@@ -71,7 +74,7 @@ public class EsproductListAction extends WaterfrontBaseAction {
     //                                                                              Select
     //                                                                              ======
     private PagingResultBean<Product> selectProductPage(int pageNumber, EsproductSearchForm form) {
-        verifyParameterTrue("The pageNumber should be positive number: " + pageNumber, pageNumber > 0);
+        verifyOrClientError("The pageNumber should be positive number: " + pageNumber, pageNumber > 0);
         return productBhv.selectPage(cb -> {
             cb.ignoreNullOrEmptyQuery(); // TODO support
             //            cb.setupSelect_ProductStatus();
@@ -93,7 +96,7 @@ public class EsproductListAction extends WaterfrontBaseAction {
             }
             cb.query().addOrderBy_ProductName_Asc(); // TODO multifield support
             cb.query().addOrderBy_Id_Asc();
-            cb.paging(getPagingPageSize(), pageNumber);
+            cb.paging(4, pageNumber);
         });
     }
 

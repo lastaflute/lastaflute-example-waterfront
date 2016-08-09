@@ -8,6 +8,7 @@ import org.docksidestage.dbflute.exbhv.MemberBhv;
 import org.docksidestage.dbflute.exbhv.MemberWithdrawalBhv;
 import org.docksidestage.dbflute.exentity.Member;
 import org.docksidestage.dbflute.exentity.MemberWithdrawal;
+import org.lastaflute.core.time.TimeManager;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.response.HtmlResponse;
 
@@ -20,9 +21,8 @@ public class WithdrawalAction extends WaterfrontBaseAction {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    // -----------------------------------------------------
-    //                                          DI Component
-    //                                          ------------
+    @Resource
+    private TimeManager timeManager;
     @Resource
     private MemberBhv memberBhv;
     @Resource
@@ -38,7 +38,7 @@ public class WithdrawalAction extends WaterfrontBaseAction {
 
     @Execute
     public HtmlResponse confirm(WithdrawalForm form) {
-        validate(form, messages -> {} , () -> {
+        validate(form, messages -> {}, () -> {
             return asHtml(path_Withdrawal_WithdrawalJsp);
         });
         return asHtml(path_Withdrawal_WithdrawalConfirmJsp);
@@ -52,7 +52,7 @@ public class WithdrawalAction extends WaterfrontBaseAction {
         withdrawal.setMemberId(memberId);
         withdrawal.setWithdrawalReasonCodeAsWithdrawalReason(form.reasonCode);
         withdrawal.setWithdrawalReasonInputText(form.reasonInput);
-        withdrawal.setWithdrawalDatetime(currentDateTime());
+        withdrawal.setWithdrawalDatetime(timeManager.currentDateTime());
         memberWithdrawalBhv.insert(withdrawal);
 
         // update status of member

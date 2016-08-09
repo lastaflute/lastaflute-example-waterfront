@@ -476,7 +476,7 @@ public abstract class EsAbstractConditionQuery implements ConditionQuery {
     @FunctionalInterface
     public interface OperatorCall<CQ extends EsAbstractConditionQuery> {
 
-        void callback(CQ query);
+        void callback(CQ and);
     }
 }
 

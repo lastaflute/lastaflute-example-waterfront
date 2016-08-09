@@ -18,6 +18,7 @@ package org.docksidestage.app.web.esproduct;
 import javax.annotation.Resource;
 
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
+import org.docksidestage.app.web.base.view.DisplayAssist;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.lastaflute.di.core.SingletonLaContainer;
@@ -36,6 +37,8 @@ public class EsproductImportAction extends WaterfrontBaseAction {
     //                                                                           =========
     @Resource
     private ProductBhv productBhv;
+    @Resource
+    private DisplayAssist displayAssist;
 
     // ===================================================================================
     //                                                                             Execute
@@ -55,7 +58,7 @@ public class EsproductImportAction extends WaterfrontBaseAction {
         }, entity -> {
             Product product = new Product();
             product.asDocMeta().id(entity.getProductId().toString());
-            product.setLatestPurchaseDate(entity.getLatestPurchaseDate());
+            product.setLatestPurchaseDate(displayAssist.toDateTime(entity.getLatestPurchaseDate()).orElse(null));
             product.setProductDescription(entity.getProductDescription());
             product.setProductCategoryCode(entity.getProductCategoryCode());
             product.setProductCategory(entity.getProductCategory().get().getProductCategoryName());

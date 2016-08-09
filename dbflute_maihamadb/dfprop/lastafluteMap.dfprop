@@ -32,7 +32,7 @@ map:{
     ; appMap = map:{
         ; waterfront = map:{
             ; path = ..
-            ; freeGenList = list:{ env ; config ; label ; message ; mail ; template ; jsp ; doc ; webcls }
+            ; freeGenList = list:{ env ; config ; label ; message ; mail ; template ; jsp ; doc ; appcls }
             ; propertiesHtmlList = list:{ env ; config ; label ; message }
         }
     }

@@ -26,6 +26,7 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.FuzzyQueryBuilder;
 import org.elasticsearch.index.query.IdsQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.NotQueryBuilder;
 import org.elasticsearch.index.query.PrefixQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
@@ -71,8 +72,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         not(notLambda, null);
     }
 
-    public void not(final OperatorCall<ProductCQ> notLambda, final ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        bool((must, should, mustNot, filter) -> notLambda.callback(mustNot), opLambda);
+    public void not(OperatorCall<ProductCQ> notLambda, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        ProductCQ notQuery = new ProductCQ();
+        notLambda.callback(notQuery);
+        if (notQuery.hasQueries()) {
+            if (notQuery.getQueryBuilderList().size() > 1) {
+                final String msg = "not query must be one query.";
+                throw new IllegalConditionBeanOperationException(msg);
+            }
+            NotQueryBuilder builder = QueryBuilders.notQuery(notQuery.getQueryBuilderList().get(0));
+            if (opLambda != null) {
+                opLambda.callback(builder);
+            }
+        }
     }
 
     public void bool(BoolCall<ProductCQ> boolLambda) {
@@ -119,16 +131,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setId_NotTerm(id, null);
     }
 
+    public void setId_NotEqual(String id, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setId_NotTerm(id, opLambda);
+    }
+
     public void setId_NotTerm(String id) {
         setId_NotTerm(id, null);
     }
 
-    public void setId_NotEqual(String id, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setId_NotTerm(id, opLambda);
-    }
-
-    public void setId_NotTerm(String id, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setId_Term(id), opLambda);
+    public void setId_NotTerm(String id, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("_id", id));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setId_Terms(Collection<String> idList) {
@@ -183,16 +198,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setLatestPurchaseDate_NotTerm(latestPurchaseDate, null);
     }
 
+    public void setLatestPurchaseDate_NotEqual(LocalDateTime latestPurchaseDate, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setLatestPurchaseDate_NotTerm(latestPurchaseDate, opLambda);
+    }
+
     public void setLatestPurchaseDate_NotTerm(LocalDateTime latestPurchaseDate) {
         setLatestPurchaseDate_NotTerm(latestPurchaseDate, null);
     }
 
-    public void setLatestPurchaseDate_NotEqual(LocalDateTime latestPurchaseDate, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setLatestPurchaseDate_NotTerm(latestPurchaseDate, opLambda);
-    }
-
-    public void setLatestPurchaseDate_NotTerm(LocalDateTime latestPurchaseDate, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setLatestPurchaseDate_Term(latestPurchaseDate), opLambda);
+    public void setLatestPurchaseDate_NotTerm(LocalDateTime latestPurchaseDate, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("latest_purchase_date", latestPurchaseDate));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setLatestPurchaseDate_Terms(Collection<LocalDateTime> latestPurchaseDateList) {
@@ -335,16 +353,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setProductCategory_NotTerm(productCategory, null);
     }
 
+    public void setProductCategory_NotEqual(String productCategory, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductCategory_NotTerm(productCategory, opLambda);
+    }
+
     public void setProductCategory_NotTerm(String productCategory) {
         setProductCategory_NotTerm(productCategory, null);
     }
 
-    public void setProductCategory_NotEqual(String productCategory, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setProductCategory_NotTerm(productCategory, opLambda);
-    }
-
-    public void setProductCategory_NotTerm(String productCategory, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setProductCategory_Term(productCategory), opLambda);
+    public void setProductCategory_NotTerm(String productCategory, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_category", productCategory));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setProductCategory_Terms(Collection<String> productCategoryList) {
@@ -498,16 +519,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setProductCategoryCode_NotTerm(productCategoryCode, null);
     }
 
+    public void setProductCategoryCode_NotEqual(String productCategoryCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductCategoryCode_NotTerm(productCategoryCode, opLambda);
+    }
+
     public void setProductCategoryCode_NotTerm(String productCategoryCode) {
         setProductCategoryCode_NotTerm(productCategoryCode, null);
     }
 
-    public void setProductCategoryCode_NotEqual(String productCategoryCode, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setProductCategoryCode_NotTerm(productCategoryCode, opLambda);
-    }
-
-    public void setProductCategoryCode_NotTerm(String productCategoryCode, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setProductCategoryCode_Term(productCategoryCode), opLambda);
+    public void setProductCategoryCode_NotTerm(String productCategoryCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_category_code", productCategoryCode));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setProductCategoryCode_Terms(Collection<String> productCategoryCodeList) {
@@ -661,16 +685,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setProductDescription_NotTerm(productDescription, null);
     }
 
+    public void setProductDescription_NotEqual(String productDescription, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductDescription_NotTerm(productDescription, opLambda);
+    }
+
     public void setProductDescription_NotTerm(String productDescription) {
         setProductDescription_NotTerm(productDescription, null);
     }
 
-    public void setProductDescription_NotEqual(String productDescription, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setProductDescription_NotTerm(productDescription, opLambda);
-    }
-
-    public void setProductDescription_NotTerm(String productDescription, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setProductDescription_Term(productDescription), opLambda);
+    public void setProductDescription_NotTerm(String productDescription, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_description", productDescription));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setProductDescription_Terms(Collection<String> productDescriptionList) {
@@ -824,16 +851,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setProductHandleCode_NotTerm(productHandleCode, null);
     }
 
+    public void setProductHandleCode_NotEqual(String productHandleCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductHandleCode_NotTerm(productHandleCode, opLambda);
+    }
+
     public void setProductHandleCode_NotTerm(String productHandleCode) {
         setProductHandleCode_NotTerm(productHandleCode, null);
     }
 
-    public void setProductHandleCode_NotEqual(String productHandleCode, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setProductHandleCode_NotTerm(productHandleCode, opLambda);
-    }
-
-    public void setProductHandleCode_NotTerm(String productHandleCode, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setProductHandleCode_Term(productHandleCode), opLambda);
+    public void setProductHandleCode_NotTerm(String productHandleCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_handle_code", productHandleCode));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setProductHandleCode_Terms(Collection<String> productHandleCodeList) {
@@ -987,16 +1017,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setProductName_NotTerm(productName, null);
     }
 
+    public void setProductName_NotEqual(String productName, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductName_NotTerm(productName, opLambda);
+    }
+
     public void setProductName_NotTerm(String productName) {
         setProductName_NotTerm(productName, null);
     }
 
-    public void setProductName_NotEqual(String productName, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setProductName_NotTerm(productName, opLambda);
-    }
-
-    public void setProductName_NotTerm(String productName, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setProductName_Term(productName), opLambda);
+    public void setProductName_NotTerm(String productName, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_name", productName));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setProductName_Terms(Collection<String> productNameList) {
@@ -1150,16 +1183,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setProductStatus_NotTerm(productStatus, null);
     }
 
+    public void setProductStatus_NotEqual(String productStatus, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductStatus_NotTerm(productStatus, opLambda);
+    }
+
     public void setProductStatus_NotTerm(String productStatus) {
         setProductStatus_NotTerm(productStatus, null);
     }
 
-    public void setProductStatus_NotEqual(String productStatus, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setProductStatus_NotTerm(productStatus, opLambda);
-    }
-
-    public void setProductStatus_NotTerm(String productStatus, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setProductStatus_Term(productStatus), opLambda);
+    public void setProductStatus_NotTerm(String productStatus, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_status", productStatus));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setProductStatus_Terms(Collection<String> productStatusList) {
@@ -1313,16 +1349,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setProductStatusCode_NotTerm(productStatusCode, null);
     }
 
+    public void setProductStatusCode_NotEqual(String productStatusCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setProductStatusCode_NotTerm(productStatusCode, opLambda);
+    }
+
     public void setProductStatusCode_NotTerm(String productStatusCode) {
         setProductStatusCode_NotTerm(productStatusCode, null);
     }
 
-    public void setProductStatusCode_NotEqual(String productStatusCode, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setProductStatusCode_NotTerm(productStatusCode, opLambda);
-    }
-
-    public void setProductStatusCode_NotTerm(String productStatusCode, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setProductStatusCode_Term(productStatusCode), opLambda);
+    public void setProductStatusCode_NotTerm(String productStatusCode, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("product_status_code", productStatusCode));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setProductStatusCode_Terms(Collection<String> productStatusCodeList) {
@@ -1476,16 +1515,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setRegisterDatetime_NotTerm(registerDatetime, null);
     }
 
+    public void setRegisterDatetime_NotEqual(LocalDateTime registerDatetime, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setRegisterDatetime_NotTerm(registerDatetime, opLambda);
+    }
+
     public void setRegisterDatetime_NotTerm(LocalDateTime registerDatetime) {
         setRegisterDatetime_NotTerm(registerDatetime, null);
     }
 
-    public void setRegisterDatetime_NotEqual(LocalDateTime registerDatetime, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setRegisterDatetime_NotTerm(registerDatetime, opLambda);
-    }
-
-    public void setRegisterDatetime_NotTerm(LocalDateTime registerDatetime, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setRegisterDatetime_Term(registerDatetime), opLambda);
+    public void setRegisterDatetime_NotTerm(LocalDateTime registerDatetime, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("register_datetime", registerDatetime));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setRegisterDatetime_Terms(Collection<LocalDateTime> registerDatetimeList) {
@@ -1628,16 +1670,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setRegisterUser_NotTerm(registerUser, null);
     }
 
+    public void setRegisterUser_NotEqual(String registerUser, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setRegisterUser_NotTerm(registerUser, opLambda);
+    }
+
     public void setRegisterUser_NotTerm(String registerUser) {
         setRegisterUser_NotTerm(registerUser, null);
     }
 
-    public void setRegisterUser_NotEqual(String registerUser, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setRegisterUser_NotTerm(registerUser, opLambda);
-    }
-
-    public void setRegisterUser_NotTerm(String registerUser, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setRegisterUser_Term(registerUser), opLambda);
+    public void setRegisterUser_NotTerm(String registerUser, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("register_user", registerUser));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setRegisterUser_Terms(Collection<String> registerUserList) {
@@ -1791,16 +1836,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setRegularPrice_NotTerm(regularPrice, null);
     }
 
+    public void setRegularPrice_NotEqual(Integer regularPrice, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setRegularPrice_NotTerm(regularPrice, opLambda);
+    }
+
     public void setRegularPrice_NotTerm(Integer regularPrice) {
         setRegularPrice_NotTerm(regularPrice, null);
     }
 
-    public void setRegularPrice_NotEqual(Integer regularPrice, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setRegularPrice_NotTerm(regularPrice, opLambda);
-    }
-
-    public void setRegularPrice_NotTerm(Integer regularPrice, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setRegularPrice_Term(regularPrice), opLambda);
+    public void setRegularPrice_NotTerm(Integer regularPrice, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("regular_price", regularPrice));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setRegularPrice_Terms(Collection<Integer> regularPriceList) {
@@ -1943,16 +1991,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setUpdateDatetime_NotTerm(updateDatetime, null);
     }
 
+    public void setUpdateDatetime_NotEqual(LocalDateTime updateDatetime, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setUpdateDatetime_NotTerm(updateDatetime, opLambda);
+    }
+
     public void setUpdateDatetime_NotTerm(LocalDateTime updateDatetime) {
         setUpdateDatetime_NotTerm(updateDatetime, null);
     }
 
-    public void setUpdateDatetime_NotEqual(LocalDateTime updateDatetime, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setUpdateDatetime_NotTerm(updateDatetime, opLambda);
-    }
-
-    public void setUpdateDatetime_NotTerm(LocalDateTime updateDatetime, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setUpdateDatetime_Term(updateDatetime), opLambda);
+    public void setUpdateDatetime_NotTerm(LocalDateTime updateDatetime, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("update_datetime", updateDatetime));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setUpdateDatetime_Terms(Collection<LocalDateTime> updateDatetimeList) {
@@ -2095,16 +2146,19 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         setUpdateUser_NotTerm(updateUser, null);
     }
 
+    public void setUpdateUser_NotEqual(String updateUser, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        setUpdateUser_NotTerm(updateUser, opLambda);
+    }
+
     public void setUpdateUser_NotTerm(String updateUser) {
         setUpdateUser_NotTerm(updateUser, null);
     }
 
-    public void setUpdateUser_NotEqual(String updateUser, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        setUpdateUser_NotTerm(updateUser, opLambda);
-    }
-
-    public void setUpdateUser_NotTerm(String updateUser, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setUpdateUser_Term(updateUser), opLambda);
+    public void setUpdateUser_NotTerm(String updateUser, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("update_user", updateUser));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setUpdateUser_Terms(Collection<String> updateUserList) {

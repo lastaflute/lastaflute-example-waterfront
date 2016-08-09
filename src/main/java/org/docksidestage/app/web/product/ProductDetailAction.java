@@ -44,7 +44,7 @@ public class ProductDetailAction extends WaterfrontBaseAction {
     //                                                                             =======
     @Execute
     public HtmlResponse index(Integer productId) {
-        validate(productId, messages -> {} , () -> {
+        validate(productId, messages -> {}, () -> {
             return asHtml(path_Product_ProductListJsp);
         });
         Product product = selectProduct(productId);
@@ -60,9 +60,7 @@ public class ProductDetailAction extends WaterfrontBaseAction {
         return productBhv.selectEntity(cb -> {
             cb.setupSelect_ProductCategory();
             cb.query().setProductId_Equal(productId);
-        }).orElseThrow(() -> {
-            return of404("Not found the product: " + productId); // mistake or user joke
-        });
+        }).get();
     }
 
     // ===================================================================================

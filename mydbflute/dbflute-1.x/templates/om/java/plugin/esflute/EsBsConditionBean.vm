@@ -10,11 +10,9 @@ import ${request.package}.cbean.${table.camelizedName}CB;
 import ${request.package}.cbean.cq.${table.camelizedName}CQ;
 import ${request.package}.cbean.cq.bs.Bs${table.camelizedName}CQ;
 import org.dbflute.cbean.ConditionQuery;
+import org.elasticsearch.action.count.CountRequestBuilder;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
-#if ($esVersion.isLessThan("2.3.0"))##
-import org.elasticsearch.action.count.CountRequestBuilder;
-#end##
 
 /**
  * @author ESFlute (using FreeGen)
@@ -68,7 +66,6 @@ public class Bs${table.camelizedName}CB extends EsAbstractConditionBean {
     // ===================================================================================
     //                                                                               Build
     //                                                                               =====
-#if ($esVersion.isLessThan("2.3.0"))##
     @Override
     public CountRequestBuilder build(CountRequestBuilder builder) {
         if (_conditionQuery != null) {
@@ -79,7 +76,6 @@ public class Bs${table.camelizedName}CB extends EsAbstractConditionBean {
         }
         return builder;
     }
-#end##
 
     @Override
     public SearchRequestBuilder build(SearchRequestBuilder builder) {

@@ -15,20 +15,12 @@
  */
 package org.docksidestage.app.web.base;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.TimeZone;
-
 import javax.annotation.Resource;
 
-import org.dbflute.Entity;
-import org.dbflute.cbean.result.PagingResultBean;
 import org.dbflute.optional.OptionalObject;
 import org.dbflute.optional.OptionalThing;
 import org.docksidestage.app.logic.context.AccessContextLogic;
-import org.docksidestage.app.logic.i18n.I18nDateLogic;
 import org.docksidestage.app.web.base.login.WaterfrontLoginAssist;
-import org.docksidestage.app.web.base.paging.PagingNavi;
 import org.docksidestage.mylasta.action.WaterfrontHtmlPath;
 import org.docksidestage.mylasta.action.WaterfrontMessages;
 import org.docksidestage.mylasta.action.WaterfrontUserBean;
@@ -37,7 +29,6 @@ import org.lastaflute.db.dbflute.accesscontext.AccessContextArranger;
 import org.lastaflute.web.TypicalAction;
 import org.lastaflute.web.login.LoginManager;
 import org.lastaflute.web.response.ActionResponse;
-import org.lastaflute.web.response.render.RenderData;
 import org.lastaflute.web.ruts.process.ActionRuntime;
 import org.lastaflute.web.servlet.request.RequestManager;
 import org.lastaflute.web.validation.ActionValidator;
@@ -52,8 +43,8 @@ public abstract class WaterfrontBaseAction extends TypicalAction // has several 
     // ===================================================================================
     //                                                                          Definition
     //                                                                          ==========
-    /** The application type for HarBoR, e.g. used by access context. */
-    protected static final String APP_TYPE = "HBR"; // #change_it_first
+    /** The application type for WaTerFront, e.g. used by access context. */
+    protected static final String APP_TYPE = "WTF"; // #change_it_first
 
     /** The user type for Member, e.g. used by access context. */
     protected static final String USER_TYPE = "M"; // #change_it_first
@@ -64,13 +55,11 @@ public abstract class WaterfrontBaseAction extends TypicalAction // has several 
     @Resource
     private RequestManager requestManager;
     @Resource
-    private WaterfrontConfig waterfrontConfig;
-    @Resource
-    private WaterfrontLoginAssist waterfrontLoginAssist;
+    private WaterfrontConfig config;
     @Resource
     private AccessContextLogic accessContextLogic;
     @Resource
-    private I18nDateLogic i18nDateLogic;
+    private WaterfrontLoginAssist loginAssist;
 
     // ===================================================================================
     //                                                                               Hook
@@ -121,24 +110,31 @@ public abstract class WaterfrontBaseAction extends TypicalAction // has several 
     // ===================================================================================
     //                                                                           User Info
     //                                                                           =========
-    @Override
-    protected OptionalThing<WaterfrontUserBean> getUserBean() { // to return as concrete class
-        return waterfrontLoginAssist.getSessionUserBean(); // #app_customize return empty if login is unused
-    }
-
+    // -----------------------------------------------------
+    //                                      Application Info
+    //                                      ----------------
     @Override
     protected String myAppType() { // for framework
         return APP_TYPE;
     }
 
+    // -----------------------------------------------------
+    //                                            Login Info
+    //                                            ----------
+    // #app_customize return empty if login is unused
     @Override
-    protected OptionalThing<String> myUserType() { // for framework
-        return OptionalObject.of(USER_TYPE); // #app_customize return empty if login is unused
+    protected OptionalThing<WaterfrontUserBean> getUserBean() { // application may call, overriding for co-variant
+        return loginAssist.getSavedUserBean();
     }
 
     @Override
-    protected OptionalThing<LoginManager> myLoginManager() {
-        return OptionalThing.of(waterfrontLoginAssist);
+    protected OptionalThing<String> myUserType() { // for framework
+        return OptionalObject.of(USER_TYPE);
+    }
+
+    @Override
+    protected OptionalThing<LoginManager> myLoginManager() { // for framework
+        return OptionalThing.of(loginAssist);
     }
 
     // ===================================================================================
@@ -156,93 +152,19 @@ public abstract class WaterfrontBaseAction extends TypicalAction // has several 
     }
 
     // ===================================================================================
-    //                                                                              Paging
-    //                                                                              ======
-    // #app_customize you can customize the paging navigation logic
-    /**
-     * Register the paging navigation as page-range.
-     * @param data The data object to render the HTML. (NotNull)
-     * @param page The selected page as bean of paging result. (NotNull)
-     * @param form The form for query string added to link. (NotNull)
-     */
-    protected void registerPagingNavi(RenderData data, PagingResultBean<? extends Entity> page, Object form) { // application may call
-        data.register("pagingNavi", createPagingNavi(page, form));
-    }
-
-    protected PagingNavi createPagingNavi(PagingResultBean<? extends Entity> page, Object form) { // application may override
-        return new PagingNavi(page, op -> {
-            op.rangeSize(waterfrontConfig.getPagingPageRangeSizeAsInteger());
-            if (waterfrontConfig.isPagingPageRangeFillLimit()) {
-                op.fillLimit();
-            }
-        } , form);
-    }
-
-    /**
-     * Get page size (record count of one page) for paging.
-     * @return The integer as page size. (NotZero, NotMinus)
-     */
-    protected int getPagingPageSize() { // application may call
-        return waterfrontConfig.getPagingPageSizeAsInteger();
-    }
-
-    // ===================================================================================
-    //                                                                   Conversion Helper
-    //                                                                   =================
-    // #app_customize you can customize the conversion logic
-    // -----------------------------------------------------
-    //                                         to Local Date
-    //                                         -------------
-    protected OptionalThing<LocalDate> toDate(Object exp) { // application may call
-        return i18nDateLogic.toDate(exp, myConvZone());
-    }
-
-    protected OptionalThing<LocalDateTime> toDateTime(Object exp) { // application may call
-        return i18nDateLogic.toDateTime(exp, myConvZone());
-    }
-
-    // -----------------------------------------------------
-    //                                        to String Date
-    //                                        --------------
-    protected OptionalThing<String> toStringDate(LocalDate date) { // application may call
-        return i18nDateLogic.toStringDate(date, myConvZone());
-    }
-
-    protected OptionalThing<String> toStringDate(LocalDateTime dateTime) { // application may call
-        return i18nDateLogic.toStringDate(dateTime, myConvZone());
-    }
-
-    protected OptionalThing<String> toStringDateTime(LocalDateTime dateTime) { // application may call
-        return i18nDateLogic.toStringDateTime(dateTime, myConvZone());
-    }
-
-    // -----------------------------------------------------
-    //                                   Conversion Resource
-    //                                   -------------------
-    protected TimeZone myConvZone() {
-        return requestManager.getUserTimeZone();
-    }
-
-    // ===================================================================================
     //                                                                            Document
     //                                                                            ========
-    /**
-     * {@inheritDoc} <br>
-     * Application Origin Methods:
-     * <pre>
-     * <span style="font-size: 130%; color: #553000">[Paging]</span>
-     * o registerPagingNavi() <span style="color: #3F7E5E">// register paging navigation to HTML</span>
-     * o getPagingPageSize() <span style="color: #3F7E5E">// get page size: record count per one page</span>
-     * 
-     * <span style="font-size: 130%; color: #553000">[Conversion Helper]</span>
-     * o toDate(exp) <span style="color: #3F7E5E">// convert expression to local date</span>
-     * o toDateTime(exp) <span style="color: #3F7E5E">// convert expression to local date-time</span>
-     * o toStringDate(date) <span style="color: #3F7E5E">// convert local date to display expression</span>
-     * o toStringDateTime(date) <span style="color: #3F7E5E">// convert local date-time to display expression</span>
-     * </pre>
-     */
-    @Override
-    public void document1_CallableSuperMethod() {
-        super.document1_CallableSuperMethod();
-    }
+    // #app_customize you should override javadoc when you add new methods for sub class at super class.
+    ///**
+    // * {@inheritDoc} <br>
+    // * Application Native Methods:
+    // * <pre>
+    // * <span style="font-size: 130%; color: #553000">[xxx]</span>
+    // * o xxx() <span style="color: #3F7E5E">// xxx</span>
+    // * </pre>
+    // */
+    //@Override
+    //public void document1_CallableSuperMethod() {
+    //    super.document1_CallableSuperMethod();
+    //}
 }
