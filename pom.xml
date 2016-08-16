@@ -17,8 +17,8 @@
 		<dbflute.version>1.1.1</dbflute.version>
 		<h2.jdbc.version>1.4.192</h2.jdbc.version>
 		<elasticsearch.version>2.3.3</elasticsearch.version>
-		<lastaflute.version>0.8.3-RCC</lastaflute.version>
-		<lasta.taglib.version>0.7.1-RC2</lasta.taglib.version>
+		<lastaflute.version>0.8.3</lastaflute.version>
+		<lasta.taglib.version>0.7.1</lasta.taglib.version>
 		<lasta.job.version>0.2.2</lasta.job.version>
 
 		<!-- Partner Library -->
@@ -26,7 +26,7 @@
 		<logback.version>1.1.3</logback.version>
 		<servlet.version>3.1.0</servlet.version>
 		<jsp.version>2.3.1</jsp.version>
-		<tomcat.boot.version>0.5.0-RC3</tomcat.boot.version>
+		<tomcat.boot.version>0.5.0</tomcat.boot.version>
 
 		<!-- GoodNeighbor Library -->
 		<commons.lang.version>3.4</commons.lang.version>
