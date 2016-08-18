@@ -16,7 +16,7 @@
 package org.docksidestage.mylasta.action;
 
 import org.docksidestage.mylasta.action.WaterfrontLabels;
-import org.lastaflute.web.ruts.message.ActionMessage;
+import org.lastaflute.core.message.UserMessage;
 
 /**
  * The keys for message.
@@ -26,18 +26,6 @@ public class WaterfrontMessages extends WaterfrontLabels {
 
     /** The serial version UID for object serialization. (Default) */
     private static final long serialVersionUID = 1L;
-
-    /** The key of the message: &lt;font color="red"&gt;&lt;ul&gt; */
-    public static final String ERRORS_HEADER = "{errors.header}";
-
-    /** The key of the message: &lt;/ul&gt;&lt;/font&gt; */
-    public static final String ERRORS_FOOTER = "{errors.footer}";
-
-    /** The key of the message: &lt;li&gt; */
-    public static final String ERRORS_PREFIX = "{errors.prefix}";
-
-    /** The key of the message: &lt;/li&gt; */
-    public static final String ERRORS_SUFFIX = "{errors.suffix}";
 
     /** The key of the message: must be false */
     public static final String CONSTRAINTS_AssertFalse_MESSAGE = "{constraints.AssertFalse.message}";
@@ -147,65 +135,20 @@ public class WaterfrontMessages extends WaterfrontLabels {
     /** The key of the message: double submit might be requested */
     public static final String ERRORS_APP_DOUBLE_SUBMIT_REQUEST = "{errors.app.double.submit.request}";
 
+    /** The key of the message: &lt;font color="red"&gt;&lt;ul&gt; */
+    public static final String ERRORS_HEADER = "{errors.header}";
+
+    /** The key of the message: &lt;/ul&gt;&lt;/font&gt; */
+    public static final String ERRORS_FOOTER = "{errors.footer}";
+
+    /** The key of the message: &lt;li&gt; */
+    public static final String ERRORS_PREFIX = "{errors.prefix}";
+
+    /** The key of the message: &lt;/li&gt; */
+    public static final String ERRORS_SUFFIX = "{errors.suffix}";
+
     /** The key of the message: the account already exists so input others */
     public static final String ERRORS_SIGNUP_ACCOUNT_ALREADY_EXISTS = "{errors.signup.account.already.exists}";
-
-    /**
-     * Add the created action message for the key 'errors.header' with parameters.
-     * <pre>
-     * message: &lt;font color="red"&gt;&lt;ul&gt;
-     * comment: ------------
-     * </pre>
-     * @param property The property name for the message. (NotNull)
-     * @return this. (NotNull)
-     */
-    public WaterfrontMessages addErrorsHeader(String property) {
-        assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_HEADER));
-        return this;
-    }
-
-    /**
-     * Add the created action message for the key 'errors.footer' with parameters.
-     * <pre>
-     * message: &lt;/ul&gt;&lt;/font&gt;
-     * </pre>
-     * @param property The property name for the message. (NotNull)
-     * @return this. (NotNull)
-     */
-    public WaterfrontMessages addErrorsFooter(String property) {
-        assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_FOOTER));
-        return this;
-    }
-
-    /**
-     * Add the created action message for the key 'errors.prefix' with parameters.
-     * <pre>
-     * message: &lt;li&gt;
-     * </pre>
-     * @param property The property name for the message. (NotNull)
-     * @return this. (NotNull)
-     */
-    public WaterfrontMessages addErrorsPrefix(String property) {
-        assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_PREFIX));
-        return this;
-    }
-
-    /**
-     * Add the created action message for the key 'errors.suffix' with parameters.
-     * <pre>
-     * message: &lt;/li&gt;
-     * </pre>
-     * @param property The property name for the message. (NotNull)
-     * @return this. (NotNull)
-     */
-    public WaterfrontMessages addErrorsSuffix(String property) {
-        assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_SUFFIX));
-        return this;
-    }
 
     /**
      * Add the created action message for the key 'constraints.AssertFalse.message' with parameters.
@@ -218,7 +161,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsAssertFalseMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_AssertFalse_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_AssertFalse_MESSAGE));
         return this;
     }
 
@@ -232,7 +175,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsAssertTrueMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_AssertTrue_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_AssertTrue_MESSAGE));
         return this;
     }
 
@@ -247,7 +190,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsDecimalMaxMessage(String property, String value) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_DecimalMax_MESSAGE, value));
+        add(property, new UserMessage(CONSTRAINTS_DecimalMax_MESSAGE, value));
         return this;
     }
 
@@ -262,7 +205,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsDecimalMinMessage(String property, String value) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_DecimalMin_MESSAGE, value));
+        add(property, new UserMessage(CONSTRAINTS_DecimalMin_MESSAGE, value));
         return this;
     }
 
@@ -278,7 +221,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsDigitsMessage(String property, String integer, String fraction) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Digits_MESSAGE, integer, fraction));
+        add(property, new UserMessage(CONSTRAINTS_Digits_MESSAGE, integer, fraction));
         return this;
     }
 
@@ -292,7 +235,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsFutureMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Future_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_Future_MESSAGE));
         return this;
     }
 
@@ -307,7 +250,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsMaxMessage(String property, String value) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Max_MESSAGE, value));
+        add(property, new UserMessage(CONSTRAINTS_Max_MESSAGE, value));
         return this;
     }
 
@@ -322,7 +265,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsMinMessage(String property, String value) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Min_MESSAGE, value));
+        add(property, new UserMessage(CONSTRAINTS_Min_MESSAGE, value));
         return this;
     }
 
@@ -336,7 +279,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsNotNullMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_NotNull_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_NotNull_MESSAGE));
         return this;
     }
 
@@ -350,7 +293,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsNullMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Null_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_Null_MESSAGE));
         return this;
     }
 
@@ -364,7 +307,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsPastMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Past_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_Past_MESSAGE));
         return this;
     }
 
@@ -379,7 +322,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsPatternMessage(String property, String regexp) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Pattern_MESSAGE, regexp));
+        add(property, new UserMessage(CONSTRAINTS_Pattern_MESSAGE, regexp));
         return this;
     }
 
@@ -395,7 +338,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsSizeMessage(String property, String min, String max) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Size_MESSAGE, min, max));
+        add(property, new UserMessage(CONSTRAINTS_Size_MESSAGE, min, max));
         return this;
     }
 
@@ -410,7 +353,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsCreditCardNumberMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_CreditCardNumber_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_CreditCardNumber_MESSAGE));
         return this;
     }
 
@@ -425,7 +368,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsEanMessage(String property, String type) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_EAN_MESSAGE, type));
+        add(property, new UserMessage(CONSTRAINTS_EAN_MESSAGE, type));
         return this;
     }
 
@@ -439,7 +382,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsEmailMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Email_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_Email_MESSAGE));
         return this;
     }
 
@@ -455,7 +398,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsLengthMessage(String property, String min, String max) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Length_MESSAGE, min, max));
+        add(property, new UserMessage(CONSTRAINTS_Length_MESSAGE, min, max));
         return this;
     }
 
@@ -470,7 +413,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsLuhnCheckMessage(String property, String value) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_LuhnCheck_MESSAGE, value));
+        add(property, new UserMessage(CONSTRAINTS_LuhnCheck_MESSAGE, value));
         return this;
     }
 
@@ -485,7 +428,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsMod10CheckMessage(String property, String value) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Mod10Check_MESSAGE, value));
+        add(property, new UserMessage(CONSTRAINTS_Mod10Check_MESSAGE, value));
         return this;
     }
 
@@ -500,7 +443,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsMod11CheckMessage(String property, String value) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Mod11Check_MESSAGE, value));
+        add(property, new UserMessage(CONSTRAINTS_Mod11Check_MESSAGE, value));
         return this;
     }
 
@@ -516,7 +459,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsModCheckMessage(String property, String value, String modType) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_ModCheck_MESSAGE, value, modType));
+        add(property, new UserMessage(CONSTRAINTS_ModCheck_MESSAGE, value, modType));
         return this;
     }
 
@@ -530,7 +473,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsNotBlankMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_NotBlank_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_NotBlank_MESSAGE));
         return this;
     }
 
@@ -544,7 +487,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsNotEmptyMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_NotEmpty_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_NotEmpty_MESSAGE));
         return this;
     }
 
@@ -559,7 +502,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsParametersScriptAssertMessage(String property, String script) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_ParametersScriptAssert_MESSAGE, script));
+        add(property, new UserMessage(CONSTRAINTS_ParametersScriptAssert_MESSAGE, script));
         return this;
     }
 
@@ -575,7 +518,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsRangeMessage(String property, String min, String max) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Range_MESSAGE, min, max));
+        add(property, new UserMessage(CONSTRAINTS_Range_MESSAGE, min, max));
         return this;
     }
 
@@ -589,7 +532,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsSafeHtmlMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_SafeHtml_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_SafeHtml_MESSAGE));
         return this;
     }
 
@@ -604,7 +547,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsScriptAssertMessage(String property, String script) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_ScriptAssert_MESSAGE, script));
+        add(property, new UserMessage(CONSTRAINTS_ScriptAssert_MESSAGE, script));
         return this;
     }
 
@@ -618,7 +561,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsUrlMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_URL_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_URL_MESSAGE));
         return this;
     }
 
@@ -632,7 +575,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsRequiredMessage(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_Required_MESSAGE));
+        add(property, new UserMessage(CONSTRAINTS_Required_MESSAGE));
         return this;
     }
 
@@ -647,7 +590,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addConstraintsTypeAnyMessage(String property, String propertyType) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(CONSTRAINTS_TypeAny_MESSAGE, propertyType));
+        add(property, new UserMessage(CONSTRAINTS_TypeAny_MESSAGE, propertyType));
         return this;
     }
 
@@ -662,7 +605,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addErrorsLoginFailure(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_LOGIN_FAILURE));
+        add(property, new UserMessage(ERRORS_LOGIN_FAILURE));
         return this;
     }
 
@@ -676,7 +619,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addErrorsAppIllegalTransition(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_APP_ILLEGAL_TRANSITION));
+        add(property, new UserMessage(ERRORS_APP_ILLEGAL_TRANSITION));
         return this;
     }
 
@@ -690,7 +633,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addErrorsAppDbAlreadyDeleted(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_APP_DB_ALREADY_DELETED));
+        add(property, new UserMessage(ERRORS_APP_DB_ALREADY_DELETED));
         return this;
     }
 
@@ -704,7 +647,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addErrorsAppDbAlreadyUpdated(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_APP_DB_ALREADY_UPDATED));
+        add(property, new UserMessage(ERRORS_APP_DB_ALREADY_UPDATED));
         return this;
     }
 
@@ -718,7 +661,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addErrorsAppDbAlreadyExists(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_APP_DB_ALREADY_EXISTS));
+        add(property, new UserMessage(ERRORS_APP_DB_ALREADY_EXISTS));
         return this;
     }
 
@@ -732,7 +675,64 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addErrorsAppDoubleSubmitRequest(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_APP_DOUBLE_SUBMIT_REQUEST));
+        add(property, new UserMessage(ERRORS_APP_DOUBLE_SUBMIT_REQUEST));
+        return this;
+    }
+
+    /**
+     * Add the created action message for the key 'errors.header' with parameters.
+     * <pre>
+     * message: &lt;font color="red"&gt;&lt;ul&gt;
+     * comment: error message design for header tag #delete_ifapi
+     * </pre>
+     * @param property The property name for the message. (NotNull)
+     * @return this. (NotNull)
+     */
+    public WaterfrontMessages addErrorsHeader(String property) {
+        assertPropertyNotNull(property);
+        add(property, new UserMessage(ERRORS_HEADER));
+        return this;
+    }
+
+    /**
+     * Add the created action message for the key 'errors.footer' with parameters.
+     * <pre>
+     * message: &lt;/ul&gt;&lt;/font&gt;
+     * </pre>
+     * @param property The property name for the message. (NotNull)
+     * @return this. (NotNull)
+     */
+    public WaterfrontMessages addErrorsFooter(String property) {
+        assertPropertyNotNull(property);
+        add(property, new UserMessage(ERRORS_FOOTER));
+        return this;
+    }
+
+    /**
+     * Add the created action message for the key 'errors.prefix' with parameters.
+     * <pre>
+     * message: &lt;li&gt;
+     * </pre>
+     * @param property The property name for the message. (NotNull)
+     * @return this. (NotNull)
+     */
+    public WaterfrontMessages addErrorsPrefix(String property) {
+        assertPropertyNotNull(property);
+        add(property, new UserMessage(ERRORS_PREFIX));
+        return this;
+    }
+
+    /**
+     * Add the created action message for the key 'errors.suffix' with parameters.
+     * <pre>
+     * message: &lt;/li&gt;
+     * </pre>
+     * @param property The property name for the message. (NotNull)
+     * @return this. (NotNull)
+     */
+    public WaterfrontMessages addErrorsSuffix(String property) {
+        assertPropertyNotNull(property);
+        add(property, new UserMessage(ERRORS_SUFFIX));
         return this;
     }
 
@@ -746,7 +746,7 @@ public class WaterfrontMessages extends WaterfrontLabels {
      */
     public WaterfrontMessages addErrorsSignupAccountAlreadyExists(String property) {
         assertPropertyNotNull(property);
-        add(property, new ActionMessage(ERRORS_SIGNUP_ACCOUNT_ALREADY_EXISTS));
+        add(property, new UserMessage(ERRORS_SIGNUP_ACCOUNT_ALREADY_EXISTS));
         return this;
     }
 }
