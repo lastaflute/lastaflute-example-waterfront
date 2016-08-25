@@ -189,9 +189,7 @@ public abstract class BsProductBhv extends EsAbstractBehavior<Product, ProductCB
     }
 
     public void insert(Product entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
-        if (entity instanceof EsAbstractEntity) {
-            entity.asDocMeta().indexOption(opLambda);
-        }
+        entity.asDocMeta().indexOption(opLambda);
         doInsert(entity, null);
     }
 
@@ -200,9 +198,7 @@ public abstract class BsProductBhv extends EsAbstractBehavior<Product, ProductCB
     }
 
     public void update(Product entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
-        if (entity instanceof EsAbstractEntity) {
-            entity.asDocMeta().indexOption(opLambda);
-        }
+        entity.asDocMeta().indexOption(opLambda);
         doUpdate(entity, null);
     }
 
@@ -211,9 +207,7 @@ public abstract class BsProductBhv extends EsAbstractBehavior<Product, ProductCB
     }
 
     public void insertOrUpdate(Product entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
-        if (entity instanceof EsAbstractEntity) {
-            entity.asDocMeta().indexOption(opLambda);
-        }
+        entity.asDocMeta().indexOption(opLambda);
         doInsertOrUpdate(entity, null, null);
     }
 
@@ -222,9 +216,7 @@ public abstract class BsProductBhv extends EsAbstractBehavior<Product, ProductCB
     }
 
     public void delete(Product entity, RequestOptionCall<DeleteRequestBuilder> opLambda) {
-        if (entity instanceof EsAbstractEntity) {
-            entity.asDocMeta().deleteOption(opLambda);
-        }
+        entity.asDocMeta().deleteOption(opLambda);
         doDelete(entity, null);
     }
 

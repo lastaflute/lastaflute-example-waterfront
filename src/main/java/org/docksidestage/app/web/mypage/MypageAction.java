@@ -34,7 +34,7 @@ import org.lastaflute.web.response.JsonResponse;
 public class MypageAction extends WaterfrontBaseAction {
 
     @Resource
-    protected ProductBhv productBhv;
+    private ProductBhv productBhv;
 
     @Execute
     public HtmlResponse index() {
