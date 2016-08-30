@@ -43,13 +43,13 @@ public class WaterfrontMailDeliveryDepartmentCreator {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected final WaterfrontConfig waterfrontConfig;
+    protected final WaterfrontConfig config;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public WaterfrontMailDeliveryDepartmentCreator(WaterfrontConfig waterfrontConfig) {
-        this.waterfrontConfig = waterfrontConfig;
+    public WaterfrontMailDeliveryDepartmentCreator(WaterfrontConfig config) {
+        this.config = config;
     }
 
     // ===================================================================================
@@ -65,10 +65,10 @@ public class WaterfrontMailDeliveryDepartmentCreator {
     protected SMailPostalParkingLot createPostalParkingLot() {
         final SMailPostalParkingLot parkingLot = new SMailPostalParkingLot();
         final SMailPostalMotorbike motorbike = new SMailPostalMotorbike();
-        final String hostAndPort = waterfrontConfig.getMailSmtpServerMainHostAndPort();
+        final String hostAndPort = config.getMailSmtpServerMainHostAndPort();
         final List<String> hostPortList = DfStringUtil.splitListTrimmed(hostAndPort, ":");
         motorbike.registerConnectionInfo(hostPortList.get(0), Integer.parseInt(hostPortList.get(1)));
-        motorbike.registerReturnPath(waterfrontConfig.getMailReturnPath());
+        motorbike.registerReturnPath(config.getMailReturnPath());
         parkingLot.registerMotorbikeAsMain(motorbike);
         return parkingLot;
     }
@@ -78,11 +78,11 @@ public class WaterfrontMailDeliveryDepartmentCreator {
     //                                      ----------------
     protected SMailPostalPersonnel createPostalPersonnel() {
         final SMailDogmaticPostalPersonnel personnel = createDogmaticPostalPersonnel();
-        return waterfrontConfig.isMailSendMock() ? personnel.asTraining() : personnel;
+        return config.isMailSendMock() ? personnel.asTraining() : personnel;
     }
 
     protected SMailDogmaticPostalPersonnel createDogmaticPostalPersonnel() { // #ext_point e.g. locale, database
-        final String testPrefix = waterfrontConfig.getMailSubjectTestPrefix();
+        final String testPrefix = config.getMailSubjectTestPrefix();
         final AsyncManager asyncManager = getAsyncManager();
         final MessageManager messageManager = getMessageManager();
         return new SMailDogmaticPostalPersonnel() {

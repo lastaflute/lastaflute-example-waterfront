@@ -24,20 +24,20 @@ import org.lastaflute.web.servlet.cookie.CookieResourceProvider;
  */
 public class WaterfrontCookieResourceProvider implements CookieResourceProvider {
 
-    protected final WaterfrontConfig waterfrontConfig;
+    protected final WaterfrontConfig config;
     protected final InvertibleCryptographer cookieCipher;
 
-    public WaterfrontCookieResourceProvider(WaterfrontConfig waterfrontConfig, InvertibleCryptographer cookieCipher) {
-        this.waterfrontConfig = waterfrontConfig;
+    public WaterfrontCookieResourceProvider(WaterfrontConfig config, InvertibleCryptographer cookieCipher) {
+        this.config = config;
         this.cookieCipher = cookieCipher;
     }
 
     public String provideDefaultPath() {
-        return waterfrontConfig.getCookieDefaultPath();
+        return config.getCookieDefaultPath();
     }
 
     public Integer provideDefaultExpire() {
-        return waterfrontConfig.getCookieDefaultExpireAsInteger();
+        return config.getCookieDefaultExpireAsInteger();
     }
 
     public InvertibleCryptographer provideCipher() {

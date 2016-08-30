@@ -28,13 +28,13 @@ public class WaterfrontTimeResourceProvider extends TypicalTimeResourceProvider 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected final WaterfrontConfig waterfrontConfig;
+    protected final WaterfrontConfig config;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public WaterfrontTimeResourceProvider(WaterfrontConfig waterfrontConfig) {
-        this.waterfrontConfig = waterfrontConfig;
+    public WaterfrontTimeResourceProvider(WaterfrontConfig config) {
+        this.config = config;
     }
 
     // ===================================================================================
@@ -50,11 +50,11 @@ public class WaterfrontTimeResourceProvider extends TypicalTimeResourceProvider 
     //                                                                     ===============
     @Override
     protected String getTimeAdjustTimeMillis() {
-        return waterfrontConfig.getTimeAdjustTimeMillis();
+        return config.getTimeAdjustTimeMillis();
     }
 
     @Override
     protected Long getTimeAdjustTimeMillisAsLong() {
-        return waterfrontConfig.getTimeAdjustTimeMillisAsLong();
+        return config.getTimeAdjustTimeMillisAsLong();
     }
 }
