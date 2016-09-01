@@ -34,7 +34,7 @@ import org.lastaflute.web.response.JsonResponse;
 public class WaterfrontApiFailureHook implements ApiFailureHook { // #change_it for handling API failure
 
     // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-    // [Front-side Implementation Image]
+    // [Front-side Implementation Example]
     //
     // if (HTTP Status: 200) { // success
     //     JsonBean bean = parseJsonAsSuccess(response);
@@ -67,8 +67,8 @@ public class WaterfrontApiFailureHook implements ApiFailureHook { // #change_it 
     //                                                                    ================
     @Override
     public ApiResponse handleValidationError(ApiFailureResource resource) {
-        final TooSimpleFailureBean bean = createFailureBean(TooSimpleFailureType.VALIDATION_ERROR, resource);
-        return asJson(bean).httpStatus(BUSINESS_FAILURE_STATUS);
+        final TooSimpleFailureResult result = createFailureBean(TooSimpleFailureType.VALIDATION_ERROR, resource);
+        return asJson(result).httpStatus(BUSINESS_FAILURE_STATUS);
     }
 
     @Override
@@ -76,8 +76,8 @@ public class WaterfrontApiFailureHook implements ApiFailureHook { // #change_it 
         final TooSimpleFailureType failureType = failureTypeMapping.findAssignable(cause).orElseGet(() -> {
             return TooSimpleFailureType.APPLICATION_EXCEPTION;
         });
-        final TooSimpleFailureBean bean = createFailureBean(failureType, resource);
-        return asJson(bean).httpStatus(BUSINESS_FAILURE_STATUS);
+        final TooSimpleFailureResult result = createFailureBean(failureType, resource);
+        return asJson(result).httpStatus(BUSINESS_FAILURE_STATUS);
     }
 
     // ===================================================================================
@@ -85,8 +85,8 @@ public class WaterfrontApiFailureHook implements ApiFailureHook { // #change_it 
     //                                                                      ==============
     @Override
     public OptionalThing<ApiResponse> handleClientException(ApiFailureResource resource, RuntimeException cause) {
-        final TooSimpleFailureBean bean = createFailureBean(TooSimpleFailureType.CLIENT_EXCEPTION, resource);
-        return OptionalThing.of(asJson(bean)); // HTTP status will be automatically sent as client error for the cause
+        final TooSimpleFailureResult result = createFailureBean(TooSimpleFailureType.CLIENT_EXCEPTION, resource);
+        return OptionalThing.of(asJson(result)); // HTTP status will be automatically sent as client error for the cause
     }
 
     @Override
@@ -97,21 +97,21 @@ public class WaterfrontApiFailureHook implements ApiFailureHook { // #change_it 
     // ===================================================================================
     //                                                                        Assist Logic
     //                                                                        ============
-    protected JsonResponse<TooSimpleFailureBean> asJson(TooSimpleFailureBean bean) {
-        return new JsonResponse<TooSimpleFailureBean>(bean);
+    protected JsonResponse<TooSimpleFailureResult> asJson(TooSimpleFailureResult result) {
+        return new JsonResponse<TooSimpleFailureResult>(result);
     }
 
-    protected TooSimpleFailureBean createFailureBean(TooSimpleFailureType failureType, ApiFailureResource resource) {
-        return new TooSimpleFailureBean(failureType, resource.getMessageList());
+    protected TooSimpleFailureResult createFailureBean(TooSimpleFailureType failureType, ApiFailureResource resource) {
+        return new TooSimpleFailureResult(failureType, resource.getMessageList());
     }
 
-    public static class TooSimpleFailureBean {
+    public static class TooSimpleFailureResult {
 
         public final String notice = "[Attension] tentative JSON so you should change it: " + WaterfrontApiFailureHook.class;
         public final TooSimpleFailureType failureType;
         public final List<String> messageList;
 
-        public TooSimpleFailureBean(TooSimpleFailureType failureType, List<String> messageList) {
+        public TooSimpleFailureResult(TooSimpleFailureType failureType, List<String> messageList) {
             this.failureType = failureType;
             this.messageList = messageList;
         }
@@ -121,6 +121,6 @@ public class WaterfrontApiFailureHook implements ApiFailureHook { // #change_it 
         VALIDATION_ERROR // special type
         , LOGIN_FAILURE, LOGIN_REQUIRED // specific type of application exception
         , APPLICATION_EXCEPTION // default type of application exception
-        , CLIENT_EXCEPTION
+        , CLIENT_EXCEPTION // e.g. 404 not found
     }
 }
