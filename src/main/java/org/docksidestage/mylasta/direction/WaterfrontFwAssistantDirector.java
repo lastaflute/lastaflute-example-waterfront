@@ -47,7 +47,7 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
     //                                                                           Attribute
     //                                                                           =========
     @Resource
-    private WaterfrontConfig waterfrontConfig;
+    private WaterfrontConfig config;
 
     // ===================================================================================
     //                                                                              Assist
@@ -63,14 +63,14 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
     @Override
     protected void prepareCoreDirection(FwCoreDirection direction) {
         // this configuration is on waterfront_env.properties because this is true only when development
-        direction.directDevelopmentHere(waterfrontConfig.isDevelopmentHere());
+        direction.directDevelopmentHere(config.isDevelopmentHere());
 
         // titles of the application for logging are from configurations
-        direction.directLoggingTitle(waterfrontConfig.getDomainTitle(), waterfrontConfig.getEnvironmentTitle());
+        direction.directLoggingTitle(config.getDomainTitle(), config.getEnvironmentTitle());
 
         // this configuration is on sea_env.properties because it has no influence to production
         // even if you set true manually and forget to set false back
-        direction.directFrameworkDebug(waterfrontConfig.isFrameworkDebug()); // basically false
+        direction.directFrameworkDebug(config.isFrameworkDebug()); // basically false
 
         // you can add your own process when your application is booting
         direction.directCurtainBefore(createCurtainBeforeHook());
@@ -92,7 +92,7 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
     }
 
     protected WaterfrontTimeResourceProvider createTimeResourceProvider() {
-        return new WaterfrontTimeResourceProvider(waterfrontConfig);
+        return new WaterfrontTimeResourceProvider(config);
     }
 
     protected WaterfrontJsonResourceProvider createJsonResourceProvider() {
@@ -100,7 +100,7 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
     }
 
     protected WaterfrontMailDeliveryDepartmentCreator createMailDeliveryDepartmentCreator() {
-        return new WaterfrontMailDeliveryDepartmentCreator(waterfrontConfig);
+        return new WaterfrontMailDeliveryDepartmentCreator(config);
     }
 
     // ===================================================================================
@@ -142,7 +142,7 @@ public class WaterfrontFwAssistantDirector extends CachedFwAssistantDirector {
 
     protected WaterfrontCookieResourceProvider createCookieResourceProvider() { // #change_it_first
         final InvertibleCryptographer cr = InvertibleCryptographer.createBlowfishCipher("docks:waterfront");
-        return new WaterfrontCookieResourceProvider(waterfrontConfig, cr);
+        return new WaterfrontCookieResourceProvider(config, cr);
     }
 
     protected WaterfrontActionAdjustmentProvider createActionAdjustmentProvider() {
