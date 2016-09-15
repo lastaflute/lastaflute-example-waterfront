@@ -21,17 +21,8 @@ import java.util.Collection;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionQuery;
 import org.docksidestage.esflute.maihama.cbean.cq.ProductCQ;
 import org.dbflute.cbean.ckey.ConditionKey;
+import org.elasticsearch.index.query.*;
 import org.dbflute.exception.IllegalConditionBeanOperationException;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.FuzzyQueryBuilder;
-import org.elasticsearch.index.query.IdsQueryBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.PrefixQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.RangeQueryBuilder;
-import org.elasticsearch.index.query.TermQueryBuilder;
-import org.elasticsearch.index.query.TermsQueryBuilder;
-
 
 /**
  * @author ESFlute (using FreeGen)
@@ -302,6 +293,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setLatestPurchaseDate_Exists() {
+        setLatestPurchaseDate_Exists(null);
+    }
+
+    public void setLatestPurchaseDate_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("latestPurchaseDate");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setLatestPurchaseDate_CommonTerms(LocalDateTime latestPurchaseDate) {
+        setLatestPurchaseDate_CommonTerms(latestPurchaseDate, null);
+    }
+
+    public void setLatestPurchaseDate_CommonTerms(LocalDateTime latestPurchaseDate, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("latestPurchaseDate", latestPurchaseDate);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public BsProductCQ addOrderBy_LatestPurchaseDate_Asc() {
         regOBA("latest_purchase_date");
         return this;
@@ -421,6 +434,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setProductCategory_Wildcard(String productCategory) {
+        setProductCategory_Wildcard(productCategory, null);
+    }
+
+    public void setProductCategory_Wildcard(String productCategory, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("productCategory", productCategory);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductCategory_Regexp(String productCategory) {
+        setProductCategory_Regexp(productCategory, null);
+    }
+
+    public void setProductCategory_Regexp(String productCategory, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("productCategory", productCategory);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setProductCategory_GreaterThan(String productCategory) {
         setProductCategory_GreaterThan(productCategory, null);
     }
@@ -460,6 +495,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductCategory_LessEqual(String productCategory, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("product_category", ConditionKey.CK_LESS_EQUAL, productCategory);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductCategory_Exists() {
+        setProductCategory_Exists(null);
+    }
+
+    public void setProductCategory_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("productCategory");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductCategory_CommonTerms(String productCategory) {
+        setProductCategory_CommonTerms(productCategory, null);
+    }
+
+    public void setProductCategory_CommonTerms(String productCategory, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("productCategory", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -584,6 +641,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setProductCategoryCode_Wildcard(String productCategoryCode) {
+        setProductCategoryCode_Wildcard(productCategoryCode, null);
+    }
+
+    public void setProductCategoryCode_Wildcard(String productCategoryCode, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("productCategoryCode", productCategoryCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductCategoryCode_Regexp(String productCategoryCode) {
+        setProductCategoryCode_Regexp(productCategoryCode, null);
+    }
+
+    public void setProductCategoryCode_Regexp(String productCategoryCode, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("productCategoryCode", productCategoryCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setProductCategoryCode_GreaterThan(String productCategoryCode) {
         setProductCategoryCode_GreaterThan(productCategoryCode, null);
     }
@@ -623,6 +702,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductCategoryCode_LessEqual(String productCategoryCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("product_category_code", ConditionKey.CK_LESS_EQUAL, productCategoryCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductCategoryCode_Exists() {
+        setProductCategoryCode_Exists(null);
+    }
+
+    public void setProductCategoryCode_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("productCategoryCode");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductCategoryCode_CommonTerms(String productCategoryCode) {
+        setProductCategoryCode_CommonTerms(productCategoryCode, null);
+    }
+
+    public void setProductCategoryCode_CommonTerms(String productCategoryCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("productCategoryCode", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -747,6 +848,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setProductDescription_Wildcard(String productDescription) {
+        setProductDescription_Wildcard(productDescription, null);
+    }
+
+    public void setProductDescription_Wildcard(String productDescription, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("productDescription", productDescription);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductDescription_Regexp(String productDescription) {
+        setProductDescription_Regexp(productDescription, null);
+    }
+
+    public void setProductDescription_Regexp(String productDescription, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("productDescription", productDescription);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setProductDescription_GreaterThan(String productDescription) {
         setProductDescription_GreaterThan(productDescription, null);
     }
@@ -786,6 +909,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductDescription_LessEqual(String productDescription, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("product_description", ConditionKey.CK_LESS_EQUAL, productDescription);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductDescription_Exists() {
+        setProductDescription_Exists(null);
+    }
+
+    public void setProductDescription_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("productDescription");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductDescription_CommonTerms(String productDescription) {
+        setProductDescription_CommonTerms(productDescription, null);
+    }
+
+    public void setProductDescription_CommonTerms(String productDescription, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("productDescription", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -910,6 +1055,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setProductHandleCode_Wildcard(String productHandleCode) {
+        setProductHandleCode_Wildcard(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_Wildcard(String productHandleCode, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("productHandleCode", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_Regexp(String productHandleCode) {
+        setProductHandleCode_Regexp(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_Regexp(String productHandleCode, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("productHandleCode", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setProductHandleCode_GreaterThan(String productHandleCode) {
         setProductHandleCode_GreaterThan(productHandleCode, null);
     }
@@ -949,6 +1116,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductHandleCode_LessEqual(String productHandleCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("product_handle_code", ConditionKey.CK_LESS_EQUAL, productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_Exists() {
+        setProductHandleCode_Exists(null);
+    }
+
+    public void setProductHandleCode_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("productHandleCode");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_CommonTerms(String productHandleCode) {
+        setProductHandleCode_CommonTerms(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_CommonTerms(String productHandleCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("productHandleCode", productHandleCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1073,6 +1262,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setProductName_Wildcard(String productName) {
+        setProductName_Wildcard(productName, null);
+    }
+
+    public void setProductName_Wildcard(String productName, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("productName", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_Regexp(String productName) {
+        setProductName_Regexp(productName, null);
+    }
+
+    public void setProductName_Regexp(String productName, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("productName", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setProductName_GreaterThan(String productName) {
         setProductName_GreaterThan(productName, null);
     }
@@ -1112,6 +1323,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductName_LessEqual(String productName, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("product_name", ConditionKey.CK_LESS_EQUAL, productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_Exists() {
+        setProductName_Exists(null);
+    }
+
+    public void setProductName_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("productName");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductName_CommonTerms(String productName) {
+        setProductName_CommonTerms(productName, null);
+    }
+
+    public void setProductName_CommonTerms(String productName, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("productName", productName);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1236,6 +1469,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setProductStatus_Wildcard(String productStatus) {
+        setProductStatus_Wildcard(productStatus, null);
+    }
+
+    public void setProductStatus_Wildcard(String productStatus, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("productStatus", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_Regexp(String productStatus) {
+        setProductStatus_Regexp(productStatus, null);
+    }
+
+    public void setProductStatus_Regexp(String productStatus, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("productStatus", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setProductStatus_GreaterThan(String productStatus) {
         setProductStatus_GreaterThan(productStatus, null);
     }
@@ -1275,6 +1530,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductStatus_LessEqual(String productStatus, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("product_status", ConditionKey.CK_LESS_EQUAL, productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_Exists() {
+        setProductStatus_Exists(null);
+    }
+
+    public void setProductStatus_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("productStatus");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatus_CommonTerms(String productStatus) {
+        setProductStatus_CommonTerms(productStatus, null);
+    }
+
+    public void setProductStatus_CommonTerms(String productStatus, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("productStatus", productStatus);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1399,6 +1676,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setProductStatusCode_Wildcard(String productStatusCode) {
+        setProductStatusCode_Wildcard(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_Wildcard(String productStatusCode, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("productStatusCode", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_Regexp(String productStatusCode) {
+        setProductStatusCode_Regexp(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_Regexp(String productStatusCode, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("productStatusCode", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setProductStatusCode_GreaterThan(String productStatusCode) {
         setProductStatusCode_GreaterThan(productStatusCode, null);
     }
@@ -1438,6 +1737,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductStatusCode_LessEqual(String productStatusCode, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("product_status_code", ConditionKey.CK_LESS_EQUAL, productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_Exists() {
+        setProductStatusCode_Exists(null);
+    }
+
+    public void setProductStatusCode_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("productStatusCode");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_CommonTerms(String productStatusCode) {
+        setProductStatusCode_CommonTerms(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_CommonTerms(String productStatusCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("productStatusCode", productStatusCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1595,6 +1916,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setRegisterDatetime_Exists() {
+        setRegisterDatetime_Exists(null);
+    }
+
+    public void setRegisterDatetime_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("registerDatetime");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setRegisterDatetime_CommonTerms(LocalDateTime registerDatetime) {
+        setRegisterDatetime_CommonTerms(registerDatetime, null);
+    }
+
+    public void setRegisterDatetime_CommonTerms(LocalDateTime registerDatetime, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("registerDatetime", registerDatetime);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public BsProductCQ addOrderBy_RegisterDatetime_Asc() {
         regOBA("register_datetime");
         return this;
@@ -1714,6 +2057,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setRegisterUser_Wildcard(String registerUser) {
+        setRegisterUser_Wildcard(registerUser, null);
+    }
+
+    public void setRegisterUser_Wildcard(String registerUser, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("registerUser", registerUser);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setRegisterUser_Regexp(String registerUser) {
+        setRegisterUser_Regexp(registerUser, null);
+    }
+
+    public void setRegisterUser_Regexp(String registerUser, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("registerUser", registerUser);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setRegisterUser_GreaterThan(String registerUser) {
         setRegisterUser_GreaterThan(registerUser, null);
     }
@@ -1753,6 +2118,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setRegisterUser_LessEqual(String registerUser, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("register_user", ConditionKey.CK_LESS_EQUAL, registerUser);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setRegisterUser_Exists() {
+        setRegisterUser_Exists(null);
+    }
+
+    public void setRegisterUser_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("registerUser");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setRegisterUser_CommonTerms(String registerUser) {
+        setRegisterUser_CommonTerms(registerUser, null);
+    }
+
+    public void setRegisterUser_CommonTerms(String registerUser, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("registerUser", registerUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1910,6 +2297,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setRegularPrice_Exists() {
+        setRegularPrice_Exists(null);
+    }
+
+    public void setRegularPrice_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("regularPrice");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setRegularPrice_CommonTerms(Integer regularPrice) {
+        setRegularPrice_CommonTerms(regularPrice, null);
+    }
+
+    public void setRegularPrice_CommonTerms(Integer regularPrice, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("regularPrice", regularPrice);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public BsProductCQ addOrderBy_RegularPrice_Asc() {
         regOBA("regular_price");
         return this;
@@ -2062,6 +2471,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setUpdateDatetime_Exists() {
+        setUpdateDatetime_Exists(null);
+    }
+
+    public void setUpdateDatetime_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("updateDatetime");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setUpdateDatetime_CommonTerms(LocalDateTime updateDatetime) {
+        setUpdateDatetime_CommonTerms(updateDatetime, null);
+    }
+
+    public void setUpdateDatetime_CommonTerms(LocalDateTime updateDatetime, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("updateDatetime", updateDatetime);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public BsProductCQ addOrderBy_UpdateDatetime_Asc() {
         regOBA("update_datetime");
         return this;
@@ -2181,6 +2612,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setUpdateUser_Wildcard(String updateUser) {
+        setUpdateUser_Wildcard(updateUser, null);
+    }
+
+    public void setUpdateUser_Wildcard(String updateUser, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("updateUser", updateUser);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setUpdateUser_Regexp(String updateUser) {
+        setUpdateUser_Regexp(updateUser, null);
+    }
+
+    public void setUpdateUser_Regexp(String updateUser, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("updateUser", updateUser);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setUpdateUser_GreaterThan(String updateUser) {
         setUpdateUser_GreaterThan(updateUser, null);
     }
@@ -2220,6 +2673,28 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setUpdateUser_LessEqual(String updateUser, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("update_user", ConditionKey.CK_LESS_EQUAL, updateUser);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setUpdateUser_Exists() {
+        setUpdateUser_Exists(null);
+    }
+
+    public void setUpdateUser_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("updateUser");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setUpdateUser_CommonTerms(String updateUser) {
+        setUpdateUser_CommonTerms(updateUser, null);
+    }
+
+    public void setUpdateUser_CommonTerms(String updateUser, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("updateUser", updateUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }

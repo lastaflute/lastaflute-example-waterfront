@@ -21,17 +21,8 @@ import java.util.Collection;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionQuery;
 import org.docksidestage.esflute.maihama.cbean.cq.MenberCQ;
 import org.dbflute.cbean.ckey.ConditionKey;
+import org.elasticsearch.index.query.*;
 import org.dbflute.exception.IllegalConditionBeanOperationException;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.FuzzyQueryBuilder;
-import org.elasticsearch.index.query.IdsQueryBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.PrefixQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.RangeQueryBuilder;
-import org.elasticsearch.index.query.TermQueryBuilder;
-import org.elasticsearch.index.query.TermsQueryBuilder;
-
 
 /**
  * @author ESFlute (using FreeGen)
@@ -269,6 +260,28 @@ public abstract class BsMenberCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setAccount_Wildcard(String account) {
+        setAccount_Wildcard(account, null);
+    }
+
+    public void setAccount_Wildcard(String account, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("account", account);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setAccount_Regexp(String account) {
+        setAccount_Regexp(account, null);
+    }
+
+    public void setAccount_Regexp(String account, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("account", account);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setAccount_GreaterThan(String account) {
         setAccount_GreaterThan(account, null);
     }
@@ -308,6 +321,28 @@ public abstract class BsMenberCQ extends EsAbstractConditionQuery {
 
     public void setAccount_LessEqual(String account, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_LESS_EQUAL, account);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setAccount_Exists() {
+        setAccount_Exists(null);
+    }
+
+    public void setAccount_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("account");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setAccount_CommonTerms(String account) {
+        setAccount_CommonTerms(account, null);
+    }
+
+    public void setAccount_CommonTerms(String account, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("account", account);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -432,6 +467,28 @@ public abstract class BsMenberCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setName_Wildcard(String name) {
+        setName_Wildcard(name, null);
+    }
+
+    public void setName_Wildcard(String name, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
+        WildcardQueryBuilder builder = regWildcardQ("name", name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setName_Regexp(String name) {
+        setName_Regexp(name, null);
+    }
+
+    public void setName_Regexp(String name, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
+        RegexpQueryBuilder builder = regRegexpQ("name", name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void setName_GreaterThan(String name) {
         setName_GreaterThan(name, null);
     }
@@ -471,6 +528,28 @@ public abstract class BsMenberCQ extends EsAbstractConditionQuery {
 
     public void setName_LessEqual(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
         RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_LESS_EQUAL, name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setName_Exists() {
+        setName_Exists(null);
+    }
+
+    public void setName_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
+        ExistsQueryBuilder builder = regExistsQ("name");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setName_CommonTerms(String name) {
+        setName_CommonTerms(name, null);
+    }
+
+    public void setName_CommonTerms(String name, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
+        CommonTermsQueryBuilder builder = regCommonTermsQ("name", name);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
