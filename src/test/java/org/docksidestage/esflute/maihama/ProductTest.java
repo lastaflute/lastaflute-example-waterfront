@@ -69,9 +69,21 @@ public class ProductTest extends UnitWaterfrontTestCase {
         ProductBhv productBhv = getComponent(ProductBhv.class);
 
         // insert
-        Product product = new Product();
-        product.setProductName("Test Product1");
-        productBhv.insert(product);
+        Product product1 = new Product();
+        Product product2 = new Product();
+        Product product3 = new Product();
+        product1.setProductName("Test Product1");
+        product2.setProductName("Test Product2");
+        product3.setProductName("Test Product3");
+        productBhv.insert(product1);
+        productBhv.insert(product2);
+        productBhv.insert(product3);
+        runner.refresh();
+
+        // Match All Query
+        productBhv.selectCursor(cb -> {  }, product -> {
+            assertContains(product.getProductName(), "Test Product");
+        });
 
         // wait for yellow status
         runner.ensureYellow();
