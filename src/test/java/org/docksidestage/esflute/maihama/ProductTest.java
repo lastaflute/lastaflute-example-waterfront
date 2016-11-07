@@ -4,9 +4,13 @@ import static org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner.newCo
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
+import org.codelibs.elasticsearch.runner.net.Curl;
+import org.codelibs.elasticsearch.runner.net.CurlResponse;
+import org.dbflute.cbean.result.ListResultBean;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
@@ -66,12 +70,129 @@ public class ProductTest extends UnitWaterfrontTestCase {
             fail();
         }
 
+        // bulk
+        try (final CurlResponse response = Curl.post(runner.node(), "/_bulk").onConnect((req, con) -> {
+            con.setDoOutput(true);
+            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("data-maihama.json").openStream();
+                    final OutputStream output = con.getOutputStream()) {
+                IOUtils.copy(input, output);
+            } catch (final IOException e) {
+                throw new IORuntimeException(e);
+            }
+        }).execute()) {
+            assertEquals(200, response.getHttpStatusCode());
+        }
+
+        runner.refresh();
+
         ProductBhv productBhv = getComponent(ProductBhv.class);
 
-        // insert
-        Product product = new Product();
-        product.setProductName("Test Product1");
-        productBhv.insert(product);
+        {
+            // Match All Query
+            ListResultBean<Product> list = productBhv.selectList(cb -> cb.query().matchAll());
+            assertEquals(10, list.size());
+            assertEquals(20, list.getAllRecordCount());
+        }
+
+        // Match Query
+        // Match Phrase Query
+        // Match Phrase Prefix Query
+        // Multi Match Query
+        // Common Terms Query
+        // Query String Query
+        // Simple Query String Query
+        // Term Query
+        // Terms Query
+        // Range Query
+        // Exists Query
+        // Prefix Query
+        // Wildcard Query
+        // Regexp Query
+        // Fuzzy Query
+        // Type Query
+        // Ids Query
+        // Constant Score Query
+        // Bool Query
+        // Dis Max Query
+        // Function Score Query
+        // Boosting Query
+        // Indices Query
+        // Nested Query
+        // Has Child Query
+        // Has Parent Query
+        // Parent Id Query
+        // GeoShape Query
+        // Geo Bounding Box Query
+        // Geo Distance Query
+        // Geo Distance Range Query
+        // Geo Polygon Query
+        // More Like This Query
+        // Template Query
+        // Script Query
+        // Percolate Query
+        // Span Term Query
+        // Span Multi Term Query
+        // Span First Query
+        // Span Near Query
+        // Span Or Query
+        // Span Not Query
+        // Span Containing Query
+        // Span Within Query
+        // Span Field Masking Query
+
+        // Avg Aggregation
+        // Cardinality Aggregation
+        // Extended Stats Aggregation
+        // Geo Bounds Aggregation
+        // Geo Centroid Aggregation
+        // Max Aggregation
+        // Min Aggregation
+        // Percentiles Aggregation
+        // Percentile Ranks Aggregation
+        // Scripted Metric Aggregation
+        // Stats Aggregation
+        // Sum Aggregation
+        // Top hits Aggregation
+        // Value Count Aggregation
+        // Children Aggregation
+        // Date Histogram Aggregation
+        // Date Range Aggregation
+        // Diversified Sampler Aggregation
+        // Filter Aggregation
+        // Filters Aggregation
+        // Geo Distance Aggregation
+        // GeoHash grid Aggregation
+        // Global Aggregation
+        // Histogram Aggregation
+        // IP Range Aggregation
+        // Missing Aggregation
+        // Nested Aggregation
+        // Range Aggregation
+        // Reverse nested Aggregation
+        // Sampler Aggregation
+        // Significant Terms Aggregation
+        // Terms Aggregation
+        // Avg Bucket Aggregation
+        // Derivative Aggregation
+        // Max Bucket Aggregation
+        // Min Bucket Aggregation
+        // Sum Bucket Aggregation
+        // Stats Bucket Aggregation
+        // Extended Stats Bucket Aggregation
+        // Percentiles Bucket Aggregation
+        // Moving Average Aggregation
+        // Cumulative Sum Aggregation
+        // Bucket Script Aggregation
+        // Bucket Selector Aggregation
+        // Serial Differencing Aggregation
+        // Matrix Stats
+
+        {
+            // insert
+            Product product = new Product();
+            product.setProductName("Test Product1");
+            productBhv.insert(product);
+        }
 
         // wait for yellow status
         runner.ensureYellow();
