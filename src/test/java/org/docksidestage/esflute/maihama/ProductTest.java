@@ -10,7 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
 import org.codelibs.elasticsearch.runner.net.Curl;
 import org.codelibs.elasticsearch.runner.net.CurlResponse;
-import org.dbflute.cbean.result.ListResultBean;
+import org.dbflute.cbean.result.PagingResultBean;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
@@ -87,11 +87,84 @@ public class ProductTest extends UnitWaterfrontTestCase {
 
         ProductBhv productBhv = getComponent(ProductBhv.class);
 
+        // Match All Query
         {
-            // Match All Query
-            ListResultBean<Product> list = productBhv.selectList(cb -> cb.query().matchAll());
-            assertEquals(10, list.size());
-            assertEquals(20, list.getAllRecordCount());
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                // TODO cb.query().addOrderBy_Id_Asc();
+                cb.query().addOrderBy_ProductName_Asc();
+                cb.paging(5, 1);
+            });
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            // assertEquals("", list1.get(0).asDocMeta().id());
+            // assertEquals("", list1.get(1).asDocMeta().id());
+            // assertEquals("", list1.get(2).asDocMeta().id());
+            // assertEquals("", list1.get(3).asDocMeta().id());
+            // assertEquals("", list1.get(4).asDocMeta().id());
+
+            // middle page
+            PagingResultBean<Product> list2 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.query().addOrderBy_ProductName_Asc();
+                cb.paging(5, 2);
+            });
+            assertEquals(5, list2.size());
+            assertEquals(20, list2.getAllRecordCount());
+            assertEquals(4, list2.getAllPageCount());
+            assertEquals(2, list2.getCurrentPageNumber());
+            assertEquals(6, list2.getCurrentStartRecordNumber());
+            assertEquals(10, list2.getCurrentEndRecordNumber());
+            assertEquals(1, list2.getPreviousPageNumber());
+            assertEquals(3, list2.getNextPageNumber());
+            assertTrue(list2.existsPreviousPage());
+            assertTrue(list2.existsNextPage());
+            // assertEquals("", list2.get(0).asDocMeta().id());
+            // assertEquals("", list2.get(1).asDocMeta().id());
+            // assertEquals("", list2.get(2).asDocMeta().id());
+            // assertEquals("", list2.get(3).asDocMeta().id());
+            // assertEquals("", list2.get(4).asDocMeta().id());
+
+            // last page
+            PagingResultBean<Product> list3 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.query().addOrderBy_ProductName_Asc();
+                cb.paging(5, 4);
+            });
+            assertEquals(5, list3.size());
+            assertEquals(20, list3.getAllRecordCount());
+            assertEquals(4, list3.getAllPageCount());
+            assertEquals(4, list3.getCurrentPageNumber());
+            assertEquals(16, list3.getCurrentStartRecordNumber());
+            assertEquals(20, list3.getCurrentEndRecordNumber());
+            assertEquals(3, list3.getPreviousPageNumber());
+            try {
+                list3.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertTrue(list3.existsPreviousPage());
+            assertFalse(list3.existsNextPage());
+            // assertEquals("", list3.get(0).asDocMeta().id());
+            // assertEquals("", list3.get(1).asDocMeta().id());
+            // assertEquals("", list3.get(2).asDocMeta().id());
+            // assertEquals("", list3.get(3).asDocMeta().id());
+            // assertEquals("", list3.get(4).asDocMeta().id());
         }
 
         // Match Query
