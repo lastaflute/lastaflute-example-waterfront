@@ -168,6 +168,38 @@ public class ProductTest extends UnitWaterfrontTestCase {
         }
 
         // Match Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().setProductName_Match("flute");
+                cb.query().addOrderBy_ProductName_Asc();
+                cb.paging(5, 1);
+            });
+            assertEquals(3, list1.size());
+            assertEquals(3, list1.getAllRecordCount());
+            assertEquals(1, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(3, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            try {
+                list1.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertFalse(list1.existsNextPage());
+            // assertEquals("Gold Flute", list1.get(0).getProductName());
+            // assertEquals("Low Price Flute", list1.get(1).getProductName());
+            // assertEquals("Silver Flute", list1.get(2).getProductName());
+        }
+
         // Match Phrase Query
         // Match Phrase Prefix Query
         // Multi Match Query
