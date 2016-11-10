@@ -11,6 +11,7 @@ import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
 import org.codelibs.elasticsearch.runner.net.Curl;
 import org.codelibs.elasticsearch.runner.net.CurlResponse;
 import org.dbflute.cbean.result.PagingResultBean;
+import org.docksidestage.esflute.maihama.allcommon.EsPagingResultBean;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
@@ -96,6 +97,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
                 cb.query().addOrderBy_ProductName_Asc();
                 cb.paging(5, 1);
             });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
             assertEquals(5, list1.size());
             assertEquals(20, list1.getAllRecordCount());
             assertEquals(4, list1.getAllPageCount());
@@ -123,6 +125,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
                 cb.query().addOrderBy_ProductName_Asc();
                 cb.paging(5, 2);
             });
+            System.out.println(((EsPagingResultBean<Product>) list2).getQueryDsl());
             assertEquals(5, list2.size());
             assertEquals(20, list2.getAllRecordCount());
             assertEquals(4, list2.getAllPageCount());
@@ -145,6 +148,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
                 cb.query().addOrderBy_ProductName_Asc();
                 cb.paging(5, 4);
             });
+            System.out.println(((EsPagingResultBean<Product>) list3).getQueryDsl());
             assertEquals(5, list3.size());
             assertEquals(20, list3.getAllRecordCount());
             assertEquals(4, list3.getAllPageCount());
@@ -172,9 +176,10 @@ public class ProductTest extends UnitWaterfrontTestCase {
             // first page
             PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
                 cb.query().setProductName_Match("flute");
-                cb.query().addOrderBy_ProductName_Asc();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
                 cb.paging(5, 1);
             });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
             assertEquals(3, list1.size());
             assertEquals(3, list1.getAllRecordCount());
             assertEquals(1, list1.getAllPageCount());
@@ -195,9 +200,9 @@ public class ProductTest extends UnitWaterfrontTestCase {
             }
             assertFalse(list1.existsPreviousPage());
             assertFalse(list1.existsNextPage());
-            // assertEquals("Gold Flute", list1.get(0).getProductName());
-            // assertEquals("Low Price Flute", list1.get(1).getProductName());
-            // assertEquals("Silver Flute", list1.get(2).getProductName());
+            assertEquals("FLUTE-01", list1.get(0).getProductHandleCode());
+            assertEquals("FLUTE-02", list1.get(1).getProductHandleCode());
+            assertEquals("FLUTE-03", list1.get(2).getProductHandleCode());
         }
 
         // Match Phrase Query
@@ -218,6 +223,41 @@ public class ProductTest extends UnitWaterfrontTestCase {
         // Ids Query
         // Constant Score Query
         // Bool Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().bool((must, should, mustNot, filter) -> {
+                    must.setProductName_Match("flute");
+                    mustNot.setProductName_Match("gold");
+                });
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(2, list1.size());
+            assertEquals(2, list1.getAllRecordCount());
+            assertEquals(1, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(2, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            try {
+                list1.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertFalse(list1.existsNextPage());
+            assertEquals("FLUTE-01", list1.get(0).getProductHandleCode());
+            assertEquals("FLUTE-02", list1.get(1).getProductHandleCode());
+        }
+
         // Dis Max Query
         // Function Score Query
         // Boosting Query
