@@ -337,7 +337,7 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
     }
 
     public void set${column.capCamelName}_Wildcard($javaNative ${column.uncapCamelName}, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("${column.uncapCamelName}", ${column.uncapCamelName});
+        WildcardQueryBuilder builder = regWildcardQ("${column.name}", ${column.uncapCamelName});
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -348,7 +348,7 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
     }
 
     public void set${column.capCamelName}_Regexp($javaNative ${column.uncapCamelName}, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("${column.uncapCamelName}", ${column.uncapCamelName});
+        RegexpQueryBuilder builder = regRegexpQ("${column.name}", ${column.uncapCamelName});
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -404,7 +404,7 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
     }
 
     public void set${column.capCamelName}_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("${column.uncapCamelName}");
+        ExistsQueryBuilder builder = regExistsQ("${column.name}");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -415,7 +415,7 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
     }
 
     public void set${column.capCamelName}_CommonTerms($javaNative ${column.uncapCamelName}, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("${column.uncapCamelName}", ${column.uncapCamelName});
+        CommonTermsQueryBuilder builder = regCommonTermsQ("${column.name}", ${column.uncapCamelName});
         if (opLambda != null) {
             opLambda.callback(builder);
         }

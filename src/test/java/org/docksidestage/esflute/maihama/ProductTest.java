@@ -206,17 +206,247 @@ public class ProductTest extends UnitWaterfrontTestCase {
         }
 
         // Match Phrase Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().setProductName_MatchPhrase("Low Price Flute");
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(1, list1.size());
+            assertEquals(1, list1.getAllRecordCount());
+            assertEquals(1, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(1, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            try {
+                list1.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertFalse(list1.existsNextPage());
+            assertEquals("FLUTE-01", list1.get(0).getProductHandleCode());
+        }
+
         // Match Phrase Prefix Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().setProductName_MatchPhrasePrefix("L", op -> {
+                    op.maxExpansions(1);
+                });
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(2, list1.size());
+            assertEquals(2, list1.getAllRecordCount());
+            assertEquals(1, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(2, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            try {
+                list1.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertFalse(list1.existsNextPage());
+            assertEquals("FLUTE-01", list1.get(0).getProductHandleCode());
+            assertEquals("HARB-100-02", list1.get(1).getProductHandleCode());
+        }
+
         // Multi Match Query
         // Common Terms Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().setProductName_CommonTerms("What is Grand Piano", op -> {
+                    op.cutoffFrequency((float) 0.001);
+                });
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(3, list1.size());
+            assertEquals(3, list1.getAllRecordCount());
+            assertEquals(1, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(3, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            try {
+                list1.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertFalse(list1.existsNextPage());
+            assertEquals("BILLYJOEL-02", list1.get(0).getProductHandleCode());
+            assertEquals("PIANO-01", list1.get(1).getProductHandleCode());
+            assertEquals("PIANO-02", list1.get(2).getProductHandleCode());
+        }
+
         // Query String Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().queryString("Flute OR Piano", op -> {
+                    op.defaultField("product_name");
+                });
+                cb.query().addOrderBy_ProductName_Asc();
+                cb.paging(6, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(6, list1.size());
+            assertEquals(6, list1.getAllRecordCount());
+            assertEquals(1, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(6, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            try {
+                list1.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertFalse(list1.existsNextPage());
+            assertEquals("FLUTE-01", list1.get(0).getProductHandleCode());
+            assertEquals("FLUTE-02", list1.get(1).getProductHandleCode());
+            assertEquals("FLUTE-03", list1.get(2).getProductHandleCode());
+            assertEquals("PIANO-01", list1.get(3).getProductHandleCode());
+            assertEquals("BILLYJOEL-02", list1.get(4).getProductHandleCode());
+            assertEquals("PIANO-02", list1.get(5).getProductHandleCode());
+        }
+
         // Simple Query String Query
         // Term Query
         // Terms Query
         // Range Query
         // Exists Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().setProductName_Exists();
+                cb.query().addOrderBy_ProductName_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+        }
+
         // Prefix Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().setProductCategory_Prefix("Ins");
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(5, list1.getAllRecordCount());
+            assertEquals(1, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            try {
+                list1.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertFalse(list1.existsNextPage());
+            assertEquals("FLUTE-01", list1.get(0).getProductHandleCode());
+            assertEquals("FLUTE-02", list1.get(1).getProductHandleCode());
+            assertEquals("FLUTE-03", list1.get(2).getProductHandleCode());
+            assertEquals("PIANO-01", list1.get(3).getProductHandleCode());
+            assertEquals("PIANO-02", list1.get(4).getProductHandleCode());
+        }
+
         // Wildcard Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().setProductCategoryCode_Wildcard("H?B");
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(4, list1.size());
+            assertEquals(4, list1.getAllRecordCount());
+            assertEquals(1, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(4, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            try {
+                list1.getNextPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertFalse(list1.existsNextPage());
+            assertEquals("HARB-100-01", list1.get(0).getProductHandleCode());
+            assertEquals("HARB-100-02", list1.get(1).getProductHandleCode());
+            assertEquals("HARB-100-03", list1.get(2).getProductHandleCode());
+            assertEquals("HARB-100-04", list1.get(3).getProductHandleCode());
+        }
+
         // Regexp Query
         // Fuzzy Query
         // Type Query

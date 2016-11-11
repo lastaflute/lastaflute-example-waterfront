@@ -25,6 +25,11 @@ import java.util.function.Function;
 
 import javax.annotation.Resource;
 
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity;
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.DocMeta;
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.RequestOptionCall;
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionBean;
+import org.docksidestage.esflute.maihama.allcommon.EsPagingResultBean;
 import org.dbflute.Entity;
 import org.dbflute.bhv.AbstractBehaviorWritable;
 import org.dbflute.bhv.readable.EntityRowHandler;
@@ -37,8 +42,6 @@ import org.dbflute.cbean.result.ListResultBean;
 import org.dbflute.exception.FetchingOverSafetySizeException;
 import org.dbflute.exception.IllegalBehaviorStateException;
 import org.dbflute.util.DfTypeUtil;
-import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.DocMeta;
-import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.RequestOptionCall;
 import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -75,12 +78,10 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
     protected String deleteTimeout = "3m";
     protected String refreshTimeout = "1m";
 
+
     protected abstract String asEsIndex();
-
     protected abstract String asEsIndexType();
-
     protected abstract String asEsSearchType();
-
     protected abstract <RESULT extends ENTITY> RESULT createEntity(Map<String, Object> source, Class<? extends RESULT> entityType);
 
     // ===================================================================================
@@ -626,3 +627,4 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
         }
     }
 }
+
