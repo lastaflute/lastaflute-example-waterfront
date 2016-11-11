@@ -298,7 +298,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setLatestPurchaseDate_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("latestPurchaseDate");
+        ExistsQueryBuilder builder = regExistsQ("latest_purchase_date");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -309,7 +309,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setLatestPurchaseDate_CommonTerms(LocalDateTime latestPurchaseDate, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("latestPurchaseDate", latestPurchaseDate);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("latest_purchase_date", latestPurchaseDate);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -439,7 +439,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductCategory_Wildcard(String productCategory, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("productCategory", productCategory);
+        WildcardQueryBuilder builder = regWildcardQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -450,7 +450,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductCategory_Regexp(String productCategory, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("productCategory", productCategory);
+        RegexpQueryBuilder builder = regRegexpQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -505,7 +505,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductCategory_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("productCategory");
+        ExistsQueryBuilder builder = regExistsQ("product_category");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -516,7 +516,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductCategory_CommonTerms(String productCategory, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("productCategory", productCategory);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("product_category", productCategory);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -646,7 +646,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductCategoryCode_Wildcard(String productCategoryCode, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("productCategoryCode", productCategoryCode);
+        WildcardQueryBuilder builder = regWildcardQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -657,7 +657,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductCategoryCode_Regexp(String productCategoryCode, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("productCategoryCode", productCategoryCode);
+        RegexpQueryBuilder builder = regRegexpQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -712,7 +712,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductCategoryCode_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("productCategoryCode");
+        ExistsQueryBuilder builder = regExistsQ("product_category_code");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -723,7 +723,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductCategoryCode_CommonTerms(String productCategoryCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("productCategoryCode", productCategoryCode);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -853,7 +853,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductDescription_Wildcard(String productDescription, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("productDescription", productDescription);
+        WildcardQueryBuilder builder = regWildcardQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -864,7 +864,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductDescription_Regexp(String productDescription, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("productDescription", productDescription);
+        RegexpQueryBuilder builder = regRegexpQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -919,7 +919,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductDescription_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("productDescription");
+        ExistsQueryBuilder builder = regExistsQ("product_description");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -930,7 +930,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductDescription_CommonTerms(String productDescription, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("productDescription", productDescription);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("product_description", productDescription);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1060,7 +1060,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductHandleCode_Wildcard(String productHandleCode, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("productHandleCode", productHandleCode);
+        WildcardQueryBuilder builder = regWildcardQ("product_handle_code", productHandleCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1071,7 +1071,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductHandleCode_Regexp(String productHandleCode, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("productHandleCode", productHandleCode);
+        RegexpQueryBuilder builder = regRegexpQ("product_handle_code", productHandleCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1126,7 +1126,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductHandleCode_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("productHandleCode");
+        ExistsQueryBuilder builder = regExistsQ("product_handle_code");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1137,7 +1137,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductHandleCode_CommonTerms(String productHandleCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("productHandleCode", productHandleCode);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("product_handle_code", productHandleCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1267,7 +1267,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductName_Wildcard(String productName, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("productName", productName);
+        WildcardQueryBuilder builder = regWildcardQ("product_name", productName);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1278,7 +1278,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductName_Regexp(String productName, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("productName", productName);
+        RegexpQueryBuilder builder = regRegexpQ("product_name", productName);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1333,7 +1333,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductName_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("productName");
+        ExistsQueryBuilder builder = regExistsQ("product_name");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1344,7 +1344,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductName_CommonTerms(String productName, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("productName", productName);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("product_name", productName);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1474,7 +1474,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductStatus_Wildcard(String productStatus, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("productStatus", productStatus);
+        WildcardQueryBuilder builder = regWildcardQ("product_status", productStatus);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1485,7 +1485,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductStatus_Regexp(String productStatus, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("productStatus", productStatus);
+        RegexpQueryBuilder builder = regRegexpQ("product_status", productStatus);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1540,7 +1540,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductStatus_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("productStatus");
+        ExistsQueryBuilder builder = regExistsQ("product_status");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1551,7 +1551,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductStatus_CommonTerms(String productStatus, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("productStatus", productStatus);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("product_status", productStatus);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1681,7 +1681,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductStatusCode_Wildcard(String productStatusCode, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("productStatusCode", productStatusCode);
+        WildcardQueryBuilder builder = regWildcardQ("product_status_code", productStatusCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1692,7 +1692,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductStatusCode_Regexp(String productStatusCode, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("productStatusCode", productStatusCode);
+        RegexpQueryBuilder builder = regRegexpQ("product_status_code", productStatusCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1747,7 +1747,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductStatusCode_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("productStatusCode");
+        ExistsQueryBuilder builder = regExistsQ("product_status_code");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1758,7 +1758,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setProductStatusCode_CommonTerms(String productStatusCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("productStatusCode", productStatusCode);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("product_status_code", productStatusCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1921,7 +1921,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setRegisterDatetime_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("registerDatetime");
+        ExistsQueryBuilder builder = regExistsQ("register_datetime");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1932,7 +1932,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setRegisterDatetime_CommonTerms(LocalDateTime registerDatetime, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("registerDatetime", registerDatetime);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("register_datetime", registerDatetime);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2062,7 +2062,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setRegisterUser_Wildcard(String registerUser, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("registerUser", registerUser);
+        WildcardQueryBuilder builder = regWildcardQ("register_user", registerUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2073,7 +2073,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setRegisterUser_Regexp(String registerUser, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("registerUser", registerUser);
+        RegexpQueryBuilder builder = regRegexpQ("register_user", registerUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2128,7 +2128,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setRegisterUser_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("registerUser");
+        ExistsQueryBuilder builder = regExistsQ("register_user");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2139,7 +2139,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setRegisterUser_CommonTerms(String registerUser, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("registerUser", registerUser);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("register_user", registerUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2302,7 +2302,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setRegularPrice_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("regularPrice");
+        ExistsQueryBuilder builder = regExistsQ("regular_price");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2313,7 +2313,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setRegularPrice_CommonTerms(Integer regularPrice, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("regularPrice", regularPrice);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("regular_price", regularPrice);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2476,7 +2476,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setUpdateDatetime_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("updateDatetime");
+        ExistsQueryBuilder builder = regExistsQ("update_datetime");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2487,7 +2487,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setUpdateDatetime_CommonTerms(LocalDateTime updateDatetime, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("updateDatetime", updateDatetime);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("update_datetime", updateDatetime);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2617,7 +2617,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setUpdateUser_Wildcard(String updateUser, ConditionOptionCall<WildcardQueryBuilder> opLambda) {
-        WildcardQueryBuilder builder = regWildcardQ("updateUser", updateUser);
+        WildcardQueryBuilder builder = regWildcardQ("update_user", updateUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2628,7 +2628,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setUpdateUser_Regexp(String updateUser, ConditionOptionCall<RegexpQueryBuilder> opLambda) {
-        RegexpQueryBuilder builder = regRegexpQ("updateUser", updateUser);
+        RegexpQueryBuilder builder = regRegexpQ("update_user", updateUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2683,7 +2683,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setUpdateUser_Exists(ConditionOptionCall<ExistsQueryBuilder> opLambda) {
-        ExistsQueryBuilder builder = regExistsQ("updateUser");
+        ExistsQueryBuilder builder = regExistsQ("update_user");
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2694,7 +2694,7 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public void setUpdateUser_CommonTerms(String updateUser, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
-        CommonTermsQueryBuilder builder = regCommonTermsQ("updateUser", updateUser);
+        CommonTermsQueryBuilder builder = regCommonTermsQ("update_user", updateUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
