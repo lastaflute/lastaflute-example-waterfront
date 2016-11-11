@@ -142,12 +142,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
     }
 
     public BsProductCQ addOrderBy_Id_Asc() {
-        regOBA("_id");
+        regOBA("_uid");
         return this;
     }
 
     public BsProductCQ addOrderBy_Id_Desc() {
-        regOBD("_id");
+        regOBD("_uid");
         return this;
     }
 

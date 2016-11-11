@@ -93,8 +93,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             // first page
             PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
-                // TODO cb.query().addOrderBy_Id_Asc();
-                cb.query().addOrderBy_ProductName_Asc();
+                cb.query().addOrderBy_Id_Asc();
                 cb.paging(5, 1);
             });
             System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
@@ -113,16 +112,16 @@ public class ProductTest extends UnitWaterfrontTestCase {
             assertEquals(2, list1.getNextPageNumber());
             assertFalse(list1.existsPreviousPage());
             assertTrue(list1.existsNextPage());
-            // assertEquals("", list1.get(0).asDocMeta().id());
-            // assertEquals("", list1.get(1).asDocMeta().id());
-            // assertEquals("", list1.get(2).asDocMeta().id());
-            // assertEquals("", list1.get(3).asDocMeta().id());
-            // assertEquals("", list1.get(4).asDocMeta().id());
+            assertEquals("1", list1.get(0).asDocMeta().id());
+            assertEquals("10", list1.get(1).asDocMeta().id());
+            assertEquals("11", list1.get(2).asDocMeta().id());
+            assertEquals("12", list1.get(3).asDocMeta().id());
+            assertEquals("13", list1.get(4).asDocMeta().id());
 
             // middle page
             PagingResultBean<Product> list2 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
-                cb.query().addOrderBy_ProductName_Asc();
+                cb.query().addOrderBy_Id_Asc();
                 cb.paging(5, 2);
             });
             System.out.println(((EsPagingResultBean<Product>) list2).getQueryDsl());
@@ -136,16 +135,16 @@ public class ProductTest extends UnitWaterfrontTestCase {
             assertEquals(3, list2.getNextPageNumber());
             assertTrue(list2.existsPreviousPage());
             assertTrue(list2.existsNextPage());
-            // assertEquals("", list2.get(0).asDocMeta().id());
-            // assertEquals("", list2.get(1).asDocMeta().id());
-            // assertEquals("", list2.get(2).asDocMeta().id());
-            // assertEquals("", list2.get(3).asDocMeta().id());
-            // assertEquals("", list2.get(4).asDocMeta().id());
+            assertEquals("14", list2.get(0).asDocMeta().id());
+            assertEquals("15", list2.get(1).asDocMeta().id());
+            assertEquals("16", list2.get(2).asDocMeta().id());
+            assertEquals("17", list2.get(3).asDocMeta().id());
+            assertEquals("18", list2.get(4).asDocMeta().id());
 
             // last page
             PagingResultBean<Product> list3 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
-                cb.query().addOrderBy_ProductName_Asc();
+                cb.query().addOrderBy_Id_Asc();
                 cb.paging(5, 4);
             });
             System.out.println(((EsPagingResultBean<Product>) list3).getQueryDsl());
@@ -164,11 +163,11 @@ public class ProductTest extends UnitWaterfrontTestCase {
             }
             assertTrue(list3.existsPreviousPage());
             assertFalse(list3.existsNextPage());
-            // assertEquals("", list3.get(0).asDocMeta().id());
-            // assertEquals("", list3.get(1).asDocMeta().id());
-            // assertEquals("", list3.get(2).asDocMeta().id());
-            // assertEquals("", list3.get(3).asDocMeta().id());
-            // assertEquals("", list3.get(4).asDocMeta().id());
+            assertEquals("5", list3.get(0).asDocMeta().id());
+            assertEquals("6", list3.get(1).asDocMeta().id());
+            assertEquals("7", list3.get(2).asDocMeta().id());
+            assertEquals("8", list3.get(3).asDocMeta().id());
+            assertEquals("9", list3.get(4).asDocMeta().id());
         }
 
         // Match Query
