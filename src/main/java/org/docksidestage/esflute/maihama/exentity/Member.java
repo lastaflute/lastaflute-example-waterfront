@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 the original author or authors.
+ * Copyright 2014-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
  */
 package org.docksidestage.esflute.maihama.exentity;
 
-import org.docksidestage.esflute.maihama.bsentity.BsMenber;
+import org.docksidestage.esflute.maihama.bsentity.BsMember;
 
 /**
  * @author ESFlute (using FreeGen)
  */
-public class Menber extends BsMenber {
+public class Member extends BsMember {
 
     private static final long serialVersionUID = 1L;
 }

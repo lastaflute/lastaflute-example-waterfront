@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 the original author or authors.
+ * Copyright 2014-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
  */
 package org.docksidestage.esflute.maihama.cbean;
 
-import org.docksidestage.esflute.maihama.cbean.bs.BsMenberCB;
+import org.docksidestage.esflute.maihama.cbean.bs.BsMemberCB;
 
 /**
  * @author ESFlute (using FreeGen)
  */
-public class MenberCB extends BsMenberCB {
+public class MemberCB extends BsMemberCB {
 }

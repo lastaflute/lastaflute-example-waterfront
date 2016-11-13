@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 the original author or authors.
+ * Copyright 2014-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,12 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.docksidestage.esflute.maihama.exbhv;
+package org.docksidestage.esflute.maihama.cbean.cq;
 
-import org.docksidestage.esflute.maihama.bsbhv.BsMenberBhv;
+import org.docksidestage.esflute.maihama.cbean.cq.bs.BsMemberCQ;
 
 /**
- * @author FreeGen
+ * @author ESFlute (using FreeGen)
  */
-public class MenberBhv extends BsMenberBhv {
-
+public class MemberCQ extends BsMemberCQ {
 }

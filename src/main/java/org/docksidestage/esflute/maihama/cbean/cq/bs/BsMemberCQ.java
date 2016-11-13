@@ -19,7 +19,7 @@ import java.time.*;
 import java.util.Collection;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionQuery;
-import org.docksidestage.esflute.maihama.cbean.cq.MenberCQ;
+import org.docksidestage.esflute.maihama.cbean.cq.MemberCQ;
 import org.dbflute.cbean.ckey.ConditionKey;
 import org.elasticsearch.index.query.*;
 import org.dbflute.exception.IllegalConditionBeanOperationException;
@@ -27,7 +27,7 @@ import org.dbflute.exception.IllegalConditionBeanOperationException;
 /**
  * @author ESFlute (using FreeGen)
  */
-public abstract class BsMenberCQ extends EsAbstractConditionQuery {
+public abstract class BsMemberCQ extends EsAbstractConditionQuery {
 
     protected static final Class<?> suppressUnusedImportLocalDateTime = LocalDateTime.class;
 
@@ -36,45 +36,45 @@ public abstract class BsMenberCQ extends EsAbstractConditionQuery {
     //                                                                       =============
     @Override
     public String asTableDbName() {
-        return "menber";
+        return "member";
     }
 
     @Override
     public String xgetAliasName() {
-        return "menber";
+        return "member";
     }
 
     // ===================================================================================
     //                                                                       Query Control
     //                                                                       =============
-    public void filtered(FilteredCall<MenberCQ, MenberCQ> filteredLambda) {
+    public void filtered(FilteredCall<MemberCQ, MemberCQ> filteredLambda) {
         filtered(filteredLambda, null);
     }
 
-    public void filtered(FilteredCall<MenberCQ, MenberCQ> filteredLambda,
+    public void filtered(FilteredCall<MemberCQ, MemberCQ> filteredLambda,
             ConditionOptionCall<BoolQueryBuilder> opLambda) {
         bool((must, should, mustNot, filter)->{
             filteredLambda.callback(must, filter);
         }, opLambda);
     }
 
-    public void not(OperatorCall<MenberCQ> notLambda) {
+    public void not(OperatorCall<MemberCQ> notLambda) {
         not(notLambda, null);
     }
 
-    public void not(final OperatorCall<MenberCQ> notLambda, final ConditionOptionCall<BoolQueryBuilder> opLambda) {
+    public void not(final OperatorCall<MemberCQ> notLambda, final ConditionOptionCall<BoolQueryBuilder> opLambda) {
         bool((must, should, mustNot, filter) -> notLambda.callback(mustNot), opLambda);
     }
 
-    public void bool(BoolCall<MenberCQ> boolLambda) {
+    public void bool(BoolCall<MemberCQ> boolLambda) {
         bool(boolLambda, null);
     }
 
-    public void bool(BoolCall<MenberCQ> boolLambda, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        MenberCQ mustQuery = new MenberCQ();
-        MenberCQ shouldQuery = new MenberCQ();
-        MenberCQ mustNotQuery = new MenberCQ();
-        MenberCQ filterQuery = new MenberCQ();
+    public void bool(BoolCall<MemberCQ> boolLambda, ConditionOptionCall<BoolQueryBuilder> opLambda) {
+        MemberCQ mustQuery = new MemberCQ();
+        MemberCQ shouldQuery = new MemberCQ();
+        MemberCQ mustNotQuery = new MemberCQ();
+        MemberCQ filterQuery = new MemberCQ();
         boolLambda.callback(mustQuery, shouldQuery, mustNotQuery, filterQuery);
         if (mustQuery.hasQueries() || shouldQuery.hasQueries() || mustNotQuery.hasQueries() || filterQuery.hasQueries()) {
             BoolQueryBuilder builder = regBoolCQ(mustQuery.getQueryBuilderList(), shouldQuery.getQueryBuilderList(), mustNotQuery.getQueryBuilderList(), filterQuery.getQueryBuilderList());
@@ -141,12 +141,12 @@ public abstract class BsMenberCQ extends EsAbstractConditionQuery {
         setId_Terms(idList, opLambda);
     }
 
-    public BsMenberCQ addOrderBy_Id_Asc() {
+    public BsMemberCQ addOrderBy_Id_Asc() {
         regOBA("_uid");
         return this;
     }
 
-    public BsMenberCQ addOrderBy_Id_Desc() {
+    public BsMemberCQ addOrderBy_Id_Desc() {
         regOBD("_uid");
         return this;
     }
@@ -348,12 +348,12 @@ public abstract class BsMenberCQ extends EsAbstractConditionQuery {
         }
     }
 
-    public BsMenberCQ addOrderBy_Account_Asc() {
+    public BsMemberCQ addOrderBy_Account_Asc() {
         regOBA("account");
         return this;
     }
 
-    public BsMenberCQ addOrderBy_Account_Desc() {
+    public BsMemberCQ addOrderBy_Account_Desc() {
         regOBD("account");
         return this;
     }
@@ -555,12 +555,12 @@ public abstract class BsMenberCQ extends EsAbstractConditionQuery {
         }
     }
 
-    public BsMenberCQ addOrderBy_Name_Asc() {
+    public BsMemberCQ addOrderBy_Name_Asc() {
         regOBA("name");
         return this;
     }
 
-    public BsMenberCQ addOrderBy_Name_Desc() {
+    public BsMemberCQ addOrderBy_Name_Desc() {
         regOBD("name");
         return this;
     }

@@ -19,7 +19,7 @@ import java.time.*;
 import java.util.List;
 import java.util.Map;
 
-import org.docksidestage.esflute.maihama.exentity.Menber;
+import org.docksidestage.esflute.maihama.exentity.Member;
 
 import org.dbflute.Entity;
 import org.dbflute.dbmeta.AbstractDBMeta;
@@ -33,19 +33,19 @@ import org.dbflute.util.DfTypeUtil;
 /**
  * @author ESFlute (using FreeGen)
  */
-public class MenberDbm extends AbstractDBMeta {
+public class MemberDbm extends AbstractDBMeta {
 
     protected static final Class<?> suppressUnusedImportLocalDateTime = LocalDateTime.class;
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final MenberDbm _instance = new MenberDbm();
+    private static final MemberDbm _instance = new MemberDbm();
 
-    private MenberDbm() {
+    private MemberDbm() {
     }
 
-    public static MenberDbm getInstance() {
+    public static MemberDbm getInstance() {
         return _instance;
     }
 
@@ -80,8 +80,8 @@ public class MenberDbm extends AbstractDBMeta {
     //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
-        setupEpg(_epgMap, et-> ((Menber)et).getAccount(),(et,vl)->((Menber) et).setAccount(DfTypeUtil.toString(vl)), "account");
-        setupEpg(_epgMap, et-> ((Menber)et).getName(),(et,vl)->((Menber) et).setName(DfTypeUtil.toString(vl)), "name");
+        setupEpg(_epgMap, et-> ((Member)et).getAccount(),(et,vl)->((Member) et).setAccount(DfTypeUtil.toString(vl)), "account");
+        setupEpg(_epgMap, et-> ((Member)et).getName(),(et,vl)->((Member) et).setName(DfTypeUtil.toString(vl)), "name");
     }
 
     @Override
@@ -92,9 +92,9 @@ public class MenberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "menber";
-    protected final String _tableDispName = "menber";
-    protected final String _tablePropertyName = "Menber";
+    protected final String _tableDbName = "member";
+    protected final String _tableDispName = "member";
+    protected final String _tablePropertyName = "Member";
     public String getTableDbName() { return _tableDbName; }
     @Override
     public String getTableDispName() { return _tableDispName; }
@@ -142,17 +142,17 @@ public class MenberDbm extends AbstractDBMeta {
     //                                                                           =========
     @Override
     public String getEntityTypeName() {
-        return "org.docksidestage.esflute.maihama.exentity.Menber";
+        return "org.docksidestage.esflute.maihama.exentity.Member";
     }
 
     @Override
     public String getConditionBeanTypeName() {
-        return "org.docksidestage.esflute.maihama.cbean.MenberCB";
+        return "org.docksidestage.esflute.maihama.cbean.MemberCB";
     }
 
     @Override
     public String getBehaviorTypeName() {
-        return "org.docksidestage.esflute.maihama.exbhv.MenberBhv";
+        return "org.docksidestage.esflute.maihama.exbhv.MemberBhv";
     }
 
     // ===================================================================================
@@ -160,7 +160,7 @@ public class MenberDbm extends AbstractDBMeta {
     //                                                                         ===========
     @Override
     public Class<? extends Entity> getEntityType() {
-        return Menber.class;
+        return Member.class;
     }
 
     // ===================================================================================
@@ -168,7 +168,7 @@ public class MenberDbm extends AbstractDBMeta {
     //                                                                     ===============
     @Override
     public Entity newEntity() {
-        return new Menber();
+        return new Member();
     }
 
     // ===================================================================================

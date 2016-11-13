@@ -64,7 +64,7 @@
           }
         }
       },
-      "menber" : {
+      "member" : {
         "_all" : {
           "enabled" : false
         },

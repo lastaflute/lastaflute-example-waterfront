@@ -21,9 +21,9 @@ import java.util.Map;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractBehavior;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.RequestOptionCall;
-import org.docksidestage.esflute.maihama.bsentity.dbmeta.MenberDbm;
-import org.docksidestage.esflute.maihama.cbean.MenberCB;
-import org.docksidestage.esflute.maihama.exentity.Menber;
+import org.docksidestage.esflute.maihama.bsentity.dbmeta.MemberDbm;
+import org.docksidestage.esflute.maihama.cbean.MemberCB;
+import org.docksidestage.esflute.maihama.exentity.Member;
 import org.dbflute.Entity;
 import org.dbflute.bhv.readable.CBCall;
 import org.dbflute.bhv.readable.EntityRowHandler;
@@ -40,7 +40,7 @@ import org.elasticsearch.action.index.IndexRequestBuilder;
 /**
  * @author ESFlute (using FreeGen)
  */
-public abstract class BsMenberBhv extends EsAbstractBehavior<Menber, MenberCB> {
+public abstract class BsMemberBhv extends EsAbstractBehavior<Member, MemberCB> {
 
     // ===================================================================================
     //                                                                    Control Override
@@ -57,21 +57,21 @@ public abstract class BsMenberBhv extends EsAbstractBehavior<Menber, MenberCB> {
 
     @Override
     public String asEsIndexType() {
-        return "menber";
+        return "member";
     }
 
     @Override
     public String asEsSearchType() {
-        return "menber";
+        return "member";
     }
 
     @Override
-    public MenberDbm asDBMeta() {
-        return MenberDbm.getInstance();
+    public MemberDbm asDBMeta() {
+        return MemberDbm.getInstance();
     }
 
     @Override
-    protected <RESULT extends Menber> RESULT createEntity(Map<String, Object> source, Class<? extends RESULT> entityType) {
+    protected <RESULT extends Member> RESULT createEntity(Map<String, Object> source, Class<? extends RESULT> entityType) {
         try {
             final RESULT result = entityType.newInstance();
             result.setAccount(DfTypeUtil.toString(source.get("account")));
@@ -86,26 +86,26 @@ public abstract class BsMenberBhv extends EsAbstractBehavior<Menber, MenberCB> {
     // ===================================================================================
     //                                                                              Select
     //                                                                              ======
-    public int selectCount(CBCall<MenberCB> cbLambda) {
+    public int selectCount(CBCall<MemberCB> cbLambda) {
         return facadeSelectCount(createCB(cbLambda));
     }
 
-    public OptionalEntity<Menber> selectEntity(CBCall<MenberCB> cbLambda) {
+    public OptionalEntity<Member> selectEntity(CBCall<MemberCB> cbLambda) {
         return facadeSelectEntity(createCB(cbLambda));
     }
 
-    protected OptionalEntity<Menber> facadeSelectEntity(MenberCB cb) {
+    protected OptionalEntity<Member> facadeSelectEntity(MemberCB cb) {
         return doSelectOptionalEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Menber> OptionalEntity<ENTITY> doSelectOptionalEntity(MenberCB cb,
+    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectOptionalEntity(MemberCB cb,
             Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
     @Override
-    public MenberCB newConditionBean() {
-        return new MenberCB();
+    public MemberCB newConditionBean() {
+        return new MemberCB();
     }
 
     @Override
@@ -113,141 +113,141 @@ public abstract class BsMenberBhv extends EsAbstractBehavior<Menber, MenberCB> {
         return facadeSelectEntity(downcast(cb)).orElse(null);
     }
 
-    public Menber selectEntityWithDeletedCheck(CBCall<MenberCB> cbLambda) {
+    public Member selectEntityWithDeletedCheck(CBCall<MemberCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
     }
 
-    public OptionalEntity<Menber> selectByPK(String id) {
+    public OptionalEntity<Member> selectByPK(String id) {
         return facadeSelectByPK(id);
     }
 
-    protected OptionalEntity<Menber> facadeSelectByPK(String id) {
+    protected OptionalEntity<Member> facadeSelectByPK(String id) {
         return doSelectOptionalByPK(id, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Menber> ENTITY doSelectByPK(String id, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Member> ENTITY doSelectByPK(String id, Class<? extends ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(id), tp);
     }
 
-    protected MenberCB xprepareCBAsPK(String id) {
+    protected MemberCB xprepareCBAsPK(String id) {
         assertObjectNotNull("id", id);
         return newConditionBean().acceptPK(id);
     }
 
-    protected <ENTITY extends Menber> OptionalEntity<ENTITY> doSelectOptionalByPK(String id, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectOptionalByPK(String id, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(id, tp), id);
     }
 
     @Override
-    protected Class<? extends Menber> typeOfSelectedEntity() {
-        return Menber.class;
+    protected Class<? extends Member> typeOfSelectedEntity() {
+        return Member.class;
     }
 
     @Override
-    protected Class<Menber> typeOfHandlingEntity() {
-        return Menber.class;
+    protected Class<Member> typeOfHandlingEntity() {
+        return Member.class;
     }
 
     @Override
-    protected Class<MenberCB> typeOfHandlingConditionBean() {
-        return MenberCB.class;
+    protected Class<MemberCB> typeOfHandlingConditionBean() {
+        return MemberCB.class;
     }
 
-    public ListResultBean<Menber> selectList(CBCall<MenberCB> cbLambda) {
+    public ListResultBean<Member> selectList(CBCall<MemberCB> cbLambda) {
         return facadeSelectList(createCB(cbLambda));
     }
 
-    public PagingResultBean<Menber> selectPage(CBCall<MenberCB> cbLambda) {
+    public PagingResultBean<Member> selectPage(CBCall<MemberCB> cbLambda) {
         // #pending same?
-        return (PagingResultBean<Menber>) facadeSelectList(createCB(cbLambda));
+        return (PagingResultBean<Member>) facadeSelectList(createCB(cbLambda));
     }
 
-    public void selectCursor(CBCall<MenberCB> cbLambda, EntityRowHandler<Menber> entityLambda) {
+    public void selectCursor(CBCall<MemberCB> cbLambda, EntityRowHandler<Member> entityLambda) {
         facadeSelectCursor(createCB(cbLambda), entityLambda);
     }
 
-    public void selectBulk(CBCall<MenberCB> cbLambda, EntityRowHandler<List<Menber>> entityLambda) {
+    public void selectBulk(CBCall<MemberCB> cbLambda, EntityRowHandler<List<Member>> entityLambda) {
         delegateSelectBulk(createCB(cbLambda), entityLambda,typeOfSelectedEntity());
     }
 
     // ===================================================================================
     //                                                                              Update
     //                                                                              ======
-    public void insert(Menber entity) {
+    public void insert(Member entity) {
         doInsert(entity, null);
     }
 
-    public void insert(Menber entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void insert(Member entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         entity.asDocMeta().indexOption(opLambda);
         doInsert(entity, null);
     }
 
-    public void update(Menber entity) {
+    public void update(Member entity) {
         doUpdate(entity, null);
     }
 
-    public void update(Menber entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void update(Member entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         entity.asDocMeta().indexOption(opLambda);
         doUpdate(entity, null);
     }
 
-    public void insertOrUpdate(Menber entity) {
+    public void insertOrUpdate(Member entity) {
         doInsertOrUpdate(entity, null, null);
     }
 
-    public void insertOrUpdate(Menber entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
+    public void insertOrUpdate(Member entity, RequestOptionCall<IndexRequestBuilder> opLambda) {
         entity.asDocMeta().indexOption(opLambda);
         doInsertOrUpdate(entity, null, null);
     }
 
-    public void delete(Menber entity) {
+    public void delete(Member entity) {
         doDelete(entity, null);
     }
 
-    public void delete(Menber entity, RequestOptionCall<DeleteRequestBuilder> opLambda) {
+    public void delete(Member entity, RequestOptionCall<DeleteRequestBuilder> opLambda) {
         entity.asDocMeta().deleteOption(opLambda);
         doDelete(entity, null);
     }
 
-    public int queryDelete(CBCall<MenberCB> cbLambda) {
+    public int queryDelete(CBCall<MemberCB> cbLambda) {
         return doQueryDelete(createCB(cbLambda), null);
     }
 
-    public int[] batchInsert(List<Menber> list) {
+    public int[] batchInsert(List<Member> list) {
         return batchInsert(list, null, null);
     }
 
-    public int[] batchInsert(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchInsert(List<Member> list, RequestOptionCall<BulkRequestBuilder> call) {
         return batchInsert(list, call, null);
     }
 
-    public int[] batchInsert(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call,
+    public int[] batchInsert(List<Member> list, RequestOptionCall<BulkRequestBuilder> call,
             RequestOptionCall<IndexRequestBuilder> entityCall) {
         return doBatchInsert(new BulkList<>(list, call, entityCall), null);
     }
 
-    public int[] batchUpdate(List<Menber> list) {
+    public int[] batchUpdate(List<Member> list) {
         return batchUpdate(list, null, null);
     }
 
-    public int[] batchUpdate(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchUpdate(List<Member> list, RequestOptionCall<BulkRequestBuilder> call) {
         return batchUpdate(list, call, null);
     }
 
-    public int[] batchUpdate(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call,
+    public int[] batchUpdate(List<Member> list, RequestOptionCall<BulkRequestBuilder> call,
             RequestOptionCall<IndexRequestBuilder> entityCall) {
         return doBatchUpdate(new BulkList<>(list, call, entityCall), null);
     }
 
-    public int[] batchDelete(List<Menber> list) {
+    public int[] batchDelete(List<Member> list) {
         return batchDelete(list, null, null);
     }
 
-    public int[] batchDelete(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call) {
+    public int[] batchDelete(List<Member> list, RequestOptionCall<BulkRequestBuilder> call) {
         return batchDelete(list, call, null);
     }
 
-    public int[] batchDelete(List<Menber> list, RequestOptionCall<BulkRequestBuilder> call,
+    public int[] batchDelete(List<Member> list, RequestOptionCall<BulkRequestBuilder> call,
             RequestOptionCall<IndexRequestBuilder> entityCall) {
         return doBatchDelete(new BulkList<>(list, call, entityCall), null);
     }

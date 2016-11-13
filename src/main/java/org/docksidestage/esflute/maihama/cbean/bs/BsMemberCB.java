@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionBean;
-import org.docksidestage.esflute.maihama.bsentity.dbmeta.MenberDbm;
-import org.docksidestage.esflute.maihama.cbean.MenberCB;
-import org.docksidestage.esflute.maihama.cbean.cq.MenberCQ;
-import org.docksidestage.esflute.maihama.cbean.cq.bs.BsMenberCQ;
+import org.docksidestage.esflute.maihama.bsentity.dbmeta.MemberDbm;
+import org.docksidestage.esflute.maihama.cbean.MemberCB;
+import org.docksidestage.esflute.maihama.cbean.cq.MemberCQ;
+import org.docksidestage.esflute.maihama.cbean.cq.bs.BsMemberCQ;
 import org.dbflute.cbean.ConditionQuery;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -31,25 +31,25 @@ import org.elasticsearch.index.query.QueryBuilder;
 /**
  * @author ESFlute (using FreeGen)
  */
-public class BsMenberCB extends EsAbstractConditionBean {
+public class BsMemberCB extends EsAbstractConditionBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected BsMenberCQ _conditionQuery;
+    protected BsMemberCQ _conditionQuery;
     protected HpSpecification _specification;
 
     // ===================================================================================
     //                                                                             Control
     //                                                                             =======
     @Override
-    public MenberDbm asDBMeta() {
-        return MenberDbm.getInstance();
+    public MemberDbm asDBMeta() {
+        return MemberDbm.getInstance();
     }
 
     @Override
     public String asTableDbName() {
-        return "menber";
+        return "member";
     }
 
     @Override
@@ -65,11 +65,11 @@ public class BsMenberCB extends EsAbstractConditionBean {
     // ===================================================================================
     //                                                                         Primary Key
     //                                                                         ===========
-    public MenberCB acceptPK(String id) {
+    public MemberCB acceptPK(String id) {
         assertObjectNotNull("id", id);
-        BsMenberCB cb = this;
+        BsMemberCB cb = this;
         cb.query().docMeta().setId_Equal(id);
-        return (MenberCB) this;
+        return (MemberCB) this;
     }
 
     @Override
@@ -103,20 +103,20 @@ public class BsMenberCB extends EsAbstractConditionBean {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    public BsMenberCQ query() {
+    public BsMemberCQ query() {
         assertQueryPurpose();
         return doGetConditionQuery();
     }
 
-    protected BsMenberCQ doGetConditionQuery() {
+    protected BsMemberCQ doGetConditionQuery() {
         if (_conditionQuery == null) {
             _conditionQuery = createLocalCQ();
         }
         return _conditionQuery;
     }
 
-    protected BsMenberCQ createLocalCQ() {
-        return new MenberCQ();
+    protected BsMemberCQ createLocalCQ() {
+        return new MemberCQ();
     }
 
     // ===================================================================================

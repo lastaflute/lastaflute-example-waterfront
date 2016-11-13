@@ -20,13 +20,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity;
-import org.docksidestage.esflute.maihama.bsentity.dbmeta.MenberDbm;
+import org.docksidestage.esflute.maihama.bsentity.dbmeta.MemberDbm;
 
 /**
  * ${table.comment}
  * @author ESFlute (using FreeGen)
  */
-public class BsMenber extends EsAbstractEntity {
+public class BsMember extends EsAbstractEntity {
 
     // ===================================================================================
     //                                                                          Definition
@@ -49,13 +49,13 @@ public class BsMenber extends EsAbstractEntity {
     //                                                                             DB Meta
     //                                                                             =======
     @Override
-    public MenberDbm asDBMeta() {
-        return MenberDbm.getInstance();
+    public MemberDbm asDBMeta() {
+        return MemberDbm.getInstance();
     }
 
     @Override
     public String asTableDbName() {
-        return "menber";
+        return "member";
     }
 
     // ===================================================================================

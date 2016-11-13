@@ -7,5 +7,5 @@
 
 	<!-- The components of Behavior. -->
 	<component name="product" class="org.docksidestage.esflute.maihama.exbhv.ProductBhv"/>
-	<component name="menber" class="org.docksidestage.esflute.maihama.exbhv.MenberBhv"/>
+	<component name="member" class="org.docksidestage.esflute.maihama.exbhv.MemberBhv"/>
 </components>
