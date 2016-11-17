@@ -22,6 +22,7 @@ import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionQuery;
 import org.docksidestage.esflute.maihama.cbean.cq.MemberCQ;
 import org.dbflute.cbean.ckey.ConditionKey;
 import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.dbflute.exception.IllegalConditionBeanOperationException;
 
 /**
@@ -47,6 +48,23 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     // ===================================================================================
     //                                                                       Query Control
     //                                                                       =============
+    public void functionScore(OperatorCall<MemberCQ> queryLambda, ScoreFunctionCall<ScoreFunctionCreator<MemberCQ>> functionsLambda,
+            final ConditionOptionCall<FunctionScoreQueryBuilder> opLambda) {
+        MemberCQ cq = new MemberCQ();
+        queryLambda.callback(cq);
+        final FunctionScoreQueryBuilder builder = regFunctionScoreQ(cq.getQuery());
+        if (functionsLambda != null) {
+            functionsLambda.callback((cqLambda, scoreFunctionBuilder) -> {
+                MemberCQ cf = new MemberCQ();
+                cqLambda.callback(cf);
+                builder.add(cf.getQuery(), scoreFunctionBuilder);
+            });
+        }
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void filtered(FilteredCall<MemberCQ, MemberCQ> filteredLambda) {
         filtered(filteredLambda, null);
     }

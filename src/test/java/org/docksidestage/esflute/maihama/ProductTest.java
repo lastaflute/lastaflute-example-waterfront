@@ -19,6 +19,7 @@ import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
 import org.elasticsearch.common.settings.Settings.Builder;
+import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.filter.Filter;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
@@ -643,6 +644,36 @@ public class ProductTest extends UnitWaterfrontTestCase {
 
         // Dis Max Query
         // Function Score Query
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().functionScore(query -> {
+                    query.setProductCategory_Equal("MusicCD");
+                }, functions -> {
+                    functions.filter(cq -> {
+                        cq.setProductName_Match("street");
+                    }, ScoreFunctionBuilders.weightFactorFunction(10.0f));
+                }, op -> {});
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(11, list1.getAllRecordCount());
+            assertEquals(3, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            assertEquals("6", list1.get(0).asDocMeta().id());
+        }
         // Boosting Query
         // Indices Query
         // Nested Query

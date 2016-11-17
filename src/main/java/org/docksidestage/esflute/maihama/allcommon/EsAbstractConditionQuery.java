@@ -33,6 +33,7 @@ import org.dbflute.dbmeta.name.ColumnSqlName;
 import org.dbflute.exception.InvalidQueryRegisteredException;
 import org.dbflute.util.Srl;
 import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.functionscore.*;
 import org.elasticsearch.search.sort.*;
 
 /**
@@ -131,6 +132,12 @@ public abstract class EsAbstractConditionQuery implements ConditionQuery {
     // ===================================================================================
     //                                                                            Register
     //                                                                            ========
+
+    protected FunctionScoreQueryBuilder regFunctionScoreQ(QueryBuilder queryBuilder) {
+        FunctionScoreQueryBuilder functionScoreQuery = QueryBuilders.functionScoreQuery(queryBuilder);
+        regQ(functionScoreQuery);
+        return functionScoreQuery;
+    }
 
     protected BoolQueryBuilder regBoolCQ(List<QueryBuilder> mustList, List<QueryBuilder> shouldList, List<QueryBuilder> mustNotList, List<QueryBuilder> filterList) {
         assertObjectNotNull("mustList", mustList);
@@ -497,6 +504,18 @@ public abstract class EsAbstractConditionQuery implements ConditionQuery {
     public interface OperatorCall<CQ extends EsAbstractConditionQuery> {
 
         void callback(CQ query);
+    }
+
+
+    @FunctionalInterface
+    public interface ScoreFunctionCall<CC extends ScoreFunctionCreator<?>> {
+
+        void callback(CC creator);
+    }
+
+    @FunctionalInterface
+    public interface ScoreFunctionCreator<T extends EsAbstractConditionQuery> {
+        void filter(final OperatorCall<T> cqLambda, final ScoreFunctionBuilder scoreFunctionBuilder);
     }
 }
 

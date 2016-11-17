@@ -7,6 +7,7 @@ import ${request.package}.allcommon.EsAbstractConditionQuery;
 import ${request.package}.cbean.cq.${table.camelizedName}CQ;
 import org.dbflute.cbean.ckey.ConditionKey;
 import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 #if ($esVersion.isGreaterEqual("2.0.0"))
 import org.dbflute.exception.IllegalConditionBeanOperationException;
 #end##
@@ -55,6 +56,23 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
         }
     }
 #else
+    public void functionScore(OperatorCall<${table.camelizedName}CQ> queryLambda, ScoreFunctionCall<ScoreFunctionCreator<${table.camelizedName}CQ>> functionsLambda,
+            final ConditionOptionCall<FunctionScoreQueryBuilder> opLambda) {
+        ${table.camelizedName}CQ cq = new ${table.camelizedName}CQ();
+        queryLambda.callback(cq);
+        final FunctionScoreQueryBuilder builder = regFunctionScoreQ(cq.getQuery());
+        if (functionsLambda != null) {
+            functionsLambda.callback((cqLambda, scoreFunctionBuilder) -> {
+                ${table.camelizedName}CQ cf = new ${table.camelizedName}CQ();
+                cqLambda.callback(cf);
+                builder.add(cf.getQuery(), scoreFunctionBuilder);
+            });
+        }
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
     public void filtered(FilteredCall<${table.camelizedName}CQ, ${table.camelizedName}CQ> filteredLambda) {
         filtered(filteredLambda, null);
     }
