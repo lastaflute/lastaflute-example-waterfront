@@ -18,6 +18,7 @@ import org.docksidestage.esflute.maihama.allcommon.EsPagingResultBean;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.settings.Settings.Builder;
 import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
@@ -74,15 +75,12 @@ public class ProductTest extends UnitWaterfrontTestCase {
         final String index = "maihama";
 
         // create an index
-        runner.createIndex(index, builder -> {
-            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("create-maihama.json").openStream()) {
-                final String mappingSource = IOUtils.toString(input);
-                builder.setSource(mappingSource);
-            } catch (final IOException e) {
-                throw new IORuntimeException(e);
-            }
-            return builder;
-        });
+        try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("create-maihama.json").openStream()) {
+            final String mappingSource = IOUtils.toString(input);
+            runner.createIndex(index, Settings.builder().loadFromSource(mappingSource).build());
+        } catch (final IOException e) {
+            throw new IORuntimeException(e);
+        }
         runner.ensureYellow(index);
 
         if (!runner.indexExists(index)) {
