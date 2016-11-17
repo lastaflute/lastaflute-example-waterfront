@@ -34,6 +34,6 @@ map:{
     }
 
     # version for elasticsearch's jar file (no version means latest)
-    ; elasticsearchVersion = 2.3.0
+    ; elasticsearchVersion = 2.4.1
 }
 # ----------------/

@@ -65,26 +65,9 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
         not(notLambda, null);
     }
 
-#if ($esVersion.isLessThan("2.3.0"))##
-    public void not(OperatorCall<${table.camelizedName}CQ> notLambda, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        ${table.camelizedName}CQ notQuery = new ${table.camelizedName}CQ();
-        notLambda.callback(notQuery);
-        if (notQuery.hasQueries()) {
-            if (notQuery.getQueryBuilderList().size() > 1) {
-                final String msg = "not query must be one query.";
-                throw new IllegalConditionBeanOperationException(msg);
-            }
-            NotQueryBuilder builder = QueryBuilders.notQuery(notQuery.getQueryBuilderList().get(0));
-            if (opLambda != null) {
-                opLambda.callback(builder);
-            }
-        }
-    }
-#else##
     public void not(final OperatorCall<${table.camelizedName}CQ> notLambda, final ConditionOptionCall<BoolQueryBuilder> opLambda) {
         bool((must, should, mustNot, filter) -> notLambda.callback(mustNot), opLambda);
     }
-#end##
 
     public void bool(BoolCall<${table.camelizedName}CQ> boolLambda) {
         bool(boolLambda, null);
@@ -135,18 +118,6 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
         setId_NotTerm(id, null);
     }
 
-#if ($esVersion.isLessThan("2.3.0"))##
-    public void setId_NotEqual(String id, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        setId_NotTerm(id, opLambda);
-    }
-
-    public void setId_NotTerm(String id, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("_id", id));
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-#else##
     public void setId_NotEqual(String id, ConditionOptionCall<BoolQueryBuilder> opLambda) {
         setId_NotTerm(id, opLambda);
     }
@@ -154,7 +125,6 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
     public void setId_NotTerm(String id, ConditionOptionCall<BoolQueryBuilder> opLambda) {
         not(not -> not.setId_Term(id), opLambda);
     }
-#end##
 
     public void setId_Terms(Collection<String> idList) {
         setId_Terms(idList, null);
@@ -216,18 +186,6 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
         set${column.capCamelName}_NotTerm(${column.uncapCamelName}, null);
     }
 
-#if ($esVersion.isLessThan("2.3.0"))##
-    public void set${column.capCamelName}_NotEqual($javaNative ${column.uncapCamelName}, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        set${column.capCamelName}_NotTerm(${column.uncapCamelName}, opLambda);
-    }
-
-    public void set${column.capCamelName}_NotTerm($javaNative ${column.uncapCamelName}, ConditionOptionCall<NotQueryBuilder> opLambda) {
-        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("${column.name}", ${column.uncapCamelName}));
-        if (opLambda != null) {
-            opLambda.callback(builder);
-        }
-    }
-#else##
     public void set${column.capCamelName}_NotEqual($javaNative ${column.uncapCamelName}, ConditionOptionCall<BoolQueryBuilder> opLambda) {
         set${column.capCamelName}_NotTerm(${column.uncapCamelName}, opLambda);
     }
@@ -235,7 +193,6 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
     public void set${column.capCamelName}_NotTerm($javaNative ${column.uncapCamelName}, ConditionOptionCall<BoolQueryBuilder> opLambda) {
         not(not -> not.set${column.capCamelName}_Term(${column.uncapCamelName}), opLambda);
     }
-#end##
 
     public void set${column.capCamelName}_Terms(Collection<$javaNative> ${column.uncapCamelName}List) {
         set${column.capCamelName}_Terms(${column.uncapCamelName}List, null);
