@@ -80,8 +80,19 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
         not(notLambda, null);
     }
 
-    public void not(final OperatorCall<MemberCQ> notLambda, final ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        bool((must, should, mustNot, filter) -> notLambda.callback(mustNot), opLambda);
+    public void not(OperatorCall<MemberCQ> notLambda, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        MemberCQ notQuery = new MemberCQ();
+        notLambda.callback(notQuery);
+        if (notQuery.hasQueries()) {
+            if (notQuery.getQueryBuilderList().size() > 1) {
+                final String msg = "not query must be one query.";
+                throw new IllegalConditionBeanOperationException(msg);
+            }
+            NotQueryBuilder builder = QueryBuilders.notQuery(notQuery.getQueryBuilderList().get(0));
+            if (opLambda != null) {
+                opLambda.callback(builder);
+            }
+        }
     }
 
     public void bool(BoolCall<MemberCQ> boolLambda) {
@@ -132,12 +143,15 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
         setId_NotTerm(id, null);
     }
 
-    public void setId_NotEqual(String id, ConditionOptionCall<BoolQueryBuilder> opLambda) {
+    public void setId_NotEqual(String id, ConditionOptionCall<NotQueryBuilder> opLambda) {
         setId_NotTerm(id, opLambda);
     }
 
-    public void setId_NotTerm(String id, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setId_Term(id), opLambda);
+    public void setId_NotTerm(String id, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("_id", id));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setId_Terms(Collection<String> idList) {
@@ -196,12 +210,15 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
         setAccount_NotTerm(account, null);
     }
 
-    public void setAccount_NotEqual(String account, ConditionOptionCall<BoolQueryBuilder> opLambda) {
+    public void setAccount_NotEqual(String account, ConditionOptionCall<NotQueryBuilder> opLambda) {
         setAccount_NotTerm(account, opLambda);
     }
 
-    public void setAccount_NotTerm(String account, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setAccount_Term(account), opLambda);
+    public void setAccount_NotTerm(String account, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("account", account));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setAccount_Terms(Collection<String> accountList) {
@@ -403,12 +420,15 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
         setName_NotTerm(name, null);
     }
 
-    public void setName_NotEqual(String name, ConditionOptionCall<BoolQueryBuilder> opLambda) {
+    public void setName_NotEqual(String name, ConditionOptionCall<NotQueryBuilder> opLambda) {
         setName_NotTerm(name, opLambda);
     }
 
-    public void setName_NotTerm(String name, ConditionOptionCall<BoolQueryBuilder> opLambda) {
-        not(not -> not.setName_Term(name), opLambda);
+    public void setName_NotTerm(String name, ConditionOptionCall<NotQueryBuilder> opLambda) {
+        NotQueryBuilder builder = QueryBuilders.notQuery(regTermQ("name", name));
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
     }
 
     public void setName_Terms(Collection<String> nameList) {

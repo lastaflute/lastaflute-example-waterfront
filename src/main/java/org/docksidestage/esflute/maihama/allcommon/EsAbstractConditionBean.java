@@ -40,6 +40,7 @@ import org.dbflute.system.DBFluteSystem;
 import org.dbflute.twowaysql.style.BoundDateDisplayStyle;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.action.count.CountRequestBuilder;
 
 /**
  * @author ESFlute (using FreeGen)
@@ -57,6 +58,8 @@ public abstract class EsAbstractConditionBean implements ConditionBean {
     // ===================================================================================
     //                                                                             Builder
     //                                                                             =======
+    public abstract CountRequestBuilder build(CountRequestBuilder builder);
+
     public abstract SearchRequestBuilder build(SearchRequestBuilder builder);
 
     // ===================================================================================
