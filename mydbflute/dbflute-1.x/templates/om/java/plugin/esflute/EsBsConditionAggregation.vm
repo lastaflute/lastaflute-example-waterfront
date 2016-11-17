@@ -3,13 +3,22 @@ ${manager.allClassCopyright}package ${request.package}.cbean.ca.bs;
 import java.util.List;
 
 import ${request.package}.allcommon.EsAbstractConditionAggregation;
+import ${request.package}.allcommon.EsAbstractConditionQuery;
 import ${request.package}.cbean.ca.${table.camelizedName}CA;
-import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import ${request.package}.cbean.cq.${table.camelizedName}CQ;
+import ${request.package}.cbean.cq.bs.Bs${table.camelizedName}CQ;
 
+import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.filter.FilterAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.global.GlobalBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.HistogramBuilder;
+import org.elasticsearch.search.aggregations.bucket.missing.MissingBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.RangeBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.date.DateRangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.range.ipv4.IPv4RangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.sampler.SamplerAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.significant.SignificantTermsBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
 import org.elasticsearch.search.aggregations.metrics.avg.AvgBuilder;
@@ -18,9 +27,11 @@ import org.elasticsearch.search.aggregations.metrics.max.MaxBuilder;
 import org.elasticsearch.search.aggregations.metrics.min.MinBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanksBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentilesBuilder;
+import org.elasticsearch.search.aggregations.metrics.scripted.ScriptedMetricBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.StatsBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStatsBuilder;
 import org.elasticsearch.search.aggregations.metrics.sum.SumBuilder;
+import org.elasticsearch.search.aggregations.metrics.tophits.TopHitsBuilder;
 import org.elasticsearch.search.aggregations.metrics.valuecount.ValueCountBuilder;
 
 /**
@@ -32,10 +43,65 @@ public abstract class Bs${table.camelizedName}CA extends EsAbstractConditionAggr
     //                                                                     Aggregation Set
     //                                                                           =========
 
+    public void filter(String name, EsAbstractConditionQuery.OperatorCall<Bs${table.camelizedName}CQ> queryLambda,
+            ConditionOptionCall<FilterAggregationBuilder> opLambda, OperatorCall<Bs${table.camelizedName}CA> aggsLambda) {
+        ${table.camelizedName}CQ cq = new ${table.camelizedName}CQ();
+        if (queryLambda != null) {
+            queryLambda.callback(cq);
+        }
+        FilterAggregationBuilder builder = regFilterA(name, cq.getQuery());
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ${table.camelizedName}CA ca = new ${table.camelizedName}CA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    public void global(String name, ConditionOptionCall<GlobalBuilder> opLambda, OperatorCall<Bs${table.camelizedName}CA> aggsLambda) {
+        GlobalBuilder builder = regGlobalA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ${table.camelizedName}CA ca = new ${table.camelizedName}CA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    public void sampler(String name, ConditionOptionCall<SamplerAggregationBuilder> opLambda, OperatorCall<Bs${table.camelizedName}CA> aggsLambda) {
+        SamplerAggregationBuilder builder = regSamplerA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ${table.camelizedName}CA ca = new ${table.camelizedName}CA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    public void scriptedMetric(String name, ConditionOptionCall<ScriptedMetricBuilder> opLambda) {
+        ScriptedMetricBuilder builder = regScriptedMetricA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void topHits(String name, ConditionOptionCall<TopHitsBuilder> opLambda) {
+        TopHitsBuilder builder = regTopHitsA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
 #foreach ($column in $table.columnList)
 #if ($column.isNormalColumn)
 #set ($javaNative = ${column.type})
-
+    // $javaNative ${column.name}
 #if ($javaNative != "String" && $javaNative != "Date" && $javaNative != "Timestamp" && $javaNative != "LocalDateTime")
     public void set${column.capCamelName}_Avg() {
         set${column.capCamelName}_Avg(null);
@@ -253,6 +319,30 @@ public abstract class Bs${table.camelizedName}CA extends EsAbstractConditionAggr
             ca.getAggregationBuilderList().forEach(builder::subAggregation);
         }
     }
+
+    public void set${column.capCamelName}_IpRange() {
+        set${column.capCamelName}_IpRange(null);
+    }
+
+    public void set${column.capCamelName}_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        set${column.capCamelName}_IpRange("${column.name}", opLambda, null);
+    }
+
+    public void set${column.capCamelName}_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<Bs${table.camelizedName}CA> aggsLambda) {
+        set${column.capCamelName}_IpRange("${column.name}", opLambda, aggsLambda);
+    }
+
+    public void set${column.capCamelName}_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<Bs${table.camelizedName}CA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "${column.name}");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ${table.camelizedName}CA ca = new ${table.camelizedName}CA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
 #end
 
 #if ($javaNative == "Date" || $javaNative == "Timestamp" || $javaNative == "LocalDateTime")
@@ -332,6 +422,30 @@ public abstract class Bs${table.camelizedName}CA extends EsAbstractConditionAggr
         CardinalityBuilder builder = regCardinalityA(name, "${column.name}");
         if (opLambda != null) {
             opLambda.callback(builder);
+        }
+    }
+
+    public void set${column.capCamelName}_Missing() {
+        set${column.capCamelName}_Missing(null);
+    }
+
+    public void set${column.capCamelName}_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        set${column.capCamelName}_Missing("${column.name}", opLambda, null);
+    }
+
+    public void set${column.capCamelName}_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<Bs${table.camelizedName}CA> aggsLambda) {
+        set${column.capCamelName}_Missing("${column.name}", opLambda, aggsLambda);
+    }
+
+    public void set${column.capCamelName}_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<Bs${table.camelizedName}CA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "${column.name}");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ${table.camelizedName}CA ca = new ${table.camelizedName}CA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
         }
     }
 

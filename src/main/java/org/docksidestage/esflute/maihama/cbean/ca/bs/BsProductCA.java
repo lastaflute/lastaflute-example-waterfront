@@ -18,13 +18,22 @@ package org.docksidestage.esflute.maihama.cbean.ca.bs;
 import java.util.List;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionAggregation;
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionQuery;
 import org.docksidestage.esflute.maihama.cbean.ca.ProductCA;
-import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import org.docksidestage.esflute.maihama.cbean.cq.ProductCQ;
+import org.docksidestage.esflute.maihama.cbean.cq.bs.BsProductCQ;
 
+import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.filter.FilterAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.global.GlobalBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.HistogramBuilder;
+import org.elasticsearch.search.aggregations.bucket.missing.MissingBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.RangeBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.date.DateRangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.range.ipv4.IPv4RangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.sampler.SamplerAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.significant.SignificantTermsBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
 import org.elasticsearch.search.aggregations.metrics.avg.AvgBuilder;
@@ -33,9 +42,11 @@ import org.elasticsearch.search.aggregations.metrics.max.MaxBuilder;
 import org.elasticsearch.search.aggregations.metrics.min.MinBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanksBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentilesBuilder;
+import org.elasticsearch.search.aggregations.metrics.scripted.ScriptedMetricBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.StatsBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStatsBuilder;
 import org.elasticsearch.search.aggregations.metrics.sum.SumBuilder;
+import org.elasticsearch.search.aggregations.metrics.tophits.TopHitsBuilder;
 import org.elasticsearch.search.aggregations.metrics.valuecount.ValueCountBuilder;
 
 /**
@@ -47,7 +58,62 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
     //                                                                     Aggregation Set
     //                                                                           =========
 
+    public void filter(String name, EsAbstractConditionQuery.OperatorCall<BsProductCQ> queryLambda,
+            ConditionOptionCall<FilterAggregationBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        ProductCQ cq = new ProductCQ();
+        if (queryLambda != null) {
+            queryLambda.callback(cq);
+        }
+        FilterAggregationBuilder builder = regFilterA(name, cq.getQuery());
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
 
+    public void global(String name, ConditionOptionCall<GlobalBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        GlobalBuilder builder = regGlobalA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    public void sampler(String name, ConditionOptionCall<SamplerAggregationBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        SamplerAggregationBuilder builder = regSamplerA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    public void scriptedMetric(String name, ConditionOptionCall<ScriptedMetricBuilder> opLambda) {
+        ScriptedMetricBuilder builder = regScriptedMetricA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void topHits(String name, ConditionOptionCall<TopHitsBuilder> opLambda) {
+        TopHitsBuilder builder = regTopHitsA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    // LocalDateTime latest_purchase_date
 
 
     public void setLatestPurchaseDate_DateRange() {
@@ -128,7 +194,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setLatestPurchaseDate_Missing() {
+        setLatestPurchaseDate_Missing(null);
+    }
 
+    public void setLatestPurchaseDate_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setLatestPurchaseDate_Missing("latest_purchase_date", opLambda, null);
+    }
+
+    public void setLatestPurchaseDate_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setLatestPurchaseDate_Missing("latest_purchase_date", opLambda, aggsLambda);
+    }
+
+    public void setLatestPurchaseDate_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "latest_purchase_date");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String product_category
 
     public void setProductCategory_Terms() {
         setProductCategory_Terms(null);
@@ -178,6 +268,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductCategory_IpRange() {
+        setProductCategory_IpRange(null);
+    }
+
+    public void setProductCategory_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setProductCategory_IpRange("product_category", opLambda, null);
+    }
+
+    public void setProductCategory_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductCategory_IpRange("product_category", opLambda, aggsLambda);
+    }
+
+    public void setProductCategory_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "product_category");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setProductCategory_Count() {
         setProductCategory_Count(null);
@@ -209,7 +323,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductCategory_Missing() {
+        setProductCategory_Missing(null);
+    }
 
+    public void setProductCategory_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setProductCategory_Missing("product_category", opLambda, null);
+    }
+
+    public void setProductCategory_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductCategory_Missing("product_category", opLambda, aggsLambda);
+    }
+
+    public void setProductCategory_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "product_category");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String product_category_code
 
     public void setProductCategoryCode_Terms() {
         setProductCategoryCode_Terms(null);
@@ -259,6 +397,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductCategoryCode_IpRange() {
+        setProductCategoryCode_IpRange(null);
+    }
+
+    public void setProductCategoryCode_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setProductCategoryCode_IpRange("product_category_code", opLambda, null);
+    }
+
+    public void setProductCategoryCode_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductCategoryCode_IpRange("product_category_code", opLambda, aggsLambda);
+    }
+
+    public void setProductCategoryCode_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "product_category_code");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setProductCategoryCode_Count() {
         setProductCategoryCode_Count(null);
@@ -290,7 +452,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductCategoryCode_Missing() {
+        setProductCategoryCode_Missing(null);
+    }
 
+    public void setProductCategoryCode_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setProductCategoryCode_Missing("product_category_code", opLambda, null);
+    }
+
+    public void setProductCategoryCode_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductCategoryCode_Missing("product_category_code", opLambda, aggsLambda);
+    }
+
+    public void setProductCategoryCode_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "product_category_code");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String product_description
 
     public void setProductDescription_Terms() {
         setProductDescription_Terms(null);
@@ -340,6 +526,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductDescription_IpRange() {
+        setProductDescription_IpRange(null);
+    }
+
+    public void setProductDescription_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setProductDescription_IpRange("product_description", opLambda, null);
+    }
+
+    public void setProductDescription_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductDescription_IpRange("product_description", opLambda, aggsLambda);
+    }
+
+    public void setProductDescription_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "product_description");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setProductDescription_Count() {
         setProductDescription_Count(null);
@@ -371,7 +581,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductDescription_Missing() {
+        setProductDescription_Missing(null);
+    }
 
+    public void setProductDescription_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setProductDescription_Missing("product_description", opLambda, null);
+    }
+
+    public void setProductDescription_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductDescription_Missing("product_description", opLambda, aggsLambda);
+    }
+
+    public void setProductDescription_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "product_description");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String product_handle_code
 
     public void setProductHandleCode_Terms() {
         setProductHandleCode_Terms(null);
@@ -421,6 +655,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductHandleCode_IpRange() {
+        setProductHandleCode_IpRange(null);
+    }
+
+    public void setProductHandleCode_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setProductHandleCode_IpRange("product_handle_code", opLambda, null);
+    }
+
+    public void setProductHandleCode_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductHandleCode_IpRange("product_handle_code", opLambda, aggsLambda);
+    }
+
+    public void setProductHandleCode_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "product_handle_code");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setProductHandleCode_Count() {
         setProductHandleCode_Count(null);
@@ -452,7 +710,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductHandleCode_Missing() {
+        setProductHandleCode_Missing(null);
+    }
 
+    public void setProductHandleCode_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setProductHandleCode_Missing("product_handle_code", opLambda, null);
+    }
+
+    public void setProductHandleCode_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductHandleCode_Missing("product_handle_code", opLambda, aggsLambda);
+    }
+
+    public void setProductHandleCode_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "product_handle_code");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String product_name
 
     public void setProductName_Terms() {
         setProductName_Terms(null);
@@ -502,6 +784,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductName_IpRange() {
+        setProductName_IpRange(null);
+    }
+
+    public void setProductName_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setProductName_IpRange("product_name", opLambda, null);
+    }
+
+    public void setProductName_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductName_IpRange("product_name", opLambda, aggsLambda);
+    }
+
+    public void setProductName_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "product_name");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setProductName_Count() {
         setProductName_Count(null);
@@ -533,7 +839,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductName_Missing() {
+        setProductName_Missing(null);
+    }
 
+    public void setProductName_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setProductName_Missing("product_name", opLambda, null);
+    }
+
+    public void setProductName_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductName_Missing("product_name", opLambda, aggsLambda);
+    }
+
+    public void setProductName_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "product_name");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String product_status
 
     public void setProductStatus_Terms() {
         setProductStatus_Terms(null);
@@ -583,6 +913,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductStatus_IpRange() {
+        setProductStatus_IpRange(null);
+    }
+
+    public void setProductStatus_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setProductStatus_IpRange("product_status", opLambda, null);
+    }
+
+    public void setProductStatus_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductStatus_IpRange("product_status", opLambda, aggsLambda);
+    }
+
+    public void setProductStatus_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "product_status");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setProductStatus_Count() {
         setProductStatus_Count(null);
@@ -614,7 +968,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductStatus_Missing() {
+        setProductStatus_Missing(null);
+    }
 
+    public void setProductStatus_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setProductStatus_Missing("product_status", opLambda, null);
+    }
+
+    public void setProductStatus_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductStatus_Missing("product_status", opLambda, aggsLambda);
+    }
+
+    public void setProductStatus_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "product_status");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String product_status_code
 
     public void setProductStatusCode_Terms() {
         setProductStatusCode_Terms(null);
@@ -664,6 +1042,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductStatusCode_IpRange() {
+        setProductStatusCode_IpRange(null);
+    }
+
+    public void setProductStatusCode_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setProductStatusCode_IpRange("product_status_code", opLambda, null);
+    }
+
+    public void setProductStatusCode_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductStatusCode_IpRange("product_status_code", opLambda, aggsLambda);
+    }
+
+    public void setProductStatusCode_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "product_status_code");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setProductStatusCode_Count() {
         setProductStatusCode_Count(null);
@@ -695,7 +1097,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setProductStatusCode_Missing() {
+        setProductStatusCode_Missing(null);
+    }
 
+    public void setProductStatusCode_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setProductStatusCode_Missing("product_status_code", opLambda, null);
+    }
+
+    public void setProductStatusCode_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setProductStatusCode_Missing("product_status_code", opLambda, aggsLambda);
+    }
+
+    public void setProductStatusCode_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "product_status_code");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // LocalDateTime register_datetime
 
 
     public void setRegisterDatetime_DateRange() {
@@ -776,7 +1202,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setRegisterDatetime_Missing() {
+        setRegisterDatetime_Missing(null);
+    }
 
+    public void setRegisterDatetime_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setRegisterDatetime_Missing("register_datetime", opLambda, null);
+    }
+
+    public void setRegisterDatetime_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setRegisterDatetime_Missing("register_datetime", opLambda, aggsLambda);
+    }
+
+    public void setRegisterDatetime_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "register_datetime");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String register_user
 
     public void setRegisterUser_Terms() {
         setRegisterUser_Terms(null);
@@ -826,6 +1276,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setRegisterUser_IpRange() {
+        setRegisterUser_IpRange(null);
+    }
+
+    public void setRegisterUser_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setRegisterUser_IpRange("register_user", opLambda, null);
+    }
+
+    public void setRegisterUser_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setRegisterUser_IpRange("register_user", opLambda, aggsLambda);
+    }
+
+    public void setRegisterUser_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "register_user");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setRegisterUser_Count() {
         setRegisterUser_Count(null);
@@ -857,7 +1331,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setRegisterUser_Missing() {
+        setRegisterUser_Missing(null);
+    }
 
+    public void setRegisterUser_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setRegisterUser_Missing("register_user", opLambda, null);
+    }
+
+    public void setRegisterUser_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setRegisterUser_Missing("register_user", opLambda, aggsLambda);
+    }
+
+    public void setRegisterUser_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "register_user");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // Integer regular_price
     public void setRegularPrice_Avg() {
         setRegularPrice_Avg(null);
     }
@@ -1057,7 +1555,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setRegularPrice_Missing() {
+        setRegularPrice_Missing(null);
+    }
 
+    public void setRegularPrice_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setRegularPrice_Missing("regular_price", opLambda, null);
+    }
+
+    public void setRegularPrice_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setRegularPrice_Missing("regular_price", opLambda, aggsLambda);
+    }
+
+    public void setRegularPrice_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "regular_price");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // LocalDateTime update_datetime
 
 
     public void setUpdateDatetime_DateRange() {
@@ -1138,7 +1660,31 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setUpdateDatetime_Missing() {
+        setUpdateDatetime_Missing(null);
+    }
 
+    public void setUpdateDatetime_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setUpdateDatetime_Missing("update_datetime", opLambda, null);
+    }
+
+    public void setUpdateDatetime_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setUpdateDatetime_Missing("update_datetime", opLambda, aggsLambda);
+    }
+
+    public void setUpdateDatetime_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "update_datetime");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String update_user
 
     public void setUpdateUser_Terms() {
         setUpdateUser_Terms(null);
@@ -1188,6 +1734,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setUpdateUser_IpRange() {
+        setUpdateUser_IpRange(null);
+    }
+
+    public void setUpdateUser_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setUpdateUser_IpRange("update_user", opLambda, null);
+    }
+
+    public void setUpdateUser_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setUpdateUser_IpRange("update_user", opLambda, aggsLambda);
+    }
+
+    public void setUpdateUser_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "update_user");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setUpdateUser_Count() {
         setUpdateUser_Count(null);
@@ -1216,6 +1786,30 @@ public abstract class BsProductCA extends EsAbstractConditionAggregation {
         CardinalityBuilder builder = regCardinalityA(name, "update_user");
         if (opLambda != null) {
             opLambda.callback(builder);
+        }
+    }
+
+    public void setUpdateUser_Missing() {
+        setUpdateUser_Missing(null);
+    }
+
+    public void setUpdateUser_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setUpdateUser_Missing("update_user", opLambda, null);
+    }
+
+    public void setUpdateUser_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        setUpdateUser_Missing("update_user", opLambda, aggsLambda);
+    }
+
+    public void setUpdateUser_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsProductCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "update_user");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            ProductCA ca = new ProductCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
         }
     }
 

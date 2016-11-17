@@ -20,6 +20,7 @@ import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
 import org.elasticsearch.common.settings.Settings.Builder;
 import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.filter.Filter;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
 import org.elasticsearch.search.aggregations.metrics.avg.Avg;
@@ -973,6 +974,35 @@ public class ProductTest extends UnitWaterfrontTestCase {
         // Date Range Aggregation
         // Diversified Sampler Aggregation
         // Filter Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().filter("filter", cq -> cq.setProductName_Equal("flute"), op -> {}, aggs -> aggs.setRegularPrice_Avg());
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Filter filter = (Filter) aggregations.get("filter");
+            Avg avg = (Avg) filter.getAggregations().get("regular_price");
+            assertEquals(1516666.6666666667, avg.getValue());
+        }
         // Filters Aggregation
         // Geo Distance Aggregation
         // GeoHash grid Aggregation

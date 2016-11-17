@@ -18,13 +18,22 @@ package org.docksidestage.esflute.maihama.cbean.ca.bs;
 import java.util.List;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionAggregation;
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionQuery;
 import org.docksidestage.esflute.maihama.cbean.ca.MemberCA;
-import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import org.docksidestage.esflute.maihama.cbean.cq.MemberCQ;
+import org.docksidestage.esflute.maihama.cbean.cq.bs.BsMemberCQ;
 
+import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.filter.FilterAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.global.GlobalBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.HistogramBuilder;
+import org.elasticsearch.search.aggregations.bucket.missing.MissingBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.RangeBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.date.DateRangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.range.ipv4.IPv4RangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.sampler.SamplerAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.significant.SignificantTermsBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
 import org.elasticsearch.search.aggregations.metrics.avg.AvgBuilder;
@@ -33,9 +42,11 @@ import org.elasticsearch.search.aggregations.metrics.max.MaxBuilder;
 import org.elasticsearch.search.aggregations.metrics.min.MinBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanksBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentilesBuilder;
+import org.elasticsearch.search.aggregations.metrics.scripted.ScriptedMetricBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.StatsBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStatsBuilder;
 import org.elasticsearch.search.aggregations.metrics.sum.SumBuilder;
+import org.elasticsearch.search.aggregations.metrics.tophits.TopHitsBuilder;
 import org.elasticsearch.search.aggregations.metrics.valuecount.ValueCountBuilder;
 
 /**
@@ -47,7 +58,62 @@ public abstract class BsMemberCA extends EsAbstractConditionAggregation {
     //                                                                     Aggregation Set
     //                                                                           =========
 
+    public void filter(String name, EsAbstractConditionQuery.OperatorCall<BsMemberCQ> queryLambda,
+            ConditionOptionCall<FilterAggregationBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        MemberCQ cq = new MemberCQ();
+        if (queryLambda != null) {
+            queryLambda.callback(cq);
+        }
+        FilterAggregationBuilder builder = regFilterA(name, cq.getQuery());
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            MemberCA ca = new MemberCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
 
+    public void global(String name, ConditionOptionCall<GlobalBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        GlobalBuilder builder = regGlobalA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            MemberCA ca = new MemberCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    public void sampler(String name, ConditionOptionCall<SamplerAggregationBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        SamplerAggregationBuilder builder = regSamplerA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            MemberCA ca = new MemberCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    public void scriptedMetric(String name, ConditionOptionCall<ScriptedMetricBuilder> opLambda) {
+        ScriptedMetricBuilder builder = regScriptedMetricA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void topHits(String name, ConditionOptionCall<TopHitsBuilder> opLambda) {
+        TopHitsBuilder builder = regTopHitsA(name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    // String account
 
     public void setAccount_Terms() {
         setAccount_Terms(null);
@@ -97,6 +163,30 @@ public abstract class BsMemberCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setAccount_IpRange() {
+        setAccount_IpRange(null);
+    }
+
+    public void setAccount_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setAccount_IpRange("account", opLambda, null);
+    }
+
+    public void setAccount_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        setAccount_IpRange("account", opLambda, aggsLambda);
+    }
+
+    public void setAccount_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "account");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            MemberCA ca = new MemberCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setAccount_Count() {
         setAccount_Count(null);
@@ -128,7 +218,31 @@ public abstract class BsMemberCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setAccount_Missing() {
+        setAccount_Missing(null);
+    }
 
+    public void setAccount_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setAccount_Missing("account", opLambda, null);
+    }
+
+    public void setAccount_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        setAccount_Missing("account", opLambda, aggsLambda);
+    }
+
+    public void setAccount_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "account");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            MemberCA ca = new MemberCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
+    // String name
 
     public void setName_Terms() {
         setName_Terms(null);
@@ -178,6 +292,30 @@ public abstract class BsMemberCA extends EsAbstractConditionAggregation {
         }
     }
 
+    public void setName_IpRange() {
+        setName_IpRange(null);
+    }
+
+    public void setName_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda) {
+        setName_IpRange("name", opLambda, null);
+    }
+
+    public void setName_IpRange(ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        setName_IpRange("name", opLambda, aggsLambda);
+    }
+
+    public void setName_IpRange(String name, ConditionOptionCall<IPv4RangeBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        IPv4RangeBuilder builder = regIpRangeA(name, "name");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            MemberCA ca = new MemberCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
+        }
+    }
+
 
     public void setName_Count() {
         setName_Count(null);
@@ -206,6 +344,30 @@ public abstract class BsMemberCA extends EsAbstractConditionAggregation {
         CardinalityBuilder builder = regCardinalityA(name, "name");
         if (opLambda != null) {
             opLambda.callback(builder);
+        }
+    }
+
+    public void setName_Missing() {
+        setName_Missing(null);
+    }
+
+    public void setName_Missing(ConditionOptionCall<MissingBuilder> opLambda) {
+        setName_Missing("name", opLambda, null);
+    }
+
+    public void setName_Missing(ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        setName_Missing("name", opLambda, aggsLambda);
+    }
+
+    public void setName_Missing(String name, ConditionOptionCall<MissingBuilder> opLambda, OperatorCall<BsMemberCA> aggsLambda) {
+        MissingBuilder builder = regMissingA(name, "name");
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+        if (aggsLambda != null) {
+            MemberCA ca = new MemberCA();
+            aggsLambda.callback(ca);
+            ca.getAggregationBuilderList().forEach(builder::subAggregation);
         }
     }
 

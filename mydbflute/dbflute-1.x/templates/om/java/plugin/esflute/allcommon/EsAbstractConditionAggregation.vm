@@ -6,13 +6,18 @@ import java.util.Collections;
 import java.util.List;
 
 import org.dbflute.exception.InvalidQueryRegisteredException;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
-
+import org.elasticsearch.search.aggregations.bucket.filter.FilterAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.global.GlobalBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.HistogramBuilder;
+import org.elasticsearch.search.aggregations.bucket.missing.MissingBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.RangeBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.date.DateRangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.range.ipv4.IPv4RangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.sampler.SamplerAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.significant.SignificantTermsBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
 import org.elasticsearch.search.aggregations.metrics.avg.AvgBuilder;
@@ -21,9 +26,11 @@ import org.elasticsearch.search.aggregations.metrics.max.MaxBuilder;
 import org.elasticsearch.search.aggregations.metrics.min.MinBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanksBuilder;
 import org.elasticsearch.search.aggregations.metrics.percentiles.PercentilesBuilder;
+import org.elasticsearch.search.aggregations.metrics.scripted.ScriptedMetricBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.StatsBuilder;
 import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStatsBuilder;
 import org.elasticsearch.search.aggregations.metrics.sum.SumBuilder;
+import org.elasticsearch.search.aggregations.metrics.tophits.TopHitsBuilder;
 import org.elasticsearch.search.aggregations.metrics.valuecount.ValueCountBuilder;
 
 /**
@@ -155,6 +162,48 @@ public abstract class EsAbstractConditionAggregation {
 
     protected DateRangeBuilder regDateRangeA(String name, String field) {
         DateRangeBuilder builder = AggregationBuilders.dateRange(name).field(field);
+        regA(builder);
+        return builder;
+    }
+
+    protected IPv4RangeBuilder regIpRangeA(String name, String field) {
+        IPv4RangeBuilder builder = AggregationBuilders.ipRange(name).field(field);
+        regA(builder);
+        return builder;
+    }
+
+    protected MissingBuilder regMissingA(String name, String field) {
+        MissingBuilder builder = AggregationBuilders.missing(name).field(field);
+        regA(builder);
+        return builder;
+    }
+
+    protected FilterAggregationBuilder regFilterA(String name, QueryBuilder filter) {
+        FilterAggregationBuilder builder = AggregationBuilders.filter(name).filter(filter);
+        regA(builder);
+        return builder;
+    }
+
+    protected GlobalBuilder regGlobalA(String name) {
+        GlobalBuilder builder = AggregationBuilders.global(name);
+        regA(builder);
+        return builder;
+    }
+
+    protected SamplerAggregationBuilder regSamplerA(String name) {
+        SamplerAggregationBuilder builder = AggregationBuilders.sampler(name);
+        regA(builder);
+        return builder;
+    }
+
+    protected ScriptedMetricBuilder regScriptedMetricA(String name) {
+        ScriptedMetricBuilder builder = AggregationBuilders.scriptedMetric(name);
+        regA(builder);
+        return builder;
+    }
+
+    protected TopHitsBuilder regTopHitsA(String name) {
+        TopHitsBuilder builder = AggregationBuilders.topHits(name);
         regA(builder);
         return builder;
     }
