@@ -39,6 +39,11 @@ $generator.parse("om/java/plugin/esflute/allcommon/EsAbstractConditionQuery.vm",
   $manager.makeDirectory($path)
   $request.info("parse('${path}')")
   $generator.parse("om/java/plugin/esflute/allcommon/EsAbstractConditionFilter.vm", $path, "", "")
+#else
+  #set ($path = "${request.generateDirPath}allcommon/EsAbstractConditionAggregation.java")
+  $manager.makeDirectory($path)
+  $request.info("parse('${path}')")
+  $generator.parse("om/java/plugin/esflute/allcommon/EsAbstractConditionAggregation.vm", $path, "", "")
 #end
 
 #set ($path = "${request.generateDirPath}allcommon/EsAbstractEntity.java")
@@ -124,6 +129,18 @@ $generator.parse("om/java/plugin/esflute/allcommon/EsSqlClause.vm", $path, "", "
     $request.info("parse('${path}')")
     #if (!$files.file(${generator.outputPath},$path).exists())
       $generator.parse("om/java/plugin/esflute/EsExConditionFilter.vm", $path, "", "")
+    #end
+  #else
+    #set ($path = "${request.generateDirPath}cbean/ca/bs/Bs${table.camelizedName}CA.java")
+    $manager.makeDirectory($path)
+    $request.info("parse('${path}')")
+    $generator.parse("om/java/plugin/esflute/EsBsConditionAggregation.vm", $path, "", "")
+
+    #set ($path = "${request.generateDirPath}cbean/ca/${table.camelizedName}CA.java")
+    $manager.makeDirectory($path)
+    $request.info("parse('${path}')")
+    #if (!$files.file(${generator.outputPath},$path).exists())
+      $generator.parse("om/java/plugin/esflute/EsExConditionAggregation.vm", $path, "", "")
     #end
   #end
 

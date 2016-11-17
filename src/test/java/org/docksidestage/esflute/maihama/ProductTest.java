@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
@@ -19,6 +19,19 @@ import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
 import org.elasticsearch.common.settings.Settings.Builder;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
+import org.elasticsearch.search.aggregations.metrics.avg.Avg;
+import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
+import org.elasticsearch.search.aggregations.metrics.max.Max;
+import org.elasticsearch.search.aggregations.metrics.min.Min;
+import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanks;
+import org.elasticsearch.search.aggregations.metrics.percentiles.Percentiles;
+import org.elasticsearch.search.aggregations.metrics.stats.Stats;
+import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStats;
+import org.elasticsearch.search.aggregations.metrics.sum.Sum;
+import org.elasticsearch.search.aggregations.metrics.valuecount.ValueCount;
 import org.lastaflute.di.exception.IORuntimeException;
 
 public class ProductTest extends UnitWaterfrontTestCase {
@@ -655,19 +668,306 @@ public class ProductTest extends UnitWaterfrontTestCase {
         // Span Field Masking Query
 
         // Avg Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_Avg();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Avg avg = (Avg) aggregations.get("regular_price");
+            assertEquals(353455.0, avg.getValue());
+        }
         // Cardinality Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setProductCategory_Cardinality();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Cardinality cardinality = (Cardinality) aggregations.get("product_category");
+            assertEquals(3, cardinality.getValue());
+        }
         // Extended Stats Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_ExtendedStats();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            ExtendedStats extendedStats = (ExtendedStats) aggregations.get("regular_price");
+            assertEquals(353455.0, extendedStats.getAvg());
+        }
         // Geo Bounds Aggregation
         // Geo Centroid Aggregation
         // Max Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_Max();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Max max = (Max) aggregations.get("regular_price");
+            assertEquals(4000000.0, max.getValue());
+        }
         // Min Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_Min();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Min min = (Min) aggregations.get("regular_price");
+            assertEquals(340.0, min.getValue());
+        }
         // Percentiles Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_Percentiles();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Percentiles percentiles = (Percentiles) aggregations.get("regular_price");
+            assertEquals(347.6, percentiles.percentile(1));
+            assertEquals(378.0, percentiles.percentile(5));
+            assertEquals(1175.0, percentiles.percentile(25));
+            assertEquals(1650.0, percentiles.percentile(50));
+            assertEquals(14075.0, percentiles.percentile(75));
+            assertEquals(1530000.0000000019, percentiles.percentile(95));
+            assertEquals(3505999.9999999967, percentiles.percentile(99));
+        }
         // Percentile Ranks Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_PercentileRanks(op -> op.percentiles(1000, 10000));
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            PercentileRanks percentileRanks = (PercentileRanks) aggregations.get("regular_price");
+            assertEquals(23.125, percentileRanks.percent(1000));
+            assertEquals(71.65625, percentileRanks.percent(10000));
+        }
         // Scripted Metric Aggregation
         // Stats Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_Stats();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Stats stats = (Stats) aggregations.get("regular_price");
+            assertEquals(353455.0, stats.getAvg());
+        }
         // Sum Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_Sum();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Sum sum = (Sum) aggregations.get("regular_price");
+            assertEquals(7069100.0, sum.getValue());
+        }
         // Top hits Aggregation
         // Value Count Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setProductCategory_Count();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            ValueCount valueCount = (ValueCount) aggregations.get("product_category");
+            assertEquals(20, valueCount.getValue());
+        }
         // Children Aggregation
         // Date Histogram Aggregation
         // Date Range Aggregation
@@ -686,6 +986,78 @@ public class ProductTest extends UnitWaterfrontTestCase {
         // Sampler Aggregation
         // Significant Terms Aggregation
         // Terms Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setProductName_Terms();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Terms terms = (Terms) aggregations.get("product_name");
+            List<Bucket> buckets = terms.getBuckets();
+            assertEquals(10, buckets.size());
+            Bucket bucket1 = buckets.get(0);
+            assertEquals("100g", bucket1.getKey());
+            assertEquals(4, bucket1.getDocCount());
+            Bucket bucket2 = buckets.get(1);
+            assertEquals("flute", bucket2.getKey());
+            assertEquals(3, bucket2.getDocCount());
+            Bucket bucket3 = buckets.get(2);
+            assertEquals("piano", bucket3.getKey());
+            assertEquals(3, bucket3.getDocCount());
+
+            // sug aggs
+            PagingResultBean<Product> list2 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setProductName_Terms(op -> {}, aggs -> aggs.setRegularPrice_Avg());
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list2).getQueryDsl());
+            assertEquals(5, list2.size());
+            assertEquals(20, list2.getAllRecordCount());
+            assertEquals(4, list2.getAllPageCount());
+            assertEquals(1, list2.getCurrentPageNumber());
+            assertEquals(1, list2.getCurrentStartRecordNumber());
+            assertEquals(5, list2.getCurrentEndRecordNumber());
+            try {
+                list2.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list2.getNextPageNumber());
+            assertFalse(list2.existsPreviousPage());
+            assertTrue(list2.existsNextPage());
+            Aggregations aggregations2 = ((EsPagingResultBean<Product>) list2).getAggregations();
+            Terms terms2 = (Terms) aggregations2.get("product_name");
+            List<Bucket> buckets2 = terms2.getBuckets();
+            assertEquals(10, buckets2.size());
+            Bucket bucket21 = buckets2.get(0);
+            assertEquals("100g", bucket21.getKey());
+            assertEquals(4, bucket21.getDocCount());
+            Aggregations aggregations3 = bucket21.getAggregations();
+            Avg avg = (Avg) aggregations3.get("regular_price");
+            assertEquals(375.0, avg.getValue());
+        }
         // Avg Bucket Aggregation
         // Derivative Aggregation
         // Max Bucket Aggregation

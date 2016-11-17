@@ -9,9 +9,12 @@ import ${request.package}.bsentity.dbmeta.${table.camelizedName}Dbm;
 import ${request.package}.cbean.${table.camelizedName}CB;
 import ${request.package}.cbean.cq.${table.camelizedName}CQ;
 import ${request.package}.cbean.cq.bs.Bs${table.camelizedName}CQ;
+import ${request.package}.cbean.ca.${table.camelizedName}CA;
+import ${request.package}.cbean.ca.bs.Bs${table.camelizedName}CA;
 import org.dbflute.cbean.ConditionQuery;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 #if ($esVersion.isLessThan("2.3.0"))##
 import org.elasticsearch.action.count.CountRequestBuilder;
 #end##
@@ -25,6 +28,7 @@ public class Bs${table.camelizedName}CB extends EsAbstractConditionBean {
     //                                                                           Attribute
     //                                                                           =========
     protected Bs${table.camelizedName}CQ _conditionQuery;
+    protected Bs${table.camelizedName}CA _conditionAggregation;
     protected HpSpecification _specification;
 
     // ===================================================================================
@@ -93,6 +97,10 @@ public class Bs${table.camelizedName}CB extends EsAbstractConditionBean {
             });
         }
 
+        if (_conditionAggregation != null) {
+            _conditionAggregation.getAggregationBuilderList().forEach(builder::addAggregation);
+        }
+
         if (_specification != null) {
             builder.setFetchSource(_specification.columnList.toArray(new String[_specification.columnList.size()]), null);
         }
@@ -120,6 +128,25 @@ public class Bs${table.camelizedName}CB extends EsAbstractConditionBean {
     }
 
     // ===================================================================================
+    //                                                                         Aggregation
+    //                                                                         ===========
+    public Bs${table.camelizedName}CA aggregation() {
+        assertAggregationPurpose();
+        return doGetConditionAggregation();
+    }
+
+    protected Bs${table.camelizedName}CA doGetConditionAggregation() {
+        if (_conditionAggregation == null) {
+            _conditionAggregation = createLocalCA();
+        }
+        return _conditionAggregation;
+    }
+
+    protected Bs${table.camelizedName}CA createLocalCA() {
+        return new ${table.camelizedName}CA();
+    }
+
+    // ===================================================================================
     //                                                                             Specify
     //                                                                             =======
     public HpSpecification specify() {
@@ -131,6 +158,9 @@ public class Bs${table.camelizedName}CB extends EsAbstractConditionBean {
     }
 
     protected void assertQueryPurpose() {
+    }
+
+    protected void assertAggregationPurpose() {
     }
 
     protected void assertSpecifyPurpose() {
