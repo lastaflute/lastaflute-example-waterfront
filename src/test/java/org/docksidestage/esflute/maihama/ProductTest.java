@@ -22,6 +22,9 @@ import org.elasticsearch.common.settings.Settings.Builder;
 import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.filter.Filter;
+import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
+import org.elasticsearch.search.aggregations.bucket.missing.Missing;
+import org.elasticsearch.search.aggregations.bucket.range.Range;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
 import org.elasticsearch.search.aggregations.metrics.avg.Avg;
@@ -1039,10 +1042,118 @@ public class ProductTest extends UnitWaterfrontTestCase {
         // GeoHash grid Aggregation
         // Global Aggregation
         // Histogram Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().setRegularPrice_LessThan(2000);
+                cb.aggregation().setRegularPrice_Histogram(op -> {
+                    op.interval(200).extendedBounds(0L, 2000L);
+                }, aggs -> {});
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(13, list1.getAllRecordCount());
+            assertEquals(3, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertEquals(2, list1.getNextPageNumber());
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Histogram histogram = (Histogram) aggregations.get("regular_price");
+            assertEquals(11, histogram.getBuckets().size());
+            assertEquals(0L, histogram.getBuckets().get(0).getDocCount());
+            assertEquals(3L, histogram.getBuckets().get(1).getDocCount());
+            assertEquals(1L, histogram.getBuckets().get(2).getDocCount());
+            assertEquals(0L, histogram.getBuckets().get(3).getDocCount());
+            assertEquals(0L, histogram.getBuckets().get(4).getDocCount());
+            assertEquals(1L, histogram.getBuckets().get(5).getDocCount());
+            assertEquals(2L, histogram.getBuckets().get(6).getDocCount());
+            assertEquals(2L, histogram.getBuckets().get(7).getDocCount());
+            assertEquals(2L, histogram.getBuckets().get(8).getDocCount());
+            assertEquals(2L, histogram.getBuckets().get(9).getDocCount());
+            assertEquals(0L, histogram.getBuckets().get(10).getDocCount());
+        }
         // IP Range Aggregation
         // Missing Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_Missing();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Missing missing = (Missing) aggregations.get("regular_price");
+            assertEquals(0, missing.getDocCount());
+        }
         // Nested Aggregation
         // Range Aggregation
+        {
+            // first page
+            PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
+                cb.query().matchAll();
+                cb.aggregation().setRegularPrice_Range(op -> {
+                    op.addUnboundedFrom("all", 0)
+                        .addRange("average", 1000, 5000)
+                        .addUnboundedTo("cheap", 1000);
+                }, aggs -> {});
+                cb.query().addOrderBy_ProductHandleCode_Asc();
+                cb.paging(5, 1);
+            });
+            System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
+            assertEquals(5, list1.size());
+            assertEquals(20, list1.getAllRecordCount());
+            assertEquals(4, list1.getAllPageCount());
+            assertEquals(1, list1.getCurrentPageNumber());
+            assertEquals(1, list1.getCurrentStartRecordNumber());
+            assertEquals(5, list1.getCurrentEndRecordNumber());
+            try {
+                list1.getPreviousPageNumber();
+                fail();
+            } catch (IllegalStateException e) {
+                // pass
+            }
+            assertFalse(list1.existsPreviousPage());
+            assertTrue(list1.existsNextPage());
+            Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
+            Range range = (Range) aggregations.get("regular_price");
+            assertEquals(3, range.getBuckets().size());
+            range.getBuckets().forEach(bucket -> {
+                System.out.println(bucket.getFromAsString());
+                System.out.println(bucket.getToAsString());
+                System.out.println(bucket.getKeyAsString());
+                System.out.println(bucket.getDocCount());
+            });
+            //assertEquals(4, range.getBuckets().get(0).getDocCount());
+            //assertEquals(15, range.getBuckets().get(0).getDocCount());
+            //assertEquals(11, range.getBuckets().get(0).getDocCount());
+        }
         // Reverse nested Aggregation
         // Sampler Aggregation
         // Significant Terms Aggregation
