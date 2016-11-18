@@ -300,6 +300,16 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setAccount_SpanTerm(String account) {
+        setAccount_SpanTerm("account", null);
+    }
+
+    public void setAccount_SpanTerm(String account, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
+        SpanTermQueryBuilder builder = regSpanTermQ("account", account);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
     public void setAccount_GreaterThan(String account) {
         setAccount_GreaterThan(account, null);
     }
@@ -507,6 +517,16 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
         }
     }
 
+    public void setName_SpanTerm(String name) {
+        setName_SpanTerm("name", null);
+    }
+
+    public void setName_SpanTerm(String name, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
+        SpanTermQueryBuilder builder = regSpanTermQ("name", name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
     public void setName_GreaterThan(String name) {
         setName_GreaterThan(name, null);
     }

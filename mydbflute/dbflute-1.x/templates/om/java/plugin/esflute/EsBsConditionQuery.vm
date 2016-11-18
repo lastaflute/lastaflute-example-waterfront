@@ -291,6 +291,16 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
         }
     }
 
+    public void set${column.capCamelName}_SpanTerm($javaNative ${column.uncapCamelName}) {
+        set${column.capCamelName}_SpanTerm("${column.name}", null);
+    }
+
+    public void set${column.capCamelName}_SpanTerm($javaNative ${column.uncapCamelName}, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
+        SpanTermQueryBuilder builder = regSpanTermQ("${column.name}", ${column.uncapCamelName});
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
 #end
     public void set${column.capCamelName}_GreaterThan($javaNative ${column.uncapCamelName}) {
         set${column.capCamelName}_GreaterThan(${column.uncapCamelName}, null);
