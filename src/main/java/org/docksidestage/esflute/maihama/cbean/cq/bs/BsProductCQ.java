@@ -484,6 +484,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
             opLambda.callback(builder);
         }
     }
+
+    public void setProductCategory_Type(String productCategory) {
+        setProductCategory_Type(productCategory, null);
+    }
+
+    public void setProductCategory_Type(String productCategory, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("product_category", productCategory);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
     public void setProductCategory_GreaterThan(String productCategory) {
         setProductCategory_GreaterThan(productCategory, null);
     }
@@ -697,6 +708,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductCategoryCode_SpanTerm(String productCategoryCode, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
         SpanTermQueryBuilder builder = regSpanTermQ("product_category_code", productCategoryCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductCategoryCode_Type(String productCategoryCode) {
+        setProductCategoryCode_Type(productCategoryCode, null);
+    }
+
+    public void setProductCategoryCode_Type(String productCategoryCode, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -918,6 +940,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
             opLambda.callback(builder);
         }
     }
+
+    public void setProductDescription_Type(String productDescription) {
+        setProductDescription_Type(productDescription, null);
+    }
+
+    public void setProductDescription_Type(String productDescription, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("product_description", productDescription);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
     public void setProductDescription_GreaterThan(String productDescription) {
         setProductDescription_GreaterThan(productDescription, null);
     }
@@ -1131,6 +1164,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductHandleCode_SpanTerm(String productHandleCode, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
         SpanTermQueryBuilder builder = regSpanTermQ("product_handle_code", productHandleCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductHandleCode_Type(String productHandleCode) {
+        setProductHandleCode_Type(productHandleCode, null);
+    }
+
+    public void setProductHandleCode_Type(String productHandleCode, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("product_handle_code", productHandleCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -1352,6 +1396,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
             opLambda.callback(builder);
         }
     }
+
+    public void setProductName_Type(String productName) {
+        setProductName_Type(productName, null);
+    }
+
+    public void setProductName_Type(String productName, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("product_name", productName);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
     public void setProductName_GreaterThan(String productName) {
         setProductName_GreaterThan(productName, null);
     }
@@ -1569,6 +1624,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
             opLambda.callback(builder);
         }
     }
+
+    public void setProductStatus_Type(String productStatus) {
+        setProductStatus_Type(productStatus, null);
+    }
+
+    public void setProductStatus_Type(String productStatus, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("product_status", productStatus);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
     public void setProductStatus_GreaterThan(String productStatus) {
         setProductStatus_GreaterThan(productStatus, null);
     }
@@ -1782,6 +1848,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setProductStatusCode_SpanTerm(String productStatusCode, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
         SpanTermQueryBuilder builder = regSpanTermQ("product_status_code", productStatusCode);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setProductStatusCode_Type(String productStatusCode) {
+        setProductStatusCode_Type(productStatusCode, null);
+    }
+
+    public void setProductStatusCode_Type(String productStatusCode, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("product_status_code", productStatusCode);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2173,6 +2250,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setRegisterUser_SpanTerm(String registerUser, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
         SpanTermQueryBuilder builder = regSpanTermQ("register_user", registerUser);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setRegisterUser_Type(String registerUser) {
+        setRegisterUser_Type(registerUser, null);
+    }
+
+    public void setRegisterUser_Type(String registerUser, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("register_user", registerUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -2738,6 +2826,17 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
 
     public void setUpdateUser_SpanTerm(String updateUser, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
         SpanTermQueryBuilder builder = regSpanTermQ("update_user", updateUser);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setUpdateUser_Type(String updateUser) {
+        setUpdateUser_Type(updateUser, null);
+    }
+
+    public void setUpdateUser_Type(String updateUser, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("update_user", updateUser);
         if (opLambda != null) {
             opLambda.callback(builder);
         }

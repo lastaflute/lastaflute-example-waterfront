@@ -301,6 +301,17 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
             opLambda.callback(builder);
         }
     }
+
+    public void set${column.capCamelName}_Type($javaNative ${column.uncapCamelName}) {
+        set${column.capCamelName}_Type(${column.uncapCamelName}, null);
+    }
+
+    public void set${column.capCamelName}_Type($javaNative ${column.uncapCamelName}, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("${column.name}", ${column.uncapCamelName});
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
 #end
     public void set${column.capCamelName}_GreaterThan($javaNative ${column.uncapCamelName}) {
         set${column.capCamelName}_GreaterThan(${column.uncapCamelName}, null);
