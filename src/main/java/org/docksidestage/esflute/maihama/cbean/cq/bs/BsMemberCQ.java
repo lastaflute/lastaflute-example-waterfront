@@ -310,6 +310,17 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
             opLambda.callback(builder);
         }
     }
+
+    public void setAccount_Type(String account) {
+        setAccount_Type(account, null);
+    }
+
+    public void setAccount_Type(String account, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("account", account);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
     public void setAccount_GreaterThan(String account) {
         setAccount_GreaterThan(account, null);
     }
@@ -523,6 +534,17 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
 
     public void setName_SpanTerm(String name, ConditionOptionCall<SpanTermQueryBuilder> opLambda) {
         SpanTermQueryBuilder builder = regSpanTermQ("name", name);
+        if (opLambda != null) {
+            opLambda.callback(builder);
+        }
+    }
+
+    public void setName_Type(String name) {
+        setName_Type(name, null);
+    }
+
+    public void setName_Type(String name, ConditionOptionCall<TypeQueryBuilder> opLambda) {
+        TypeQueryBuilder builder = regTypeQ("name", name);
         if (opLambda != null) {
             opLambda.callback(builder);
         }

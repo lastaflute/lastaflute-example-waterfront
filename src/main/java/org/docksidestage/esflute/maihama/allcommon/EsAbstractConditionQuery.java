@@ -210,6 +210,13 @@ public abstract class EsAbstractConditionQuery implements ConditionQuery {
         return fuzzyQuery;
     }
 
+    protected TypeQueryBuilder regTypeQ(String name, String type) {
+        checkEsInvalidQuery(name, type);
+        TypeQueryBuilder typeQuery = QueryBuilders.typeQuery(type);
+        regQ(typeQuery);
+        return typeQuery;
+    }
+
     protected PrefixQueryBuilder regPrefixQ(String name, String prefix) {
         checkEsInvalidQuery(name, prefix);
         PrefixQueryBuilder prefixQuery = QueryBuilders.prefixQuery(name, prefix);
