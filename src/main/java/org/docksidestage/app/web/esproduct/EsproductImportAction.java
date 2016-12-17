@@ -72,7 +72,7 @@ public class EsproductImportAction extends WaterfrontBaseAction {
             product.setUpdateDatetime(entity.getUpdateDatetime());
             product.setUpdateUser(entity.getUpdateUser());
             productBhv.insert(product, op -> {
-                op.setRefresh(true);
+                op.setRefreshPolicy("true");
             });
         });
         return redirect(EsproductListAction.class);

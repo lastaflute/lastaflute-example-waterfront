@@ -16,7 +16,7 @@
 		<!-- Main Framework -->
 		<dbflute.version>1.1.1</dbflute.version>
 		<h2.jdbc.version>1.4.192</h2.jdbc.version>
-		<elasticsearch.version>2.4.1</elasticsearch.version>
+		<elasticsearch.version>5.0.2</elasticsearch.version>
 		<lastaflute.version>0.8.4</lastaflute.version>
 		<lasta.taglib.version>0.7.1</lasta.taglib.version>
 		<lasta.job.version>0.2.4</lasta.job.version>
@@ -36,7 +36,7 @@
 		<junit.version>4.8.2</junit.version> <!-- is latest version without hamcrest -->
 		<utflute.version>0.6.1B</utflute.version>
 		<javaparser.version>2.2.2</javaparser.version>
-		<es.cluster.runner.version>2.4.0.0</es.cluster.runner.version>
+		<es.cluster.runner.version>5.0.2.0-SNAPSHOT</es.cluster.runner.version>
 	</properties>
 
 	<licenses>
@@ -251,6 +251,11 @@
 			<artifactId>elasticsearch</artifactId>
 			<version>${elasticsearch.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>transport</artifactId>
+			<version>${elasticsearch.version}</version>
+		</dependency>
 
 		<!-- lastaflute -->
 		<dependency>
@@ -307,7 +312,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version> <!-- contains taglibs.standard -->
 			<!-- should be as jar file in executable war to detect tld files -->
-			<scope>runtime</scope> 
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- tomcat -->
@@ -366,10 +371,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<optional>true</optional>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.6.2</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

@@ -74,7 +74,7 @@ public class EsproductAddAction extends WaterfrontBaseAction {
     //                                                                              ======
     private void addProduct(EsproductAddForm form) {
         productBhv.insert(mappingToEntity(form), op -> {
-            op.setRefresh(true);
+            op.setRefreshPolicy("true");
         });
     }
 

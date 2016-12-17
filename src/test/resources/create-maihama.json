@@ -27,6 +27,7 @@
           },
           "product_name" : {
             "type" : "string",
+            "fielddata" : true,
             "analyzer" : "standard",
             "fields" : {
               "raw" : {

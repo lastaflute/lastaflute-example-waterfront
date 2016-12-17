@@ -336,7 +336,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
                 cb.query().queryString("Flute OR Piano", op -> {
                     op.defaultField("product_name");
                 });
-                cb.query().addOrderBy_ProductName_Asc();
+                cb.query().addOrderBy_ProductHandleCode_Asc();
                 cb.paging(6, 1);
             });
             System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
@@ -360,11 +360,11 @@ public class ProductTest extends UnitWaterfrontTestCase {
             }
             assertFalse(list1.existsPreviousPage());
             assertFalse(list1.existsNextPage());
-            assertEquals("FLUTE-01", list1.get(0).getProductHandleCode());
-            assertEquals("FLUTE-02", list1.get(1).getProductHandleCode());
-            assertEquals("FLUTE-03", list1.get(2).getProductHandleCode());
-            assertEquals("PIANO-01", list1.get(3).getProductHandleCode());
-            assertEquals("BILLYJOEL-02", list1.get(4).getProductHandleCode());
+            assertEquals("BILLYJOEL-02", list1.get(0).getProductHandleCode());
+            assertEquals("FLUTE-01", list1.get(1).getProductHandleCode());
+            assertEquals("FLUTE-02", list1.get(2).getProductHandleCode());
+            assertEquals("FLUTE-03", list1.get(3).getProductHandleCode());
+            assertEquals("PIANO-01", list1.get(4).getProductHandleCode());
             assertEquals("PIANO-02", list1.get(5).getProductHandleCode());
         }
 
@@ -459,7 +459,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             // first page
             PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
                 cb.query().setProductName_Exists();
-                cb.query().addOrderBy_ProductName_Asc();
+                cb.query().addOrderBy_ProductName_raw_Asc();
                 cb.paging(5, 1);
             });
             System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
@@ -889,7 +889,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             // first page
             PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
-                cb.aggregation().setRegularPrice_PercentileRanks(op -> op.percentiles(1000, 10000));
+                cb.aggregation().setRegularPrice_PercentileRanks(op -> op.values(1000, 10000));
                 cb.query().addOrderBy_ProductHandleCode_Asc();
                 cb.paging(5, 1);
             });
@@ -1119,9 +1119,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
                 cb.aggregation().setRegularPrice_Range(op -> {
-                    op.addUnboundedFrom("all", 0)
-                        .addRange("average", 1000, 5000)
-                        .addUnboundedTo("cheap", 1000);
+                    op.addUnboundedFrom("all", 0).addRange("average", 1000, 5000).addUnboundedTo("cheap", 1000);
                 }, aggs -> {});
                 cb.query().addOrderBy_ProductHandleCode_Asc();
                 cb.paging(5, 1);
