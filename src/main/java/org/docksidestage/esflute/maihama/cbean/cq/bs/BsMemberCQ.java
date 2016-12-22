@@ -318,8 +318,8 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     }
 
     public void setAccount_GreaterThan(String account, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        final Object value = account;
-        RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_GREATER_THAN, value);
+        final Object _value = account;
+        RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_GREATER_THAN, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -330,8 +330,8 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     }
 
     public void setAccount_LessThan(String account, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        final Object value = account;
-        RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_LESS_THAN, value);
+        final Object _value = account;
+        RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_LESS_THAN, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -342,8 +342,8 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     }
 
     public void setAccount_GreaterEqual(String account, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        final Object value = account;
-        RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_GREATER_EQUAL, value);
+        final Object _value = account;
+        RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_GREATER_EQUAL, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -354,8 +354,8 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     }
 
     public void setAccount_LessEqual(String account, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        final Object value = account;
-        RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_LESS_EQUAL, value);
+        final Object _value = account;
+        RangeQueryBuilder builder = regRangeQ("account", ConditionKey.CK_LESS_EQUAL, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -540,8 +540,8 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     }
 
     public void setName_GreaterThan(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        final Object value = name;
-        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_GREATER_THAN, value);
+        final Object _value = name;
+        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_GREATER_THAN, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -552,8 +552,8 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     }
 
     public void setName_LessThan(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        final Object value = name;
-        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_LESS_THAN, value);
+        final Object _value = name;
+        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_LESS_THAN, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -564,8 +564,8 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     }
 
     public void setName_GreaterEqual(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        final Object value = name;
-        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_GREATER_EQUAL, value);
+        final Object _value = name;
+        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_GREATER_EQUAL, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -576,8 +576,8 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
     }
 
     public void setName_LessEqual(String name, ConditionOptionCall<RangeQueryBuilder> opLambda) {
-        final Object value = name;
-        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_LESS_EQUAL, value);
+        final Object _value = name;
+        RangeQueryBuilder builder = regRangeQ("name", ConditionKey.CK_LESS_EQUAL, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }

@@ -311,11 +311,11 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
 
     public void set${column.capCamelName}_GreaterThan($javaNative ${column.uncapCamelName}, ConditionOptionCall<RangeQueryBuilder> opLambda) {
 #if ($javaNative == "Date" || $javaNative == "LocalDateTime")##
-        final Object value = toRange${javaNative}String(${column.uncapCamelName}, "${column.format}");
+        final Object _value = toRange${javaNative}String(${column.uncapCamelName}, "${column.format}");
 #else##
-        final Object value = ${column.uncapCamelName};
+        final Object _value = ${column.uncapCamelName};
 #end##
-        RangeQueryBuilder builder = regRangeQ("${column.name}", ConditionKey.CK_GREATER_THAN, value);
+        RangeQueryBuilder builder = regRangeQ("${column.name}", ConditionKey.CK_GREATER_THAN, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -327,11 +327,11 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
 
     public void set${column.capCamelName}_LessThan($javaNative ${column.uncapCamelName}, ConditionOptionCall<RangeQueryBuilder> opLambda) {
 #if ($javaNative == "Date" || $javaNative == "LocalDateTime")##
-        final Object value = toRange${javaNative}String(${column.uncapCamelName}, "${column.format}");
+        final Object _value = toRange${javaNative}String(${column.uncapCamelName}, "${column.format}");
 #else##
-        final Object value = ${column.uncapCamelName};
+        final Object _value = ${column.uncapCamelName};
 #end##
-        RangeQueryBuilder builder = regRangeQ("${column.name}", ConditionKey.CK_LESS_THAN, value);
+        RangeQueryBuilder builder = regRangeQ("${column.name}", ConditionKey.CK_LESS_THAN, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -343,11 +343,11 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
 
     public void set${column.capCamelName}_GreaterEqual($javaNative ${column.uncapCamelName}, ConditionOptionCall<RangeQueryBuilder> opLambda) {
 #if ($javaNative == "Date" || $javaNative == "LocalDateTime")##
-        final Object value = toRange${javaNative}String(${column.uncapCamelName}, "${column.format}");
+        final Object _value = toRange${javaNative}String(${column.uncapCamelName}, "${column.format}");
 #else##
-        final Object value = ${column.uncapCamelName};
+        final Object _value = ${column.uncapCamelName};
 #end##
-        RangeQueryBuilder builder = regRangeQ("${column.name}", ConditionKey.CK_GREATER_EQUAL, value);
+        RangeQueryBuilder builder = regRangeQ("${column.name}", ConditionKey.CK_GREATER_EQUAL, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
@@ -359,11 +359,11 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
 
     public void set${column.capCamelName}_LessEqual($javaNative ${column.uncapCamelName}, ConditionOptionCall<RangeQueryBuilder> opLambda) {
 #if ($javaNative == "Date" || $javaNative == "LocalDateTime")##
-        final Object value = toRange${javaNative}String(${column.uncapCamelName}, "${column.format}");
+        final Object _value = toRange${javaNative}String(${column.uncapCamelName}, "${column.format}");
 #else##
-        final Object value = ${column.uncapCamelName};
+        final Object _value = ${column.uncapCamelName};
 #end##
-        RangeQueryBuilder builder = regRangeQ("${column.name}", ConditionKey.CK_LESS_EQUAL, value);
+        RangeQueryBuilder builder = regRangeQ("${column.name}", ConditionKey.CK_LESS_EQUAL, _value);
         if (opLambda != null) {
             opLambda.callback(builder);
         }
