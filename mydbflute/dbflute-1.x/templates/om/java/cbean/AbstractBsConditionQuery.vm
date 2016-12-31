@@ -1,5 +1,5 @@
 ##
-## Copyright 2014-2016 the original author or authors.
+## Copyright 2014-2017 the original author or authors.
 ##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
@@ -245,7 +245,7 @@ public abstract class ${myClassName} extends AbstractConditionQuery {
      * ${col.aliasExpression}${col.name}: {${col.columnDefinitionLineDisp}}
      * @param ${tmpUncapitalisedJavaName}List The collection of ${col.uncapitalisedJavaName} as inScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void set${tmpJavaName}_InScope(Collection<${col.javaNative}> ${tmpUncapitalisedJavaName}List) {
+    ${col.propertySettingModifier} void set${tmpJavaName}_InScope(Collection<${col.javaNative}> ${tmpUncapitalisedJavaName}List) {
         doSet${tmpJavaName}_InScope(${tmpUncapitalisedJavaName}List);
     }
 #if ($col.hasClassification())
@@ -723,7 +723,7 @@ public abstract class ${myClassName} extends AbstractConditionQuery {
      * ${col.aliasExpression}${col.name}: {${col.columnDefinitionLineDisp}}
      * @param ${tmpUncapitalisedJavaName}List The collection of ${col.uncapitalisedJavaName} as inScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void set${tmpJavaName}_InScope(Collection<${col.javaNative}> ${tmpUncapitalisedJavaName}List) {
+    ${col.propertySettingModifier} void set${tmpJavaName}_InScope(Collection<${col.javaNative}> ${tmpUncapitalisedJavaName}List) {
         doSet${tmpJavaName}_InScope(${tmpUncapitalisedJavaName}List);
     }
 #if ($col.hasClassification())
@@ -1248,7 +1248,6 @@ public abstract class ${myClassName} extends AbstractConditionQuery {
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
      * </pre> 
-     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<${myConditionBeanClassName}> scalar_GreaterThan() {
@@ -1264,7 +1263,6 @@ public abstract class ${myClassName} extends AbstractConditionQuery {
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
      * </pre> 
-     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<${myConditionBeanClassName}> scalar_LessThan() {
