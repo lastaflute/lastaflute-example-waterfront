@@ -87,11 +87,15 @@ public abstract class BsProductBhv extends EsAbstractBehavior<Product, ProductCB
             result.setRegularPrice(DfTypeUtil.toInteger(source.get("regular_price")));
             result.setUpdateDatetime(DfTypeUtil.toLocalDateTime(source.get("update_datetime")));
             result.setUpdateUser(DfTypeUtil.toString(source.get("update_user")));
-            return result;
+            return updateEntity(source, result);
         } catch (InstantiationException | IllegalAccessException e) {
             final String msg = "Cannot create a new instance: " + entityType.getName();
             throw new IllegalBehaviorStateException(msg, e);
         }
+    }
+
+    protected <RESULT extends Product> RESULT updateEntity(Map<String, Object> source, RESULT result) {
+        return result;
     }
 
     // ===================================================================================
