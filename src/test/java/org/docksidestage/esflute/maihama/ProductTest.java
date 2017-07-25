@@ -1182,7 +1182,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             assertTrue(list1.existsNextPage());
             Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
             Terms terms = (Terms) aggregations.get("product_name");
-            List<Bucket> buckets = terms.getBuckets();
+            List<? extends Bucket> buckets = terms.getBuckets();
             assertEquals(10, buckets.size());
             Bucket bucket1 = buckets.get(0);
             assertEquals("100g", bucket1.getKey());
@@ -1219,7 +1219,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             assertTrue(list2.existsNextPage());
             Aggregations aggregations2 = ((EsPagingResultBean<Product>) list2).getAggregations();
             Terms terms2 = (Terms) aggregations2.get("product_name");
-            List<Bucket> buckets2 = terms2.getBuckets();
+            List<? extends Bucket> buckets2 = terms2.getBuckets();
             assertEquals(10, buckets2.size());
             Bucket bucket21 = buckets2.get(0);
             assertEquals("100g", bucket21.getKey());
