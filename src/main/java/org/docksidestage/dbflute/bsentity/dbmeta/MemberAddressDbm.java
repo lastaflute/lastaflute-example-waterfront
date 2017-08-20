@@ -64,8 +64,7 @@ public class MemberAddressDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((MemberAddress)et).getValidEndDate(), (et, vl) -> ((MemberAddress)et).setValidEndDate(ctld(vl)), "validEndDate");
         setupEpg(_epgMap, et -> ((MemberAddress)et).getAddress(), (et, vl) -> ((MemberAddress)et).setAddress((String)vl), "address");
         setupEpg(_epgMap, et -> ((MemberAddress)et).getRegionId(), (et, vl) -> {
-            ColumnInfo col = columnRegionId();
-            CDef.Region cls = (CDef.Region)gcls(et, col, vl);
+            CDef.Region cls = (CDef.Region)gcls(et, columnRegionId(), vl);
             if (cls != null) {
                 ((MemberAddress)et).setRegionIdAsRegion(cls);
             } else {
@@ -112,17 +111,17 @@ public class MemberAddressDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberAddressId = cci("MEMBER_ADDRESS_ID", "MEMBER_ADDRESS_ID", null, "会員住所ID", Integer.class, "memberAddressId", null, true, true, true, "INTEGER", 10, 0, "NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1CDC023A_D0E7_4AA5_9E88_99BDCC00BA97", false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, false, false, true, "INTEGER", 10, 0, null, false, null, null, "member", null, null, false);
-    protected final ColumnInfo _columnValidBeginDate = cci("VALID_BEGIN_DATE", "VALID_BEGIN_DATE", null, "有効開始日", java.time.LocalDate.class, "validBeginDate", null, false, false, true, "DATE", 8, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnValidEndDate = cci("VALID_END_DATE", "VALID_END_DATE", null, "有効終了日", java.time.LocalDate.class, "validEndDate", null, false, false, true, "DATE", 8, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnAddress = cci("ADDRESS", "ADDRESS", null, "住所", String.class, "address", null, false, false, true, "VARCHAR", 200, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, "地域ID", Integer.class, "regionId", null, false, false, true, "INTEGER", 10, 0, null, false, null, null, "region", null, CDef.DefMeta.Region, false);
-    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, null, String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, null, String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, null, Long.class, "versionNo", null, false, false, true, "BIGINT", 19, 0, null, false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
+    protected final ColumnInfo _columnMemberAddressId = cci("MEMBER_ADDRESS_ID", "MEMBER_ADDRESS_ID", null, "会員住所ID", Integer.class, "memberAddressId", null, true, true, true, "INTEGER", 10, 0, null, "NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_9902D72A_5069_4525_B64F_8491BD77F37B", false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, false, false, true, "INTEGER", 10, 0, null, null, false, null, null, "member", null, null, false);
+    protected final ColumnInfo _columnValidBeginDate = cci("VALID_BEGIN_DATE", "VALID_BEGIN_DATE", null, "有効開始日", java.time.LocalDate.class, "validBeginDate", null, false, false, true, "DATE", 8, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnValidEndDate = cci("VALID_END_DATE", "VALID_END_DATE", null, "有効終了日", java.time.LocalDate.class, "validEndDate", null, false, false, true, "DATE", 8, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnAddress = cci("ADDRESS", "ADDRESS", null, "住所", String.class, "address", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, "地域ID", Integer.class, "regionId", null, false, false, true, "INTEGER", 10, 0, null, null, false, null, null, "region", null, CDef.DefMeta.Region, false);
+    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, null, String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, null, String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, null, Long.class, "versionNo", null, false, false, true, "BIGINT", 19, 0, null, null, false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
      * (会員住所ID)MEMBER_ADDRESS_ID: {PK, ID, NotNull, INTEGER(10)}

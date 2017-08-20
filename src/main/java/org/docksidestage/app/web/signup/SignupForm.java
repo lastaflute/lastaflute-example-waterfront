@@ -1,6 +1,6 @@
 package org.docksidestage.app.web.signup;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.lastaflute.web.validation.Required;
 
 /**
  * @author annie_pocket
@@ -8,16 +8,16 @@ import org.hibernate.validator.constraints.NotBlank;
 public class SignupForm {
 
     // Member
-    @NotBlank
+    @Required
     public String memberName;
-    @NotBlank
+    @Required
     public String memberAccount;
 
     // Member Security
-    @NotBlank
+    @Required
     public String password;
-    @NotBlank
+    @Required
     public String reminderQuestion;
-    @NotBlank
+    @Required
     public String reminderAnswer;
 }
