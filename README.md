@@ -1,4 +1,4 @@
-LastaFlute Example Waterfront
+LastaFlute Example Waterfront [![Build Status](https://travis-ci.org/lastaflute/lastaflute-example-waterfront.svg?branch=master)](https://travis-ci.org/lastaflute/lastaflute-example-waterfront)
 =======================
 example project for LastaFlute, ESFlute (with Elasticsearch, also JSP)
 
