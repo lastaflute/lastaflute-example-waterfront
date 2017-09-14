@@ -1,4 +1,4 @@
-sudo: required
+sudo: false
 
 language: java
 
@@ -11,6 +11,7 @@ cache:
 
 before_script:
   - java -version
+  - mvn dbflute:replace-schema -Ddbflute.forceExecution=y
 
 script:
   - mvn test
