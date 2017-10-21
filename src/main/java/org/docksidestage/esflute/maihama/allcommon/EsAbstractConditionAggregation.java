@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,9 @@ import org.elasticsearch.search.aggregations.bucket.global.GlobalAggregationBuil
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.histogram.HistogramAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.missing.MissingAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.range.DateRangeAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.range.IpRangeAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.RangeAggregationBuilder;
-import org.elasticsearch.search.aggregations.bucket.range.date.DateRangeAggregationBuilder;
-import org.elasticsearch.search.aggregations.bucket.range.ip.IpRangeAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.sampler.SamplerAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.significant.SignificantTermsAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
@@ -126,8 +126,8 @@ public abstract class EsAbstractConditionAggregation {
         return builder;
     }
 
-    protected PercentileRanksAggregationBuilder regPercentileRanksA(String name, String field) {
-        PercentileRanksAggregationBuilder builder = AggregationBuilders.percentileRanks(name).field(field);
+    protected PercentileRanksAggregationBuilder regPercentileRanksA(String name, String field, double[] values) {
+        PercentileRanksAggregationBuilder builder = AggregationBuilders.percentileRanks(name, values).field(field);
         regA(builder);
         return builder;
     }
@@ -143,7 +143,6 @@ public abstract class EsAbstractConditionAggregation {
         regA(builder);
         return builder;
     }
-
 
     protected TermsAggregationBuilder regTermsA(String name, String field) {
         TermsAggregationBuilder builder = AggregationBuilders.terms(name).field(field);

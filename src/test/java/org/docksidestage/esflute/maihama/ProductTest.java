@@ -19,6 +19,7 @@ import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
 import org.elasticsearch.common.settings.Settings.Builder;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.filter.Filter;
@@ -74,34 +75,50 @@ public class ProductTest extends UnitWaterfrontTestCase {
     }
 
     public void test_runCluster() throws Exception {
-        final String index = "maihama";
+        final String memberIndex = "member";
+        final String productIndex = "product";
 
         // create an index
-        runner.createIndex(index, builder -> {
-            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("create-maihama.json").openStream()) {
+        runner.createIndex(memberIndex, builder -> {
+            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("create-member.json").openStream()) {
                 final String mappingSource = IOUtils.toString(input);
-                builder.setSource(mappingSource);
+                builder.setSource(mappingSource, XContentType.JSON);
             } catch (final IOException e) {
                 throw new IORuntimeException(e);
             }
             return builder;
         });
-        runner.ensureYellow(index);
+        runner.ensureYellow(memberIndex);
+        if (!runner.indexExists(memberIndex)) {
+            fail();
+        }
 
-        if (!runner.indexExists(index)) {
+        runner.createIndex(productIndex, builder -> {
+            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("create-product.json").openStream()) {
+                final String mappingSource = IOUtils.toString(input);
+                builder.setSource(mappingSource, XContentType.JSON);
+            } catch (final IOException e) {
+                throw new IORuntimeException(e);
+            }
+            return builder;
+        });
+        runner.ensureYellow(productIndex);
+        if (!runner.indexExists(productIndex)) {
             fail();
         }
 
         // bulk
-        try (final CurlResponse response = Curl.post(runner.node(), "/_bulk").onConnect((req, con) -> {
-            con.setDoOutput(true);
-            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("data-maihama.json").openStream();
-                    final OutputStream output = con.getOutputStream()) {
-                IOUtils.copy(input, output);
-            } catch (final IOException e) {
-                throw new IORuntimeException(e);
-            }
-        }).execute()) {
+        try (final CurlResponse response =
+                Curl.post(runner.node(), "/_bulk").header("Content-Type", "application/x-ndjson").onConnect((req, con) -> {
+                    con.setDoOutput(true);
+                    try (final InputStream input =
+                            Thread.currentThread().getContextClassLoader().getResource("data-maihama.ndjson").openStream();
+                            final OutputStream output = con.getOutputStream()) {
+                        IOUtils.copy(input, output);
+                    } catch (final IOException e) {
+                        throw new IORuntimeException(e);
+                    }
+                }).execute()) {
             assertEquals(200, response.getHttpStatusCode());
         }
 
@@ -304,12 +321,12 @@ public class ProductTest extends UnitWaterfrontTestCase {
                 cb.paging(5, 1);
             });
             System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
-            assertEquals(3, list1.size());
-            assertEquals(3, list1.getAllRecordCount());
+            assertEquals(1, list1.size());
+            assertEquals(1, list1.getAllRecordCount());
             assertEquals(1, list1.getAllPageCount());
             assertEquals(1, list1.getCurrentPageNumber());
             assertEquals(1, list1.getCurrentStartRecordNumber());
-            assertEquals(3, list1.getCurrentEndRecordNumber());
+            assertEquals(1, list1.getCurrentEndRecordNumber());
             try {
                 list1.getPreviousPageNumber();
                 fail();
@@ -324,9 +341,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             }
             assertFalse(list1.existsPreviousPage());
             assertFalse(list1.existsNextPage());
-            assertEquals("BILLYJOEL-02", list1.get(0).getProductHandleCode());
-            assertEquals("PIANO-01", list1.get(1).getProductHandleCode());
-            assertEquals("PIANO-02", list1.get(2).getProductHandleCode());
+            assertEquals("PIANO-01", list1.get(0).getProductHandleCode());
         }
 
         // Query String Query
@@ -889,7 +904,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             // first page
             PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
-                cb.aggregation().setRegularPrice_PercentileRanks(op -> op.values(1000, 10000));
+                cb.aggregation().setRegularPrice_PercentileRanks(new double[] { 1000, 10000 });
                 cb.query().addOrderBy_ProductHandleCode_Asc();
                 cb.paging(5, 1);
             });

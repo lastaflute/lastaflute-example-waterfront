@@ -26,7 +26,12 @@ map:{
 
     # settings for indexes
     ; indexMap = map:{
-        ; maihama = map:{
+        ; product = map:{
+            ; package = maihama
+            #; esclientDiFile = elasticsearch_client.xml
+            #; esfluteDiFile = esflute_maihama.xml
+        }
+        ; member = map:{
             ; package = maihama
             #; esclientDiFile = elasticsearch_client.xml
             #; esfluteDiFile = esflute_maihama.xml
@@ -34,6 +39,6 @@ map:{
     }
 
     # version for elasticsearch's jar file (no version means latest)
-    ; elasticsearchVersion = 2.4.1
+    ; elasticsearchVersion = 6.0.0
 }
 # ----------------/

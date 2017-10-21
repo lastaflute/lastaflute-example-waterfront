@@ -6,5 +6,6 @@
 	<include path="dbflute.xml"/>
 	<include path="lastaflute.xml"/>
 	<include path="lasta_job.xml"/>
-	<include path="esflute_maihama.xml"/>
+	<include path="esflute_product.xml"/>
+	<include path="esflute_member.xml"/>
 </components>

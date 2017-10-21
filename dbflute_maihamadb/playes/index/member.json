@@ -1,0 +1,35 @@
+{
+  "member" : {
+    "aliases" : { },
+    "mappings" : {
+      "member" : {
+        "properties" : {
+          "account" : {
+            "type" : "keyword"
+          },
+          "name" : {
+            "type" : "text",
+            "fields" : {
+              "raw" : {
+                "type" : "keyword"
+              }
+            },
+            "analyzer" : "standard"
+          }
+        }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "creation_date" : "1481923622000",
+        "number_of_shards" : "5",
+        "number_of_replicas" : "0",
+        "uuid" : "tMQzWzs7SBig_oGcKvAr7w",
+        "version" : {
+          "created" : "5000299"
+        },
+        "provided_name" : "maihama"
+      }
+    }
+  }
+}

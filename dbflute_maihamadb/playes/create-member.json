@@ -1,0 +1,26 @@
+{
+    "mappings" : {
+      "member" : {
+        "properties" : {
+          "account" : {
+            "type" : "keyword"
+          },
+          "name" : {
+            "type" : "text",
+            "fields" : {
+              "raw" : {
+                "type" : "keyword"
+              }
+            },
+            "analyzer" : "standard"
+          }
+        }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "number_of_shards" : "5",
+        "number_of_replicas" : "0"
+      }
+    }
+}
