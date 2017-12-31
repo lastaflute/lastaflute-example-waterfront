@@ -149,12 +149,12 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
     }
 
     public Bs${table.camelizedName}CQ addOrderBy_Id_Asc() {
-        regOBA("_uid");
+        regOBA("_id");
         return this;
     }
 
     public Bs${table.camelizedName}CQ addOrderBy_Id_Desc() {
-        regOBD("_uid");
+        regOBD("_id");
         return this;
     }
 
