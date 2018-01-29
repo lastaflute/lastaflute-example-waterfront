@@ -119,7 +119,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
         }
         if (list.size() >= 2) {
             String msg = "The size of selected list is over 1: " + list.size();
-            throw new FetchingOverSafetySizeException(msg, 1); // immediatly catched by caller and translated
+            throw new FetchingOverSafetySizeException(msg, 1); // immediately catched by caller and translated
         }
         return list.get(0);
     }
