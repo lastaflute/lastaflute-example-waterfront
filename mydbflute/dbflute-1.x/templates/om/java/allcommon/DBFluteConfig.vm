@@ -1,5 +1,5 @@
 ##
-## Copyright 2014-2017 the original author or authors.
+## Copyright 2014-2018 the original author or authors.
 ##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.dbflute.bhv.core.context.mapping.MappingDateTimeZoneProvider;
 import org.dbflute.bhv.core.supplement.SequenceCacheKeyGenerator;
+import org.dbflute.cbean.garnish.SpecifyColumnRequiredExceptDeterminer;
 import org.dbflute.cbean.cipher.GearedCipherManager;
 import org.dbflute.cbean.sqlclause.SqlClauseCreator;
 import org.dbflute.dbmeta.name.SqlNameFilter;
@@ -94,6 +95,7 @@ public class ${glDBFluteConfig} {
     protected boolean _overridingQueryAllowed = ${database.isOverridingQueryAllowed()};
     protected boolean _nonSpecifiedColumnAccessAllowed = ${database.isNonSpecifiedColumnAccessAllowed()};
     protected boolean _specifyColumnRequired = ${database.isSpecifyColumnRequired()};
+    protected SpecifyColumnRequiredExceptDeterminer _specifyColumnRequiredExceptDeterminer;
     protected boolean _columnNullObjectAllowed = ${database.isColumnNullObjectAllowed()};
     protected boolean _columnNullObjectGearedToSpecify = ${database.isColumnNullObjectGearedToSpecify()};
     protected boolean _datetimePrecisionTruncationOfCondition = ${database.isDatetimePrecisionTruncationOfCondition()};
@@ -158,7 +160,7 @@ public class ${glDBFluteConfig} {
 
         if (isCurrentDBDef(DBDef.Oracle)) {
             // date formatting has two points:
-            //   o the DATE type of Oracle has seconds  
+            //   o the DATE type of Oracle has seconds
             //   o it uses a date literal of Oracle
 #if ($database.needsDateTreatedAsLocalDateTime())
             _logDatePattern = "timestamp $df:{yyyy-MM-dd HH:mm:ss}";
@@ -361,6 +363,18 @@ public class ${glDBFluteConfig} {
             _log.info("...Setting specifyColumnRequired: " + specifyColumnRequired);
         }
         _specifyColumnRequired = specifyColumnRequired;
+    }
+
+    public SpecifyColumnRequiredExceptDeterminer getSpecifyColumnRequiredExceptDeterminer() {
+        return _specifyColumnRequiredExceptDeterminer;
+    }
+
+    public void setSpecifyColumnRequiredExceptDeterminer(SpecifyColumnRequiredExceptDeterminer specifyColumnRequiredExceptDeterminer) {
+        assertUnlocked();
+        if (_log.isInfoEnabled()) {
+            _log.info("...Setting specifyColumnRequiredExceptDeterminer: " + specifyColumnRequiredExceptDeterminer);
+        }
+        _specifyColumnRequiredExceptDeterminer = specifyColumnRequiredExceptDeterminer;
     }
 
     // ===================================================================================
@@ -826,7 +840,7 @@ public class ${glDBFluteConfig} {
         if (_log.isInfoEnabled()) {
             _log.info("...Using fullTextSearchOperand: Default");
         }
-        _fullTextSearchOperand = org.dbflute.dbway.WayOfPostgreSQL.OperandOfLikeSearch.FULL_TEXT_SEARCH; 
+        _fullTextSearchOperand = org.dbflute.dbway.WayOfPostgreSQL.OperandOfLikeSearch.FULL_TEXT_SEARCH;
     }
 
     public void useOldFullTextSearchOperand() {
@@ -834,7 +848,7 @@ public class ${glDBFluteConfig} {
         if (_log.isInfoEnabled()) {
             _log.info("...Using fullTextSearchOperand: Old");
         }
-        _fullTextSearchOperand = org.dbflute.dbway.WayOfPostgreSQL.OperandOfLikeSearch.OLD_FULL_TEXT_SEARCH; 
+        _fullTextSearchOperand = org.dbflute.dbway.WayOfPostgreSQL.OperandOfLikeSearch.OLD_FULL_TEXT_SEARCH;
     }
 #end
 #end
@@ -859,7 +873,7 @@ public class ${glDBFluteConfig} {
     //                                                                          ==========
     /**
      * Register the basic value type. <br>
-     * This setting is shared per DBMS in the same class loader. 
+     * This setting is shared per DBMS in the same class loader.
      * @param keyType The type as key. (NotNull)
      * @param valueType The basic value type. (NotNull)
      */
