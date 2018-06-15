@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.codelibs.curl.CurlResponse;
 import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
-import org.codelibs.elasticsearch.runner.net.Curl;
-import org.codelibs.elasticsearch.runner.net.CurlResponse;
+import org.codelibs.elasticsearch.runner.net.EcrCurl;
 import org.dbflute.cbean.result.PagingResultBean;
 import org.docksidestage.esflute.maihama.allcommon.EsPagingResultBean;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
@@ -109,7 +109,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
 
         // bulk
         try (final CurlResponse response =
-                Curl.post(runner.node(), "/_bulk").header("Content-Type", "application/x-ndjson").onConnect((req, con) -> {
+                EcrCurl.post(runner.node(), "/_bulk").header("Content-Type", "application/x-ndjson").onConnect((req, con) -> {
                     con.setDoOutput(true);
                     try (final InputStream input =
                             Thread.currentThread().getContextClassLoader().getResource("data-maihama.ndjson").openStream();
@@ -891,13 +891,13 @@ public class ProductTest extends UnitWaterfrontTestCase {
             assertTrue(list1.existsNextPage());
             Aggregations aggregations = ((EsPagingResultBean<Product>) list1).getAggregations();
             Percentiles percentiles = (Percentiles) aggregations.get("regular_price");
-            assertEquals(347.6, percentiles.percentile(1));
-            assertEquals(378.0, percentiles.percentile(5));
-            assertEquals(1175.0, percentiles.percentile(25));
+            assertEquals(340.0, percentiles.percentile(1));
+            assertEquals(360.0, percentiles.percentile(5));
+            assertEquals(1150.0, percentiles.percentile(25));
             assertEquals(1650.0, percentiles.percentile(50));
-            assertEquals(14075.0, percentiles.percentile(75));
-            assertEquals(1530000.0000000019, percentiles.percentile(95));
-            assertEquals(3505999.9999999967, percentiles.percentile(99));
+            assertEquals(26050.0, percentiles.percentile(75));
+            assertEquals(2700000.0, percentiles.percentile(95));
+            assertEquals(4000000.0, percentiles.percentile(99));
         }
         // Percentile Ranks Aggregation
         {
