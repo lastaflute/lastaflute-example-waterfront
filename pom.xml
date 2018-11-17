@@ -17,16 +17,16 @@
 		<dbflute.version>1.1.8</dbflute.version>
 		<h2.jdbc.version>1.4.193</h2.jdbc.version>
 		<elasticsearch.version>6.5.0</elasticsearch.version>
-		<lastaflute.version>1.0.8</lastaflute.version>
-		<lasta.taglib.version>0.7.2</lasta.taglib.version>
+		<lastaflute.version>1.1.0</lastaflute.version>
+		<lasta.taglib.version>0.7.3</lasta.taglib.version>
 		<lasta.job.version>0.5.3</lasta.job.version>
 
 		<!-- Partner Library -->
 		<slf4j.version>1.7.22</slf4j.version>
-		<log4j.version>2.9.1</log4j.version>
-		<servlet.version>3.1.0</servlet.version>
-		<jsp.version>2.3.1</jsp.version>
-		<tomcat.boot.version>0.6.2</tomcat.boot.version>
+		<log4j.version>2.11.1</log4j.version>
+		<servlet.version>4.0.1</servlet.version>
+		<jsp.version>2.3.3</jsp.version>
+		<tomcat.boot.version>0.7.0</tomcat.boot.version>
 
 		<!-- GoodNeighbor Library -->
 		<commons.lang.version>3.4</commons.lang.version>
@@ -352,7 +352,7 @@
 		<dependency> <!-- for jsp -->
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper</artifactId>
-			<version>8.5.20</version>
+			<version>9.0.11</version>
 		</dependency>
 
 		<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
