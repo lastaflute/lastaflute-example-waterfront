@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,7 +94,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
       return _memberFollowingId; }
     protected ConditionValue xgetCValueMemberFollowingId() { return xdfgetMemberFollowingId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (会員フォローイングID)MEMBER_FOLLOWING_ID: {PK, ID, NotNull, BIGINT(19)}
      * @return this. (NotNull)
@@ -114,7 +114,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
       return _myMemberId; }
     protected ConditionValue xgetCValueMyMemberId() { return xdfgetMyMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (わたし)MY_MEMBER_ID: {UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER}
      * @return this. (NotNull)
@@ -134,7 +134,7 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
       return _yourMemberId; }
     protected ConditionValue xgetCValueYourMemberId() { return xdfgetYourMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (あなた)YOUR_MEMBER_ID: {+UQ, IX+, NotNull, INTEGER(10), FK to MEMBER}
      * @return this. (NotNull)
@@ -154,16 +154,16 @@ public class BsMemberFollowingCQ extends AbstractBsMemberFollowingCQ {
       return _followDatetime; }
     protected ConditionValue xgetCValueFollowDatetime() { return xdfgetFollowDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsMemberFollowingCQ addOrderBy_FollowDatetime_Asc() { regOBA("FOLLOW_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsMemberFollowingCQ addOrderBy_FollowDatetime_Desc() { regOBD("FOLLOW_DATETIME"); return this; }

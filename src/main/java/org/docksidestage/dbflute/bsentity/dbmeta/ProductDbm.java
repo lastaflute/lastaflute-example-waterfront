@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,16 +112,16 @@ public class ProductDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnProductId = cci("PRODUCT_ID", "PRODUCT_ID", null, null, Integer.class, "productId", null, true, true, true, "INTEGER", 10, 0, null, "NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_72716CC3_3031_44A0_A6B8_D0B3E45991FD", false, null, null, null, "purchaseList", null, false);
+    protected final ColumnInfo _columnProductId = cci("PRODUCT_ID", "PRODUCT_ID", null, null, Integer.class, "productId", null, true, true, true, "INTEGER", 10, 0, null, "NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_5C476D86_B201_47BB_946D_97EA2361D853", false, null, null, null, "purchaseList", null, false);
     protected final ColumnInfo _columnProductName = cci("PRODUCT_NAME", "PRODUCT_NAME", null, "商品名称", String.class, "productName", null, false, false, true, "VARCHAR", 50, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnProductDescription = cci("PRODUCT_DESCRIPTION", "PRODUCT_DESCRIPTION", null, null, String.class, "productDescription", null, false, false, false, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnProductHandleCode = cci("PRODUCT_HANDLE_CODE", "PRODUCT_HANDLE_CODE", null, "商品ハンドルコード", String.class, "productHandleCode", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnProductCategoryCode = cci("PRODUCT_CATEGORY_CODE", "PRODUCT_CATEGORY_CODE", null, null, String.class, "productCategoryCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "productCategory", null, null, false);
     protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, null, String.class, "productStatusCode", null, false, false, true, "CHAR", 3, 0, null, null, false, null, null, "productStatus", null, CDef.DefMeta.ProductStatus, false);
     protected final ColumnInfo _columnRegularPrice = cci("REGULAR_PRICE", "REGULAR_PRICE", null, "定価", Integer.class, "regularPrice", null, false, false, true, "INTEGER", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "TIMESTAMP", 26, 6, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, null, String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "TIMESTAMP", 26, 6, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, null, String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, null, Long.class, "versionNo", null, false, false, true, "BIGINT", 19, 0, null, null, false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
@@ -161,7 +161,7 @@ public class ProductDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnRegularPrice() { return _columnRegularPrice; }
     /**
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRegisterDatetime() { return _columnRegisterDatetime; }
@@ -171,7 +171,7 @@ public class ProductDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnRegisterUser() { return _columnRegisterUser; }
     /**
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }

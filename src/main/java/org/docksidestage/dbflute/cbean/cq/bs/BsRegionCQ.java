@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,7 +108,7 @@ public class BsRegionCQ extends AbstractBsRegionCQ {
     public Map<String, Object> xdfgetRegionId_QueryDerivedReferrer_MemberAddressListParameter() { return xgetSQuePmMap("regionId_QueryDerivedReferrer_MemberAddressList"); }
     public String keepRegionId_QueryDerivedReferrer_MemberAddressListParameter(Object pm) { return xkeepSQuePm("regionId_QueryDerivedReferrer_MemberAddressList", pm); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (地域ID)REGION_ID: {PK, NotNull, INTEGER(10), classification=Region}
      * @return this. (NotNull)
@@ -128,7 +128,7 @@ public class BsRegionCQ extends AbstractBsRegionCQ {
       return _regionName; }
     protected ConditionValue xgetCValueRegionName() { return xdfgetRegionName(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (地域名称)REGION_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)

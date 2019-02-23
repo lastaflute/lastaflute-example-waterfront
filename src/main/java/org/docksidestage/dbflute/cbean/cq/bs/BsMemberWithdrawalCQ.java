@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,7 +94,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _memberId; }
     protected ConditionValue xgetCValueMemberId() { return xdfgetMemberId(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
      * @return this. (NotNull)
@@ -114,7 +114,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _withdrawalReasonCode; }
     protected ConditionValue xgetCValueWithdrawalReasonCode() { return xdfgetWithdrawalReasonCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to WITHDRAWAL_REASON, classification=WithdrawalReason}
      * @return this. (NotNull)
@@ -134,7 +134,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _withdrawalReasonInputText; }
     protected ConditionValue xgetCValueWithdrawalReasonInputText() { return xdfgetWithdrawalReasonInputText(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (退会理由入力テキスト)WITHDRAWAL_REASON_INPUT_TEXT: {CLOB(2147483647)}
      * @return this. (NotNull)
@@ -154,16 +154,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _withdrawalDatetime; }
     protected ConditionValue xgetCValueWithdrawalDatetime() { return xdfgetWithdrawalDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * (退会日時)WITHDRAWAL_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (退会日時)WITHDRAWAL_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_WithdrawalDatetime_Asc() { regOBA("WITHDRAWAL_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (退会日時)WITHDRAWAL_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (退会日時)WITHDRAWAL_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_WithdrawalDatetime_Desc() { regOBD("WITHDRAWAL_DATETIME"); return this; }
@@ -174,16 +174,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _registerDatetime; }
     protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
@@ -194,7 +194,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _registerUser; }
     protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -214,16 +214,16 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _updateDatetime; }
     protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsMemberWithdrawalCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
@@ -234,7 +234,7 @@ public class BsMemberWithdrawalCQ extends AbstractBsMemberWithdrawalCQ {
       return _updateUser; }
     protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)

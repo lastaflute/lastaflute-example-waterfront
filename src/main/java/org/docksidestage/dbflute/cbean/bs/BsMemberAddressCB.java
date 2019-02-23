@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,6 +62,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
         if (DBFluteConfig.getInstance().isSpecifyColumnRequired()) {
             enableSpecifyColumnRequired();
         }
+        xsetSpecifyColumnRequiredExceptDeterminer(DBFluteConfig.getInstance().getSpecifyColumnRequiredExceptDeterminer());
         if (DBFluteConfig.getInstance().isQueryUpdateCountPreCheck()) {
             enableQueryUpdateCountPreCheck();
         }
@@ -109,7 +110,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
     /**
      * Accept the query condition of unique key as equal.
      * @param memberId (会員ID): UQ+, IX, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
-     * @param validBeginDate (有効開始日): +UQ, NotNull, DATE(8). (NotNull)
+     * @param validBeginDate (有効開始日): +UQ, NotNull, DATE(10). (NotNull)
      * @return this. (NotNull)
      */
     public MemberAddressCB acceptUniqueOf(Integer memberId, java.time.LocalDate validBeginDate) {
@@ -156,33 +157,33 @@ public class BsMemberAddressCB extends AbstractConditionBean {
      * <span style="color: #3F7E5E">// {fromDate &lt;= BIRTHDATE &lt; toDate + 1 day}</span>
      * cb.query().setBirthdate_IsNull();    <span style="color: #3F7E5E">// is null</span>
      * cb.query().setBirthdate_IsNotNull(); <span style="color: #3F7E5E">// is not null</span>
-     * 
+     *
      * <span style="color: #3F7E5E">// ExistsReferrer: (correlated sub-query)</span>
      * <span style="color: #3F7E5E">// {where exists (select PURCHASE_ID from PURCHASE where ...)}</span>
      * cb.query().existsPurchase(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer sub-query condition</span>
      * });
      * cb.query().notExistsPurchase...
-     * 
+     *
      * <span style="color: #3F7E5E">// (Query)DerivedReferrer: (correlated sub-query)</span>
      * cb.query().derivedPurchaseList().max(purchaseCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     purchaseCB.specify().columnPurchasePrice(); <span style="color: #3F7E5E">// derived column for function</span>
      *     purchaseCB.query().set... <span style="color: #3F7E5E">// referrer sub-query condition</span>
      * }).greaterEqual(value);
-     * 
+     *
      * <span style="color: #3F7E5E">// ScalarCondition: (self-table sub-query)</span>
      * cb.query().scalar_Equal().max(scalarCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     scalarCB.specify().columnBirthdate(); <span style="color: #3F7E5E">// derived column for function</span>
      *     scalarCB.query().set... <span style="color: #3F7E5E">// scalar sub-query condition</span>
      * });
-     * 
+     *
      * <span style="color: #3F7E5E">// OrderBy</span>
      * cb.query().addOrderBy_MemberName_Asc();
      * cb.query().addOrderBy_MemberName_Desc().withManualOrder(option);
      * cb.query().addOrderBy_MemberName_Desc().withNullsFirst();
      * cb.query().addOrderBy_MemberName_Desc().withNullsLast();
      * cb.query().addSpecifiedDerivedOrderBy_Desc(aliasName);
-     * 
+     *
      * <span style="color: #3F7E5E">// Query(Relation)</span>
      * cb.query().queryMemberStatus()...;
      * cb.query().queryMemberAddressAsValid(targetDate)...;
@@ -190,7 +191,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
     public MemberAddressCQ query() {
-        assertQueryPurpose(); // assert only when user-public query 
+        assertQueryPurpose(); // assert only when user-public query
         return doGetConditionQuery();
     }
 
@@ -241,7 +242,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
      * @param unionCBLambda The callback for query of 'union'. (NotNull)
      */
     public void union(UnionQuery<MemberAddressCB> unionCBLambda) {
-        final MemberAddressCB cb = new MemberAddressCB(); cb.xsetupForUnion(this); xsyncUQ(cb); 
+        final MemberAddressCB cb = new MemberAddressCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
         final MemberAddressCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
@@ -373,12 +374,12 @@ public class BsMemberAddressCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * (有効開始日)VALID_BEGIN_DATE: {+UQ, NotNull, DATE(8)}
+         * (有効開始日)VALID_BEGIN_DATE: {+UQ, NotNull, DATE(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnValidBeginDate() { return doColumn("VALID_BEGIN_DATE"); }
         /**
-         * (有効終了日)VALID_END_DATE: {NotNull, DATE(8)}
+         * (有効終了日)VALID_END_DATE: {NotNull, DATE(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnValidEndDate() { return doColumn("VALID_END_DATE"); }
@@ -393,7 +394,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnRegionId() { return doColumn("REGION_ID"); }
         /**
-         * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+         * REGISTER_DATETIME: {NotNull, TIMESTAMP(26, 6)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnRegisterDatetime() { return doColumn("REGISTER_DATETIME"); }
@@ -403,7 +404,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnRegisterUser() { return doColumn("REGISTER_USER"); }
         /**
-         * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+         * UPDATE_DATETIME: {NotNull, TIMESTAMP(26, 6)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }

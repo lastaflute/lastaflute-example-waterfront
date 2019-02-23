@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,7 +108,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
     public Map<String, Object> xdfgetProductId_QueryDerivedReferrer_PurchaseListParameter() { return xgetSQuePmMap("productId_QueryDerivedReferrer_PurchaseList"); }
     public String keepProductId_QueryDerivedReferrer_PurchaseListParameter(Object pm) { return xkeepSQuePm("productId_QueryDerivedReferrer_PurchaseList", pm); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PRODUCT_ID: {PK, ID, NotNull, INTEGER(10)}
      * @return this. (NotNull)
@@ -128,7 +128,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _productName; }
     protected ConditionValue xgetCValueProductName() { return xdfgetProductName(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (商品名称)PRODUCT_NAME: {IX, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
@@ -148,7 +148,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _productDescription; }
     protected ConditionValue xgetCValueProductDescription() { return xdfgetProductDescription(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PRODUCT_DESCRIPTION: {VARCHAR(200)}
      * @return this. (NotNull)
@@ -168,7 +168,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _productHandleCode; }
     protected ConditionValue xgetCValueProductHandleCode() { return xdfgetProductHandleCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)}
      * @return this. (NotNull)
@@ -188,7 +188,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _productCategoryCode; }
     protected ConditionValue xgetCValueProductCategoryCode() { return xdfgetProductCategoryCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PRODUCT_CATEGORY_CODE: {IX, NotNull, CHAR(3), FK to PRODUCT_CATEGORY}
      * @return this. (NotNull)
@@ -208,7 +208,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _productStatusCode; }
     protected ConditionValue xgetCValueProductStatusCode() { return xdfgetProductStatusCode(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * PRODUCT_STATUS_CODE: {IX, NotNull, CHAR(3), FK to PRODUCT_STATUS, classification=ProductStatus}
      * @return this. (NotNull)
@@ -228,7 +228,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _regularPrice; }
     protected ConditionValue xgetCValueRegularPrice() { return xdfgetRegularPrice(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * (定価)REGULAR_PRICE: {NotNull, INTEGER(10)}
      * @return this. (NotNull)
@@ -248,16 +248,16 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _registerDatetime; }
     protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsProductCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * REGISTER_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsProductCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
@@ -268,7 +268,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _registerUser; }
     protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -288,16 +288,16 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _updateDatetime; }
     protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsProductCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * UPDATE_DATETIME: {NotNull, TIMESTAMP(26, 6)}
      * @return this. (NotNull)
      */
     public BsProductCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
@@ -308,7 +308,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _updateUser; }
     protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
@@ -328,7 +328,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
       return _versionNo; }
     protected ConditionValue xgetCValueVersionNo() { return xdfgetVersionNo(); }
 
-    /** 
+    /**
      * Add order-by as ascend. <br>
      * VERSION_NO: {NotNull, BIGINT(19)}
      * @return this. (NotNull)

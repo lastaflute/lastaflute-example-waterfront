@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -423,7 +423,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * @param followDatetime The value of followDatetime as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowDatetime_Equal(java.time.LocalDateTime followDatetime) {
@@ -432,7 +432,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * @param followDatetime The value of followDatetime as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowDatetime_GreaterThan(java.time.LocalDateTime followDatetime) {
@@ -441,7 +441,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * @param followDatetime The value of followDatetime as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowDatetime_LessThan(java.time.LocalDateTime followDatetime) {
@@ -450,7 +450,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * @param followDatetime The value of followDatetime as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowDatetime_GreaterEqual(java.time.LocalDateTime followDatetime) {
@@ -459,7 +459,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * @param followDatetime The value of followDatetime as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowDatetime_LessEqual(java.time.LocalDateTime followDatetime) {
@@ -469,7 +469,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * <pre>e.g. setFollowDatetime_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
      * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of followDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of followDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
@@ -482,7 +482,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(23, 10)}
+     * (その瞬間)FOLLOW_DATETIME: {IX, NotNull, TIMESTAMP(26, 6)}
      * <pre>e.g. setFollowDatetime_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
      * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of followDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of followDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
@@ -507,7 +507,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
      *     <span style="color: #553000">purchaseCB</span>.specify().<span style="color: #CC4747">columnPurchasePrice</span>(); <span style="color: #3F7E5E">// *Point!</span>
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
-     * </pre> 
+     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<MemberFollowingCB> scalar_Equal() {
@@ -522,7 +522,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
      *     <span style="color: #553000">purchaseCB</span>.specify().<span style="color: #CC4747">columnPurchasePrice</span>(); <span style="color: #3F7E5E">// *Point!</span>
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
-     * </pre> 
+     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<MemberFollowingCB> scalar_NotEqual() {
@@ -537,7 +537,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
      *     <span style="color: #553000">purchaseCB</span>.specify().<span style="color: #CC4747">columnPurchasePrice</span>(); <span style="color: #3F7E5E">// *Point!</span>
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
-     * </pre> 
+     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<MemberFollowingCB> scalar_GreaterThan() {
@@ -552,7 +552,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
      *     <span style="color: #553000">purchaseCB</span>.specify().<span style="color: #CC4747">columnPurchasePrice</span>(); <span style="color: #3F7E5E">// *Point!</span>
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
-     * </pre> 
+     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<MemberFollowingCB> scalar_LessThan() {
@@ -567,7 +567,7 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
      *     <span style="color: #553000">purchaseCB</span>.specify().<span style="color: #CC4747">columnPurchasePrice</span>(); <span style="color: #3F7E5E">// *Point!</span>
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
-     * </pre> 
+     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<MemberFollowingCB> scalar_GreaterEqual() {
@@ -670,7 +670,6 @@ public abstract class AbstractBsMemberFollowingCQ extends AbstractConditionQuery
      * <span style="color: #3F7E5E">//   end asc, ...</span>
      *
      * cb.query().addOrderBy_MemberStatusCode_Asc().<span style="color: #CC4747">withManualOrder</span>(<span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">op</span>.<span style="color: #CC4747">when_GreaterEqual</span>(priorityDate); <span style="color: #3F7E5E">// e.g. 2000/01/01</span>
      *     <span style="color: #553000">op</span>.<span style="color: #CC4747">when_Equal</span>(CDef.MemberStatus.Withdrawal);
      *     <span style="color: #553000">op</span>.<span style="color: #CC4747">when_Equal</span>(CDef.MemberStatus.Formalized);
      *     <span style="color: #553000">op</span>.<span style="color: #CC4747">when_Equal</span>(CDef.MemberStatus.Provisional);
