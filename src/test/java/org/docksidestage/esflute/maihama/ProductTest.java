@@ -28,16 +28,16 @@ import org.elasticsearch.search.aggregations.bucket.missing.Missing;
 import org.elasticsearch.search.aggregations.bucket.range.Range;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
-import org.elasticsearch.search.aggregations.metrics.avg.Avg;
-import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
-import org.elasticsearch.search.aggregations.metrics.max.Max;
-import org.elasticsearch.search.aggregations.metrics.min.Min;
-import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanks;
-import org.elasticsearch.search.aggregations.metrics.percentiles.Percentiles;
-import org.elasticsearch.search.aggregations.metrics.stats.Stats;
-import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStats;
-import org.elasticsearch.search.aggregations.metrics.sum.Sum;
-import org.elasticsearch.search.aggregations.metrics.valuecount.ValueCount;
+import org.elasticsearch.search.aggregations.metrics.Avg;
+import org.elasticsearch.search.aggregations.metrics.Cardinality;
+import org.elasticsearch.search.aggregations.metrics.ExtendedStats;
+import org.elasticsearch.search.aggregations.metrics.Max;
+import org.elasticsearch.search.aggregations.metrics.Min;
+import org.elasticsearch.search.aggregations.metrics.PercentileRanks;
+import org.elasticsearch.search.aggregations.metrics.Percentiles;
+import org.elasticsearch.search.aggregations.metrics.Stats;
+import org.elasticsearch.search.aggregations.metrics.Sum;
+import org.elasticsearch.search.aggregations.metrics.ValueCount;
 import org.lastaflute.di.exception.IORuntimeException;
 
 public class ProductTest extends UnitWaterfrontTestCase {
@@ -58,7 +58,8 @@ public class ProductTest extends UnitWaterfrontTestCase {
             public void build(final int number, final Builder settingsBuilder) {
                 settingsBuilder.put("http.cors.enabled", true);
                 settingsBuilder.put("http.cors.allow-origin", "*");
-                settingsBuilder.putList("discovery.zen.ping.unicast.hosts", "localhost:9301-9305");
+                settingsBuilder.putList("discovery.seed_hosts", "127.0.0.1:9301");
+                settingsBuilder.putList("cluster.initial_master_nodes", "127.0.0.1:9301");
             }
         }).build(newConfigs().clusterName(clusterName).numOfNode(3));
 
@@ -321,12 +322,12 @@ public class ProductTest extends UnitWaterfrontTestCase {
                 cb.paging(5, 1);
             });
             System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
-            assertEquals(1, list1.size());
-            assertEquals(1, list1.getAllRecordCount());
+            assertEquals(2, list1.size());
+            assertEquals(2, list1.getAllRecordCount());
             assertEquals(1, list1.getAllPageCount());
             assertEquals(1, list1.getCurrentPageNumber());
             assertEquals(1, list1.getCurrentStartRecordNumber());
-            assertEquals(1, list1.getCurrentEndRecordNumber());
+            assertEquals(2, list1.getCurrentEndRecordNumber());
             try {
                 list1.getPreviousPageNumber();
                 fail();
@@ -341,7 +342,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             }
             assertFalse(list1.existsPreviousPage());
             assertFalse(list1.existsNextPage());
-            assertEquals("PIANO-01", list1.get(0).getProductHandleCode());
+            assertEquals("BILLYJOEL-02", list1.get(0).getProductHandleCode());
         }
 
         // Query String Query

@@ -3,12 +3,9 @@
 	"http://dbflute.org/meta/lastadi10.dtd">
 <components namespace="esclient">
 	<component name="client" instance="singleton">
-		new org.elasticsearch.transport.client.PreBuiltTransportClient(
+		new org.codelibs.elasticsearch.client.HttpClient(
 			org.elasticsearch.common.settings.Settings.builder()
-				.put("cluster.name", "es-waterfront-test").build())
-				.addTransportAddress(
-					new org.elasticsearch.common.transport.TransportAddress(
-						java.net.InetAddress.getByName("localhost"), 9301))
+				.put("http.hosts", "http://localhost:9201").build(), null)
 		<preDestroy name="close" />
 	</component>
 </components>
