@@ -88,7 +88,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
     @Override
     protected int delegateSelectCountUniquely(final ConditionBean cb) {
         // #pending check response and cast problem
-        final SearchRequestBuilder builder = client.prepareSearch(asEsIndex()).setTypes(asEsSearchType());
+        final SearchRequestBuilder builder = client.prepareSearch(asEsIndex());
         final EsAbstractConditionBean esCb = (EsAbstractConditionBean) cb;
         if (esCb.getPreference() != null) {
             builder.setPreference(esCb.getPreference());
@@ -112,7 +112,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
     @Override
     protected <RESULT extends ENTITY> List<RESULT> delegateSelectList(final ConditionBean cb, final Class<? extends RESULT> entityType) {
         // #pending check response
-        final SearchRequestBuilder builder = client.prepareSearch(asEsIndex()).setTypes(asEsSearchType());
+        final SearchRequestBuilder builder = client.prepareSearch(asEsIndex());
         final int from;
         final int size;
         if (cb.isFetchScopeEffective()) {
@@ -212,7 +212,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
         while (true) {
             if (response == null) {
                 final SearchRequestBuilder builder =
-                        client.prepareSearch(asEsIndex()).setTypes(asEsIndexType()).setScroll(scrollForCursor).setSize(sizeForCursor);
+                        client.prepareSearch(asEsIndex()).setScroll(scrollForCursor).setSize(sizeForCursor);
                 final EsAbstractConditionBean esCb = (EsAbstractConditionBean) cb;
                 if (esCb.getPreference() != null) {
                     builder.setPreference(esCb.getPreference());
@@ -331,7 +331,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
         while (true) {
             if (response == null) {
                 final SearchRequestBuilder builder =
-                        client.prepareSearch(asEsIndex()).setTypes(asEsIndexType()).setScroll(scrollForDelete).setSize(sizeForDelete);
+                        client.prepareSearch(asEsIndex()).setScroll(scrollForDelete).setSize(sizeForDelete);
                 final EsAbstractConditionBean esCb = (EsAbstractConditionBean) cb;
                 if (esCb.getPreference() != null) {
                     esCb.setPreference(esCb.getPreference());
