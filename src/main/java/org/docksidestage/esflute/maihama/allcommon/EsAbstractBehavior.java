@@ -278,7 +278,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
     }
 
     protected IndexRequestBuilder createInsertRequest(final EsAbstractEntity esEntity) {
-        final IndexRequestBuilder builder = client.prepareIndex(asEsIndex(), asEsIndexType()).setSource(toSource(esEntity));
+        final IndexRequestBuilder builder = client.prepareIndex().setIndex(asEsIndex()).setSource(toSource(esEntity));
         final String id = esEntity.asDocMeta().id();
         if (id != null) {
             builder.setId(id);
@@ -305,7 +305,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
 
     protected IndexRequestBuilder createUpdateRequest(final EsAbstractEntity esEntity) {
         final IndexRequestBuilder builder =
-                client.prepareIndex(asEsIndex(), asEsIndexType(), esEntity.asDocMeta().id()).setSource(toSource(esEntity));
+                client.prepareIndex().setIndex(asEsIndex()).setId(esEntity.asDocMeta().id()).setSource(toSource(esEntity));
         final RequestOptionCall<IndexRequestBuilder> indexOption = esEntity.asDocMeta().indexOption();
         if (indexOption != null) {
             indexOption.callback(builder);
@@ -331,7 +331,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
     }
 
     protected DeleteRequestBuilder createDeleteRequest(final EsAbstractEntity esEntity) {
-        final DeleteRequestBuilder builder = client.prepareDelete(asEsIndex(), asEsIndexType(), esEntity.asDocMeta().id());
+        final DeleteRequestBuilder builder = client.prepareDelete().setIndex(asEsIndex()).setId(esEntity.asDocMeta().id());
         final RequestOptionCall<DeleteRequestBuilder> deleteOption = esEntity.asDocMeta().deleteOption();
         if (deleteOption != null) {
             deleteOption.callback(builder);
@@ -365,7 +365,7 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
 
             final BulkRequestBuilder bulkRequest = client.prepareBulk();
             for (final SearchHit hit : hits) {
-                bulkRequest.add(client.prepareDelete(asEsIndex(), asEsIndexType(), hit.getId()));
+                bulkRequest.add(client.prepareDelete().setIndex(asEsIndex()).setId(hit.getId()));
             }
             count += hits.length;
             final BulkResponse bulkResponse = bulkRequest.execute().actionGet(bulkTimeout);
