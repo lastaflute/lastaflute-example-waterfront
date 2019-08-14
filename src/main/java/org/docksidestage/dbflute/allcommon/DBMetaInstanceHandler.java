@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -208,12 +208,12 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
 
     protected static String removeSchemaIfExists(String name) {
         int dotLastIndex = name.lastIndexOf(".");
-        return dotLastIndex >= 0 ? name.substring(dotLastIndex + ".".length()) : name; 
+        return dotLastIndex >= 0 ? name.substring(dotLastIndex + ".".length()) : name;
     }
 
     protected static String extractSchemaIfExists(String name) {
         int dotLastIndex = name.lastIndexOf(".");
-        return dotLastIndex >= 0 ? name.substring(0, dotLastIndex) : null; 
+        return dotLastIndex >= 0 ? name.substring(0, dotLastIndex) : null;
     }
 
     protected static String strip(String name) {
@@ -303,7 +303,7 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
 
     protected static Entity newEntity(Class<?> entityType) {
         try {
-            return (Entity)entityType.newInstance();
+            return (Entity)entityType.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             String msg = "Failed to new the instance: " + entityType;
             throw new IllegalStateException(msg, e);

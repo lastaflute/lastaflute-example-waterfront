@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -156,17 +156,17 @@ public class ImplementedBehaviorSelector implements BehaviorSelector {
         assertObjectNotNull("componentType", componentType);
         assertObjectNotNull("_container", _container);
         try {
-		    return _container.getComponent(componentType);
-		} catch (ComponentNotFoundException e) { // normally it doesn't come.
-		    final COMPONENT component;
-		    try {
-		        component = _container.getRoot().getComponent(componentType); // retry for HotDeploy mode
-		    } catch (ComponentNotFoundException ignored) {
-		        throw e;
-		    }
-		    _container = _container.getRoot(); // change container
-		    return component;
-		}
+            return _container.getComponent(componentType);
+        } catch (ComponentNotFoundException e) { // normally it doesn't come.
+            final COMPONENT component;
+            try {
+                component = _container.getRoot().getComponent(componentType); // retry for HotDeploy mode
+            } catch (ComponentNotFoundException ignored) {
+                throw e;
+            }
+            _container = _container.getRoot(); // change container
+            return component;
+        }
     }
 
     // ===================================================================================

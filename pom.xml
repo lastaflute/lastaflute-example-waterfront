@@ -26,7 +26,7 @@
 		<jsp.version>2.3.3</jsp.version>
 		<tomcat.boot.version>0.7.1</tomcat.boot.version>
 		<h2.jdbc.version>1.4.193</h2.jdbc.version>
-		<elasticsearch.version>6.7.0</elasticsearch.version>
+		<elasticsearch.version>6.8.2</elasticsearch.version>
 
 		<!-- GoodNeighbor Library -->
 		<commons.lang.version>3.4</commons.lang.version>
@@ -35,7 +35,8 @@
 		<!-- Testing -->
 		<junit.version>4.12</junit.version> <!-- is latest version without hamcrest -->
 		<utflute.version>0.9.0</utflute.version>
-		<es.cluster.runner.version>6.7.0.0</es.cluster.runner.version>
+		<es.cluster.runner.version>6.8.2.0</es.cluster.runner.version>
+		<elasticsearch.httpclient.version>6.8.1-SNAPSHOT</elasticsearch.httpclient.version>
 	</properties>
 
 	<licenses>
@@ -255,9 +256,9 @@
 			<version>${elasticsearch.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>transport</artifactId>
-			<version>${elasticsearch.version}</version>
+			<groupId>org.codelibs</groupId>
+			<artifactId>elasticsearch-httpclient</artifactId>
+			<version>${elasticsearch.httpclient.version}</version>
 		</dependency>
 
 		<!-- lastaflute -->
