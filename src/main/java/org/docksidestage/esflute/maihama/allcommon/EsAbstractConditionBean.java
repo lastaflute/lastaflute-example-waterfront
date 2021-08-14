@@ -39,7 +39,7 @@ import org.dbflute.jdbc.StatementConfig;
 import org.dbflute.system.DBFluteSystem;
 import org.dbflute.twowaysql.style.BoundDateDisplayStyle;
 import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.core.TimeValue;
 
 /**
  * @author ESFlute (using FreeGen)
