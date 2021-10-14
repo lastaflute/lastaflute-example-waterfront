@@ -27,5 +27,7 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
+    - name: Run with replace-schema
+      run: mvn dbflute:replace-schema -Ddbflute.forceExecution=true
     - name: Build with Maven
       run: mvn -B package --file pom.xml
