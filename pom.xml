@@ -26,8 +26,8 @@
 		<jsp.version>2.3.3</jsp.version>
 		<tomcat.boot.version>0.7.1</tomcat.boot.version>
 		<h2.jdbc.version>1.4.193</h2.jdbc.version>
-		<elasticsearch.version>7.15.0</elasticsearch.version>
-		<elasticsearch.httpclient.version>7.15.0</elasticsearch.httpclient.version>
+		<elasticsearch.version>7.16.0</elasticsearch.version>
+		<elasticsearch.httpclient.version>7.16.0</elasticsearch.httpclient.version>
 
 		<!-- GoodNeighbor Library -->
 		<commons.lang.version>3.4</commons.lang.version>
