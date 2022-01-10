@@ -1,5 +1,5 @@
 ##
-## Copyright 2014-2018 the original author or authors.
+## Copyright 2014-2021 the original author or authors.
 ##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
@@ -19,13 +19,18 @@ ${database.allClassCopyright}package ${myBaseBhvPackageName};
 import java.util.List;
 
 import org.dbflute.*;
+#if ($table.needsBehaviorDirectPackageImport())
 import org.dbflute.bhv.*;
+#end
 #if ($database.needsBehaviorSpringAutowired())
 import org.dbflute.bhv.core.BehaviorCommandInvoker;
 #end
 import org.dbflute.bhv.readable.*;
-#if ($table.isWritable() || $table.hasBehaviorFilterBeforeColumn())
+#if ($table.isWritable() || $table.hasBehaviorFilterBeforeColumn() || $table.isDatetimePrecisionTruncationOfUpdatedEntity())
 import org.dbflute.bhv.writable.*;
+#end
+#if ($table.isDatetimePrecisionTruncationOfUpdatedEntity())
+import org.dbflute.bhv.writable.coins.DateUpdateAdjuster;
 #end
 import org.dbflute.bhv.referrer.*;
 import org.dbflute.cbean.*;
@@ -1025,6 +1030,11 @@ public abstract class ${myClassName} extends ${table.baseBehaviorExtendsClassNam
         doInsertOrUpdateNonstrict(${myEntityVariableName}, null, null);
     }
 #end
+#if ($database.isInsertOrUpdateCountPreCheck())
+
+    @Override
+    protected boolean isInsertOrUpdateCountPreCheck() { return true; }
+#end
 
     /**
 #if ($table.hasOptimisticLock())
@@ -1812,6 +1822,12 @@ public abstract class ${myClassName} extends ${table.baseBehaviorExtendsClassNam
 #end
 #if ($database.isZeroUpdateCheckExistenceForPassing())
 
+    // ===================================================================================
+    //                                                                 Delegate to Command
+    //                                                                 ===================
+    // -----------------------------------------------------
+    //                                         Entity Update
+    //                                         -------------
     @Override
     protected int delegateUpdate(Entity entity, UpdateOption<? extends ConditionBean> option) {
         // ignore optimistic lock failure because optimistic lock column is
@@ -1915,6 +1931,25 @@ public abstract class ${myClassName} extends ${table.baseBehaviorExtendsClassNam
     public OutsideSqlAllFacadeExecutor<${myExtendedBhvClassName}> outsideSql() {
         return doOutsideSql();
     }
+#end
+#if ($table.isDatetimePrecisionTruncationOfUpdatedEntity())
+
+    // ===================================================================================
+    //                                                           Framework Filter Override
+    //                                                           =========================
+    @Override
+    protected void frameworkFilterEntityOfInsert(Entity entity, org.dbflute.optional.OptionalThing<InsertOption<? extends ConditionBean>> option) {
+        super.frameworkFilterEntityOfInsert(entity, option);
+        new DateUpdateAdjuster().truncatePrecisionOfEntityProperty(entity);
+    }
+#if ($table.isWritable())
+
+    @Override
+    protected void frameworkFilterEntityOfUpdate(Entity entity, org.dbflute.optional.OptionalThing<UpdateOption<? extends ConditionBean>> option) {
+        super.frameworkFilterEntityOfUpdate(entity, option);
+        new DateUpdateAdjuster().truncatePrecisionOfEntityProperty(entity);
+    }
+#end
 #end
 #if ($table.hasBehaviorFilterBeforeColumn())
 
