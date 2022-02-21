@@ -1,7 +1,5 @@
 package org.docksidestage.esflute.maihama;
 
-import static org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner.newConfigs;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,69 +8,94 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.codelibs.curl.Curl;
 import org.codelibs.curl.CurlResponse;
-import org.codelibs.elasticsearch.runner.ElasticsearchClusterRunner;
-import org.codelibs.elasticsearch.runner.net.EcrCurl;
+import org.codelibs.fesen.client.HttpClient;
+import org.codelibs.fesen.client.HttpClient.ContentType;
 import org.dbflute.cbean.result.PagingResultBean;
+import org.docksidestage.client.ClientWrapper;
 import org.docksidestage.esflute.maihama.allcommon.EsPagingResultBean;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
 import org.docksidestage.unit.UnitWaterfrontTestCase;
-import org.elasticsearch.common.settings.Settings.Builder;
-import org.elasticsearch.xcontent.XContentType;
-import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
-import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.bucket.filter.Filter;
-import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
-import org.elasticsearch.search.aggregations.bucket.missing.Missing;
-import org.elasticsearch.search.aggregations.bucket.range.Range;
-import org.elasticsearch.search.aggregations.bucket.terms.Terms;
-import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
-import org.elasticsearch.search.aggregations.metrics.Avg;
-import org.elasticsearch.search.aggregations.metrics.Cardinality;
-import org.elasticsearch.search.aggregations.metrics.ExtendedStats;
-import org.elasticsearch.search.aggregations.metrics.Max;
-import org.elasticsearch.search.aggregations.metrics.Min;
-import org.elasticsearch.search.aggregations.metrics.PercentileRanks;
-import org.elasticsearch.search.aggregations.metrics.Percentiles;
-import org.elasticsearch.search.aggregations.metrics.Stats;
-import org.elasticsearch.search.aggregations.metrics.Sum;
-import org.elasticsearch.search.aggregations.metrics.ValueCount;
 import org.lastaflute.di.exception.IORuntimeException;
+import org.opensearch.action.admin.indices.create.CreateIndexResponse;
+import org.opensearch.common.settings.Settings;
+import org.opensearch.common.xcontent.XContentType;
+import org.opensearch.index.query.functionscore.ScoreFunctionBuilders;
+import org.opensearch.search.aggregations.Aggregations;
+import org.opensearch.search.aggregations.bucket.filter.Filter;
+import org.opensearch.search.aggregations.bucket.histogram.Histogram;
+import org.opensearch.search.aggregations.bucket.missing.Missing;
+import org.opensearch.search.aggregations.bucket.range.Range;
+import org.opensearch.search.aggregations.bucket.terms.Terms;
+import org.opensearch.search.aggregations.bucket.terms.Terms.Bucket;
+import org.opensearch.search.aggregations.metrics.Avg;
+import org.opensearch.search.aggregations.metrics.Cardinality;
+import org.opensearch.search.aggregations.metrics.ExtendedStats;
+import org.opensearch.search.aggregations.metrics.Max;
+import org.opensearch.search.aggregations.metrics.Min;
+import org.opensearch.search.aggregations.metrics.PercentileRanks;
+import org.opensearch.search.aggregations.metrics.Percentiles;
+import org.opensearch.search.aggregations.metrics.Stats;
+import org.opensearch.search.aggregations.metrics.Sum;
+import org.opensearch.search.aggregations.metrics.ValueCount;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.utility.DockerImageName;
 
 public class ProductTest extends UnitWaterfrontTestCase {
 
-    private ElasticsearchClusterRunner runner;
+    private static final Logger logger = LoggerFactory.getLogger(ProductTest.class);
 
-    private String clusterName;
+    private final String version = "7.17.0";
+
+    private final String imageTag = "docker.elastic.co/elasticsearch/elasticsearch:" + version;
+
+    private GenericContainer server;
+
+    private HttpClient client;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        clusterName = "es-waterfront-test";
-        // create runner instance
-        runner = new ElasticsearchClusterRunner();
-        // create ES nodes
-        runner.onBuild(new ElasticsearchClusterRunner.Builder() {
-            @Override
-            public void build(final int number, final Builder settingsBuilder) {
-                settingsBuilder.put("http.cors.enabled", true);
-                settingsBuilder.put("http.cors.allow-origin", "*");
-                settingsBuilder.putList("discovery.seed_hosts", "127.0.0.1:9301");
-                settingsBuilder.putList("cluster.initial_master_nodes", "127.0.0.1:9301");
-            }
-        }).build(newConfigs().clusterName(clusterName).numOfNode(3));
+        server = new GenericContainer<>(DockerImageName.parse(imageTag))//
+                .withEnv("discovery.type", "single-node")//
+                .withEnv("xpack.security.enabled", "false")//
+                .withExposedPorts(9200);
+        server.start();
 
-        // wait for yellow status
-        runner.ensureYellow();
+        final String url = "http://" + server.getHost() + ":" + server.getFirstMappedPort();
+        logger.info("Elasticsearch " + version + ": " + url);
+        for (int i = 0; i < 10; i++) {
+            try (CurlResponse response = Curl.get(url).execute()) {
+                if (response.getHttpStatusCode() == 200) {
+                    logger.info(url + " is available.");
+                    break;
+                }
+            } catch (Exception e) {
+                logger.debug(e.getLocalizedMessage());
+            }
+            try {
+                logger.info("Waiting for " + url);
+                Thread.sleep(1000L);
+            } catch (InterruptedException e) {
+                // nothing
+            }
+        }
+
+        final String host = server.getHost() + ":" + server.getFirstMappedPort();
+        final Settings settings = Settings.builder().putList("http.hosts", host).put("http.compression", true).build();
+        client = new HttpClient(settings, null);
+        ((ClientWrapper) getComponent("client")).setClient(client);
     }
 
     @Override
     public void tearDown() throws Exception {
-        // close runner
-        runner.close();
-        // delete all files
-        runner.clean();
+        logger.info("Closing client");
+        client.close();
+        server.stop();
     }
 
     public void test_runCluster() throws Exception {
@@ -80,50 +103,128 @@ public class ProductTest extends UnitWaterfrontTestCase {
         final String productIndex = "product";
 
         // create an index
-        runner.createIndex(memberIndex, builder -> {
-            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("create-member.json").openStream()) {
-                final String mappingSource = IOUtils.toString(input);
-                builder.setSource(mappingSource, XContentType.JSON);
-            } catch (final IOException e) {
-                throw new IORuntimeException(e);
-            }
-            return builder;
-        });
-        runner.ensureYellow(memberIndex);
-        if (!runner.indexExists(memberIndex)) {
-            fail();
+        {
+            final String settingsSource = "{\n" + //
+                    "        \"index\": {\n" + //
+                    "            \"number_of_shards\": \"2\",\n" + //
+                    "            \"number_of_replicas\": \"0\"\n" + //
+                    "        }\n" + //
+                    "    }";
+            final String mappingSource = "{\n" + //
+                    "            \"properties\": {\n" + //
+                    "                \"account\": {\n" + //
+                    "                    \"type\": \"keyword\"\n" + //
+                    "                },\n" + //
+                    "                \"name\": {\n" + //
+                    "                    \"type\": \"text\",\n" + //
+                    "                    \"analyzer\": \"standard\",\n" + //
+                    "                    \"fields\": {\n" + //
+                    "                        \"raw\": {\n" + //
+                    "                            \"type\": \"keyword\"\n" + //
+                    "                        }\n" + //
+                    "                    }\n" + //
+                    "                }\n" + //
+                    "            }\n" + //
+                    "        }";
+            final CreateIndexResponse response = client.admin()
+                    .indices()
+                    .prepareCreate(memberIndex)
+                    .setSettings(settingsSource, XContentType.JSON)//
+                    .addMapping("_doc", mappingSource, XContentType.JSON)//
+                    .execute()
+                    .actionGet();
+            assertTrue(response.isAcknowledged());
         }
+        refresh(memberIndex);
+        existsIndices(memberIndex);
 
-        runner.createIndex(productIndex, builder -> {
-            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("create-product.json").openStream()) {
-                final String mappingSource = IOUtils.toString(input);
-                builder.setSource(mappingSource, XContentType.JSON);
-            } catch (final IOException e) {
-                throw new IORuntimeException(e);
-            }
-            return builder;
-        });
-        runner.ensureYellow(productIndex);
-        if (!runner.indexExists(productIndex)) {
-            fail();
+        {
+            final String settingsSource = "{\n" + //
+                    "        \"index\": {\n" + //
+                    "            \"number_of_shards\": \"2\",\n" + //
+                    "            \"number_of_replicas\": \"0\"\n" + //
+                    "        }\n" + //
+                    "    }";
+            final String mappingSource = "{\n" + //
+                    "            \"properties\": {\n" + //
+                    "                \"latest_purchase_date\": {\n" + //
+                    "                    \"type\": \"date\",\n" + //
+                    "                    \"format\": \"date_optional_time\"\n" + //
+                    "                },\n" + //
+                    "                \"product_category\": {\n" + //
+                    "                    \"type\": \"keyword\"\n" + //
+                    "                },\n" + //
+                    "                \"product_category_code\": {\n" + //
+                    "                    \"type\": \"keyword\"\n" + //
+                    "                },\n" + //
+                    "                \"product_description\": {\n" + //
+                    "                    \"type\": \"text\",\n" + //
+                    "                    \"analyzer\": \"standard\"\n" + //
+                    "                },\n" + //
+                    "                \"product_handle_code\": {\n" + //
+                    "                    \"type\": \"keyword\"\n" + //
+                    "                },\n" + //
+                    "                \"product_name\": {\n" + //
+                    "                    \"type\": \"text\",\n" + //
+                    "                    \"fielddata\": true,\n" + //
+                    "                    \"analyzer\": \"standard\",\n" + //
+                    "                    \"fields\": {\n" + //
+                    "                        \"raw\": {\n" + //
+                    "                            \"type\": \"keyword\"\n" + //
+                    "                        }\n" + //
+                    "                    }\n" + //
+                    "                },\n" + //
+                    "                \"product_status\": {\n" + //
+                    "                    \"type\": \"keyword\"\n" + //
+                    "                },\n" + //
+                    "                \"product_status_code\": {\n" + //
+                    "                    \"type\": \"keyword\"\n" + //
+                    "                },\n" + //
+                    "                \"register_datetime\": {\n" + //
+                    "                    \"type\": \"date\",\n" + //
+                    "                    \"format\": \"date_optional_time\"\n" + //
+                    "                },\n" + //
+                    "                \"register_user\": {\n" + //
+                    "                    \"type\": \"keyword\"\n" + //
+                    "                },\n" + //
+                    "                \"regular_price\": {\n" + //
+                    "                    \"type\": \"integer\"\n" + //
+                    "                },\n" + //
+                    "                \"update_datetime\": {\n" + //
+                    "                    \"type\": \"date\",\n" + //
+                    "                    \"format\": \"date_optional_time\"\n" + //
+                    "                },\n" + //
+                    "                \"update_user\": {\n" + //
+                    "                    \"type\": \"keyword\"\n" + //
+                    "                }\n" + //
+                    "            }\n" + //
+                    "        }";
+            final CreateIndexResponse response = client.admin()
+                    .indices()
+                    .prepareCreate(productIndex)
+                    .setSettings(settingsSource, XContentType.JSON)//
+                    .addMapping("_doc", mappingSource, XContentType.JSON)//
+                    .execute()
+                    .actionGet();
+            assertTrue(response.isAcknowledged());
         }
+        refresh(productIndex);
+        existsIndices(productIndex);
 
         // bulk
-        try (final CurlResponse response =
-                EcrCurl.post(runner.node(), "/_bulk").header("Content-Type", "application/x-ndjson").onConnect((req, con) -> {
-                    con.setDoOutput(true);
-                    try (final InputStream input =
-                            Thread.currentThread().getContextClassLoader().getResource("data-maihama.ndjson").openStream();
-                            final OutputStream output = con.getOutputStream()) {
-                        IOUtils.copy(input, output);
-                    } catch (final IOException e) {
-                        throw new IORuntimeException(e);
-                    }
-                }).execute()) {
-            assertEquals(200, response.getHttpStatusCode());
+        try (final CurlResponse response = client.getCurlRequest(Curl::post, ContentType.X_NDJSON, "/_bulk").onConnect((req, con) -> {
+            con.setDoOutput(true);
+            try (final InputStream input = Thread.currentThread().getContextClassLoader().getResource("data-maihama.ndjson").openStream();
+                    final OutputStream output = con.getOutputStream()) {
+                IOUtils.copy(input, output);
+            } catch (final IOException e) {
+                throw new IORuntimeException(e);
+            }
+        }).execute()) {
+            assertEquals(response.getContentAsString(), 200, response.getHttpStatusCode());
         }
 
-        runner.refresh();
+        refresh();
 
         ProductBhv productBhv = getComponent(ProductBhv.class);
 
@@ -132,7 +233,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
             // first page
             PagingResultBean<Product> list1 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
-                cb.query().addOrderBy_Id_Asc();
+                cb.query().addOrderBy_RegisterDatetime_Asc();
                 cb.paging(5, 1);
             });
             System.out.println(((EsPagingResultBean<Product>) list1).getQueryDsl());
@@ -152,15 +253,15 @@ public class ProductTest extends UnitWaterfrontTestCase {
             assertFalse(list1.existsPreviousPage());
             assertTrue(list1.existsNextPage());
             assertEquals("1", list1.get(0).asDocMeta().id());
-            assertEquals("10", list1.get(1).asDocMeta().id());
-            assertEquals("11", list1.get(2).asDocMeta().id());
-            assertEquals("12", list1.get(3).asDocMeta().id());
-            assertEquals("13", list1.get(4).asDocMeta().id());
+            assertEquals("2", list1.get(1).asDocMeta().id());
+            assertEquals("3", list1.get(2).asDocMeta().id());
+            assertEquals("4", list1.get(3).asDocMeta().id());
+            assertEquals("5", list1.get(4).asDocMeta().id());
 
             // middle page
             PagingResultBean<Product> list2 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
-                cb.query().addOrderBy_Id_Asc();
+                cb.query().addOrderBy_RegisterDatetime_Asc();
                 cb.paging(5, 2);
             });
             System.out.println(((EsPagingResultBean<Product>) list2).getQueryDsl());
@@ -174,16 +275,16 @@ public class ProductTest extends UnitWaterfrontTestCase {
             assertEquals(3, list2.getNextPageNumber());
             assertTrue(list2.existsPreviousPage());
             assertTrue(list2.existsNextPage());
-            assertEquals("14", list2.get(0).asDocMeta().id());
-            assertEquals("15", list2.get(1).asDocMeta().id());
-            assertEquals("16", list2.get(2).asDocMeta().id());
-            assertEquals("17", list2.get(3).asDocMeta().id());
-            assertEquals("18", list2.get(4).asDocMeta().id());
+            assertEquals("6", list2.get(0).asDocMeta().id());
+            assertEquals("7", list2.get(1).asDocMeta().id());
+            assertEquals("8", list2.get(2).asDocMeta().id());
+            assertEquals("9", list2.get(3).asDocMeta().id());
+            assertEquals("10", list2.get(4).asDocMeta().id());
 
             // last page
             PagingResultBean<Product> list3 = productBhv.selectPage(cb -> {
                 cb.query().matchAll();
-                cb.query().addOrderBy_Id_Asc();
+                cb.query().addOrderBy_RegisterDatetime_Asc();
                 cb.paging(5, 4);
             });
             System.out.println(((EsPagingResultBean<Product>) list3).getQueryDsl());
@@ -202,11 +303,11 @@ public class ProductTest extends UnitWaterfrontTestCase {
             }
             assertTrue(list3.existsPreviousPage());
             assertFalse(list3.existsNextPage());
-            assertEquals("5", list3.get(0).asDocMeta().id());
-            assertEquals("6", list3.get(1).asDocMeta().id());
-            assertEquals("7", list3.get(2).asDocMeta().id());
-            assertEquals("8", list3.get(3).asDocMeta().id());
-            assertEquals("9", list3.get(4).asDocMeta().id());
+            assertEquals("16", list3.get(0).asDocMeta().id());
+            assertEquals("17", list3.get(1).asDocMeta().id());
+            assertEquals("18", list3.get(2).asDocMeta().id());
+            assertEquals("19", list3.get(3).asDocMeta().id());
+            assertEquals("20", list3.get(4).asDocMeta().id());
         }
 
         // Match Query
@@ -1266,7 +1367,13 @@ public class ProductTest extends UnitWaterfrontTestCase {
             productBhv.insert(product);
         }
 
-        // wait for yellow status
-        runner.ensureYellow();
+    }
+
+    private void existsIndices(final String... indices) {
+        assertTrue(client.admin().indices().prepareExists(indices).execute().actionGet().isExists());
+    }
+
+    private void refresh(final String... indices) {
+        assertEquals(200, client.admin().indices().prepareRefresh(indices).execute().actionGet().getStatus().getStatus());
     }
 }

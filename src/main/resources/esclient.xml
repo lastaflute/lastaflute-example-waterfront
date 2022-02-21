@@ -3,8 +3,8 @@
 	"http://dbflute.org/meta/lastadi10.dtd">
 <components namespace="esclient">
 	<component name="client" instance="singleton">
-		new org.codelibs.elasticsearch.client.HttpClient(
-			org.elasticsearch.common.settings.Settings.builder()
+		new org.codelibs.fesen.client.HttpClient(
+			org.opensearch.common.settings.Settings.builder()
 				.put("http.hosts", "http://localhost:9200").build(), null)
 		<preDestroy name="close" />
 	</component>

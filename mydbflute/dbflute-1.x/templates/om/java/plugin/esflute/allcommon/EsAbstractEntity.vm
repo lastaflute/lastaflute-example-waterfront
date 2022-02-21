@@ -9,8 +9,8 @@ import org.dbflute.FunCustodial;
 import org.dbflute.dbmeta.accessory.EntityModifiedProperties;
 import org.dbflute.dbmeta.accessory.EntityUniqueDrivenProperties;
 import org.dbflute.util.DfCollectionUtil;
-import org.elasticsearch.action.delete.DeleteRequestBuilder;
-import org.elasticsearch.action.index.IndexRequestBuilder;
+import org.opensearch.action.delete.DeleteRequestBuilder;
+import org.opensearch.action.index.IndexRequestBuilder;
 
 /**
  * @author ESFlute (using FreeGen)

@@ -2,10 +2,7 @@
 <!DOCTYPE components PUBLIC "-//DBFLUTE//DTD LastaDi 1.0//EN" 
 	"http://dbflute.org/meta/lastadi10.dtd">
 <components namespace="esclient">
-	<component name="client" instance="singleton">
-		new org.codelibs.elasticsearch.client.HttpClient(
-			org.elasticsearch.common.settings.Settings.builder()
-				.put("http.hosts", "http://localhost:9201").build(), null)
-		<preDestroy name="close" />
+	<component name="client"
+		class="org.docksidestage.client.ClientWrapper">
 	</component>
 </components>

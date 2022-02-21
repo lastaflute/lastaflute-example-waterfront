@@ -8,9 +8,9 @@ import java.util.Collection;
 import ${request.package}.allcommon.EsAbstractConditionQuery;
 import ${request.package}.cbean.cq.${table.camelizedName}CQ;
 import org.dbflute.cbean.ckey.ConditionKey;
-import org.elasticsearch.index.query.*;
-import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
-import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder.FilterFunctionBuilder;
+import org.opensearch.index.query.*;
+import org.opensearch.index.query.functionscore.FunctionScoreQueryBuilder;
+import org.opensearch.index.query.functionscore.FunctionScoreQueryBuilder.FilterFunctionBuilder;
 
 /**
  * @author ESFlute (using FreeGen)
@@ -148,11 +148,13 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
         setId_Terms(idList, opLambda);
     }
 
+    @Deprecated
     public Bs${table.camelizedName}CQ addOrderBy_Id_Asc() {
         regOBA("_id");
         return this;
     }
 
+    @Deprecated
     public Bs${table.camelizedName}CQ addOrderBy_Id_Desc() {
         regOBD("_id");
         return this;

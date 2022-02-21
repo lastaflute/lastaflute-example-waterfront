@@ -17,8 +17,8 @@ package org.docksidestage.esflute.maihama.allcommon;
 
 import org.apache.lucene.search.TotalHits;
 import org.dbflute.cbean.result.PagingResultBean;
-import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.search.aggregations.Aggregations;
+import org.opensearch.action.search.SearchRequestBuilder;
+import org.opensearch.search.aggregations.Aggregations;
 
 /**
  * @param <ENTITY> The type of entity.

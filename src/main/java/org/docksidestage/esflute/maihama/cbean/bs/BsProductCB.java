@@ -27,8 +27,8 @@ import org.docksidestage.esflute.maihama.cbean.cq.bs.BsProductCQ;
 import org.docksidestage.esflute.maihama.cbean.ca.ProductCA;
 import org.docksidestage.esflute.maihama.cbean.ca.bs.BsProductCA;
 import org.dbflute.cbean.ConditionQuery;
-import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
+import org.opensearch.action.search.SearchRequestBuilder;
+import org.opensearch.index.query.QueryBuilder;
 
 /**
  * @author ESFlute (using FreeGen)

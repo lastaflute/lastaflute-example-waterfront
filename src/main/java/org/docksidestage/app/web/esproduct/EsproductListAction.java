@@ -25,10 +25,10 @@ import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.app.web.base.paging.PagingAssist;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;
 import org.docksidestage.esflute.maihama.exentity.Product;
-import org.elasticsearch.index.IndexNotFoundException;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.login.AllowAnyoneAccess;
 import org.lastaflute.web.response.HtmlResponse;
+import org.opensearch.index.IndexNotFoundException;
 
 /**
  * @author jflute
