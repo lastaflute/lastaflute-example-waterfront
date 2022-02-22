@@ -331,10 +331,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setLatestPurchaseDate_CommonTerms(LocalDateTime latestPurchaseDate) {
         setLatestPurchaseDate_CommonTerms(latestPurchaseDate, null);
     }
 
+    @Deprecated
     public void setLatestPurchaseDate_CommonTerms(LocalDateTime latestPurchaseDate, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("latest_purchase_date", latestPurchaseDate);
         if (opLambda != null) {
@@ -553,10 +555,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setProductCategory_CommonTerms(String productCategory) {
         setProductCategory_CommonTerms(productCategory, null);
     }
 
+    @Deprecated
     public void setProductCategory_CommonTerms(String productCategory, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("product_category", productCategory);
         if (opLambda != null) {
@@ -775,10 +779,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setProductCategoryCode_CommonTerms(String productCategoryCode) {
         setProductCategoryCode_CommonTerms(productCategoryCode, null);
     }
 
+    @Deprecated
     public void setProductCategoryCode_CommonTerms(String productCategoryCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("product_category_code", productCategoryCode);
         if (opLambda != null) {
@@ -997,10 +1003,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setProductDescription_CommonTerms(String productDescription) {
         setProductDescription_CommonTerms(productDescription, null);
     }
 
+    @Deprecated
     public void setProductDescription_CommonTerms(String productDescription, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("product_description", productDescription);
         if (opLambda != null) {
@@ -1210,10 +1218,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setProductHandleCode_CommonTerms(String productHandleCode) {
         setProductHandleCode_CommonTerms(productHandleCode, null);
     }
 
+    @Deprecated
     public void setProductHandleCode_CommonTerms(String productHandleCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("product_handle_code", productHandleCode);
         if (opLambda != null) {
@@ -1432,10 +1442,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setProductName_CommonTerms(String productName) {
         setProductName_CommonTerms(productName, null);
     }
 
+    @Deprecated
     public void setProductName_CommonTerms(String productName, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("product_name", productName);
         if (opLambda != null) {
@@ -1654,10 +1666,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setProductStatus_CommonTerms(String productStatus) {
         setProductStatus_CommonTerms(productStatus, null);
     }
 
+    @Deprecated
     public void setProductStatus_CommonTerms(String productStatus, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("product_status", productStatus);
         if (opLambda != null) {
@@ -1876,10 +1890,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setProductStatusCode_CommonTerms(String productStatusCode) {
         setProductStatusCode_CommonTerms(productStatusCode, null);
     }
 
+    @Deprecated
     public void setProductStatusCode_CommonTerms(String productStatusCode, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("product_status_code", productStatusCode);
         if (opLambda != null) {
@@ -2055,10 +2071,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setRegisterDatetime_CommonTerms(LocalDateTime registerDatetime) {
         setRegisterDatetime_CommonTerms(registerDatetime, null);
     }
 
+    @Deprecated
     public void setRegisterDatetime_CommonTerms(LocalDateTime registerDatetime, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("register_datetime", registerDatetime);
         if (opLambda != null) {
@@ -2277,10 +2295,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setRegisterUser_CommonTerms(String registerUser) {
         setRegisterUser_CommonTerms(registerUser, null);
     }
 
+    @Deprecated
     public void setRegisterUser_CommonTerms(String registerUser, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("register_user", registerUser);
         if (opLambda != null) {
@@ -2456,10 +2476,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setRegularPrice_CommonTerms(Integer regularPrice) {
         setRegularPrice_CommonTerms(regularPrice, null);
     }
 
+    @Deprecated
     public void setRegularPrice_CommonTerms(Integer regularPrice, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("regular_price", regularPrice);
         if (opLambda != null) {
@@ -2635,10 +2657,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setUpdateDatetime_CommonTerms(LocalDateTime updateDatetime) {
         setUpdateDatetime_CommonTerms(updateDatetime, null);
     }
 
+    @Deprecated
     public void setUpdateDatetime_CommonTerms(LocalDateTime updateDatetime, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("update_datetime", updateDatetime);
         if (opLambda != null) {
@@ -2857,10 +2881,12 @@ public abstract class BsProductCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setUpdateUser_CommonTerms(String updateUser) {
         setUpdateUser_CommonTerms(updateUser, null);
     }
 
+    @Deprecated
     public void setUpdateUser_CommonTerms(String updateUser, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("update_user", updateUser);
         if (opLambda != null) {

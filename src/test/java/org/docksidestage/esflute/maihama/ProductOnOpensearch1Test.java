@@ -45,13 +45,13 @@ import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.utility.DockerImageName;
 
-public class ProductTest extends UnitWaterfrontTestCase {
+public class ProductOnOpensearch1Test extends UnitWaterfrontTestCase {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductOnOpensearch1Test.class);
 
-    private final String version = "7.17.0";
+    private final String version = "1.2.4";
 
-    private final String imageTag = "docker.elastic.co/elasticsearch/elasticsearch:" + version;
+    private final String imageTag = "opensearchproject/opensearch:" + version;
 
     private GenericContainer server;
 
@@ -62,7 +62,7 @@ public class ProductTest extends UnitWaterfrontTestCase {
         super.setUp();
         server = new GenericContainer<>(DockerImageName.parse(imageTag))//
                 .withEnv("discovery.type", "single-node")//
-                .withEnv("xpack.security.enabled", "false")//
+                .withEnv("plugins.security.disabled", "true")//
                 .withExposedPorts(9200);
         server.start();
 

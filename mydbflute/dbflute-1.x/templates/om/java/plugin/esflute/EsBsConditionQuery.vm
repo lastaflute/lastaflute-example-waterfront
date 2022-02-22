@@ -382,10 +382,12 @@ public abstract class Bs${table.camelizedName}CQ extends EsAbstractConditionQuer
         }
     }
 
+    @Deprecated
     public void set${column.capCamelName}_CommonTerms($javaNative ${column.uncapCamelName}) {
         set${column.capCamelName}_CommonTerms(${column.uncapCamelName}, null);
     }
 
+    @Deprecated
     public void set${column.capCamelName}_CommonTerms($javaNative ${column.uncapCamelName}, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("${column.name}", ${column.uncapCamelName});
         if (opLambda != null) {

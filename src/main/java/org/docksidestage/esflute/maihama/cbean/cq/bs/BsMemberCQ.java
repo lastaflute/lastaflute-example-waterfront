@@ -374,10 +374,12 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setAccount_CommonTerms(String account) {
         setAccount_CommonTerms(account, null);
     }
 
+    @Deprecated
     public void setAccount_CommonTerms(String account, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("account", account);
         if (opLambda != null) {
@@ -596,10 +598,12 @@ public abstract class BsMemberCQ extends EsAbstractConditionQuery {
         }
     }
 
+    @Deprecated
     public void setName_CommonTerms(String name) {
         setName_CommonTerms(name, null);
     }
 
+    @Deprecated
     public void setName_CommonTerms(String name, ConditionOptionCall<CommonTermsQueryBuilder> opLambda) {
         CommonTermsQueryBuilder builder = regCommonTermsQ("name", name);
         if (opLambda != null) {
