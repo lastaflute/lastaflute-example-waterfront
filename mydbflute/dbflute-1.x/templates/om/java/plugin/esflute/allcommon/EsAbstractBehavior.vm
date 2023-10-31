@@ -1,5 +1,5 @@
 ${manager.allClassCopyright}package ${request.package}.allcommon;
-#set ($jakartaPackage = $database.currentJakartaPackage)
+#set ($jakartaPackage = $manager.currentJakartaPackage)
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
