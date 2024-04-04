@@ -130,7 +130,7 @@ public class ProductOnElasticsearch7Test extends UnitWaterfrontTestCase {
                     .indices()
                     .prepareCreate(memberIndex)
                     .setSettings(settingsSource, XContentType.JSON)//
-                    .addMapping("_doc", mappingSource, XContentType.JSON)//
+                    .setMapping(mappingSource)//
                     .execute()
                     .actionGet();
             assertTrue(response.isAcknowledged());
@@ -203,7 +203,7 @@ public class ProductOnElasticsearch7Test extends UnitWaterfrontTestCase {
                     .indices()
                     .prepareCreate(productIndex)
                     .setSettings(settingsSource, XContentType.JSON)//
-                    .addMapping("_doc", mappingSource, XContentType.JSON)//
+                    .setMapping(mappingSource)//
                     .execute()
                     .actionGet();
             assertTrue(response.isAcknowledged());

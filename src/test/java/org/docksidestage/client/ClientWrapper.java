@@ -2,11 +2,10 @@ package org.docksidestage.client;
 
 import java.util.Map;
 
-import org.opensearch.action.ActionFuture;
-import org.opensearch.action.ActionListener;
 import org.opensearch.action.ActionRequest;
-import org.opensearch.action.ActionResponse;
 import org.opensearch.action.ActionType;
+import org.opensearch.action.admin.indices.segments.IndicesSegmentResponse;
+import org.opensearch.action.admin.indices.segments.PitSegmentsRequest;
 import org.opensearch.action.bulk.BulkRequest;
 import org.opensearch.action.bulk.BulkRequestBuilder;
 import org.opensearch.action.bulk.BulkResponse;
@@ -31,6 +30,12 @@ import org.opensearch.action.index.IndexResponse;
 import org.opensearch.action.search.ClearScrollRequest;
 import org.opensearch.action.search.ClearScrollRequestBuilder;
 import org.opensearch.action.search.ClearScrollResponse;
+import org.opensearch.action.search.CreatePitRequest;
+import org.opensearch.action.search.CreatePitResponse;
+import org.opensearch.action.search.DeletePitRequest;
+import org.opensearch.action.search.DeletePitResponse;
+import org.opensearch.action.search.GetAllPitNodesRequest;
+import org.opensearch.action.search.GetAllPitNodesResponse;
 import org.opensearch.action.search.MultiSearchRequest;
 import org.opensearch.action.search.MultiSearchRequestBuilder;
 import org.opensearch.action.search.MultiSearchResponse;
@@ -65,285 +70,245 @@ public class ClientWrapper implements Client {
         parent.close();
     }
 
-    @Override
-    public <Request extends ActionRequest, Response extends ActionResponse> ActionFuture<Response> execute(
-            final ActionType<Response> action, final Request request) {
+    public <Request extends ActionRequest, Response extends org.opensearch.core.action.ActionResponse> org.opensearch.common.action.ActionFuture<Response> execute(
+            ActionType<Response> action, Request request) {
         return parent.execute(action, request);
     }
 
-    @Override
-    public <Request extends ActionRequest, Response extends ActionResponse> void execute(final ActionType<Response> action,
-            final Request request, final ActionListener<Response> listener) {
+    public <Request extends ActionRequest, Response extends org.opensearch.core.action.ActionResponse> void execute(
+            ActionType<Response> action, Request request, org.opensearch.core.action.ActionListener<Response> listener) {
         parent.execute(action, request, listener);
     }
 
-    @Override
     public ThreadPool threadPool() {
         return parent.threadPool();
     }
 
-    @Override
     public AdminClient admin() {
         return parent.admin();
     }
 
-    @Override
-    public ActionFuture<IndexResponse> index(final IndexRequest request) {
+    public org.opensearch.common.action.ActionFuture<IndexResponse> index(IndexRequest request) {
         return parent.index(request);
     }
 
-    @Override
-    public void index(final IndexRequest request, final ActionListener<IndexResponse> listener) {
+    public void index(IndexRequest request, org.opensearch.core.action.ActionListener<IndexResponse> listener) {
         parent.index(request, listener);
     }
 
-    @Override
     public IndexRequestBuilder prepareIndex() {
         return parent.prepareIndex();
     }
 
-    @Override
-    public ActionFuture<UpdateResponse> update(final UpdateRequest request) {
+    public IndexRequestBuilder prepareIndex(String index) {
+        return parent.prepareIndex(index);
+    }
+
+    public org.opensearch.common.action.ActionFuture<UpdateResponse> update(UpdateRequest request) {
         return parent.update(request);
     }
 
-    @Override
-    public void update(final UpdateRequest request, final ActionListener<UpdateResponse> listener) {
+    public void update(UpdateRequest request, org.opensearch.core.action.ActionListener<UpdateResponse> listener) {
         parent.update(request, listener);
     }
 
-    @Override
     public UpdateRequestBuilder prepareUpdate() {
         return parent.prepareUpdate();
     }
 
-    @Override
-    public UpdateRequestBuilder prepareUpdate(final String index, final String type, final String id) {
-        return parent.prepareUpdate(index, type, id);
+    public UpdateRequestBuilder prepareUpdate(String index, String id) {
+        return parent.prepareUpdate(index, id);
     }
 
-    @Override
-    public IndexRequestBuilder prepareIndex(final String index, final String type) {
-        return parent.prepareIndex(index, type);
-    }
-
-    @Override
-    public IndexRequestBuilder prepareIndex(final String index, final String type, final String id) {
-        return parent.prepareIndex(index, type, id);
-    }
-
-    @Override
-    public ActionFuture<DeleteResponse> delete(final DeleteRequest request) {
+    public org.opensearch.common.action.ActionFuture<DeleteResponse> delete(DeleteRequest request) {
         return parent.delete(request);
     }
 
-    @Override
-    public void delete(final DeleteRequest request, final ActionListener<DeleteResponse> listener) {
+    public void delete(DeleteRequest request, org.opensearch.core.action.ActionListener<DeleteResponse> listener) {
         parent.delete(request, listener);
     }
 
-    @Override
     public DeleteRequestBuilder prepareDelete() {
         return parent.prepareDelete();
     }
 
-    @Override
-    public DeleteRequestBuilder prepareDelete(final String index, final String type, final String id) {
-        return parent.prepareDelete(index, type, id);
+    public DeleteRequestBuilder prepareDelete(String index, String id) {
+        return parent.prepareDelete(index, id);
     }
 
-    @Override
-    public ActionFuture<BulkResponse> bulk(final BulkRequest request) {
+    public org.opensearch.common.action.ActionFuture<BulkResponse> bulk(BulkRequest request) {
         return parent.bulk(request);
     }
 
-    @Override
-    public void bulk(final BulkRequest request, final ActionListener<BulkResponse> listener) {
+    public void bulk(BulkRequest request, org.opensearch.core.action.ActionListener<BulkResponse> listener) {
         parent.bulk(request, listener);
     }
 
-    @Override
     public BulkRequestBuilder prepareBulk() {
         return parent.prepareBulk();
     }
 
-    @Override
-    public BulkRequestBuilder prepareBulk(final String globalIndex, final String globalType) {
-        return parent.prepareBulk(globalIndex, globalType);
+    public BulkRequestBuilder prepareBulk(String globalIndex) {
+        return parent.prepareBulk(globalIndex);
     }
 
-    @Override
-    public ActionFuture<GetResponse> get(final GetRequest request) {
+    public org.opensearch.common.action.ActionFuture<GetResponse> get(GetRequest request) {
         return parent.get(request);
     }
 
-    @Override
-    public void get(final GetRequest request, final ActionListener<GetResponse> listener) {
+    public void get(GetRequest request, org.opensearch.core.action.ActionListener<GetResponse> listener) {
         parent.get(request, listener);
     }
 
-    @Override
     public GetRequestBuilder prepareGet() {
         return parent.prepareGet();
     }
 
-    @Override
-    public GetRequestBuilder prepareGet(final String index, final String type, final String id) {
-        return parent.prepareGet(index, type, id);
+    public GetRequestBuilder prepareGet(String index, String id) {
+        return parent.prepareGet(index, id);
     }
 
-    @Override
-    public ActionFuture<MultiGetResponse> multiGet(final MultiGetRequest request) {
+    public org.opensearch.common.action.ActionFuture<MultiGetResponse> multiGet(MultiGetRequest request) {
         return parent.multiGet(request);
     }
 
-    @Override
-    public void multiGet(final MultiGetRequest request, final ActionListener<MultiGetResponse> listener) {
+    public void multiGet(MultiGetRequest request, org.opensearch.core.action.ActionListener<MultiGetResponse> listener) {
         parent.multiGet(request, listener);
     }
 
-    @Override
     public MultiGetRequestBuilder prepareMultiGet() {
         return parent.prepareMultiGet();
     }
 
-    @Override
-    public ActionFuture<SearchResponse> search(final SearchRequest request) {
+    public org.opensearch.common.action.ActionFuture<SearchResponse> search(SearchRequest request) {
         return parent.search(request);
     }
 
-    @Override
-    public void search(final SearchRequest request, final ActionListener<SearchResponse> listener) {
+    public void search(SearchRequest request, org.opensearch.core.action.ActionListener<SearchResponse> listener) {
         parent.search(request, listener);
     }
 
-    @Override
-    public SearchRequestBuilder prepareSearch(final String... indices) {
+    public SearchRequestBuilder prepareSearch(String... indices) {
         return parent.prepareSearch(indices);
     }
 
-    @Override
-    public ActionFuture<SearchResponse> searchScroll(final SearchScrollRequest request) {
+    public org.opensearch.common.action.ActionFuture<SearchResponse> searchScroll(SearchScrollRequest request) {
         return parent.searchScroll(request);
     }
 
-    @Override
-    public void searchScroll(final SearchScrollRequest request, final ActionListener<SearchResponse> listener) {
+    public void searchScroll(SearchScrollRequest request, org.opensearch.core.action.ActionListener<SearchResponse> listener) {
         parent.searchScroll(request, listener);
     }
 
-    @Override
-    public SearchScrollRequestBuilder prepareSearchScroll(final String scrollId) {
+    public SearchScrollRequestBuilder prepareSearchScroll(String scrollId) {
         return parent.prepareSearchScroll(scrollId);
     }
 
-    @Override
-    public ActionFuture<MultiSearchResponse> multiSearch(final MultiSearchRequest request) {
+    public void createPit(CreatePitRequest createPITRequest, org.opensearch.core.action.ActionListener<CreatePitResponse> listener) {
+        parent.createPit(createPITRequest, listener);
+    }
+
+    public void deletePits(DeletePitRequest deletePITRequest, org.opensearch.core.action.ActionListener<DeletePitResponse> listener) {
+        parent.deletePits(deletePITRequest, listener);
+    }
+
+    public void getAllPits(GetAllPitNodesRequest getAllPitNodesRequest,
+            org.opensearch.core.action.ActionListener<GetAllPitNodesResponse> listener) {
+        parent.getAllPits(getAllPitNodesRequest, listener);
+    }
+
+    public void pitSegments(PitSegmentsRequest pitSegmentsRequest,
+            org.opensearch.core.action.ActionListener<IndicesSegmentResponse> listener) {
+        parent.pitSegments(pitSegmentsRequest, listener);
+    }
+
+    public org.opensearch.common.action.ActionFuture<MultiSearchResponse> multiSearch(MultiSearchRequest request) {
         return parent.multiSearch(request);
     }
 
-    @Override
-    public void multiSearch(final MultiSearchRequest request, final ActionListener<MultiSearchResponse> listener) {
+    public void multiSearch(MultiSearchRequest request, org.opensearch.core.action.ActionListener<MultiSearchResponse> listener) {
         parent.multiSearch(request, listener);
     }
 
-    @Override
     public MultiSearchRequestBuilder prepareMultiSearch() {
         return parent.prepareMultiSearch();
     }
 
-    @Override
-    public ActionFuture<TermVectorsResponse> termVectors(final TermVectorsRequest request) {
+    public org.opensearch.common.action.ActionFuture<TermVectorsResponse> termVectors(TermVectorsRequest request) {
         return parent.termVectors(request);
     }
 
-    @Override
-    public void termVectors(final TermVectorsRequest request, final ActionListener<TermVectorsResponse> listener) {
+    public void termVectors(TermVectorsRequest request, org.opensearch.core.action.ActionListener<TermVectorsResponse> listener) {
         parent.termVectors(request, listener);
     }
 
-    @Override
     public TermVectorsRequestBuilder prepareTermVectors() {
         return parent.prepareTermVectors();
     }
 
-    @Override
-    public TermVectorsRequestBuilder prepareTermVectors(final String index, final String type, final String id) {
-        return parent.prepareTermVectors(index, type, id);
+    public TermVectorsRequestBuilder prepareTermVectors(String index, String id) {
+        return parent.prepareTermVectors(index, id);
     }
 
-    @Override
-    public ActionFuture<MultiTermVectorsResponse> multiTermVectors(final MultiTermVectorsRequest request) {
+    public org.opensearch.common.action.ActionFuture<MultiTermVectorsResponse> multiTermVectors(MultiTermVectorsRequest request) {
         return parent.multiTermVectors(request);
     }
 
-    @Override
-    public void multiTermVectors(final MultiTermVectorsRequest request, final ActionListener<MultiTermVectorsResponse> listener) {
+    public void multiTermVectors(MultiTermVectorsRequest request,
+            org.opensearch.core.action.ActionListener<MultiTermVectorsResponse> listener) {
         parent.multiTermVectors(request, listener);
     }
 
-    @Override
     public MultiTermVectorsRequestBuilder prepareMultiTermVectors() {
         return parent.prepareMultiTermVectors();
     }
 
-    @Override
-    public ExplainRequestBuilder prepareExplain(final String index, final String type, final String id) {
-        return parent.prepareExplain(index, type, id);
+    public ExplainRequestBuilder prepareExplain(String index, String id) {
+        return parent.prepareExplain(index, id);
     }
 
-    @Override
-    public ActionFuture<ExplainResponse> explain(final ExplainRequest request) {
+    public org.opensearch.common.action.ActionFuture<ExplainResponse> explain(ExplainRequest request) {
         return parent.explain(request);
     }
 
-    @Override
-    public void explain(final ExplainRequest request, final ActionListener<ExplainResponse> listener) {
+    public void explain(ExplainRequest request, org.opensearch.core.action.ActionListener<ExplainResponse> listener) {
         parent.explain(request, listener);
     }
 
-    @Override
     public ClearScrollRequestBuilder prepareClearScroll() {
         return parent.prepareClearScroll();
     }
 
-    @Override
-    public ActionFuture<ClearScrollResponse> clearScroll(final ClearScrollRequest request) {
+    public org.opensearch.common.action.ActionFuture<ClearScrollResponse> clearScroll(ClearScrollRequest request) {
         return parent.clearScroll(request);
     }
 
-    @Override
-    public void clearScroll(final ClearScrollRequest request, final ActionListener<ClearScrollResponse> listener) {
+    public void clearScroll(ClearScrollRequest request, org.opensearch.core.action.ActionListener<ClearScrollResponse> listener) {
         parent.clearScroll(request, listener);
     }
 
-    @Override
-    public FieldCapabilitiesRequestBuilder prepareFieldCaps(final String... indices) {
+    public FieldCapabilitiesRequestBuilder prepareFieldCaps(String... indices) {
         return parent.prepareFieldCaps(indices);
     }
 
-    @Override
-    public ActionFuture<FieldCapabilitiesResponse> fieldCaps(final FieldCapabilitiesRequest request) {
+    public org.opensearch.common.action.ActionFuture<FieldCapabilitiesResponse> fieldCaps(FieldCapabilitiesRequest request) {
         return parent.fieldCaps(request);
     }
 
-    @Override
-    public void fieldCaps(final FieldCapabilitiesRequest request, final ActionListener<FieldCapabilitiesResponse> listener) {
+    public void fieldCaps(FieldCapabilitiesRequest request, org.opensearch.core.action.ActionListener<FieldCapabilitiesResponse> listener) {
         parent.fieldCaps(request, listener);
     }
 
-    @Override
     public Settings settings() {
         return parent.settings();
     }
 
-    @Override
-    public Client filterWithHeader(final Map<String, String> headers) {
+    public Client filterWithHeader(Map<String, String> headers) {
         return parent.filterWithHeader(headers);
     }
 
-    @Override
-    public Client getRemoteClusterClient(final String clusterAlias) {
+    public Client getRemoteClusterClient(String clusterAlias) {
         return parent.getRemoteClusterClient(clusterAlias);
     }
+
 }
