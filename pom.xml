@@ -26,7 +26,7 @@
 		<jsp.version>2.3.3</jsp.version>
 		<tomcat.boot.version>0.8.4</tomcat.boot.version>
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
-		<fesen.httpclient.version>2.14.0</fesen.httpclient.version>
+		<fesen.httpclient.version>2.15.0</fesen.httpclient.version>
 
 		<!-- GoodNeighbor Library -->
 		<commons.lang.version>3.4</commons.lang.version>
