@@ -44,9 +44,9 @@ h3 {
 h4 {
 	padding: 0 0 0 10px;
 	margin: 1em 10% 0 1em;
-	border-top: solid 1px #af0000;
-	border-bottom: solid 1px #af0000;
-	font-size: 1.4em;
+	border-top: none;
+	border-bottom: solid 1px #663333;
+	font-size: 1.3em;
 	color: #333333;
 }
 
@@ -219,6 +219,46 @@ span.tablefirstdatetitle {
 }
 
 /* -------------------------------------------------
+                                    Arrange Query
+------------------------------------------------- */
+span.arrqycount {
+	font-size: 0.5em;
+}
+dl.arrqylist {
+	margin-top: 0.7em;
+	padding-left: 3em;
+}
+dl.arrqylist dt {
+	display: list-item;
+	list-style-type: circle;
+	font-size: 1.3em;
+	margin-top: 0.3em;
+}
+dl.arrqylist dd {
+	padding-left: 1em;
+}
+dl.arrqylist dd pre {
+	font-size: 1.1em;
+}
+dl.arrqylist dd.subinfo {
+	padding-left: 2em;
+}
+dl.arrqylist dd.subinfo span.sqlap {
+	font-style: italic;
+	color: #002266;
+}
+dl.arrqylist dd.subinfo span.file {
+	font-style: italic;
+	color: #002266;
+}
+dl.arrqylist dd.subinfo span.ctet {
+	color: green;
+}
+dl.arrqylist dd.subinfo span.pmb {
+	color: green;
+}
+
+/* -------------------------------------------------
                              Behavior Query Path
 ------------------------------------------------- */
 span.bqpcount {
@@ -291,6 +331,19 @@ dl.procedurelist dd.column span.type {
 }
 dl.procedurelist dd.column pre {
 	padding-left: 1em;
+}
+
+/* -------------------------------------------------
+                                    Schema Policy
+------------------------------------------------- */
+pre.spolicydisp {
+	padding-top: 0.5em;
+	padding-left: 0.5em;
+}
+pre.spolicyviodisp {
+	padding-top: 0.5em;
+	padding-left: 0.5em;
+	color: #994747;
 }
 
 /* -------------------------------------------------
@@ -389,7 +442,9 @@ dl.procedurelist dd.column pre {
 <div class="navilinkarea">
 <p class="sublink">
  <a href="#cdef">Classification Definition</a>
+| <a href="#arrangequery">ArrangeQuery List</a>
 | <a href="#procedure">Procedure List</a>
+| <a href="#schemapolicy">Schema Policy</a>
 | <a href="#diagram">Schema Diagram</a>
 </p>
 <p class="sisterlink"><a href="./history-maihamadb.html">to HistoryHTML</a></p>
@@ -650,6 +705,7 @@ dl.procedurelist dd.column pre {
 
 <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">
 (会員)MEMBER
+&nbsp;<span class="arrqycount"><a href="#member_arrqy">(arrangeQuery=2)</a></span>
 </h2>
 <div class="tablecomment MEMBER_comment" data-name="MEMBER"><pre>会員のプロフィールやアカウントなどの基本情報を保持する。
 基本的に物理削除はなく、退会したらステータスが退会会員になる。
@@ -3484,7 +3540,39 @@ dl.procedurelist dd.column pre {
 	</tbody>
 </table>
 
+<h2 id="arrangequery">ArrangeQuery List</h2>
+<h3 id="member_arrqy"><a href="#member">MEMBER</a></h3>
+<h4 id="member_arrqy_query">MemberCQ</h4>
+<dl class="arrqylist">
+	<dt>arrangeLogin() <span class="commentdesc">// Arrange member login query.</span></dt>
+	<dd>&nbsp;</dd>
+	<dt>arrangeLoginByIdentity() <span class="commentdesc">// Arrange member login query by identity.</span></dt>
+	<dd>&nbsp;</dd>
+</dl>
 <h2 id="procedure">Procedure</h2>
+
+<h2 id="schemapolicy">Schema Policy</h2>
+<pre class="spolicydisp">
+
+[Schema Policy]
+ tableExceptList: [REGION]
+ tableTargetList: []
+ columnExceptMap: {}
+ isMainSchemaOnly: false
+ wholeMap:
+   themeList: [uniqueTableAlias, sameColumnAliasIfSameColumnName]
+   statementList:
+ tableMap:
+   themeList: [hasPK, upperCaseBasis, identityIfPureIDPK]
+   statementList:
+    {if:{tableName is $$ALL$$}} {then:{fkName is prefix:FK_$$table$$}}
+ columnMap:
+   themeList: [upperCaseBasis]
+   statementList:
+    {if:{columnName is suffix:_FLAG}} {then bad =&gt; should be _FLG}
+    {if:{columnName is suffix:_FLG}} {then notNull}
+    {if:{columnName is suffix:_FLG}} {then classification}
+</pre>
 
 <h2 id="diagram">Schema Diagram</h2>
 <h3>maihamadb_erd</h3>
@@ -4506,6 +4594,7 @@ StoreClient.prototype = {
 			}
 			var decomment = {
 				"body": property["decomment"],
+				"pieceOwner": property["pieceOwner"],
 				"pieceGitBranch": property["pieceGitBranch"]
 			}
 			decomments.push(decomment);
@@ -4569,6 +4658,7 @@ StoreClient.prototype = {
 			}
 			var decomment = {
 				"body": property["decomment"],
+				"pieceOwner": property["pieceOwner"],
 				"pieceGitBranch": property["pieceGitBranch"]
 			}
 			decomments.push(decomment);
@@ -4635,6 +4725,7 @@ function PickupTableProperty(tableDbName, json) {
 		this.decomments = json.decomments || [];
 		this.previousPieces = json.previousPieces;
 		this.authors = json.authors;
+		this.pieceOwner = json.pieceOwner;
 		this.commentVersion = json.commentVersion;
 		this.columns = {};
 		var columns = json.columns || {};
@@ -4695,7 +4786,7 @@ PickupTableProperty.prototype = {
 			var decomment = this.decomments[key];
 			displayComment += decomment.body
 			if (this.isConflict() && decomment.pieceGitBranch) {
-				displayComment += '\n=======' + decomment.pieceGitBranch;
+				displayComment += '\n=======' + decomment.pieceGitBranch + ' (' + decomment.pieceOwner + ')';
 				if (key < commentCount - 1) {
 					displayComment += '\n\n'; // show between comments
 				}
@@ -4784,6 +4875,7 @@ function PickupColumnProperty(tableDbName, columnName, json) {
 		this.decomments = json['decomments'] || [];
 		this.previousPieces = json['previousPieces'];
 		this.authors = json['authors'];
+		this.pieceOwner = json['pieceOwner'];
 		this.commentVersion = json['commentVersion'];
 		this.previousWholeComment = json['previousWholeComment'];
 	}
@@ -4842,7 +4934,7 @@ PickupColumnProperty.prototype = {
 			var decomment = this.decomments[key];
 			displayComment += decomment.body
 			if (this.isConflict() && decomment.pieceGitBranch) {
-				displayComment += '\n=======' + decomment.pieceGitBranch;
+				displayComment += '\n=======' + decomment.pieceGitBranch + ' (' + decomment.pieceOwner + ')';
 				if (key < commentCount - 1) {
 					displayComment += '\n\n'; // show between comments
 				}
