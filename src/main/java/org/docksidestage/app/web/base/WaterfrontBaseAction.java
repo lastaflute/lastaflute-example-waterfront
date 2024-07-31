@@ -15,7 +15,7 @@
  */
 package org.docksidestage.app.web.base;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.dbflute.optional.OptionalObject;
 import org.dbflute.optional.OptionalThing;

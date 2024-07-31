@@ -17,7 +17,7 @@ package org.docksidestage.app.web.esproduct;
 
 import java.time.LocalDateTime;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.dbflute.allcommon.CDef.ProductStatus;

@@ -15,7 +15,7 @@
  */
 package org.docksidestage.app.web.esproduct;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.esflute.maihama.exbhv.ProductBhv;

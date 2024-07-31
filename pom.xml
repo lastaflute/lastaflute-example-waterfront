@@ -15,26 +15,26 @@
 	<properties>
 		<!-- Main Framework -->
 		<dbflute.version>1.2.8</dbflute.version>
-		<lastaflute.version>1.2.7</lastaflute.version>
-		<lasta.taglib.version>0.7.6</lasta.taglib.version>
-		<lasta.job.version>0.5.7</lasta.job.version>
+		<lastaflute.version>2.0.0-C-SNAPSHOT</lastaflute.version> <!-- #jakarta -->
+		<lasta.taglib.version>2.0.0-A-SNAPSHOT</lasta.taglib.version> <!-- #jakarta -->
+		<lasta.job.version>2.0.0-A-SNAPSHOT</lasta.job.version> <!-- #jakarta -->
 
 		<!-- Partner Library -->
 		<slf4j.version>1.7.36</slf4j.version>
 		<log4j.version>2.17.1</log4j.version>
-		<servlet.version>4.0.1</servlet.version>
-		<jsp.version>2.3.3</jsp.version>
-		<tomcat.boot.version>0.8.5</tomcat.boot.version>
+		<servlet.version>6.0.0</servlet.version> <!-- #jakarta -->
+		<jsp.version>4.0.0</jsp.version> <!-- #jakarta -->
+		<tomcat.boot.version>2.0.0-A-SNAPSHOT</tomcat.boot.version> <!-- #jakarta -->
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
 		<fesen.httpclient.version>2.13.0-SNAPSHOT</fesen.httpclient.version>
 
 		<!-- GoodNeighbor Library -->
 		<commons.lang.version>3.4</commons.lang.version>
-		<commons.fileupload.version>1.5</commons.fileupload.version>
+		<commons.fileupload.version>2.0.0-M2</commons.fileupload.version> <!-- #jakarta -->
 
 		<!-- Testing -->
 		<junit.version>4.13.2</junit.version>
-		<utflute.version>0.9.8</utflute.version>
+		<utflute.version>2.0.0-A-SNAPSHOT</utflute.version> <!-- #jakarta -->
 		<testcontainers.version>1.16.2</testcontainers.version>
 	</properties>
 
@@ -286,9 +286,9 @@
 		<!--                                                               = = = = = = = = -->
 		<!-- transaction -->
 		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>javax.transaction-api</artifactId>
-			<version>1.2</version>
+			<groupId>jakarta.transaction</groupId> <!-- #jakarta -->
+			<artifactId>jakarta.transaction-api</artifactId>
+			<version>2.0.1</version>
 		</dependency>
 
 		<!-- logging -->
@@ -330,19 +330,20 @@
 
 		<!-- servlet -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
+			<groupId>jakarta.servlet</groupId> <!-- #jakarta -->
+			<artifactId>jakarta.servlet-api</artifactId>
 			<version>${servlet.version}</version>
+			<scope>provided</scope> <!-- existing in jetty/tomcat -->
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
+			<groupId>jakarta.servlet.jsp</groupId>
+			<artifactId>jakarta.servlet.jsp-api</artifactId>
 			<version>${jsp.version}</version>
 		</dependency>
 		<dependency> <!-- tomcat does not provides, jetty's two jar files so here -->
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version> <!-- contains taglibs.standard -->
+			<groupId>jakarta.servlet.jsp.jstl</groupId> <!-- #jakarta -->
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+			<version>3.0.0</version> <!-- contains taglibs.standard -->
 			<!-- should be as jar file in executable war to detect tld files -->
 			<scope>runtime</scope>
 		</dependency>
@@ -356,7 +357,7 @@
 		<dependency> <!-- for jsp -->
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper</artifactId>
-			<version>9.0.80</version>
+			<version>10.1.17</version> <!-- #jakarta -->
 		</dependency>
 
 		<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
@@ -369,8 +370,8 @@
 			<version>${commons.lang.version}</version>
 		</dependency>
 		<dependency> <!-- used for multipart request -->
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
+			<groupId>org.apache.commons</groupId> <!-- #jakarta -->
+			<artifactId>commons-fileupload2-jakarta-servlet6</artifactId> <!-- #jakarta -->
 			<version>${commons.fileupload.version}</version>
 		</dependency>
 		<dependency>

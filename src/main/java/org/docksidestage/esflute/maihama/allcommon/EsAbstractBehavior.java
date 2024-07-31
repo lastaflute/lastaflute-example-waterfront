@@ -25,7 +25,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.function.Function;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity;
 import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.DocMeta;

@@ -15,7 +15,7 @@
  */
 package org.docksidestage.app.web.signin;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.app.web.base.login.WaterfrontLoginAssist;

@@ -1,6 +1,6 @@
 package org.docksidestage.mylasta.direction;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.docksidestage.unit.UnitWaterfrontTestCase;
 import org.lastaflute.core.security.PrimaryCipher;

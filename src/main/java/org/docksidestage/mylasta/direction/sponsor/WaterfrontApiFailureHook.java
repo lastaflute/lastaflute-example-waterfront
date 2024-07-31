@@ -17,8 +17,6 @@ package org.docksidestage.mylasta.direction.sponsor;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.dbflute.optional.OptionalThing;
 import org.lastaflute.web.api.ApiFailureHook;
 import org.lastaflute.web.api.ApiFailureResource;
@@ -27,6 +25,8 @@ import org.lastaflute.web.login.exception.LoginFailureException;
 import org.lastaflute.web.login.exception.LoginRequiredException;
 import org.lastaflute.web.response.ApiResponse;
 import org.lastaflute.web.response.JsonResponse;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * @author jflute

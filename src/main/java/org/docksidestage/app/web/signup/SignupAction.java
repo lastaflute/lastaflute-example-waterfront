@@ -2,7 +2,7 @@ package org.docksidestage.app.web.signup;
 
 import java.util.Random;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.docksidestage.app.web.base.WaterfrontBaseAction;
 import org.docksidestage.app.web.base.login.WaterfrontLoginAssist;
