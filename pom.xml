@@ -24,7 +24,7 @@
 		<log4j.version>2.17.1</log4j.version>
 		<servlet.version>4.0.1</servlet.version>
 		<jsp.version>2.3.3</jsp.version>
-		<tomcat.boot.version>0.8.4</tomcat.boot.version>
+		<tomcat.boot.version>0.8.5</tomcat.boot.version>
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
 		<fesen.httpclient.version>2.13.0-SNAPSHOT</fesen.httpclient.version>
 
