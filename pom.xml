@@ -34,7 +34,7 @@
 
 		<!-- Testing -->
 		<junit.version>4.13.2</junit.version> <!-- is latest version without hamcrest -->
-		<utflute.version>0.9.0</utflute.version>
+		<utflute.version>0.9.8</utflute.version>
 		<testcontainers.version>1.16.2</testcontainers.version>
 	</properties>
 
@@ -388,6 +388,12 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+            <exclusions>
+            	<exclusion> <!-- unneeded for this project -->
+            		<groupId>org.hamcrest</groupId>
+            		<artifactId>hamcrest-core</artifactId>
+            	</exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.dbflute.utflute</groupId>
