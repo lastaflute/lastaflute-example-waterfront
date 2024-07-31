@@ -33,7 +33,7 @@
 		<commons.fileupload.version>1.5</commons.fileupload.version>
 
 		<!-- Testing -->
-		<junit.version>4.13.2</junit.version> <!-- is latest version without hamcrest -->
+		<junit.version>4.13.2</junit.version>
 		<utflute.version>0.9.8</utflute.version>
 		<testcontainers.version>1.16.2</testcontainers.version>
 	</properties>
