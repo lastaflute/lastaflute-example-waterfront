@@ -23,10 +23,10 @@ import org.dbflute.tomcat.TomcatBoot;
 public class WaterfrontBoot { // #change_it_first
 
     public static void main(String[] args) { // e.g. java -Dlasta.env=production -jar waterfront.war
-        new TomcatBoot(8099, "/waterfront").useTldDetect().asDevelopment(isNoneEnv()).bootAwait();
+        new TomcatBoot(8099, "/waterfront").useTldDetect().asDevelopment(isDevelopment()).bootAwait();
     }
 
-    private static boolean isNoneEnv() {
+    private static boolean isDevelopment() {
         return System.getProperty("lasta.env") == null;
     }
 }
