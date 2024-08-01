@@ -2,8 +2,12 @@
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
-                             web-app_6_0.xsd"
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+	<!-- #for_now add full-URL xsd definition to schemaLocation and download it on Eclipse tooltip
+	     then the web-app and xsd error on Eclipse were disappeared by jflute (2024/08/01)
+	     (ref: https://qiita.com/opengl-8080/items/7a2ddecdcdaeea229ae7)
+	 -->
 
     <!-- ================================================================================= -->
     <!--                                                                    Servlet Filter -->
