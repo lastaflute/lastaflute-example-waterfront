@@ -358,7 +358,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency> <!-- needed as jstl tld definition and jstl implementation -->
+		<dependency> <!-- #jakarta needed as jstl tld definition and jstl implementation -->
 			<groupId>org.glassfish.web</groupId> <!-- also contains taglibs.standard -->
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 			<version>3.0.0</version>
