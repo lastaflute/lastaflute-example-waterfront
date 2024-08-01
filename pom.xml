@@ -347,6 +347,16 @@
 			<version>3.0.0</version> <!-- contains taglibs.standard -->
 			<!-- should be as jar file in executable war to detect tld files -->
 			<scope>runtime</scope>
+			<exclusions>
+				<exclusion> <!-- tomcat has -->
+					<groupId>jakarta.el</groupId>
+					<artifactId>jakarta.el-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>jakarta.servlet</groupId>
+					<artifactId>jakarta.servlet-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- tomcat -->
