@@ -4,7 +4,7 @@
 	<Properties>
 		<Property name="domain.name" value="waterfront" />
 		<Property name="log.level" value="${sys:log.level:-debug}" />
-		<Property name="log.pattern" value="%d [%t] %-5p \\(%C{0}@%M\\(\\):%L\\) - %m%n" />
+		<Property name="log.pattern" value="%d [%t] %-5p \(%C{0}@%M\(\):%L\) - %m%n" />
 		<Property name="log.file.basedir" value="${sys:log.file.basedir:-/tmp/lastaflute/undefinedbasedir}" />
 		<Property name="backup.date.suffix" value="_%d{yyyyMMdd}" />
 		<Property name="backup.max.history" value="180" />
