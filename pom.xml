@@ -344,7 +344,7 @@
 		<dependency> <!-- tomcat does not provides, jetty's two jar files so here -->
 			<groupId>jakarta.servlet.jsp.jstl</groupId> <!-- #jakarta -->
 			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-			<version>3.0.0</version> <!-- contains taglibs.standard -->
+			<version>3.0.0</version>
 			<!-- should be as jar file in executable war to detect tld files -->
 			<scope>runtime</scope>
 			<exclusions>
@@ -357,6 +357,11 @@
 					<artifactId>jakarta.servlet-api</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency> <!-- needed as jstl tld definition and jstl implementation -->
+			<groupId>org.glassfish.web</groupId> <!-- also contains taglibs.standard -->
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 
 		<!-- tomcat -->
