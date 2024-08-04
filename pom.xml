@@ -24,7 +24,9 @@
 		<log4j.version>2.17.1</log4j.version>
 		<servlet.version>4.0.1</servlet.version>
 		<jsp.version>2.3.3</jsp.version>
+		<jstl.version>1.2</jstl.version>
 		<tomcat.boot.version>0.8.5</tomcat.boot.version>
+		<tomcat.jasper.version>9.0.80</tomcat.jasper.version>
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
 		<fesen.httpclient.version>2.13.0-SNAPSHOT</fesen.httpclient.version>
 
@@ -270,6 +272,11 @@
 			<artifactId>lastaflute</artifactId>
 			<version>${lastaflute.version}</version>
 		</dependency>
+		<dependency> <!-- Lasta Di uses instead of Nashorn removed since java15 -->
+			<groupId>org.codelibs</groupId>
+			<artifactId>sai</artifactId>
+			<version>0.2.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.lastaflute.html</groupId>
 			<artifactId>lasta-taglib</artifactId>
@@ -341,8 +348,8 @@
 		</dependency>
 		<dependency> <!-- tomcat does not provides, jetty's two jar files so here -->
 			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version> <!-- contains taglibs.standard -->
+			<artifactId>jstl</artifactId> <!-- contains taglibs.standard -->
+			<version>${jstl.version}</version>
 			<!-- should be as jar file in executable war to detect tld files -->
 			<scope>runtime</scope>
 		</dependency>
@@ -356,7 +363,7 @@
 		<dependency> <!-- for jsp -->
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper</artifactId>
-			<version>9.0.80</version>
+			<version>${tomcat.jasper.version}</version>
 		</dependency>
 
 		<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
@@ -372,11 +379,6 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>${commons.fileupload.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codelibs</groupId>
-			<artifactId>sai</artifactId>
-			<version>0.2.0</version>
 		</dependency>
 
 		<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
