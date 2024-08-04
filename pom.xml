@@ -24,7 +24,9 @@
 		<log4j.version>2.17.1</log4j.version>
 		<servlet.version>6.0.0</servlet.version> <!-- #jakarta -->
 		<jsp.version>4.0.0</jsp.version> <!-- #jakarta -->
+		<jstl.version>3.0.0</jstl.version> <!-- #jakarta -->
 		<tomcat.boot.version>2.0.0-A-SNAPSHOT</tomcat.boot.version> <!-- #jakarta -->
+		<tomcat.jasper.version>10.1.17</tomcat.jasper.version> <!-- #jakarta -->
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
 		<fesen.httpclient.version>2.13.0-SNAPSHOT</fesen.httpclient.version>
 
@@ -271,6 +273,11 @@
 			<artifactId>lastaflute</artifactId>
 			<version>${lastaflute.version}</version>
 		</dependency>
+		<dependency> <!-- Lasta Di uses instead of Nashorn removed since java15 -->
+			<groupId>org.codelibs</groupId>
+			<artifactId>sai</artifactId>
+			<version>0.2.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.lastaflute.html</groupId>
 			<artifactId>lasta-taglib</artifactId>
@@ -286,10 +293,18 @@
 		<!--                                                               Partner Library -->
 		<!--                                                               = = = = = = = = -->
 		<!-- transaction -->
-		<dependency>
+		<dependency> <!-- Lasta Di uses e.g. TransactionManager -->
 			<groupId>jakarta.transaction</groupId> <!-- #jakarta -->
 			<artifactId>jakarta.transaction-api</artifactId>
 			<version>2.0.1</version>
+		</dependency>
+
+		<!-- annotation -->
+		<dependency> <!-- Lasta Di uses e.g. @Resource -->
+			<groupId>jakarta.annotation</groupId> <!-- #jakarta -->
+			<artifactId>jakarta.annotation-api</artifactId>
+			<version>2.1.1</version>
+			<scope>provided</scope> <!-- existing in jetty/tomcat -->
 		</dependency>
 
 		<!-- logging -->
@@ -344,7 +359,7 @@
 		<dependency> <!-- tomcat does not provides, jetty's two jar files so here -->
 			<groupId>jakarta.servlet.jsp.jstl</groupId> <!-- #jakarta -->
 			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-			<version>3.0.0</version>
+			<version>${jstl.version}</version>
 			<!-- should be as jar file in executable war to detect tld files -->
 			<scope>runtime</scope>
 			<exclusions>
@@ -358,10 +373,10 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency> <!-- #jakarta needed as jstl tld definition and jstl implementation -->
-			<groupId>org.glassfish.web</groupId> <!-- also contains taglibs.standard -->
-			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
-			<version>3.0.0</version>
+		<dependency>
+			<groupId>org.glassfish.web</groupId> <!-- #jakarta needed as jstl tld and implementation -->
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId> <!-- also contains taglibs.standard -->
+			<version>${jstl.version}</version>
 		</dependency>
 
 		<!-- tomcat -->
@@ -371,9 +386,9 @@
 			<version>${tomcat.boot.version}</version>
 		</dependency>
 		<dependency> <!-- for jsp -->
-			<groupId>org.apache.tomcat</groupId>
+			<groupId>org.apache.tomcat</groupId> <!-- #jakarta -->
 			<artifactId>tomcat-jasper</artifactId>
-			<version>10.1.17</version> <!-- #jakarta -->
+			<version>${tomcat.jasper.version}</version>
 		</dependency>
 
 		<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
@@ -389,11 +404,6 @@
 			<groupId>org.apache.commons</groupId> <!-- #jakarta -->
 			<artifactId>commons-fileupload2-jakarta-servlet6</artifactId> <!-- #jakarta -->
 			<version>${commons.fileupload.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codelibs</groupId>
-			<artifactId>sai</artifactId>
-			<version>0.2.0</version>
 		</dependency>
 
 		<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
