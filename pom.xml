@@ -15,9 +15,9 @@
 	<properties>
 		<!-- Main Framework -->
 		<dbflute.version>1.2.8</dbflute.version>
-		<lastaflute.version>2.0.0-C-SNAPSHOT</lastaflute.version> <!-- #jakarta -->
-		<lasta.taglib.version>2.0.0-A-SNAPSHOT</lasta.taglib.version> <!-- #jakarta -->
-		<lasta.job.version>2.0.0-A-SNAPSHOT</lasta.job.version> <!-- #jakarta -->
+		<lastaflute.version>2.0.0</lastaflute.version> <!-- #jakarta -->
+		<lasta.taglib.version>2.0.0</lasta.taglib.version> <!-- #jakarta -->
+		<lasta.job.version>2.0.0</lasta.job.version> <!-- #jakarta -->
 
 		<!-- Partner Library -->
 		<slf4j.version>1.7.36</slf4j.version>
@@ -25,7 +25,7 @@
 		<servlet.version>6.0.0</servlet.version> <!-- #jakarta -->
 		<jsp.version>4.0.0</jsp.version> <!-- #jakarta -->
 		<jstl.version>3.0.0</jstl.version> <!-- #jakarta -->
-		<tomcat.boot.version>2.0.0-A-SNAPSHOT</tomcat.boot.version> <!-- #jakarta -->
+		<tomcat.boot.version>2.0.0</tomcat.boot.version> <!-- #jakarta -->
 		<tomcat.jasper.version>10.1.17</tomcat.jasper.version> <!-- #jakarta -->
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
 		<fesen.httpclient.version>2.13.0-SNAPSHOT</fesen.httpclient.version>
@@ -36,7 +36,7 @@
 
 		<!-- Testing -->
 		<junit.version>4.13.2</junit.version>
-		<utflute.version>2.0.0-A-SNAPSHOT</utflute.version> <!-- #jakarta -->
+		<utflute.version>2.0.0</utflute.version> <!-- #jakarta -->
 		<testcontainers.version>1.16.2</testcontainers.version>
 	</properties>
 
