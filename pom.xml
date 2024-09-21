@@ -28,7 +28,7 @@
 		<tomcat.boot.version>0.8.5</tomcat.boot.version>
 		<tomcat.jasper.version>9.0.80</tomcat.jasper.version>
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
-		<fesen.httpclient.version>2.13.0-SNAPSHOT</fesen.httpclient.version>
+		<fesen.httpclient.version>2.17.0-SNAPSHOT</fesen.httpclient.version>
 
 		<!-- GoodNeighbor Library -->
 		<commons.lang.version>3.4</commons.lang.version>
