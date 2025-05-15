@@ -28,7 +28,7 @@
 		<tomcat.boot.version>0.8.5</tomcat.boot.version>
 		<tomcat.jasper.version>9.0.80</tomcat.jasper.version>
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
-		<fesen.httpclient.version>2.18.0</fesen.httpclient.version>
+		<fesen.httpclient.version>3.0.0-SNAPSHOT</fesen.httpclient.version>
 
 		<!-- GoodNeighbor Library -->
 		<commons.lang.version>3.4</commons.lang.version>
@@ -66,15 +66,15 @@
 			<plugins>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.12.1</version>
+					<version>3.14.0</version>
 					<configuration>
-						<release>17</release>
+						<release>21</release>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
 				<plugin>
 					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
+					<version>3.1.2</version>
 					<configuration>
 						<updateReleaseInfo>true</updateReleaseInfo>
 					</configuration>
@@ -107,7 +107,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.6.3</version>
+					<version>3.11.2</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
 						<docencoding>UTF-8</docencoding>
