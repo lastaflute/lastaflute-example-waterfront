@@ -27,6 +27,11 @@ import java.util.function.Function;
 
 import javax.annotation.Resource;
 
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity;
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.DocMeta;
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.RequestOptionCall;
+import org.docksidestage.esflute.maihama.allcommon.EsAbstractConditionBean;
+import org.docksidestage.esflute.maihama.allcommon.EsPagingResultBean;
 import org.dbflute.Entity;
 import org.dbflute.bhv.AbstractBehaviorWritable;
 import org.dbflute.bhv.readable.EntityRowHandler;
@@ -39,8 +44,6 @@ import org.dbflute.cbean.result.ListResultBean;
 import org.dbflute.exception.FetchingOverSafetySizeException;
 import org.dbflute.exception.IllegalBehaviorStateException;
 import org.dbflute.util.DfTypeUtil;
-import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.DocMeta;
-import org.docksidestage.esflute.maihama.allcommon.EsAbstractEntity.RequestOptionCall;
 import org.opensearch.action.DocWriteResponse.Result;
 import org.opensearch.action.admin.indices.refresh.RefreshResponse;
 import org.opensearch.action.bulk.BulkItemResponse;
@@ -683,3 +686,4 @@ public abstract class EsAbstractBehavior<ENTITY extends Entity, CB extends Condi
         }
     }
 }
+

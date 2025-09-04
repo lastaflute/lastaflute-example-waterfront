@@ -336,4 +336,9 @@ public class ClientWrapper implements Client {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
+    @Override
+    public SearchRequestBuilder prepareStreamSearch(String... indices) {
+        return parent.prepareStreamSearch(indices);
+    }
+
 }
