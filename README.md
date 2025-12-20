@@ -1,42 +1,124 @@
-LastaFlute Example Waterfront [![Build Status](https://travis-ci.org/lastaflute/lastaflute-example-waterfront.svg?branch=master)](https://travis-ci.org/lastaflute/lastaflute-example-waterfront)
-=======================
-example project for LastaFlute, ESFlute (with Elasticsearch/OpenSearch, also JSP)
+# LastaFlute Example Waterfront
 
-LastaFlute:  
-https://github.com/lastaflute/lastaflute
+[![Java CI with Maven](https://github.com/lastaflute/lastaflute-example-waterfront/actions/workflows/maven.yml/badge.svg)](https://github.com/lastaflute/lastaflute-example-waterfront/actions/workflows/maven.yml)
 
-# Quick Trial
-Can boot it by example of LastaFlute:
+Example web application demonstrating **LastaFlute**, **ESFlute** (with Elasticsearch/OpenSearch), and **JSP** integration.
 
-1. start Elasticsearch 7.x, 8.x or OpenSearch 1.x
-2. git clone https://github.com/lastaflute/lastaflute-example-waterfront.git
-3. create index: curl -XPUT localhost:9200/maihama -d @dbflute_maihamadb/playes/create-maihama.json
-4. prepare database by *ReplaceSchema at DBFlute client directory 'dbflute_maihamadb'  
-5. compile it by Java17, on e.g. Eclipse or IntelliJ or ... as Maven project
-6. execute the *main() method of (org.docksidestage.boot) WaterfrontBoot
-7. access to http://localhost:8099/waterfront  
-and login by user 'Pixy' and password 'sea', and can see debug log at console.
+## Features
 
-*ReplaceSchema
-```java
-// call manage.sh at lastaflute-example-waterfront/dbflute_maihamadb
-// and select replace-schema in displayed menu
-...:dbflute_maihamadb ...$ sh manage.sh
+- Full-text search with Elasticsearch/OpenSearch via ESFlute
+- Traditional RDBMS access via DBFlute
+- User authentication and session management
+- JSP-based view templates
+
+## Supported Search Engines
+
+- Elasticsearch 7.x, 8.x
+- OpenSearch 1.x, 2.x, 3.x
+
+## Requirements
+
+- Java 21
+- Maven 3.6+
+- Docker (for running tests)
+- Elasticsearch or OpenSearch (for development)
+
+## Quick Start
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/lastaflute/lastaflute-example-waterfront.git
+cd lastaflute-example-waterfront
 ```
 
-*main() method
-```java
-public class WaterfrontBoot {
+### 2. Initialize the database
 
-    public static void main(String[] args) {
-        new TomcatBoot(8099, "/waterfront").useTldDetect().asDevelopment(isNoneEnv()).bootAwait();
-    }
-}
+```bash
+cd dbflute_maihamadb
+mvn dbflute:replace-schema -Ddbflute.forceExecution=true
+cd ..
 ```
 
-# Information
+### 3. Start Elasticsearch/OpenSearch
+
+Start Elasticsearch 8.x or OpenSearch on port 9200:
+
+```bash
+# Using Docker (Elasticsearch 8.x)
+docker run -d --name es -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" docker.elastic.co/elasticsearch/elasticsearch:8.0.0
+
+# Or OpenSearch
+docker run -d --name opensearch -p 9200:9200 -e "discovery.type=single-node" -e "plugins.security.disabled=true" opensearchproject/opensearch:2.0.0
+```
+
+### 4. Create the search index
+
+```bash
+curl -XPUT localhost:9200/maihama -H "Content-Type: application/json" -d @dbflute_maihamadb/playes/create-maihama.json
+```
+
+### 5. Build and run
+
+```bash
+mvn package -DskipTests
+java -jar target/waterfront.war
+```
+
+### 6. Access the application
+
+Open http://localhost:8099/waterfront
+
+**Login credentials:**
+- User: `Pixy`
+- Password: `sea`
+
+## Development
+
+### Build
+
+```bash
+mvn package
+```
+
+### Run tests
+
+Requires Docker running:
+
+```bash
+mvn test
+```
+
+### Code generation
+
+Regenerate DBFlute/ESFlute code:
+
+```bash
+mvn dbflute:freegen
+```
+
+## Project Structure
+
+```
+src/main/java/org/docksidestage/
+├── app/web/          # Actions, Forms (Web layer)
+├── dbflute/          # DBFlute generated code (RDB)
+├── esflute/maihama/  # ESFlute generated code (Elasticsearch)
+└── mylasta/          # LastaFlute customization
+```
+
+See [CLAUDE.md](CLAUDE.md) for detailed development documentation.
+
+## Related Projects
+
+- [LastaFlute](https://github.com/lastaflute/lastaflute) - Web framework
+- [DBFlute](https://github.com/dbflute/dbflute-core) - O/R mapper
+- [Fesen HttpClient](https://github.com/codelibs/fesen-httpclient) - Elasticsearch/OpenSearch client
+
 ## License
+
 Apache License 2.0
 
-## Official site
-comming soon...
+## Author
+
+The DBFlute Project - http://dbflute.org/

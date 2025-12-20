@@ -21,23 +21,23 @@
 
 		<!-- Partner Library -->
 		<slf4j.version>1.7.36</slf4j.version>
-		<log4j.version>2.17.1</log4j.version>
+		<log4j.version>2.24.2</log4j.version>
 		<servlet.version>4.0.1</servlet.version>
 		<jsp.version>2.3.3</jsp.version>
 		<jstl.version>1.2</jstl.version>
 		<tomcat.boot.version>0.8.5</tomcat.boot.version>
 		<tomcat.jasper.version>9.0.80</tomcat.jasper.version>
 		<h2.jdbc.version>1.4.200</h2.jdbc.version>
-		<fesen.httpclient.version>3.3.0</fesen.httpclient.version>
+		<fesen.httpclient.version>3.4.0</fesen.httpclient.version>
 
 		<!-- GoodNeighbor Library -->
-		<commons.lang.version>3.4</commons.lang.version>
+		<commons.lang.version>3.17.0</commons.lang.version>
 		<commons.fileupload.version>1.5</commons.fileupload.version>
 
 		<!-- Testing -->
 		<junit.version>4.13.2</junit.version>
 		<utflute.version>0.9.8</utflute.version>
-		<testcontainers.version>1.16.2</testcontainers.version>
+		<testcontainers.version>1.21.4</testcontainers.version>
 	</properties>
 
 	<licenses>
